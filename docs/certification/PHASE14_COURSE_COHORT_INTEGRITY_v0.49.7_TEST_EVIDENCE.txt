@@ -1,0 +1,24 @@
+........................................................................ [ 10%]
+........................................................................ [ 21%]
+........................................................................ [ 32%]
+........................................................................ [ 42%]
+........................................................................ [ 53%]
+........................................................................ [ 64%]
+........................................................................ [ 75%]
+........................................................................ [ 85%]
+........................................................................ [ 96%]
+........................                                                 [100%]
+672 passed in 31.04s
+
+=== FINAL VERIFICATION AUDIT ===
+Baseline: EduNova v0.49.6, SHA-256 a633692dcf8a68381f76bde9d444e5038f6979e1adf782e50583e0d259ccb3b9
+Baseline full suite: 666 passed in 29.79s, exit code 0 (re-executed).
+Final candidate full suite: exit code 0 (background process finished, checked).
+Final Phase 14 focused suite:
+...................................................                      [100%]
+51 passed in 0.73s
+Python compileall: exit code 0.
+Static structural audit:
+LOT32 GLOBAL AUDIT: 17/17 PASS
+Migrations: no new SQL migration; existing last migration 0082.
+External cert: Flutter/Dart/PostgreSQL/Redis/workers/object storage/devices/providers not executed.

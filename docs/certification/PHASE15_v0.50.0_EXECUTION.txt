@@ -1,0 +1,65 @@
+EduNova v0.50.0 / Phase 15 Foundation
+14 octobre 2026
+SOURCE SHA-256 VERIFIED:
+ab8aed8c45a9a788266ffc23b02a73d4dda6f6cdb3113a605ead40a79cfdbb43  EduNova_v0.49.13_RC_PHASE14_BACKEND_CLOSURE.zip
+
+BASELINE (before source edits):
+$ PYTHONPATH=services/api python -m pytest -q services/api/tests
+770 passed in 148.42s (0:02:28)
+exit_code=0
+
+PHASE 15 DEDICATED AFTER FIXTURES:
+$ PYTHONPATH=services/api python -m pytest -q services/api/tests/test_phase15_institutional_intelligence.py
+15 passed in 6.67s
+exit_code=0
+
+INTERMEDIATE FULL RUN (NON-CERTIFYING):
+70 failed, 713 passed in 170.95s
+exit_code=1
+Cause: a second pytest invocation ran concurrently and test suite conftest.py deleted its shared SQLite test DB file. Subsequent writes failed with sqlite3.OperationalError: attempt to write a readonly database.
+Remediation: terminate any overlapping test executions and perform a fresh, serial full run.
+
+FINAL SERIAL FULL REGRESSION:
+$ PYTHONPATH=services/api python -m pytest -q services/api/tests
+........................................................................ [  9%]
+........................................................................ [ 18%]
+........................................................................ [ 27%]
+........................................................................ [ 36%]
+........................................................................ [ 45%]
+........................................................................ [ 55%]
+........................................................................ [ 64%]
+........................................................................ [ 73%]
+........................................................................ [ 82%]
+........................................................................ [ 91%]
+.................................................................        [100%]
+785 passed in 160.91s (0:02:40)
+exit_code=0
+
+PYTHON STATIC COMPILE:
+$ python -m compileall -q services/api/app services/api/tests
+exit_code=0
+
+HISTORICAL STRUCTURE AUDIT:
+$ python scripts/audit_lot32_global.py
+PASS migration chain contiguous through latest
+PASS trust personal-space boundary
+PASS persistent sessions
+PASS commerce licensing
+PASS campus core
+PASS teaching
+PASS assignments
+PASS gradebook
+PASS institutional analytics
+PASS knowledge graph
+PASS tutor
+PASS pilot readiness
+PASS pwa offline
+PASS production compose
+PASS ci and release
+PASS backup restore
+PASS no TODO/FIXME/NotImplementedError
+LOT32 GLOBAL AUDIT: 17/17 PASS
+exit_code=0
+
+MIGRATIONS: 0001..0084 contiguous, 0 added.
+NOT EXECUTED: PostgreSQL / Redis / object storage real, Flutter/Dart compile, mobile devices, external providers.

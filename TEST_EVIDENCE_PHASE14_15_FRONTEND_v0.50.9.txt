@@ -1,0 +1,35 @@
+EDUNOVA v0.50.9 — PREUVES D'EXÉCUTION LOCALE
+
+SOURCE : EduNova_v0.50.8_RC_PHASE14_15_FLUTTER_BRIDGE.zip
+
+1) Backend ciblé contrat frontend
+   PYTHONPATH=services/api python -m pytest -q \
+      services/api/tests/test_phase14_15_flutter_completion_contract.py \
+      services/api/tests/test_phase14_15_frontend_route_contract.py
+   RÉSULTAT : 6 PASSED en 6.15 s ; exit 0
+
+2) Backend ciblé sécurité inter-facultés + Phase 14 existante
+   PYTHONPATH=services/api python -m pytest -q \
+      services/api/tests/test_phase14_faculty_scope_frontend_hardening.py \
+      services/api/tests/test_phase14_pedagogical_intelligence.py
+   RÉSULTAT : 98 PASSED en 4.19 s ; exit 0
+
+3) Contrôle auditeur Phase 15
+   PYTHONPATH=services/api python -m pytest -q services/api/tests/test_phase15_auditor_read_only_frontend.py
+   RÉSULTAT : 2 PASSED en 0.87 s ; exit 0
+
+4) Backend régression complète APRÈS la correction RBAC
+   PYTHONPATH=services/api python -m pytest -q services/api/tests
+   RÉSULTAT : 900 PASSED en 169.76 s ; exit 0
+
+5) Compilation syntaxique Python (modules et tests) : exit 0
+6) python scripts/audit_lot30.py : 23/23 PASS ; exit 0
+7) python scripts/audit_campus_intelligence_flutter.py : 23/23 PASS ; exit 0
+8) bash -n scripts/certify_phase14_15_flutter.sh : PASS
+9) Parse YAML `.github/workflows/ci.yml` : PASS
+10) Contrôle de délimiteurs Dart par analyse lexicale : OK (n'est PAS une analyse Dart)
+
+NON EXECUTÉS : flutter pub get ; flutter analyze ; flutter test ; flutter build ; appareils
+NON EXECUTÉS : PostgreSQL réel ; Redis réel ; stockage objet réel
+
+La CI Flutter nouvellement définie n'a pas été exécutée localement.

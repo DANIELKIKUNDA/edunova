@@ -1,0 +1,57 @@
+services:
+  api:
+    build: ./services/api
+    env_file: .env
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    volumes:
+      - edunova_ingestion:/tmp/edunova-ingestion
+  ingestion-worker:
+    build: ./services/api
+    command: ["python", "-m", "app.modules.ingestion.worker"]
+    env_file: .env
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    volumes:
+      - edunova_ingestion:/tmp/edunova-ingestion
+    restart: unless-stopped
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: edunova
+      POSTGRES_USER: edunova
+      POSTGRES_PASSWORD: edunova
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U edunova -d edunova"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    volumes:
+      - edunova_pg:/var/lib/postgresql/data
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+  clamav:
+    image: clamav/clamav:stable
+    profiles: ["production-security"]
+    expose:
+      - "3310"
+    healthcheck:
+      test: ["CMD", "clamdscan", "--ping", "1"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+volumes:
+  edunova_pg:
+  edunova_ingestion:

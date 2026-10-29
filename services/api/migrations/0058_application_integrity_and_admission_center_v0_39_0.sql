@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS candidate_application_consents (id VARCHAR(64) PRIMARY KEY, application_id VARCHAR(64) NOT NULL, kind VARCHAR(40) NOT NULL, policy_version VARCHAR(80) NOT NULL, accepted_at TIMESTAMPTZ NOT NULL, evidence_hash VARCHAR(64) NOT NULL);
+CREATE INDEX IF NOT EXISTS ix_candidate_application_consents_application_id ON candidate_application_consents(application_id);
+CREATE TABLE IF NOT EXISTS candidate_submission_snapshots (id VARCHAR(64) PRIMARY KEY, application_id VARCHAR(64) NOT NULL UNIQUE, row_version INTEGER NOT NULL, payload_sha256 VARCHAR(64) NOT NULL, document_manifest_sha256 VARCHAR(64) NOT NULL, created_at TIMESTAMPTZ NOT NULL);
+CREATE TABLE IF NOT EXISTS admission_reviews (id VARCHAR(64) PRIMARY KEY, application_id VARCHAR(64) NOT NULL UNIQUE, institution_id VARCHAR(64) NOT NULL, state VARCHAR(32) NOT NULL, assigned_to VARCHAR(64), decision_reason VARCHAR(1000), row_version INTEGER NOT NULL, created_at TIMESTAMPTZ NOT NULL, updated_at TIMESTAMPTZ NOT NULL, decided_at TIMESTAMPTZ);
+CREATE INDEX IF NOT EXISTS ix_admission_reviews_institution_state ON admission_reviews(institution_id,state);
+CREATE INDEX IF NOT EXISTS ix_admission_reviews_assigned_to ON admission_reviews(assigned_to);
+CREATE TABLE IF NOT EXISTS admission_document_reviews (id VARCHAR(64) PRIMARY KEY, review_id VARCHAR(64) NOT NULL, document_id VARCHAR(64) NOT NULL, state VARCHAR(32) NOT NULL, note VARCHAR(1000), reviewed_by VARCHAR(64) NOT NULL, reviewed_at TIMESTAMPTZ NOT NULL, CONSTRAINT uq_review_document UNIQUE(review_id,document_id));
+CREATE INDEX IF NOT EXISTS ix_admission_document_reviews_review_id ON admission_document_reviews(review_id);

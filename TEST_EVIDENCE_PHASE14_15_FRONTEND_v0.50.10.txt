@@ -1,0 +1,12 @@
+EduNova v0.50.10 — PREUVES
+Source: v0.50.9 SHA-256 8642c7b2ca9570cdabb9b88f404cabd2f00c989086c08f1ed308afcb0137184e
+Backend PYTEST global: 900/900 PASS (exit=0), 141.55 s
+Backend ciblé API RBAC: 11/11 PASS
+Audit structurel: 23/23 PASS
+Audit statique spécifique Phase14/15: 33/33 PASS (NON-compilant)
+Python compileall: PASS
+Shell bash -n: PASS
+CI YAML parse: PASS
+Flutter SDK/Dart: ABSENTS, analyses et tests Flutter NON exécutés
+7 scénarios Flutter nouveaux ajoutés (ne pas les comptabiliser PASS)
+Détails: evidence/* et rapport technique inclus dans le ZIP.

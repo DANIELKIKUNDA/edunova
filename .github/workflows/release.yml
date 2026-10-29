@@ -1,0 +1,22 @@
+name: EduNova Release Gate
+on: {workflow_dispatch: {}, push: {tags: ['v*']}}
+permissions: {contents: read}
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.13'}
+      - run: pip install -r services/api/requirements.txt
+      - run: cd services/api && pytest -q
+      - run: python scripts/audit_lot30.py
+      - name: Deploy over approved SSH boundary
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.PRODUCTION_HOST }}
+          username: ${{ secrets.PRODUCTION_USER }}
+          key: ${{ secrets.PRODUCTION_SSH_KEY }}
+          script: cd ${{ secrets.PRODUCTION_DEPLOY_DIR }} && RELEASE_TAG=${{ github.ref_name }} DEPLOY_DIR=$PWD ./scripts/deploy_production.sh

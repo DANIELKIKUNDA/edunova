@@ -1,0 +1,3 @@
+# ADR-037 — LOT24 maximal assignment workflow and grading safety
+
+EduNova separates deterministic grading from probabilistic assistance and institutional validation. Objective items use deterministic comparison; symbolic mathematics uses SymPy equivalence. Open productions may receive an AI proposal, but a human validates institutional grades. Similarity is a review signal, never an automatic plagiarism finding. Exceptional reopen is explicit, scoped, time-bound and auditable. Group membership is authoritative rather than a client-supplied label. Assignment lifecycle transitions are explicit and optimistic-lock protected.

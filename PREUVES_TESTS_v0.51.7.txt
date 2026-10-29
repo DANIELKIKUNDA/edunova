@@ -1,0 +1,10 @@
+EduNova v0.51.7 — résultats d'exécution enregistrés
+Parent canonique v0.51.6 SHA-256 = 2a0017b63f668d4bad4a49e84918e90f4a0d14fcbdd80c3c639443593567d3fb (vérifié)
+Ciblage: PYTHONPATH=services/api python -m pytest -q services/api/tests/test_phase16_campus_alerts_v0_51_7.py
+Ciblage: 12 passed in 4.98s ; retour 0.
+Régression: PYTHONPATH=services/api python -m pytest -q services/api/tests
+Régression: 1042 passed in 223.74s (0:03:43) ; retour 0.
+Compil Python: python -m compileall -q services/api/app services/api/tests/test_phase16_campus_alerts_v0_51_7.py ; retour 0.
+Inspect structure : 6 points présents, sans équivalence avec flutter analyze.
+Flutter/Dart SDK absent : aucune commande Flutter exécutée.
+PostgreSQL/Redis/stockage objet réels, fournisseurs, téléphones : non exécutés.

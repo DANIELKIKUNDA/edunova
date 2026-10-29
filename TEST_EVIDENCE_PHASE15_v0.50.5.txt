@@ -1,0 +1,81 @@
+EduNova v0.50.5 — PREUVES DE TESTS LOCAUX (15/10/2026)
+Source canonique v0.50.4 : SHA-256 6ac66e9952e497b12f0ebdaaba3524f9286313f869bfef159ab34791798390e2
+
+I. AVANT MODIFICATION — suite globale
+Commande : PYTHONPATH=services/api python -m pytest -q services/api/tests
+Code de sortie : 0
+........................................................................ [  8%]
+........................................................................ [ 17%]
+........................................................................ [ 25%]
+........................................................................ [ 34%]
+........................................................................ [ 43%]
+........................................................................ [ 51%]
+........................................................................ [ 60%]
+........................................................................ [ 68%]
+........................................................................ [ 77%]
+........................................................................ [ 86%]
+........................................................................ [ 94%]
+.............................................                            [100%]
+837 passed in 68.73s (0:01:08)
+
+II. APRÈS MODIFICATION — tests spécifiques nouveau module
+Commande : PYTHONPATH=services/api python -m pytest -q services/api/tests/test_phase15_legacy_surface_closure.py
+Code de sortie : 0
+.....................                                                    [100%]
+21 passed in 5.72s
+
+III. APRÈS TOUTES MODIFICATIONS — suite globale isolée (aucun autre pytest concurrent)
+Commande : PYTHONPATH=services/api python -m pytest -q services/api/tests
+Code de sortie : 0
+........................................................................ [  8%]
+........................................................................ [ 16%]
+........................................................................ [ 25%]
+........................................................................ [ 33%]
+........................................................................ [ 41%]
+........................................................................ [ 50%]
+........................................................................ [ 58%]
+........................................................................ [ 67%]
+........................................................................ [ 75%]
+........................................................................ [ 83%]
+........................................................................ [ 92%]
+..................................................................       [100%]
+858 passed in 71.79s (0:01:11)
+
+IV. Audit structurel final
+Commande : python scripts/audit_lot32_global.py
+Code de sortie : 0
+PASS migration chain contiguous through latest
+PASS trust personal-space boundary
+PASS persistent sessions
+PASS commerce licensing
+PASS campus core
+PASS teaching
+PASS assignments
+PASS gradebook
+PASS institutional analytics
+PASS knowledge graph
+PASS tutor
+PASS pilot readiness
+PASS pwa offline
+PASS production compose
+PASS ci and release
+PASS backup restore
+PASS no TODO/FIXME/NotImplementedError
+LOT32 GLOBAL AUDIT: 17/17 PASS
+
+V. Compilation statique Python finale
+Commande : python -m compileall -q services/api/app services/api/tests
+Code de sortie : 0, aucune erreur sortie.
+
+VI. INCIDENT INTERMÉDIAIRE, NON COMPTABILISÉ COMME SUCCÈS
+Un second pytest ciblé a été démarré pendant une régression globale ;
+conftest.py efface la base fichier .pytest_edunova.db à chaque nouveau
+pytest, entraînant dans le premier processus 54 échecs liés à une base
+SQLite devenue « readonly ». Journal de cet essai: final_857_pytest.log
+(non inclus dans ZIP car transitoire). Une exécution globale FINALE
+isolée de tout autre pytest a ensuite réussi 858/858, exit 0.
+
+VII. NON EXÉCUTÉ
+- Flutter (compilation, tests sur appareil)
+- PostgreSQL réel / Redis réel / stockage objet réel / fournisseurs externes
+- Certification de production et montée en charge réelle

@@ -1,0 +1,60 @@
+EduNova v0.50.6 — EXECUTION EVIDENCE (15 octobre 2026)
+===================================================
+
+1. Canonical input verification:
+   sha256sum /mnt/data/EduNova_v0.50.5_RC_PHASE15_LEGACY_ANALYTICS_PRIVACY_CLOSURE.zip
+   92e51581f06af42bad443e21c84bd6b80facdba41d6d5f26e34b4b4104832cc0
+   Status: MATCH with prior reported canonical hash.
+
+2. Baseline previously reported for v0.50.5: 858/858 PASS.
+   (This historical baseline was not rerun on an unmodified extracted tree.)
+
+3. Development tests:
+   PYTHONPATH=services/api python -m pytest -q services/api/tests/test_phase15_legacy_surface_closure.py services/api/tests/test_institutional_analytics_lot27.py
+   Exit 0: 31 passed in 13.79s.
+   PYTHONPATH=services/api python -m pytest -q services/api/tests/test_phase15_temporal_archive_integrity.py
+   Exit 0: 19 passed in 12.04s (before the 20th new test was appended).
+
+4. Initial global regression after implementation (prior to final adversarial addition):
+   PYTHONPATH=services/api python -m pytest -q services/api/tests
+   Exit 0: 877 passed in 137.00s.
+
+5. FINAL GLOBAL REGRESSION on the final code including 20 new tests:
+   PYTHONPATH=services/api python -m pytest -q services/api/tests
+   Exit 0: 878 passed in 152.44s (0:02:32).
+   Output saved in external evidence file EduNova_v0.50.6_REGRESSION_COMPLETE.txt.
+   Run was isolated: no simultaneous pytest process; test DB was not invalidated.
+
+6. Static global structural audit:
+   python scripts/audit_lot32_global.py
+   Exit 0: LOT32 GLOBAL AUDIT 17/17 PASS.
+   (The 17 gates are structural checks, not a full security proof.)
+
+7. Python compilation:
+   python -m compileall -q services/api/app services/api/tests
+   Exit 0, no errors.
+
+8. Migration SQL:
+   No new migration; last numbered SQL file 0084_assessment_grading_snapshot_v0_49_12.sql.
+   No PostgreSQL migration executor was run.
+
+9. Archive-integrity SHA-256, file manifest and ZIP CRC:
+   See external EduNova_v0.50.6_SHA256.txt and MANIFEST_SHA256_v0.50.6.txt.
+
+10. NOT EXECUTED / NOT CERTIFIED:
+    Flutter compile / mobile device, production PostgreSQL, Redis, object storage,
+    concurrency/serializability under PostgreSQL, production load, external
+    providers, full protection against repeated temporal queries.
+
+11. Intermediary rejected test runs:
+    A preliminary 31-case targeted run had 1 failing assertion because the
+    old test incorrectly required two randomized-v4 archive hashes to match;
+    it was updated to require distinct per-archive hashes and rerun PASS.
+    A new integration test initially attempted an enrollment duplicate that
+    the real DB UNIQUE constraint correctly forbade. The case was corrected to
+    verify the database integrity constraint and rerun PASS.
+    Another test incorrectly rejected a short learner ID substring inside a
+    random hex HMAC; it was corrected to check the proof schema and hex encoding.
+    An early global attempt exceeded the foreground execution time limit and
+    was not counted as a PASS. The full test suite was subsequently completed
+    to process exit 0, and finally rerun after the last code/test updates.

@@ -1,0 +1,15 @@
+EduNova v0.51.0 — preuves d'exécution réelles
+
+Source : checkpoint v0.50.10
+Commande de référence : PYTHONPATH=services/api python -m pytest -q services/api/tests
+BASELINE : 900 passed in 90.81s
+
+Run intermédiaire : 911 passed, 1 failed (contrat attendu de la liste des migrations : 0086 nouvelle)
+Correction test_migration_contract.py : ajout de 0086 et import du mapping correspondant
+
+Ciblés finaux (migration + phase16): 13 passed in 5.03s
+Global final : 912 passed in 83.80s (0:01:23), sortie 0
+Compilation syntaxe : PYTHONPATH=services/api python -m compileall -q services/api/app services/api/tests -> PASS
+
+Flutter : flutter/dart SDK absents. flutter analyze/test/build non exécutés.
+PostgreSQL réel : non exécuté. SQLite ne valide pas FOR UPDATE.

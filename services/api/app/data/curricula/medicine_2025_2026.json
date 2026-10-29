@@ -1,0 +1,1816 @@
+{
+  "schema_version": "1.0",
+  "catalog_id": "medicine-lmd-2025-2026-source",
+  "faculty_domain": "Médecine",
+  "program": "Médecine",
+  "curriculum_label": "Enseignements LMD Médecine 2025-2026",
+  "source_status": "institutional_source_received_unverified_externally",
+  "source_pages": 7,
+  "normalization_policy": "Preserve source values; do not silently repair inconsistencies. Null means absent/illegible in parsed source.",
+  "semesters": [
+    {
+      "cycle": "Bachelier",
+      "level": "Bachelier 1",
+      "semester": 1,
+      "declared_totals": {
+        "hours": 750,
+        "credits": 30,
+        "percent": 100
+      },
+      "entries": [
+        {
+          "ue": "CSS",
+          "ue_declared_credits": 21,
+          "code": "ANA1111",
+          "title": "Anatomie 1 (ostéologie, myologie, anatomie Maxillo-Faciale arthrologie, angiologie)",
+          "cmi": 80,
+          "tp_td": 40,
+          "tpe": 80,
+          "total_hours": 200,
+          "credits": 8,
+          "percent": 27
+        },
+        {
+          "ue": "CSS",
+          "ue_declared_credits": 21,
+          "code": "SAN1111",
+          "title": "Santé publique- Santé communautaire",
+          "cmi": 20,
+          "tp_td": 10,
+          "tpe": 20,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 7
+        },
+        {
+          "ue": "CSS",
+          "ue_declared_credits": 21,
+          "code": "VAC1111",
+          "title": "Vaccinologie 1",
+          "cmi": 10,
+          "tp_td": 0,
+          "tpe": 15,
+          "total_hours": 25,
+          "credits": 1,
+          "percent": 3
+        },
+        {
+          "ue": "CSS",
+          "ue_declared_credits": 21,
+          "code": "BPM1111",
+          "title": "Bases physiques préparant aux Sciences biomédicales",
+          "cmi": 35,
+          "tp_td": 10,
+          "tpe": 30,
+          "total_hours": 75,
+          "credits": 3,
+          "percent": 10
+        },
+        {
+          "ue": "CSS",
+          "ue_declared_credits": 21,
+          "code": "BIO1111",
+          "title": "Bases de biologie préparant aux sciences biomédicales",
+          "cmi": 50,
+          "tp_td": 25,
+          "tpe": 50,
+          "total_hours": 125,
+          "credits": 5,
+          "percent": 17
+        },
+        {
+          "ue": "CSS",
+          "ue_declared_credits": 21,
+          "code": "SEM1111",
+          "title": "Séminaire d’analyse des pratiques professionnelles",
+          "cmi": 20,
+          "tp_td": 15,
+          "tpe": 15,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 7
+        },
+        {
+          "ue": "RCH",
+          "ue_declared_credits": 7,
+          "code": "BST1311",
+          "title": "Biostatistiques",
+          "cmi": 45,
+          "tp_td": 15,
+          "tpe": 40,
+          "total_hours": 100,
+          "credits": 4,
+          "percent": 13
+        },
+        {
+          "ue": "RCH",
+          "ue_declared_credits": 7,
+          "code": "INF1311",
+          "title": "Informatique et recherche documentaire",
+          "cmi": 30,
+          "tp_td": 15,
+          "tpe": 30,
+          "total_hours": 75,
+          "credits": 3,
+          "percent": 10
+        },
+        {
+          "ue": "IDP",
+          "ue_declared_credits": 2,
+          "code": "EDU1811",
+          "title": "Education à la citoyenneté",
+          "cmi": 15,
+          "tp_td": 5,
+          "tpe": 5,
+          "total_hours": 25,
+          "credits": 1,
+          "percent": 3
+        },
+        {
+          "ue": "IDP",
+          "ue_declared_credits": 2,
+          "code": "HME1811",
+          "title": "Histoire de la médecine",
+          "cmi": 15,
+          "tp_td": 5,
+          "tpe": 5,
+          "total_hours": 25,
+          "credits": 1,
+          "percent": 3
+        }
+      ],
+      "notes": []
+    },
+    {
+      "cycle": "Bachelier",
+      "level": "Bachelier 1",
+      "semester": 2,
+      "declared_totals": {
+        "hours": 750,
+        "credits": 30,
+        "percent": 100
+      },
+      "entries": [
+        {
+          "ue": "CSS",
+          "ue_declared_credits": 14,
+          "code": "BCM1112",
+          "title": "Bases chimiques préparatoires aux sciences biomédicales",
+          "cmi": 50,
+          "tp_td": 25,
+          "tpe": 50,
+          "total_hours": 125,
+          "credits": 5,
+          "percent": 17
+        },
+        {
+          "ue": "CSS",
+          "ue_declared_credits": 14,
+          "code": "BPH1112",
+          "title": "Biophysique",
+          "cmi": 50,
+          "tp_td": 25,
+          "tpe": 25,
+          "total_hours": 100,
+          "credits": 4,
+          "percent": 13
+        },
+        {
+          "ue": "CSS",
+          "ue_declared_credits": 14,
+          "code": "HIS1112",
+          "title": "Histologie 1",
+          "cmi": 45,
+          "tp_td": 30,
+          "tpe": 50,
+          "total_hours": 125,
+          "credits": 5,
+          "percent": 17
+        },
+        {
+          "ue": "RCH",
+          "ue_declared_credits": 8,
+          "code": "ANG1312",
+          "title": "Anglais médical1",
+          "cmi": 30,
+          "tp_td": 15,
+          "tpe": 30,
+          "total_hours": 75,
+          "credits": 3,
+          "percent": 10
+        },
+        {
+          "ue": "RCH",
+          "ue_declared_credits": 8,
+          "code": "MAT1312",
+          "title": "Bases mathématiques préparant aux sciences biomédicales",
+          "cmi": 25,
+          "tp_td": 25,
+          "tpe": 25,
+          "total_hours": 75,
+          "credits": 3,
+          "percent": 10
+        },
+        {
+          "ue": "RCH",
+          "ue_declared_credits": 8,
+          "code": null,
+          "title": "Situation d’intégration",
+          "cmi": null,
+          "tp_td": 30,
+          "tpe": 20,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 6
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 2,
+          "code": "STA1412",
+          "title": "Stage de soins communautaires",
+          "cmi": 0,
+          "tp_td": 0,
+          "tpe": 150,
+          "total_hours": 150,
+          "credits": 6,
+          "percent": 20
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 2,
+          "code": "PRE1412",
+          "title": "Premiers secours",
+          "cmi": 20,
+          "tp_td": 15,
+          "tpe": 15,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 6
+        }
+      ],
+      "notes": [
+        "ANOMALY: UE4:PDS is declared 2 credits while visible ECUE credits sum to 8; source semester total remains 30."
+      ]
+    },
+    {
+      "cycle": "Bachelier",
+      "level": "Bachelier 2",
+      "semester": 3,
+      "declared_totals": {
+        "hours": 750,
+        "credits": 30,
+        "percent": 100
+      },
+      "entries": [
+        {
+          "ue": "CSS",
+          "ue_declared_credits": 27,
+          "code": "ENT1123",
+          "title": "Entomologie",
+          "cmi": 20,
+          "tp_td": 15,
+          "tpe": 15,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 6
+        },
+        {
+          "ue": "CSS",
+          "ue_declared_credits": 27,
+          "code": "ANA1123",
+          "title": "Anatomie 2 (splanchnologie, neuroanatomie, thoracique)",
+          "cmi": 95,
+          "tp_td": 60,
+          "tpe": 70,
+          "total_hours": 225,
+          "credits": 9,
+          "percent": 30
+        },
+        {
+          "ue": "CSS",
+          "ue_declared_credits": 27,
+          "code": "HIS1123",
+          "title": "Histologie 2",
+          "cmi": 45,
+          "tp_td": 30,
+          "tpe": 50,
+          "total_hours": 125,
+          "credits": 5,
+          "percent": 17
+        },
+        {
+          "ue": "CSS",
+          "ue_declared_credits": 27,
+          "code": "BCH1123",
+          "title": "Biochimie",
+          "cmi": 90,
+          "tp_td": 30,
+          "tpe": 30,
+          "total_hours": 150,
+          "credits": 6,
+          "percent": 20
+        },
+        {
+          "ue": "CSS",
+          "ue_declared_credits": 27,
+          "code": "BML1123",
+          "title": "Biologie moléculaire et Génétique 1",
+          "cmi": 45,
+          "tp_td": 30,
+          "tpe": 50,
+          "total_hours": 125,
+          "credits": 5,
+          "percent": 17
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 3,
+          "code": "SOI1423",
+          "title": "Soins infirmiers",
+          "cmi": 20,
+          "tp_td": 10,
+          "tpe": 20,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 7
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 3,
+          "code": "VAC1423",
+          "title": "Vaccinologie 2",
+          "cmi": 10,
+          "tp_td": 0,
+          "tpe": 15,
+          "total_hours": 25,
+          "credits": 1,
+          "percent": 3
+        }
+      ],
+      "notes": []
+    },
+    {
+      "cycle": "Bachelier",
+      "level": "Bachelier 2",
+      "semester": 4,
+      "declared_totals": {
+        "hours": 750,
+        "credits": 30,
+        "percent": 100
+      },
+      "entries": [
+        {
+          "ue": "CSS",
+          "ue_declared_credits": 18,
+          "code": "PHY1124",
+          "title": "Physiologie générale",
+          "cmi": 75,
+          "tp_td": 30,
+          "tpe": 20,
+          "total_hours": 125,
+          "credits": 5,
+          "percent": 17
+        },
+        {
+          "ue": "CSS",
+          "ue_declared_credits": 18,
+          "code": "EMB1124",
+          "title": "Embryologie",
+          "cmi": 45,
+          "tp_td": 25,
+          "tpe": 30,
+          "total_hours": 100,
+          "credits": 4,
+          "percent": 13
+        },
+        {
+          "ue": "CSS",
+          "ue_declared_credits": 18,
+          "code": "HYG1124",
+          "title": "Santé publique-Hygiène",
+          "cmi": 30,
+          "tp_td": 15,
+          "tpe": 30,
+          "total_hours": 75,
+          "credits": 3,
+          "percent": 10
+        },
+        {
+          "ue": "CSS",
+          "ue_declared_credits": 18,
+          "code": "GEN1124",
+          "title": "Génétique 2",
+          "cmi": 30,
+          "tp_td": 15,
+          "tpe": 30,
+          "total_hours": 75,
+          "credits": 3,
+          "percent": 10
+        },
+        {
+          "ue": "CSS",
+          "ue_declared_credits": 18,
+          "code": "SEM1124",
+          "title": "Séminaire d’analyse des pratiques professionnelles1",
+          "cmi": 30,
+          "tp_td": 15,
+          "tpe": 30,
+          "total_hours": 75,
+          "credits": 3,
+          "percent": 10
+        },
+        {
+          "ue": "RCH",
+          "ue_declared_credits": 8,
+          "code": "MET1324",
+          "title": "Méthodologie de la recherche1",
+          "cmi": 45,
+          "tp_td": 30,
+          "tpe": 25,
+          "total_hours": 100,
+          "credits": 4,
+          "percent": 13
+        },
+        {
+          "ue": "RCH",
+          "ue_declared_credits": 8,
+          "code": "ANG1324",
+          "title": "Anglais médical2",
+          "cmi": 20,
+          "tp_td": 15,
+          "tpe": 15,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 7
+        },
+        {
+          "ue": "RCH",
+          "ue_declared_credits": 8,
+          "code": null,
+          "title": "Situation d’intégration",
+          "cmi": null,
+          "tp_td": 30,
+          "tpe": 20,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 7
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 3,
+          "code": "STA1424",
+          "title": "Stage de soins infirmiers",
+          "cmi": 0,
+          "tp_td": 0,
+          "tpe": 75,
+          "total_hours": 75,
+          "credits": 3,
+          "percent": 10
+        },
+        {
+          "ue": "REP",
+          "ue_declared_credits": 1,
+          "code": "COM1724",
+          "title": "Communication pour le changement social et de comportement en santé 1",
+          "cmi": 10,
+          "tp_td": 10,
+          "tpe": 5,
+          "total_hours": 25,
+          "credits": 1,
+          "percent": 3
+        }
+      ],
+      "notes": []
+    },
+    {
+      "cycle": "Bachelier",
+      "level": "Bachelier 3",
+      "semester": 5,
+      "declared_totals": {
+        "hours": 750,
+        "credits": 30,
+        "percent": 100
+      },
+      "entries": [
+        {
+          "ue": "CSS",
+          "ue_declared_credits": 20,
+          "code": "SME1135",
+          "title": "Sémiologie médicale",
+          "cmi": 45,
+          "tp_td": 40,
+          "tpe": 15,
+          "total_hours": 100,
+          "credits": 4,
+          "percent": 13
+        },
+        {
+          "ue": "CSS",
+          "ue_declared_credits": 20,
+          "code": "PHY1135",
+          "title": "Physiologie spéciale",
+          "cmi": 120,
+          "tp_td": 40,
+          "tpe": 40,
+          "total_hours": 200,
+          "credits": 8,
+          "percent": 27
+        },
+        {
+          "ue": "CSS",
+          "ue_declared_credits": 20,
+          "code": "ANP1135",
+          "title": "Anatomie pathologique générale",
+          "cmi": 45,
+          "tp_td": 30,
+          "tpe": 25,
+          "total_hours": 100,
+          "credits": 4,
+          "percent": 13
+        },
+        {
+          "ue": "CSS",
+          "ue_declared_credits": 20,
+          "code": "NRP113 5",
+          "title": "Neurophysiologie",
+          "cmi": 15,
+          "tp_td": 5,
+          "tpe": 5,
+          "total_hours": 25,
+          "credits": 1,
+          "percent": 4,
+          "source_code_irregular": true
+        },
+        {
+          "ue": "CSS",
+          "ue_declared_credits": 20,
+          "code": "PHA1135",
+          "title": "Pharmacologie générale",
+          "cmi": 45,
+          "tp_td": 15,
+          "tpe": 15,
+          "total_hours": 75,
+          "credits": 3,
+          "percent": 10
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 10,
+          "code": "PAR1435",
+          "title": "Parasitologie",
+          "cmi": 45,
+          "tp_td": 30,
+          "tpe": 25,
+          "total_hours": 100,
+          "credits": 4,
+          "percent": 13
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 10,
+          "code": "MIC1435",
+          "title": "Microbiologie",
+          "cmi": 75,
+          "tp_td": 40,
+          "tpe": 35,
+          "total_hours": 150,
+          "credits": 6,
+          "percent": 20
+        }
+      ],
+      "notes": []
+    },
+    {
+      "cycle": "Bachelier",
+      "level": "Bachelier 3",
+      "semester": 6,
+      "declared_totals": {
+        "hours": 750,
+        "credits": 30,
+        "percent": 100
+      },
+      "entries": [
+        {
+          "ue": "CSS",
+          "ue_declared_credits": 24,
+          "code": "BCL1136",
+          "title": "Biologie clinique",
+          "cmi": 40,
+          "tp_td": 30,
+          "tpe": 30,
+          "total_hours": 100,
+          "credits": 4,
+          "percent": 13
+        },
+        {
+          "ue": "CSS",
+          "ue_declared_credits": 24,
+          "code": "IMM1136",
+          "title": "Immunologie & Vaccinologie 3",
+          "cmi": 30,
+          "tp_td": 10,
+          "tpe": 10,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 7
+        },
+        {
+          "ue": "CSS",
+          "ue_declared_credits": 24,
+          "code": "SCH1136",
+          "title": "Sémiologie chirurgicale",
+          "cmi": 45,
+          "tp_td": 40,
+          "tpe": 15,
+          "total_hours": 100,
+          "credits": 4,
+          "percent": 13
+        },
+        {
+          "ue": "CSS",
+          "ue_declared_credits": 24,
+          "code": "RAD1136",
+          "title": "Radio-anatomie",
+          "cmi": 30,
+          "tp_td": 30,
+          "tpe": 15,
+          "total_hours": 75,
+          "credits": 3,
+          "percent": 10
+        },
+        {
+          "ue": "CSS",
+          "ue_declared_credits": 24,
+          "code": "INT1136",
+          "title": "chirurgie générale",
+          "cmi": 30,
+          "tp_td": 10,
+          "tpe": 10,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 7
+        },
+        {
+          "ue": "CSS",
+          "ue_declared_credits": 24,
+          "code": "ONC1136",
+          "title": "oncologie clinique",
+          "cmi": 30,
+          "tp_td": 10,
+          "tpe": 10,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 7
+        },
+        {
+          "ue": "CSS",
+          "ue_declared_credits": 24,
+          "code": "PHP1136",
+          "title": "Physiopathologie",
+          "cmi": 45,
+          "tp_td": 30,
+          "tpe": 25,
+          "total_hours": 100,
+          "credits": 4,
+          "percent": 13
+        },
+        {
+          "ue": "CSS",
+          "ue_declared_credits": 24,
+          "code": "SEM1136",
+          "title": "Séminaire d’analyse des pratiques professionnelles",
+          "cmi": 20,
+          "tp_td": 15,
+          "tpe": 15,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 7
+        },
+        {
+          "ue": "CSS",
+          "ue_declared_credits": 24,
+          "code": null,
+          "title": "Situation d’intégration",
+          "cmi": null,
+          "tp_td": 15,
+          "tpe": 10,
+          "total_hours": 25,
+          "credits": 1,
+          "percent": 3
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 4,
+          "code": "STA1436",
+          "title": "Stage de laboratoire",
+          "cmi": 0,
+          "tp_td": 0,
+          "tpe": 50,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 7
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 4,
+          "code": "SSL1436",
+          "title": "Stage de sémiologie",
+          "cmi": 0,
+          "tp_td": 0,
+          "tpe": 50,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 7
+        },
+        {
+          "ue": "RCH",
+          "ue_declared_credits": 2,
+          "code": "TFC1336",
+          "title": "TFC",
+          "cmi": 0,
+          "tp_td": 0,
+          "tpe": 50,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 7
+        }
+      ],
+      "notes": []
+    },
+    {
+      "cycle": "Master",
+      "level": "Master 1",
+      "semester": 7,
+      "declared_totals": {
+        "hours": 750,
+        "credits": 30,
+        "percent": 100
+      },
+      "entries": [
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 30,
+          "code": "PHA1447",
+          "title": "Pharmacologie spéciale",
+          "cmi": 60,
+          "tp_td": 20,
+          "tpe": 20,
+          "total_hours": 100,
+          "credits": 4,
+          "percent": 13
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 30,
+          "code": "EPI1447",
+          "title": "Santé Publique – Epidémiologie",
+          "cmi": 45,
+          "tp_td": 15,
+          "tpe": 15,
+          "total_hours": 75,
+          "credits": 3,
+          "percent": 10
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 30,
+          "code": "PNE1447",
+          "title": "Pneumologie",
+          "cmi": 30,
+          "tp_td": 10,
+          "tpe": 10,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 7
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 30,
+          "code": "HEM1447",
+          "title": "Hématologie",
+          "cmi": 30,
+          "tp_td": 10,
+          "tpe": 10,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 7
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 30,
+          "code": "CAR1447",
+          "title": "Cardiologie",
+          "cmi": 30,
+          "tp_td": 10,
+          "tpe": 10,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 7
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 30,
+          "code": "NEP1447",
+          "title": "Néphrologie",
+          "cmi": 30,
+          "tp_td": 10,
+          "tpe": 10,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 7
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 30,
+          "code": null,
+          "title": "Gastro-Entérologie",
+          "cmi": 30,
+          "tp_td": 10,
+          "tpe": 10,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 7
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 30,
+          "code": "OBS1447",
+          "title": "Obstétrique",
+          "cmi": 90,
+          "tp_td": 60,
+          "tpe": 25,
+          "total_hours": 175,
+          "credits": 7,
+          "percent": 23,
+          "components": [
+            {
+              "title": "Grossesse",
+              "cmi": 35,
+              "tp_td": 25,
+              "tpe": 15,
+              "total_hours": 75,
+              "credits": 3
+            },
+            {
+              "title": "Accouchement",
+              "cmi": 35,
+              "tp_td": 25,
+              "tpe": 15,
+              "total_hours": 75,
+              "credits": 3
+            },
+            {
+              "title": "Post-partum",
+              "cmi": 20,
+              "tp_td": 5,
+              "tpe": null,
+              "total_hours": 25,
+              "credits": 1
+            }
+          ]
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 30,
+          "code": "ANP1447",
+          "title": "Anatomie pathologique spéciale1",
+          "cmi": 30,
+          "tp_td": 20,
+          "tpe": 25,
+          "total_hours": 75,
+          "credits": 3,
+          "percent": 10
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 30,
+          "code": null,
+          "title": "Situation d’intégration",
+          "cmi": null,
+          "tp_td": 30,
+          "tpe": 20,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 7
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 30,
+          "code": "STA1447",
+          "title": "Stage clinique d’obstétrique",
+          "cmi": 0,
+          "tp_td": 50,
+          "tpe": 0,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 7
+        }
+      ],
+      "notes": []
+    },
+    {
+      "cycle": "Master",
+      "level": "Master 1",
+      "semester": 8,
+      "declared_totals": {
+        "hours": 750,
+        "credits": 30,
+        "percent": 100
+      },
+      "entries": [
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 26,
+          "code": "CHI1448",
+          "title": null,
+          "cmi": null,
+          "tp_td": null,
+          "tpe": null,
+          "total_hours": null,
+          "credits": null,
+          "percent": null,
+          "source_row_incomplete": true
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 26,
+          "code": "URO1448",
+          "title": "Urologie",
+          "cmi": 30,
+          "tp_td": 10,
+          "tpe": 10,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 7
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 26,
+          "code": "TRA1448",
+          "title": "Traumatologie",
+          "cmi": 30,
+          "tp_td": 10,
+          "tpe": 10,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 7
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 26,
+          "code": "CTH1448",
+          "title": "Chirurgie Thoracique",
+          "cmi": 30,
+          "tp_td": 10,
+          "tpe": 10,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 7
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 26,
+          "code": "CMF1448",
+          "title": "Chirurgie Digestive",
+          "cmi": 30,
+          "tp_td": 10,
+          "tpe": 10,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 7
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 26,
+          "code": "PED1448",
+          "title": "Pédiatrie 1 & Vaccinologie 4",
+          "cmi": 75,
+          "tp_td": 60,
+          "tpe": 40,
+          "total_hours": 175,
+          "credits": 7,
+          "percent": 23
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 26,
+          "code": "IMA1448",
+          "title": "Imagerie médicale",
+          "cmi": 30,
+          "tp_td": 15,
+          "tpe": 30,
+          "total_hours": 75,
+          "credits": 3,
+          "percent": 10
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 26,
+          "code": null,
+          "title": "Situation d’intégration",
+          "cmi": null,
+          "tp_td": 30,
+          "tpe": 20,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 7
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 26,
+          "code": "STA1448",
+          "title": "Stage clinique de pédiatrie",
+          "cmi": 0,
+          "tp_td": 55,
+          "tpe": 20,
+          "total_hours": 75,
+          "credits": 3,
+          "percent": 10
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 26,
+          "code": "SEM1448",
+          "title": "Séminaire d’analyse des pratiques professionnelles",
+          "cmi": 30,
+          "tp_td": 15,
+          "tpe": 30,
+          "total_hours": 75,
+          "credits": 3,
+          "percent": 10
+        },
+        {
+          "ue": "RCH",
+          "ue_declared_credits": 2,
+          "code": "MET1348",
+          "title": "Méthodologie de la recherche2",
+          "cmi": 20,
+          "tp_td": 10,
+          "tpe": 20,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 7
+        },
+        {
+          "ue": "ACC",
+          "ue_declared_credits": 2,
+          "code": "PSY1548",
+          "title": "Psychologie médicale",
+          "cmi": 30,
+          "tp_td": 10,
+          "tpe": 10,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 7
+        }
+      ],
+      "notes": [
+        "ANOMALY: source row CHI1448 has no visible ECUE title/hours in parsed source; preserved as incomplete rather than inferred."
+      ]
+    },
+    {
+      "cycle": "Master",
+      "level": "Master 2",
+      "semester": 9,
+      "declared_totals": {
+        "hours": 750,
+        "credits": 30,
+        "percent": 100
+      },
+      "entries": [
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 30,
+          "code": "NEP1447",
+          "title": "Néphrologie",
+          "cmi": 30,
+          "tp_td": 10,
+          "tpe": 10,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 7,
+          "source_code_repeated": true
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 30,
+          "code": "RHU1459",
+          "title": "Rhumatologie",
+          "cmi": 30,
+          "tp_td": 10,
+          "tpe": 10,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 6
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 30,
+          "code": "MMD1459",
+          "title": "Maladies métaboliques-Diabétologie",
+          "cmi": 30,
+          "tp_td": 10,
+          "tpe": 10,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 6
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 30,
+          "code": "END1459",
+          "title": "Endocrinologie",
+          "cmi": 30,
+          "tp_td": 10,
+          "tpe": 10,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 6
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 30,
+          "code": "PED1459",
+          "title": "Pédiatrie 2 & vaccinologie 5",
+          "cmi": 100,
+          "tp_td": 60,
+          "tpe": 40,
+          "total_hours": 200,
+          "credits": 8,
+          "percent": 27
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 30,
+          "code": "NEU1459",
+          "title": "Neurologie",
+          "cmi": 50,
+          "tp_td": 50,
+          "tpe": 25,
+          "total_hours": 125,
+          "credits": 5,
+          "percent": 18
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 30,
+          "code": "GYN1459",
+          "title": "Gynécologie",
+          "cmi": 100,
+          "tp_td": 50,
+          "tpe": 50,
+          "total_hours": 200,
+          "credits": 8,
+          "percent": 27
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 30,
+          "code": "ANE1459",
+          "title": "Anesthésiologie",
+          "cmi": 30,
+          "tp_td": 20,
+          "tpe": 15,
+          "total_hours": 75,
+          "credits": 3,
+          "percent": 10
+        }
+      ],
+      "notes": [
+        "ANOMALY: NEP1447 repeats the code used in semester 7; preserved exactly from source."
+      ]
+    },
+    {
+      "cycle": "Master",
+      "level": "Master 2",
+      "semester": 10,
+      "declared_totals": {
+        "hours": 750,
+        "credits": 30,
+        "percent": 100
+      },
+      "entries": [
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 30,
+          "code": "CHP14510",
+          "title": "Chirurgie Pediatrique",
+          "cmi": 25,
+          "tp_td": 15,
+          "tpe": 10,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 7
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 30,
+          "code": "NEU14510",
+          "title": "Neurochirurgie",
+          "cmi": 25,
+          "tp_td": 15,
+          "tpe": 10,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 7
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 30,
+          "code": "CAR14510",
+          "title": "Chirurgie Cardiovasculaire",
+          "cmi": 25,
+          "tp_td": 15,
+          "tpe": 10,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 7
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 30,
+          "code": "ORT14510",
+          "title": "Orthopédie",
+          "cmi": 25,
+          "tp_td": 15,
+          "tpe": 10,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 7
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 30,
+          "code": "CHD14510",
+          "title": "Chirurgie Maxillo-Faciale",
+          "cmi": 25,
+          "tp_td": 15,
+          "tpe": 10,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 7
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 30,
+          "code": "REA14510",
+          "title": "Réanimation",
+          "cmi": 25,
+          "tp_td": 15,
+          "tpe": 10,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 7
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 30,
+          "code": "PSY14510",
+          "title": "Psychiatrie",
+          "cmi": 25,
+          "tp_td": 15,
+          "tpe": 10,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 7
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 30,
+          "code": "ANP14510",
+          "title": "Anatomie pathologique spéciale2",
+          "cmi": 25,
+          "tp_td": 15,
+          "tpe": 10,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 7
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 30,
+          "code": "MAN14510",
+          "title": "Santé Publique – Management",
+          "cmi": 25,
+          "tp_td": 15,
+          "tpe": 10,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 7
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 30,
+          "code": "SEM14510",
+          "title": "Séminaire d’analyse des pratiques professionnelles",
+          "cmi": 25,
+          "tp_td": 15,
+          "tpe": 10,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 7
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 30,
+          "code": null,
+          "title": "Situation d’intégration",
+          "cmi": null,
+          "tp_td": 30,
+          "tpe": 20,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": null
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 30,
+          "code": "SCC14510",
+          "title": "Stage clinique de chirurgie",
+          "cmi": 0,
+          "tp_td": 0,
+          "tpe": 75,
+          "total_hours": 75,
+          "credits": 3,
+          "percent": 10
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 30,
+          "code": "SCM14510",
+          "title": "Stage clinique de Médecine Interne",
+          "cmi": 0,
+          "tp_td": 0,
+          "tpe": 75,
+          "total_hours": 75,
+          "credits": 3,
+          "percent": 10
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 30,
+          "code": "MPR14510",
+          "title": "Médecine physique et réadaptation",
+          "cmi": 25,
+          "tp_td": 15,
+          "tpe": 10,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 7
+        }
+      ],
+      "notes": []
+    },
+    {
+      "cycle": "Master",
+      "level": "Master 3",
+      "semester": 11,
+      "declared_totals": {
+        "hours": 750,
+        "credits": 30,
+        "percent": 100
+      },
+      "entries": [
+        {
+          "ue": "CSS",
+          "ue_declared_credits": 4,
+          "code": "MAE11611",
+          "title": "Médecine aéronautique",
+          "cmi": 15,
+          "tp_td": 5,
+          "tpe": 5,
+          "total_hours": 25,
+          "credits": 1,
+          "percent": 3
+        },
+        {
+          "ue": "CSS",
+          "ue_declared_credits": 4,
+          "code": "TOX11611",
+          "title": "Toxicologie",
+          "cmi": 15,
+          "tp_td": 5,
+          "tpe": 5,
+          "total_hours": 25,
+          "credits": 1,
+          "percent": 3
+        },
+        {
+          "ue": "CSS",
+          "ue_declared_credits": 4,
+          "code": "ANT11611",
+          "title": "Anthropologie",
+          "cmi": 15,
+          "tp_td": 5,
+          "tpe": 5,
+          "total_hours": 25,
+          "credits": 1,
+          "percent": 3
+        },
+        {
+          "ue": "CSS",
+          "ue_declared_credits": 4,
+          "code": "MET11611",
+          "title": "Médecine traditionnelle",
+          "cmi": 15,
+          "tp_td": 5,
+          "tpe": 5,
+          "total_hours": 25,
+          "credits": 1,
+          "percent": 3
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 23,
+          "code": "CHI14611",
+          "title": "Chirurgie 3",
+          "cmi": 50,
+          "tp_td": 20,
+          "tpe": 30,
+          "total_hours": 100,
+          "credits": 4,
+          "percent": 13
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 23,
+          "code": "MIP14611",
+          "title": "Maladies Infectieuses et Parasitaires",
+          "cmi": 45,
+          "tp_td": 30,
+          "tpe": 25,
+          "total_hours": 100,
+          "credits": 4,
+          "percent": 13
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 23,
+          "code": "STO14611",
+          "title": "Stomatologie",
+          "cmi": 30,
+          "tp_td": 20,
+          "tpe": 25,
+          "total_hours": 75,
+          "credits": 3,
+          "percent": 10
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 23,
+          "code": "OPH14611",
+          "title": "Ophtalmologie",
+          "cmi": 30,
+          "tp_td": 20,
+          "tpe": 25,
+          "total_hours": 75,
+          "credits": 3,
+          "percent": 10
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 23,
+          "code": "DER14611",
+          "title": "Dermatologie",
+          "cmi": 30,
+          "tp_td": 20,
+          "tpe": 25,
+          "total_hours": 75,
+          "credits": 3,
+          "percent": 10
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 23,
+          "code": "ORL14611",
+          "title": "OthoRinoLaryngologie",
+          "cmi": 45,
+          "tp_td": 25,
+          "tpe": 30,
+          "total_hours": 100,
+          "credits": 4,
+          "percent": 13
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 23,
+          "code": "GER14611",
+          "title": "Gériatrie",
+          "cmi": 25,
+          "tp_td": 10,
+          "tpe": 15,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 7
+        },
+        {
+          "ue": "REP",
+          "ue_declared_credits": 1,
+          "code": "COM17611",
+          "title": "Communication pour le Changement social et de comportement en Santé 2",
+          "cmi": 10,
+          "tp_td": 10,
+          "tpe": 5,
+          "total_hours": 25,
+          "credits": 1,
+          "percent": 3
+        },
+        {
+          "ue": "IDP",
+          "ue_declared_credits": 2,
+          "code": "MLE16611",
+          "title": "Médecine légale",
+          "cmi": 15,
+          "tp_td": 5,
+          "tpe": 5,
+          "total_hours": 25,
+          "credits": 1,
+          "percent": 3
+        },
+        {
+          "ue": "IDP",
+          "ue_declared_credits": 2,
+          "code": "DRO16611",
+          "title": "Droit médical",
+          "cmi": 15,
+          "tp_td": 5,
+          "tpe": 5,
+          "total_hours": 25,
+          "credits": 1,
+          "percent": 3
+        }
+      ],
+      "notes": []
+    },
+    {
+      "cycle": "Master",
+      "level": "Master 3",
+      "semester": 12,
+      "declared_totals": {
+        "hours": 750,
+        "credits": 30,
+        "percent": 100
+      },
+      "entries": [
+        {
+          "ue": "CSS",
+          "ue_declared_credits": 1,
+          "code": "MTR11612",
+          "title": "Médecine du travail",
+          "cmi": 15,
+          "tp_td": 5,
+          "tpe": 5,
+          "total_hours": 25,
+          "credits": 1,
+          "percent": 3
+        },
+        {
+          "ue": "GES",
+          "ue_declared_credits": 2,
+          "code": "SEM12612",
+          "title": "Séminaire en management",
+          "cmi": 15,
+          "tp_td": 15,
+          "tpe": 20,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 8
+        },
+        {
+          "ue": "RCH",
+          "ue_declared_credits": 3,
+          "code": "BET13612",
+          "title": "Bioéthique",
+          "cmi": 15,
+          "tp_td": 5,
+          "tpe": 5,
+          "total_hours": 25,
+          "credits": 1,
+          "percent": 3
+        },
+        {
+          "ue": "RCH",
+          "ue_declared_credits": 3,
+          "code": "RED13612",
+          "title": "Rédaction médicale",
+          "cmi": 15,
+          "tp_td": 15,
+          "tpe": 20,
+          "total_hours": 50,
+          "credits": 2,
+          "percent": 8
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 21,
+          "code": "URG14612",
+          "title": "Urgences et gestion des catastrophes",
+          "cmi": 30,
+          "tp_td": 15,
+          "tpe": 30,
+          "total_hours": 75,
+          "credits": 3,
+          "percent": 10
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 21,
+          "code": "SEM14612",
+          "title": "Séminaire d’analyse des pratiques professionnelles",
+          "cmi": 30,
+          "tp_td": 15,
+          "tpe": 30,
+          "total_hours": 75,
+          "credits": 3,
+          "percent": 10
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 21,
+          "code": null,
+          "title": "Situation d’intégration",
+          "cmi": null,
+          "tp_td": 45,
+          "tpe": 30,
+          "total_hours": 75,
+          "credits": 3,
+          "percent": null
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 21,
+          "code": "SNP14612",
+          "title": "Stage interné en neurologie et psychiatrie",
+          "cmi": 0,
+          "tp_td": 100,
+          "tpe": 200,
+          "total_hours": 300,
+          "credits": 12,
+          "percent": 50
+        },
+        {
+          "ue": "ACC",
+          "ue_declared_credits": 1,
+          "code": "SOP15612",
+          "title": "Soins palliatifs",
+          "cmi": 15,
+          "tp_td": 5,
+          "tpe": 5,
+          "total_hours": 25,
+          "credits": 1,
+          "percent": 3
+        },
+        {
+          "ue": "IDP",
+          "ue_declared_credits": 2,
+          "code": "ETH16612",
+          "title": "Ethique",
+          "cmi": 15,
+          "tp_td": 5,
+          "tpe": 5,
+          "total_hours": 25,
+          "credits": 1,
+          "percent": 3
+        },
+        {
+          "ue": "IDP",
+          "ue_declared_credits": 2,
+          "code": "DEO16612",
+          "title": "Déontologie médicale",
+          "cmi": 15,
+          "tp_td": 5,
+          "tpe": 5,
+          "total_hours": 25,
+          "credits": 1,
+          "percent": 3
+        }
+      ],
+      "notes": []
+    },
+    {
+      "cycle": "Master",
+      "level": "Master 4",
+      "semester": 13,
+      "declared_totals": {
+        "hours": 750,
+        "credits": 30,
+        "percent": 100
+      },
+      "entries": [
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 30,
+          "code": "SMI14713",
+          "title": "Stage interné en médecine interne",
+          "cmi": 0,
+          "tp_td": 75,
+          "tpe": 225,
+          "total_hours": 300,
+          "credits": 12,
+          "percent": 40
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 30,
+          "code": "SCH14713",
+          "title": "Stage interné en Chirurgie",
+          "cmi": 0,
+          "tp_td": 75,
+          "tpe": 225,
+          "total_hours": 300,
+          "credits": 12,
+          "percent": 40
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 30,
+          "code": "SSI14713",
+          "title": "Stage interné en spécialités et imagerie médicale",
+          "cmi": 0,
+          "tp_td": 50,
+          "tpe": 100,
+          "total_hours": 150,
+          "credits": 6,
+          "percent": 20
+        }
+      ],
+      "notes": []
+    },
+    {
+      "cycle": "Master",
+      "level": "Master 4",
+      "semester": 14,
+      "declared_totals": {
+        "hours": 750,
+        "credits": 30,
+        "percent": 100
+      },
+      "entries": [
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 30,
+          "code": "SZS14713",
+          "title": "Stage au Bureau centrale de la zone de santé",
+          "cmi": 0,
+          "tp_td": 50,
+          "tpe": 100,
+          "total_hours": 150,
+          "credits": 6,
+          "percent": 20,
+          "source_code_semester_mismatch": true
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 30,
+          "code": "SGO14713",
+          "title": "Stage interné en gynéco-obstétrique",
+          "cmi": 0,
+          "tp_td": 75,
+          "tpe": 175,
+          "total_hours": 250,
+          "credits": 10,
+          "percent": 33.3,
+          "source_code_semester_mismatch": true
+        },
+        {
+          "ue": "PDS",
+          "ue_declared_credits": 30,
+          "code": "SPE14713",
+          "title": "Stage interné en Pédiatrie & vaccinologie 7",
+          "cmi": 0,
+          "tp_td": 75,
+          "tpe": 175,
+          "total_hours": 250,
+          "credits": 10,
+          "percent": 33.3,
+          "source_code_semester_mismatch": true
+        },
+        {
+          "ue": "RCH",
+          "ue_declared_credits": null,
+          "code": "TFE13714",
+          "title": "Rédaction du travail de fin d’étude",
+          "cmi": 0,
+          "tp_td": 50,
+          "tpe": 50,
+          "total_hours": 100,
+          "credits": 4,
+          "percent": 13.3
+        }
+      ],
+      "notes": [
+        "ANOMALY: several semester-14 stage codes end in 14713; preserved exactly from source."
+      ]
+    }
+  ],
+  "editorial_suggestions": [
+    "BAC1/BAC2 situation d’intégration considered not adapted to prerequisites.",
+    "Maladies infectieuses could be moved to BAC3.",
+    "Immunologie should be split into générale/pathologique.",
+    "Vaccinologie considered overprogrammed; reduce promotions and reinforce practice.",
+    "Dermatology particulars could be modules in anatomy/semiology.",
+    "Master semester numbering could restart at 1 for the new cycle.",
+    "Médecine nucléaire is noted as omitted in Master 3."
+  ],
+  "suggestions_status": "editorial_recommendations_not_applied"
+}

@@ -1,0 +1,53 @@
+PASS apps/mobile/lib/src/features/home/presentation/home_page.dart: upcomingEventsProvider
+PASS apps/mobile/lib/src/features/home/presentation/home_page.dart: todayPlanProvider
+PASS apps/mobile/lib/src/features/home/presentation/home_page.dart: libraryCoursesProvider
+PASS apps/mobile/lib/src/features/home/presentation/home_page.dart: _greeting
+PASS home contains no demo literal 'Biochimie'
+PASS home contains no demo literal 'Physiologie générale'
+PASS home contains no demo literal 'value: .48'
+PASS apps/mobile/lib/src/shared/presentation/edunova_shell.dart: NavigationRail
+PASS apps/mobile/lib/src/shared/presentation/edunova_shell.dart: NavigationBar
+PASS apps/mobile/lib/src/shared/presentation/edunova_shell.dart: railBreakpoint
+PASS apps/mobile/lib/src/features/engagement/presentation/engagement_page.dart: Rythme
+PASS apps/mobile/lib/src/features/engagement/presentation/engagement_page.dart: Rappels
+PASS apps/mobile/lib/src/features/engagement/presentation/engagement_page.dart: Réglages
+PASS apps/mobile/lib/src/features/engagement/presentation/engagement_page.dart: Historique récent
+PASS apps/mobile/lib/src/features/engagement/presentation/engagement_page.dart: showTimePicker
+PASS apps/mobile/lib/src/features/engagement/presentation/engagement_page.dart: systemNotificationsSupported
+PASS apps/mobile/lib/src/features/audio/presentation/audio_summary_page.dart: Slider(
+PASS apps/mobile/lib/src/features/audio/presentation/audio_summary_page.dart: SegmentedButton<double>
+PASS apps/mobile/lib/src/features/audio/presentation/audio_summary_page.dart: Mes repères audio
+PASS apps/mobile/lib/src/features/audio/presentation/audio_summary_page.dart: Texte du résumé
+PASS apps/mobile/lib/src/features/audio/presentation/audio_summary_page.dart: Aperçu audio gratuit
+PASS apps/mobile/lib/src/features/engagement/infrastructure/local_notification_scheduler_native.dart: getNotificationAppLaunchDetails
+PASS apps/mobile/lib/src/features/engagement/infrastructure/local_notification_scheduler_native.dart: onDidReceiveNotificationResponse
+PASS apps/mobile/lib/src/features/engagement/infrastructure/local_notification_scheduler_native.dart: 'link':n.deepLink
+PASS apps/mobile/lib/src/core/theme/edunova_theme.dart: navigationRailTheme
+PASS apps/mobile/lib/src/core/theme/edunova_theme.dart: bottomSheetTheme
+PASS apps/mobile/lib/src/core/theme/edunova_theme.dart: scrollbarTheme
+PASS apps/mobile/lib/src/shared/presentation/widgets/premium_surface.dart: EduNovaPageBody
+PASS apps/mobile/lib/src/shared/presentation/widgets/premium_surface.dart: PremiumPanel
+PASS apps/mobile/lib/src/shared/presentation/widgets/premium_surface.dart: EmptyStateCard
+PASS apps/mobile/lib/src/shared/presentation/widgets/premium_surface.dart: SkeletonLine
+PASS apps/mobile/lib/src/core/theme/tokens.dart: braces balanced
+PASS apps/mobile/lib/src/core/theme/tokens.dart: parens balanced
+PASS apps/mobile/lib/src/core/theme/edunova_theme.dart: braces balanced
+PASS apps/mobile/lib/src/core/theme/edunova_theme.dart: parens balanced
+PASS apps/mobile/lib/src/shared/presentation/edunova_shell.dart: braces balanced
+PASS apps/mobile/lib/src/shared/presentation/edunova_shell.dart: parens balanced
+PASS apps/mobile/lib/src/shared/presentation/widgets/premium_surface.dart: braces balanced
+PASS apps/mobile/lib/src/shared/presentation/widgets/premium_surface.dart: parens balanced
+PASS apps/mobile/lib/src/features/home/presentation/home_page.dart: braces balanced
+PASS apps/mobile/lib/src/features/home/presentation/home_page.dart: parens balanced
+PASS apps/mobile/lib/src/features/engagement/presentation/engagement_page.dart: braces balanced
+PASS apps/mobile/lib/src/features/engagement/presentation/engagement_page.dart: parens balanced
+PASS apps/mobile/lib/src/features/audio/presentation/audio_summary_page.dart: braces balanced
+PASS apps/mobile/lib/src/features/audio/presentation/audio_summary_page.dart: parens balanced
+PASS apps/mobile/lib/src/features/engagement/application/local_notification_scheduler.dart: braces balanced
+PASS apps/mobile/lib/src/features/engagement/application/local_notification_scheduler.dart: parens balanced
+PASS apps/mobile/lib/src/features/engagement/infrastructure/local_notification_scheduler_native.dart: braces balanced
+PASS apps/mobile/lib/src/features/engagement/infrastructure/local_notification_scheduler_native.dart: parens balanced
+PASS apps/mobile/lib/src/app/edunova_app.dart: braces balanced
+PASS apps/mobile/lib/src/app/edunova_app.dart: parens balanced
+
+51 UX static checks PASS

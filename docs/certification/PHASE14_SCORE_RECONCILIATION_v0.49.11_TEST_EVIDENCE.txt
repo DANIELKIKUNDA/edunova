@@ -1,0 +1,40 @@
+EDUNOVA v0.49.11 — PHASE 14 SCORE RECONCILIATION
+SOURCE: EduNova_v0.49.10_RC_PHASE14_ATTEMPT_RESULT_INTEGRITY.zip
+SOURCE SHA-256 VERIFIED: e36fc837abc9745731f90f8df9c390542939c5d06bde3e88a7f52d3a6ed3c1ec
+
+BASELINE — unmodified v0.49.10 source (extracted archive)
+Command: PYTHONPATH=services/api python -m pytest -q services/api/tests
+Exit: 0
+698 passed in 39.64s
+
+FIRST INTEGRATION REGRESSION — before 3 final adversarial tests and report guard
+Command: PYTHONPATH=services/api python -m pytest -q services/api/tests
+Exit: 0
+724 passed in 39.77s
+
+FINAL FULL REGRESSION — code with 29 new tests, 0.49.11 version
+Command: PYTHONPATH=services/api python -m pytest -q services/api/tests
+Exit: 0
+727 passed in 39.32s
+
+FOCUSED PHASE 14
+Command: PYTHONPATH=services/api python -m pytest -q services/api/tests/test_phase14_pedagogical_intelligence.py services/api/tests/test_phase14_score_reconciliation.py
+Exit: 0
+106 passed in 2.35s
+
+MIGRATION CONTRACT
+Command: PYTHONPATH=services/api python -m pytest -q services/api/tests/test_migration_contract.py
+Exit: 0
+1 passed in 0.70s
+
+PYTHON COMPILATION
+Command: python -m compileall -q services/api/app services/api/tests
+Exit: 0
+
+EXTERNAL GATES NOT RUN
+Flutter analyze/test/build: not run (flutter and dart CLI absent).
+PostgreSQL real migration/concurrency: not run (SQLite integration tests only).
+Redis/object storage/providers/real devices: not run.
+
+NOTES
+Assessment scores remain read-only in analytics. Legacy version 0 is NOT automatically certified as complete, even if detail and total match by coincidence.

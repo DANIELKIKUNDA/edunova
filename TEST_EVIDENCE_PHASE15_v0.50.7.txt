@@ -1,0 +1,52 @@
+EduNova Phase 15 — Certification backend locale v0.50.7
+Baseline v0.50.6 SHA-256: 4842a0b65596ad5a843ff66d85107ada45cc181c280c7e6d035f07c5a3118c1e
+
+Commande réellement exécutée :
+PYTHONPATH=services/api python -m pytest -q services/api/tests
+Code de retour enregistré : 0
+Journal complet :
+........................................................................ [  8%]
+........................................................................ [ 16%]
+........................................................................ [ 24%]
+........................................................................ [ 32%]
+........................................................................ [ 40%]
+........................................................................ [ 48%]
+........................................................................ [ 56%]
+........................................................................ [ 64%]
+........................................................................ [ 72%]
+........................................................................ [ 80%]
+........................................................................ [ 89%]
+........................................................................ [ 97%]
+.........................                                                [100%]
+889 passed in 157.48s (0:02:37)
+
+Tests ciblés Phase 15, version finale :
+Commande : PYTHONPATH=services/api python -m pytest -q services/api/tests/test_phase15_live_release_closure.py services/api/tests/test_phase15_temporal_archive_integrity.py services/api/tests/test_phase15_legacy_surface_closure.py services/api/tests/test_migration_contract.py
+Résultat :
+.....................................................                    [100%]
+53 passed in 21.95s
+
+Audit structurel LOT32 :
+PASS migration chain contiguous through latest
+PASS trust personal-space boundary
+PASS persistent sessions
+PASS commerce licensing
+PASS campus core
+PASS teaching
+PASS assignments
+PASS gradebook
+PASS institutional analytics
+PASS knowledge graph
+PASS tutor
+PASS pilot readiness
+PASS pwa offline
+PASS production compose
+PASS ci and release
+PASS backup restore
+PASS no TODO/FIXME/NotImplementedError
+LOT32 GLOBAL AUDIT: 17/17 PASS
+
+Compilation : python -m compileall -q services/api/app services/api/tests ; code 0.
+
+Exécutions préliminaires : une tentative globale concurrente à des tests ciblés sur le même fichier SQLite de test a échoué avec « attempt to write a readonly database » ; elle n'est pas la certification finale.
+Non exécutés : PostgreSQL serveur, Redis, stockage objet, Flutter, vrais appareils, fournisseurs externes, load-test de production, signatures légales.

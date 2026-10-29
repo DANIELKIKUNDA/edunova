@@ -1,0 +1,41 @@
+name: edunova_admin
+description: Back-office editorial privé EduNova
+publish_to: none
+version: 0.52.3+17003
+environment:
+  sdk: '>=3.4.0 <4.0.0'
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^1.2.2
+  flutter_secure_storage: ^9.2.2
+  file_picker: ^8.1.7
+dev_dependencies:
+  flutter_launcher_icons: ^0.14.3
+  flutter_native_splash: ^2.4.4
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/branding/
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: assets/branding/app_icon.png
+  web:
+    generate: true
+    image_path: assets/branding/app_icon.png
+  windows:
+    generate: true
+    image_path: assets/branding/app_icon.png
+
+flutter_native_splash:
+  color: "#FFFFFF"
+  image: assets/branding/edunova_logo_official.png
+  branding: assets/branding/edunova_logo_official.png
+  android_12:
+    color: "#FFFFFF"
+    image: assets/branding/app_icon.png

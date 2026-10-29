@@ -1,0 +1,12 @@
+EduNova v0.51.7 — Audit structurel (NON compilateur Dart / Flutter)
+- Source API GET /institutions/{institution_id}/alerts : présente.
+- Authentification account_id par bearer token : présente.
+- Rattachement à une institution ACTIVE et membership ACTIVE : présent.
+- Repository SQL tenant+account sur prêts, réservations et inscriptions : présent.
+- Filtres d'état (prêt non restitué, annulation maintenance, inscription active) : présents.
+- Données privées administrateurs limitées à leurs propres alertes : présent.
+- Borne d'agrégation à 50 événements : présente.
+- Projections Flutter (Dio, no-store, validation des doublons) : présentes.
+- Cycle de vie Flutter : remise à zéro de l'état et génération anti-réponses tardives : présent.
+- CI existante : flutter analyze et flutter test --no-pub configurés.
+Aucune de ces inspections statiques n'est une compilation Flutter/Dart.

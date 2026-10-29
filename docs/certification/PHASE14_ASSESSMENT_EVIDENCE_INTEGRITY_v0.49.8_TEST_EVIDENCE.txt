@@ -1,0 +1,51 @@
+EduNova v0.49.8 — PHASE14_ASSESSMENT_EVIDENCE_INTEGRITY
+Source v0.49.7 SHA-256: df489d8f7afcec95d525abb02727f883c32875d6850709b3f9e948580fa5cf58
+Baseline full suite: 672 passed in 33.53s; code 0 (freshly rerun).
+
+=== FINAL FULL BACKEND REGRESSION ===
+........................................................................ [ 10%]
+........................................................................ [ 21%]
+........................................................................ [ 31%]
+........................................................................ [ 42%]
+........................................................................ [ 52%]
+........................................................................ [ 63%]
+........................................................................ [ 74%]
+........................................................................ [ 84%]
+........................................................................ [ 95%]
+.................................                                        [100%]
+681 passed in 34.35s
+
+Full suite exit code: 0 (waited for detached process and read .exit file)
+
+=== PHASE 14 FOCUSED SUITE ===
+60 passed in 1.08s; exit code 0
+
+=== Python compileall ===
+PASS, exit code 0, command: python -m compileall -q services/api/app services/api/tests
+
+=== LOT32 STRUCTURAL AUDIT ===
+PASS migration chain contiguous through latest
+PASS trust personal-space boundary
+PASS persistent sessions
+PASS commerce licensing
+PASS campus core
+PASS teaching
+PASS assignments
+PASS gradebook
+PASS institutional analytics
+PASS knowledge graph
+PASS tutor
+PASS pilot readiness
+PASS pwa offline
+PASS production compose
+PASS ci and release
+PASS backup restore
+PASS no TODO/FIXME/NotImplementedError
+LOT32 GLOBAL AUDIT: 17/17 PASS
+
+Audit exit code: 0
+
+Latest existing SQL migration: 0082 (no new migration needed)
+Flutter/Dart: NOT RUN (not installed in this environment)
+PostgreSQL real, Redis, workers, object storage, devices/providers: NOT RUN
+Tests use SQLite; not production certification.

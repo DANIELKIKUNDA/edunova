@@ -1,0 +1,2 @@
+# LOT 19 — OPEN-machine certification
+Run on target machine: PostgreSQL migration 0024; concurrent optimistic-lock conflict tests; Flutter analyze/test/build for Android/PWA/Windows; offline queue/replay and multi-device conflict scenarios; accessibility/visual checks on real phones/tablets/desktops; large real-student evidence corpus; medical/high-stakes pedagogical review; load/endurance on diagnosis/path dashboards.
