@@ -24,6 +24,8 @@ class PaymentGatewayService:
   now=self.now();pid=uuid4().hex;x=PaymentIntent(pid,i,student_id,amount_minor,currency,provider,payer_msisdn,idempotency_key,'PAY-'+pid[:16].upper(),None,PaymentStatus.PENDING,a,now,now,now+timedelta(minutes=30),None,None);self.repo.save(x);self._audit(a,'payment.initiated',x.id,{'provider':provider});return x
  def sign_sandbox(self,payload:bytes):return hmac_new(self.secrets['sandbox'].encode(),payload,'sha256').hexdigest()
  def callback(self,provider,event_id,intent_id,status,provider_reference,payload,signature):
+  # Reject unsupported outcomes before persisting a provider event.
+  if status not in {'succeeded','failed'}:raise ValueError('payment_callback_status_invalid')
   if provider not in self.secrets:raise PermissionError('payment_provider_not_configured')
   envelope={'event_id':event_id,'intent_id':intent_id,'status':status,'provider_reference':provider_reference,'payload':payload};raw=dumps(envelope,sort_keys=True,separators=(',',':')).encode();expected=hmac_new(self.secrets[provider].encode(),raw,'sha256').hexdigest()
   if not compare_digest(expected,signature):raise PermissionError('payment_callback_signature_invalid')
