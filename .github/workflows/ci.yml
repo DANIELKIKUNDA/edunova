@@ -48,3 +48,22 @@ jobs:
       - name: Flutter web build (compilation only, not device certification)
         working-directory: apps/mobile
         run: flutter build web --release --no-pub
+
+  admin-flutter:
+    name: Flutter administration analysis and tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - name: Resolve admin dependencies
+        working-directory: apps/admin
+        run: flutter pub get
+      - name: Analyze admin application
+        working-directory: apps/admin
+        run: flutter analyze --no-pub
+      - name: Run admin tests
+        working-directory: apps/admin
+        run: flutter test --no-pub
