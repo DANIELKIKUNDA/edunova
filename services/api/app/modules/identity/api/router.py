@@ -118,7 +118,14 @@ def login(req: LoginRequest, request: Request) -> TokenResponse:
 
 
 @router.post("/refresh", response_model=TokenResponse)
-def refresh(req: RefreshRequest) -> TokenResponse:
+def refresh(req: RefreshRequest, request: Request) -> TokenResponse:
+    try:
+        runtime.rate_limiter.check(
+            key=f"refresh:{request.client.host if request.client else 'unknown'}",
+            limit=60, window_seconds=900,
+        )
+    except RateLimitExceeded as exc:
+        raise HTTPException(status_code=429, detail="too_many_attempts") from exc
     try:
         tokens = runtime.identity.refresh(req.refresh_token, req.device_name)
         payload = runtime.token_issuer.decode_access(tokens.access_token)
@@ -205,7 +212,14 @@ def request_recovery(req: RecoveryRequest, request: Request) -> dict:
 
 
 @router.post("/recovery/confirm")
-def confirm_recovery(req: RecoveryConfirmRequest) -> dict:
+def confirm_recovery(req: RecoveryConfirmRequest, request: Request) -> dict:
+    try:
+        runtime.rate_limiter.check(
+            key=f"recovery-confirm:{request.client.host if request.client else 'unknown'}:{req.challenge_id}",
+            limit=8, window_seconds=900,
+        )
+    except RateLimitExceeded as exc:
+        raise HTTPException(status_code=429, detail="too_many_attempts") from exc
     try:
         runtime.identity.confirm_password_recovery(challenge_id=req.challenge_id, code=req.code, new_password=req.new_password)
     except ValueError as exc:
