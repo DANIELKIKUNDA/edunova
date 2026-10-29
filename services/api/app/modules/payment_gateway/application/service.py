@@ -17,7 +17,7 @@ class PaymentGatewayService:
   if not idempotency_key.strip() or not payer_msisdn.strip():raise ValueError('payment_idempotency_and_msisdn_required')
   old=self.repo.by_idempotency(i,idempotency_key)
   if old:
-   if (old.student_id,old.amount_minor,old.currency,old.provider)!=(student_id,amount_minor,currency,provider):raise ValueError('payment_idempotency_conflict')
+   if (old.student_id,old.amount_minor,old.currency,old.provider,old.payer_msisdn)!=(student_id,amount_minor,currency,provider,payer_msisdn):raise ValueError('payment_idempotency_conflict')
    return old
   balance=self.finance.statement(a,i,student_id)['balances_by_currency'].get(currency,0)
   if amount_minor>balance:raise ValueError('payment_exceeds_student_balance')
