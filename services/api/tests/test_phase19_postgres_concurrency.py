@@ -8,6 +8,7 @@ from unittest.mock import Mock
 
 import pytest
 from sqlalchemy import func, select
+from sqlalchemy.exc import IntegrityError
 from test_phase19_atomic_callback import repositories, settle
 from test_phase19_atomic_finance import database, receipt
 from app.modules.payment_gateway.infrastructure.sqlalchemy_repo import PaymentIntentRow, ProviderEventRow
@@ -94,6 +95,8 @@ def test_callback_racing_stale_terminal_save_cannot_erase_settlement(repositorie
             committed.set()
     operation = (lambda: service.expire('intent-1')) if terminal == 'expired' else (lambda: service.cancel('student-a', 'institution-a', 'intent-1', 'test cancellation'))
     results = simultaneous(callback, operation)
+    assert not isinstance(results[0], Exception), results
+    assert isinstance(results[1], ValueError) and str(results[1]) == 'payment_terminal_status_conflict', results
     with sf() as s:
         intent = s.get(PaymentIntentRow, 'intent-1')
         receipts, ledger = counts(sf)
@@ -103,3 +106,35 @@ def test_callback_racing_stale_terminal_save_cannot_erase_settlement(repositorie
         else:
             assert intent.status == terminal
             assert ledger == 0
+
+
+@pytest.mark.parametrize('terminal', ['expired', 'cancelled'])
+def test_terminal_operation_committed_first_blocks_callback(repositories, terminal):
+    sf, gateway, finance, now = repositories
+    from app.modules.payment_gateway.application.service import PaymentGatewayService
+    service = PaymentGatewayService(gateway, Mock(), Mock(), Mock(), lambda: now)
+    if terminal == 'expired':
+        service.expire('intent-1')
+    else:
+        service.cancel('student-a', 'institution-a', 'intent-1', 'test cancellation')
+    with pytest.raises(ValueError, match='payment_terminal_status_conflict'):
+        settle(gateway, finance, now)
+    assert counts(sf) == (0, 0)
+    with sf() as s:
+        assert s.get(PaymentIntentRow, 'intent-1').status == terminal
+        assert s.scalar(select(func.count()).select_from(ProviderEventRow)) == 0
+
+
+def test_provider_reference_conflict_rolls_back_second_intent(repositories):
+    sf, gateway, finance, now = repositories
+    second = replace(gateway.get('intent-1'), id='intent-2', merchant_reference='PAY-2', idempotency_key='key-2')
+    gateway.save(second)
+    settle(gateway, finance, now)
+    with pytest.raises(IntegrityError):
+        gateway.settle_callback_atomic('sandbox', 'event-2', 'intent-2', 'succeeded', 'provider-ref-1', sha256(b'second').hexdigest(), None, finance, now)
+    assert counts(sf) == (1, 1)
+    with sf() as s:
+        second = s.get(PaymentIntentRow, 'intent-2')
+        assert second.status == 'pending' and second.receipt_id is None
+        assert s.get(StudentChargeRow, 'charge-1').paid_minor == 2500
+        assert s.scalar(select(func.count()).select_from(ProviderEventRow)) == 1

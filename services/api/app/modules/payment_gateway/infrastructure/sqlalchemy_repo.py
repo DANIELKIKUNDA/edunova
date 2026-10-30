@@ -25,7 +25,11 @@ class SqlPaymentGatewayRepository:
   with self.sf() as s:r=s.scalar(select(PaymentIntentRow).where(PaymentIntentRow.institution_id==i,PaymentIntentRow.idempotency_key==k));return self._i(r) if r else None
  def save(self,x):
   with self.sf() as s:
-   r=s.get(PaymentIntentRow,x.id);d=x.__dict__.copy();d['status']=x.status.value
+   r=s.scalar(select(PaymentIntentRow).where(PaymentIntentRow.id==x.id).with_for_update());d=x.__dict__.copy();d['status']=x.status.value
+   # Cancellation/expiry may have read PENDING before a callback settled. Check
+   # again while holding the same row lock used by atomic callback settlement.
+   if r and r.status!=PaymentStatus.PENDING.value and r.status!=d['status']:
+    raise ValueError('payment_terminal_status_conflict')
    if not r:s.add(PaymentIntentRow(**d))
    else:
     for k,v in d.items():setattr(r,k,v)
