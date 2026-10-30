@@ -9,6 +9,7 @@ import pytest
 from sqlalchemy import create_engine, event, func, select
 from sqlalchemy.orm import Session, sessionmaker
 from sqlalchemy.pool import StaticPool
+from phase19_db import build_test_engine, dispose_test_engine
 
 from app.shared.infrastructure.database import Base
 from app.modules.student_finance.domain.model import FinanceReceipt
@@ -20,11 +21,7 @@ from app.modules.student_finance.infrastructure.sqlalchemy_repo import (
 
 @pytest.fixture
 def database():
-    engine = create_engine(
-        "sqlite+pysqlite:///:memory:",
-        connect_args={"check_same_thread": False},
-        poolclass=StaticPool,
-    )
+    engine = build_test_engine()
     Base.metadata.create_all(engine)
     sf = sessionmaker(bind=engine)
     with sf.begin() as s:
@@ -39,7 +36,7 @@ def database():
     try:
         yield sf, SqlStudentFinanceRepository(sf)
     finally:
-        engine.dispose()
+        dispose_test_engine(engine)
 
 
 def receipt(external_reference="provider-ref"):
