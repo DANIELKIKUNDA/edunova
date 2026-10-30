@@ -206,3 +206,71 @@ def test_cross_institution_provider_observation_is_rejected():
     repo.add_attempt.assert_not_called()
     repo.save.assert_not_called()
     finance.payment.assert_not_called()
+
+
+def test_finance_external_reference_cannot_be_reused_for_another_student():
+    from app.modules.student_finance.application.service import StudentFinanceService
+
+    repo = Mock()
+    repo.receipt_by_external.return_value = SimpleNamespace(
+        student_id="student-a",
+        amount_minor=2500,
+        currency="CDF",
+        method="mobile_money",
+    )
+    student_repo = Mock()
+    student_repo.get.return_value = SimpleNamespace(
+        institution_id="institution-a"
+    )
+    finance = StudentFinanceService(
+        repo=repo,
+        campus=Mock(),
+        campus_repo=Mock(),
+        student_repo=student_repo,
+        now=lambda: datetime(2026, 10, 30, tzinfo=UTC),
+    )
+
+    with pytest.raises(ValueError, match="finance_external_reference_conflict"):
+        finance.payment(
+            "provider:sandbox", "institution-a", "student-b",
+            2500, "CDF", "mobile_money", "provider-reference-1",
+            internal=True,
+        )
+
+    repo.add_receipt.assert_not_called()
+    repo.update_charge_paid.assert_not_called()
+    repo.add_ledger.assert_not_called()
+
+
+def test_finance_external_reference_replay_returns_matching_receipt():
+    from app.modules.student_finance.application.service import StudentFinanceService
+
+    repo = Mock()
+    receipt = SimpleNamespace(
+        student_id="student-a",
+        amount_minor=2500,
+        currency="CDF",
+        method="mobile_money",
+    )
+    repo.receipt_by_external.return_value = receipt
+    student_repo = Mock()
+    student_repo.get.return_value = SimpleNamespace(
+        institution_id="institution-a"
+    )
+    finance = StudentFinanceService(
+        repo=repo,
+        campus=Mock(),
+        campus_repo=Mock(),
+        student_repo=student_repo,
+        now=lambda: datetime(2026, 10, 30, tzinfo=UTC),
+    )
+
+    result = finance.payment(
+        "provider:sandbox", "institution-a", "student-a",
+        2500, "CDF", "mobile_money", "provider-reference-1",
+        internal=True,
+    )
+
+    assert result is receipt
+    repo.add_receipt.assert_not_called()
+    repo.add_ledger.assert_not_called()
