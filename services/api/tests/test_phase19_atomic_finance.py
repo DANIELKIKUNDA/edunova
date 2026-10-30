@@ -156,3 +156,34 @@ def test_atomic_payment_rejects_reversed_reference(database):
         assert s.get(StudentChargeRow, "charge-1").paid_minor == 2500
         assert s.scalar(select(func.count()).select_from(FinanceReceiptRow)) == 1
         assert s.scalar(select(func.count()).select_from(FinanceLedgerRow)) == 1
+
+
+def test_atomic_payment_rolls_back_when_charge_update_fails(database):
+    sf, repo = database
+
+    def fail_charge_update(mapper, connection, target):
+        raise RuntimeError("injected_charge_update_failure")
+
+    event.listen(StudentChargeRow, "before_update", fail_charge_update)
+    try:
+        with pytest.raises(RuntimeError, match="injected_charge_update_failure"):
+            repo.post_payment_atomic(receipt("charge-update-failure"), "fault injection")
+    finally:
+        event.remove(StudentChargeRow, "before_update", fail_charge_update)
+
+    with sf() as s:
+        assert s.get(StudentChargeRow, "charge-1").paid_minor == 0
+        assert s.scalar(select(func.count()).select_from(FinanceReceiptRow)) == 0
+        assert s.scalar(select(func.count()).select_from(FinanceLedgerRow)) == 0
+
+
+def test_atomic_payment_cannot_allocate_to_another_institution(database):
+    sf, repo = database
+    from dataclasses import replace
+    wrong_institution = replace(receipt("foreign-campus-ref"), institution_id="institution-b")
+    with pytest.raises(ValueError, match="finance_no_open_charges"):
+        repo.post_payment_atomic(wrong_institution, "cross-campus attempt")
+    with sf() as s:
+        assert s.get(StudentChargeRow, "charge-1").paid_minor == 0
+        assert s.scalar(select(func.count()).select_from(FinanceReceiptRow)) == 0
+        assert s.scalar(select(func.count()).select_from(FinanceLedgerRow)) == 0
