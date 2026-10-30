@@ -70,7 +70,7 @@ class StudentFinanceService:
    posted=self.repo.post_payment_atomic(receipt,note)
    self._audit(a,'finance.payment.posted',posted.id,{'amount_minor':amount_minor,'currency':currency})
    return posted
-  open_charges=[c for c in self.repo.charges(student_id) if c.currency==currency and c.state!=ChargeState.PAID]
+  open_charges=[c for c in self.repo.charges(student_id) if c.currency==currency and c.state in {ChargeState.OPEN,ChargeState.PARTIAL}]
   if not open_charges:raise ValueError('finance_no_open_charges')
   outstanding=sum(c.amount_minor-c.paid_minor for c in open_charges)
   if amount_minor>outstanding:raise ValueError('finance_overpayment_requires_explicit_credit_policy')
