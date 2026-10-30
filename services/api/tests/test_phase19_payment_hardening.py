@@ -216,7 +216,7 @@ def test_finance_external_reference_cannot_be_reused_for_another_student():
         student_id="student-a",
         amount_minor=2500,
         currency="CDF",
-        method="mobile_money",
+        payment_method="mobile_money",
     )
     student_repo = Mock()
     student_repo.get.return_value = SimpleNamespace(
@@ -250,7 +250,7 @@ def test_finance_external_reference_replay_returns_matching_receipt():
         student_id="student-a",
         amount_minor=2500,
         currency="CDF",
-        method="mobile_money",
+        payment_method="mobile_money",
     )
     repo.receipt_by_external.return_value = receipt
     student_repo = Mock()
