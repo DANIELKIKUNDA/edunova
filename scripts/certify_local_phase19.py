@@ -14,13 +14,18 @@ for key in list(env):
     if any(token in key.upper() for token in ('SECRET', 'TOKEN', 'API_KEY', 'DATABASE_URL', 'REDIS_URL', 'AWS_', 'GOOGLE_APPLICATION_CREDENTIALS')):
         env.pop(key, None)
 env.update(EDUNOVA_ENV='test', AI_PROVIDER='fake', PAYMENT_PROVIDER='sandbox', FCM_ENABLED='false', PYTHONIOENCODING='utf-8', PYTHONUTF8='1')
+ocr = ROOT / '.local-certification/tesseract'
+if (ocr / 'tesseract.exe').exists():
+    env['PATH'] = str(ocr) + os.pathsep + env.get('PATH', '')
 python = str(ROOT / '.venv/Scripts/python.exe')
 flutter = str(Path.home() / 'dev/flutter/bin/flutter.bat')
 jobs = {
+    'mobile-codegen': ([str(Path.home() / 'dev/flutter/bin/dart.bat'), 'run', 'build_runner', 'build', '--delete-conflicting-outputs'], ROOT / 'apps/mobile'),
     'compile': ([python, '-m', 'compileall', '-q', 'services/api/app', 'services/api/tests'], ROOT),
     'collect': ([python, '-m', 'pytest', '--collect-only', '-q', 'services/api/tests'], ROOT),
     'phase19': ([python, '-m', 'pytest', '-q', 'services/api/tests/test_phase19_payment_hardening.py', 'services/api/tests/test_phase19_atomic_finance.py', 'services/api/tests/test_phase19_atomic_callback.py', '--junitxml=' + str(OUT / 'phase19.xml')], ROOT),
     'backend': ([python, '-m', 'pytest', '-q', 'services/api/tests', '--junitxml=' + str(OUT / 'backend.xml')], ROOT),
+    'backend-final': ([python, '-m', 'pytest', '-q', '-n', '4', '--dist', 'loadfile', '--durations=20', 'services/api/tests', '--junitxml=' + str(OUT / 'backend-final.xml')], ROOT),
     'pip-check': ([python, '-m', 'pip', 'check'], ROOT),
     'freeze': ([python, '-m', 'pip', 'freeze'], ROOT),
     'postgres': ([python, '-m', 'pytest', '-q', 'services/api/tests/test_phase19_atomic_finance.py', 'services/api/tests/test_phase19_atomic_callback.py', 'services/api/tests/test_phase19_postgres_concurrency.py', 'services/api/tests/test_phase19_postgres_constraints.py', '--junitxml=' + str(OUT / 'postgres.xml')], ROOT),
