@@ -35,11 +35,11 @@ class PaymentGatewayService:
    return self.repo.get(intent_id)
   x=self.repo.get(intent_id)
   if not x or x.provider!=provider:raise ValueError('payment_intent_not_found')
-  self.repo.add_event(ProviderEvent(uuid4().hex,provider,event_id,intent_id,provider_reference,status,sha256(raw).hexdigest(),self.now(),False))
   if x.status==PaymentStatus.SUCCEEDED:
    if status!='succeeded':raise ValueError('payment_terminal_status_conflict')
-   self.repo.mark_event(provider,event_id);return x
+   return x
   if x.status in {PaymentStatus.FAILED,PaymentStatus.EXPIRED,PaymentStatus.CANCELLED}:raise ValueError('payment_terminal_status_conflict')
+  self.repo.add_event(ProviderEvent(uuid4().hex,provider,event_id,intent_id,provider_reference,status,sha256(raw).hexdigest(),self.now(),False))
   now=self.now();self.repo.add_attempt(PaymentAttempt(uuid4().hex,x.id,provider,'callback',self.repo.next_attempt_no(x.id),status,str(provider_reference or ''),now))
   if status=='succeeded':
    # Provider success is the only event allowed to create a finance receipt.
