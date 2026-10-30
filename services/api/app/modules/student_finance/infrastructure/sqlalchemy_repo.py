@@ -100,3 +100,90 @@ SqlStudentFinanceRepository.plan_for_registration=_plan_for_reg
 def _plan_lines(self,pid):
  with self.sf() as s:return tuple(_line(r) for r in s.scalars(select(PaymentPlanLineRow).where(PaymentPlanLineRow.plan_id==pid).order_by(PaymentPlanLineRow.sequence_no)).all())
 SqlStudentFinanceRepository.plan_lines=_plan_lines
+
+
+def _post_payment_atomic(self, receipt, note):
+    """Post receipt, charge allocations and ledger in one database transaction.
+
+    PostgreSQL row locks serialize payments for the same student's charges.
+    The receipt unique constraint resolves concurrent external-reference claims.
+    """
+    from uuid import uuid4
+    with self.sf() as s:
+        with s.begin():
+            # Serialize against other payments for this student, even if they use
+            # distinct provider references. Lock all charges in stable ID order.
+            charges = s.scalars(
+                select(StudentChargeRow)
+                .where(
+                    StudentChargeRow.institution_id == receipt.institution_id,
+                    StudentChargeRow.student_id == receipt.student_id,
+                    StudentChargeRow.currency == receipt.currency,
+                )
+                .order_by(StudentChargeRow.id)
+                .with_for_update()
+            ).all()
+            if receipt.external_reference:
+                existing = s.scalar(
+                    select(FinanceReceiptRow).where(
+                        FinanceReceiptRow.institution_id == receipt.institution_id,
+                        FinanceReceiptRow.external_reference == receipt.external_reference,
+                    )
+                )
+                if existing:
+                    if existing.reversed:
+                        raise ValueError("finance_external_reference_reversed")
+                    if (
+                        existing.student_id,
+                        existing.amount_minor,
+                        existing.currency,
+                        existing.payment_method,
+                    ) != (
+                        receipt.student_id,
+                        receipt.amount_minor,
+                        receipt.currency,
+                        receipt.payment_method,
+                    ):
+                        raise ValueError("finance_external_reference_conflict")
+                    return self._receipt(existing)
+            open_charges = [
+                c for c in charges
+                if c.state != ChargeState.PAID.value and c.amount_minor > c.paid_minor
+            ]
+            outstanding = sum(c.amount_minor - c.paid_minor for c in open_charges)
+            if not open_charges:
+                raise ValueError("finance_no_open_charges")
+            if receipt.amount_minor > outstanding:
+                raise ValueError("finance_overpayment_requires_explicit_credit_policy")
+            s.add(FinanceReceiptRow(**receipt.__dict__))
+            remaining = receipt.amount_minor
+            for charge in open_charges:
+                if remaining <= 0:
+                    break
+                allocation = min(remaining, charge.amount_minor - charge.paid_minor)
+                charge.paid_minor += allocation
+                charge.state = (
+                    ChargeState.PAID.value
+                    if charge.paid_minor >= charge.amount_minor
+                    else ChargeState.PARTIAL.value
+                )
+                s.add(FinanceLedgerRow(
+                    id=uuid4().hex,
+                    institution_id=receipt.institution_id,
+                    student_id=receipt.student_id,
+                    kind=TxKind.PAYMENT.value,
+                    amount_minor=allocation,
+                    currency=receipt.currency,
+                    reference=receipt.reference,
+                    charge_id=charge.id,
+                    actor_id=receipt.issued_by,
+                    note=note,
+                    created_at=receipt.issued_at,
+                ))
+                remaining -= allocation
+            if remaining:
+                raise ValueError("finance_allocation_incomplete")
+    return receipt
+
+
+SqlStudentFinanceRepository.post_payment_atomic = _post_payment_atomic
