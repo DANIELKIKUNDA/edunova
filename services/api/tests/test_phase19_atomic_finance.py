@@ -142,3 +142,17 @@ def test_atomic_payment_conflicting_reference_preserves_first_settlement(databas
         assert s.get(StudentChargeRow, "charge-1").paid_minor == 2500
         assert s.scalar(select(func.count()).select_from(FinanceReceiptRow)) == 1
         assert s.scalar(select(func.count()).select_from(FinanceLedgerRow)) == 1
+
+
+def test_atomic_payment_rejects_reversed_reference(database):
+    sf, repo = database
+    first = repo.post_payment_atomic(receipt("reversed-provider-ref"), "first")
+    with sf.begin() as s:
+        row = s.get(FinanceReceiptRow, first.id)
+        row.reversed = True
+    with pytest.raises(ValueError, match="finance_external_reference_reversed"):
+        repo.post_payment_atomic(receipt("reversed-provider-ref"), "retry")
+    with sf() as s:
+        assert s.get(StudentChargeRow, "charge-1").paid_minor == 2500
+        assert s.scalar(select(func.count()).select_from(FinanceReceiptRow)) == 1
+        assert s.scalar(select(func.count()).select_from(FinanceLedgerRow)) == 1
