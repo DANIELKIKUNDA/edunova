@@ -62,6 +62,14 @@ class StudentFinanceService:
    if (old.student_id,old.amount_minor,old.currency,old.payment_method)!=(student_id,amount_minor,currency,method):
     raise ValueError('finance_external_reference_conflict')
    return old
+  # SQL-backed finance posts the receipt, allocations and ledger atomically.
+  # In-memory test repositories retain the legacy interface.
+  if callable(getattr(type(self.repo),'post_payment_atomic',None)):
+   now=self.now();rid=uuid4().hex
+   receipt=FinanceReceipt(rid,i,student_id,'RCT-'+rid[:12].upper(),amount_minor,currency,method,external_reference,a,now,False)
+   posted=self.repo.post_payment_atomic(receipt,note)
+   self._audit(a,'finance.payment.posted',posted.id,{'amount_minor':amount_minor,'currency':currency})
+   return posted
   open_charges=[c for c in self.repo.charges(student_id) if c.currency==currency and c.state!=ChargeState.PAID]
   if not open_charges:raise ValueError('finance_no_open_charges')
   outstanding=sum(c.amount_minor-c.paid_minor for c in open_charges)
