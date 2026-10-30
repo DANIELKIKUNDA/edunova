@@ -148,7 +148,8 @@ def _post_payment_atomic(self, receipt, note):
                     return self._receipt(existing)
             open_charges = [
                 c for c in charges
-                if c.state != ChargeState.PAID.value and c.amount_minor > c.paid_minor
+                if c.state in {ChargeState.OPEN.value, ChargeState.PARTIAL.value}
+                and c.amount_minor > c.paid_minor
             ]
             outstanding = sum(c.amount_minor - c.paid_minor for c in open_charges)
             if not open_charges:
