@@ -54,8 +54,12 @@ class StudentFinanceService:
   if method=='cash':
    cs=self.repo.open_cash_session(i,a)
    if not cs or cs.currency!=currency:raise ValueError('finance_cash_session_required')
-  old=self.repo.receipt_by_external(i,external_reference)
-  if old:return old
+  old=self.repo.receipt_by_external(i,external_reference) if external_reference else None
+  if old:
+   # An external provider reference must never acknowledge a different payment.
+   if (old.student_id,old.amount_minor,old.currency,old.method)!=(student_id,amount_minor,currency,method):
+    raise ValueError('finance_external_reference_conflict')
+   return old
   open_charges=[c for c in self.repo.charges(student_id) if c.currency==currency and c.state!=ChargeState.PAID]
   if not open_charges:raise ValueError('finance_no_open_charges')
   outstanding=sum(c.amount_minor-c.paid_minor for c in open_charges)
