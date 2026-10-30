@@ -274,3 +274,35 @@ def test_finance_external_reference_replay_returns_matching_receipt():
     assert result is receipt
     repo.add_receipt.assert_not_called()
     repo.add_ledger.assert_not_called()
+
+
+@pytest.mark.parametrize("terminal_status", ["failed", "expired", "cancelled"])
+def test_terminal_payment_rejects_new_callback_without_persisting_event(terminal_status):
+    from app.modules.payment_gateway.domain.model import PaymentStatus
+    gateway, repo, finance = service()
+    repo.event.return_value = None
+    repo.get.return_value = SimpleNamespace(
+        id="intent-terminal", provider="sandbox",
+        status=PaymentStatus(terminal_status)
+    )
+    import json
+    raw = json.dumps(
+        {
+            "event_id": "terminal-event",
+            "intent_id": "intent-terminal",
+            "status": "succeeded",
+            "provider_reference": None,
+            "payload": {},
+        },
+        sort_keys=True, separators=(",", ":")
+    ).encode()
+
+    with pytest.raises(ValueError, match="payment_terminal_status_conflict"):
+        gateway.callback(
+            "sandbox", "terminal-event", "intent-terminal",
+            "succeeded", None, {}, gateway.sign_sandbox(raw)
+        )
+
+    repo.add_event.assert_not_called()
+    repo.add_attempt.assert_not_called()
+    finance.payment.assert_not_called()
