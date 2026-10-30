@@ -64,6 +64,8 @@ def _settle_callback_atomic(self, provider, event_id, intent_id, status,
     from app.modules.student_finance.domain.model import FinanceReceipt
     from sqlalchemy import select
 
+    if self.sf is not finance_repo.sf:
+        raise RuntimeError("payment_finance_session_factory_mismatch")
     with self.sf() as s:
         with s.begin():
             intent = s.scalar(
