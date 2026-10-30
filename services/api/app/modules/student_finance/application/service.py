@@ -56,6 +56,8 @@ class StudentFinanceService:
    if not cs or cs.currency!=currency:raise ValueError('finance_cash_session_required')
   old=self.repo.receipt_by_external(i,external_reference) if external_reference else None
   if old:
+   if old.reversed:
+    raise ValueError('finance_external_reference_reversed')
    # An external provider reference must never acknowledge a different payment.
    if (old.student_id,old.amount_minor,old.currency,old.payment_method)!=(student_id,amount_minor,currency,method):
     raise ValueError('finance_external_reference_conflict')
