@@ -57,7 +57,7 @@ class StudentFinanceService:
   old=self.repo.receipt_by_external(i,external_reference) if external_reference else None
   if old:
    # An external provider reference must never acknowledge a different payment.
-   if (old.student_id,old.amount_minor,old.currency,old.method)!=(student_id,amount_minor,currency,method):
+   if (old.student_id,old.amount_minor,old.currency,old.payment_method)!=(student_id,amount_minor,currency,method):
     raise ValueError('finance_external_reference_conflict')
    return old
   open_charges=[c for c in self.repo.charges(student_id) if c.currency==currency and c.state!=ChargeState.PAID]
