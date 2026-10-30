@@ -187,3 +187,16 @@ def test_atomic_payment_cannot_allocate_to_another_institution(database):
         assert s.get(StudentChargeRow, "charge-1").paid_minor == 0
         assert s.scalar(select(func.count()).select_from(FinanceReceiptRow)) == 0
         assert s.scalar(select(func.count()).select_from(FinanceLedgerRow)) == 0
+
+
+def test_atomic_payment_does_not_allocate_to_voided_charge(database):
+    sf, repo = database
+    with sf.begin() as s:
+        charge = s.get(StudentChargeRow, "charge-1")
+        charge.state = "void"
+    with pytest.raises(ValueError, match="finance_no_open_charges"):
+        repo.post_payment_atomic(receipt("void-charge-ref"), "void charge")
+    with sf() as s:
+        assert s.get(StudentChargeRow, "charge-1").paid_minor == 0
+        assert s.scalar(select(func.count()).select_from(FinanceReceiptRow)) == 0
+        assert s.scalar(select(func.count()).select_from(FinanceLedgerRow)) == 0
