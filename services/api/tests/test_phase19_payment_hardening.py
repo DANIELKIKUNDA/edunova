@@ -149,3 +149,60 @@ def test_replay_with_modified_payload_is_rejected():
 
     repo.add_event.assert_not_called()
     finance.payment.assert_not_called()
+
+
+def test_student_from_another_institution_cannot_start_payment():
+    gateway, repo, finance = service()
+    gateway.student_repo.get.return_value = SimpleNamespace(
+        institution_id="institution-b", account_id="student-a"
+    )
+
+    with pytest.raises(ValueError, match="payment_student_not_found"):
+        gateway.initiate(
+            "student-a", "institution-a", "student-1", 2500,
+            "CDF", "sandbox", "+243810000001", "cross-campus-key"
+        )
+
+    repo.by_idempotency.assert_not_called()
+    repo.save.assert_not_called()
+    finance.payment.assert_not_called()
+
+
+def test_provider_observation_does_not_settle_payment():
+    gateway, repo, finance = service()
+    from app.modules.payment_gateway.domain.model import PaymentStatus
+    repo.get.return_value = SimpleNamespace(
+        id="intent-5", institution_id="institution-a",
+        status=PaymentStatus.PENDING, provider="sandbox"
+    )
+    repo.next_attempt_no.return_value = 1
+
+    result = gateway.record_poll(
+        "finance-admin", "institution-a", "intent-5",
+        provider_status="succeeded", provider_reference="external-5"
+    )
+
+    assert result.kind == "poll"
+    assert result.outcome == "succeeded"
+    repo.add_attempt.assert_called_once()
+    repo.save.assert_not_called()
+    finance.payment.assert_not_called()
+
+
+def test_cross_institution_provider_observation_is_rejected():
+    gateway, repo, finance = service()
+    from app.modules.payment_gateway.domain.model import PaymentStatus
+    repo.get.return_value = SimpleNamespace(
+        id="intent-6", institution_id="institution-b",
+        status=PaymentStatus.PENDING, provider="sandbox"
+    )
+
+    with pytest.raises(ValueError, match="payment_intent_not_found"):
+        gateway.record_poll(
+            "finance-admin", "institution-a", "intent-6",
+            provider_status="succeeded"
+        )
+
+    repo.add_attempt.assert_not_called()
+    repo.save.assert_not_called()
+    finance.payment.assert_not_called()
