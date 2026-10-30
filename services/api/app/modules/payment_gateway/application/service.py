@@ -29,6 +29,12 @@ class PaymentGatewayService:
   if provider not in self.secrets:raise PermissionError('payment_provider_not_configured')
   envelope={'event_id':event_id,'intent_id':intent_id,'status':status,'provider_reference':provider_reference,'payload':payload};raw=dumps(envelope,sort_keys=True,separators=(',',':')).encode();expected=hmac_new(self.secrets[provider].encode(),raw,'sha256').hexdigest()
   if not compare_digest(expected,signature):raise PermissionError('payment_callback_signature_invalid')
+  # SQL repositories settle the callback and its finance receipt in one transaction.
+  finance_repo=getattr(self.finance,'repo',None)
+  if callable(getattr(type(self.repo),'settle_callback_atomic',None)) and callable(getattr(type(finance_repo),'post_payment_atomic',None)):
+   result=self.repo.settle_callback_atomic(provider,event_id,intent_id,status,provider_reference,sha256(raw).hexdigest(),str(payload.get('failure_code') or 'provider_failed') if status=='failed' else None,finance_repo,self.now())
+   self._audit('provider:'+provider,'payment.'+result.status.value,result.id)
+   return result
   old_event=self.repo.event(provider,event_id)
   if old_event:
    if old_event.payment_intent_id!=intent_id or old_event.payload_sha256!=sha256(raw).hexdigest():raise PermissionError('payment_provider_event_replay_conflict')
