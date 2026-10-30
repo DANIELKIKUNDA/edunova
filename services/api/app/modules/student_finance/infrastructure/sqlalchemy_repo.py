@@ -102,15 +102,18 @@ def _plan_lines(self,pid):
 SqlStudentFinanceRepository.plan_lines=_plan_lines
 
 
-def _post_payment_atomic(self, receipt, note):
+def _post_payment_atomic(self, receipt, note, session=None):
     """Post receipt, charge allocations and ledger in one database transaction.
 
     PostgreSQL row locks serialize payments for the same student's charges.
     The receipt unique constraint resolves concurrent external-reference claims.
     """
     from uuid import uuid4
-    with self.sf() as s:
-        with s.begin():
+    from contextlib import nullcontext
+    session_context = nullcontext(session) if session is not None else self.sf()
+    with session_context as s:
+        transaction_context = nullcontext() if session is not None else s.begin()
+        with transaction_context:
             # Serialize against other payments for this student, even if they use
             # distinct provider references. Lock all charges in stable ID order.
             charges = s.scalars(
