@@ -54,3 +54,86 @@ class SqlPaymentGatewayRepository:
    q=select(PaymentIntentRow).where(PaymentIntentRow.status==PaymentStatus.PENDING.value)
    if provider:q=q.where(PaymentIntentRow.provider==provider)
    return tuple(self._i(r) for r in s.scalars(q.order_by(PaymentIntentRow.created_at)).all())
+
+
+def _settle_callback_atomic(self, provider, event_id, intent_id, status,
+                            provider_reference, payload_digest, failure_code,
+                            finance_repo, now):
+    """Commit provider event, attempt, finance posting and intent state together."""
+    from uuid import uuid4
+    from app.modules.student_finance.domain.model import FinanceReceipt
+    from sqlalchemy import select
+
+    with self.sf() as s:
+        with s.begin():
+            intent = s.scalar(
+                select(PaymentIntentRow)
+                .where(PaymentIntentRow.id == intent_id)
+                .with_for_update()
+            )
+            if not intent or intent.provider != provider:
+                raise ValueError("payment_intent_not_found")
+            previous = s.scalar(
+                select(ProviderEventRow).where(
+                    ProviderEventRow.provider == provider,
+                    ProviderEventRow.provider_event_id == event_id,
+                )
+            )
+            if previous:
+                if (previous.payment_intent_id != intent_id
+                        or previous.payload_sha256 != payload_digest):
+                    raise PermissionError("payment_provider_event_replay_conflict")
+                if not previous.processed:
+                    raise ValueError("payment_provider_event_unprocessed")
+                return self._i(intent)
+            if intent.status == PaymentStatus.SUCCEEDED.value:
+                if status != "succeeded":
+                    raise ValueError("payment_terminal_status_conflict")
+                return self._i(intent)
+            if intent.status != PaymentStatus.PENDING.value:
+                raise ValueError("payment_terminal_status_conflict")
+
+            s.add(ProviderEventRow(
+                id=uuid4().hex, provider=provider,
+                provider_event_id=event_id,
+                payment_intent_id=intent_id,
+                provider_reference=provider_reference,
+                status=status, payload_sha256=payload_digest,
+                received_at=now, processed=True,
+            ))
+            attempt_no = int(s.scalar(
+                select(func.count()).select_from(PaymentAttemptRow).where(
+                    PaymentAttemptRow.payment_intent_id == intent_id
+                )
+            ) or 0) + 1
+            s.add(PaymentAttemptRow(
+                id=uuid4().hex, payment_intent_id=intent_id,
+                provider=provider, kind="callback",
+                attempt_no=attempt_no, outcome=status,
+                detail=str(provider_reference or ""), created_at=now,
+            ))
+            if status == "succeeded":
+                receipt_id = uuid4().hex
+                reference = provider_reference or intent.merchant_reference
+                receipt = FinanceReceipt(
+                    receipt_id, intent.institution_id, intent.student_id,
+                    "RCT-" + receipt_id[:12].upper(),
+                    intent.amount_minor, intent.currency, "mobile_money",
+                    reference, "provider:" + provider, now, False,
+                )
+                posted = finance_repo.post_payment_atomic(
+                    receipt, "provider:" + provider, session=s
+                )
+                intent.status = PaymentStatus.SUCCEEDED.value
+                intent.receipt_id = posted.id
+            else:
+                intent.status = PaymentStatus.FAILED.value
+                intent.failure_code = failure_code or "provider_failed"
+            intent.provider_reference = provider_reference
+            intent.updated_at = now
+            s.flush()
+            result = self._i(intent)
+    return result
+
+
+SqlPaymentGatewayRepository.settle_callback_atomic = _settle_callback_atomic
