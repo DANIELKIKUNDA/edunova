@@ -27,11 +27,17 @@ jobs = {
     'migrations': ([python, str(ROOT / 'scripts/certify_phase19_migrations.py')], ROOT),
 }
 for app in ('admin', 'mobile'):
-    for task, args in {'analyze': ['analyze', '--no-pub'], 'test': ['test', '--no-pub', '--reporter=expanded'], 'web': ['build', 'web', '--release', '--no-pub']}.items():
+    for task, args in {'pub': ['pub', 'get'], 'analyze': ['analyze', '--no-pub'], 'test': ['test', '--no-pub', '--reporter=expanded'], 'web': ['build', 'web', '--release', '--no-pub'], 'windows': ['build', 'windows', '--release', '--no-pub'], 'android': ['build', 'apk', '--debug', '--no-pub']}.items():
         jobs[f'{app}-{task}'] = ([flutter, *args], ROOT / 'apps' / app)
 
 def run(name):
     command, cwd = jobs[name]
+    stamp = str(time.time_ns())
+    for extension in ('log', 'json', 'xml'):
+        previous = OUT / f'{name}.{extension}'
+        if previous.exists():
+            previous.rename(OUT / f'{name}-previous-{stamp}.{extension}')
+    commit = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
     start = time.monotonic()
     with (OUT / f'{name}.log').open('w', encoding='utf-8') as log:
         log.write('COMMAND: ' + subprocess.list2cmdline(command) + '\nCWD: ' + str(cwd) + '\n')
@@ -45,7 +51,7 @@ def run(name):
         except subprocess.TimeoutExpired:
             log.write('\nTIMEOUT after 4500 seconds\n')
             code = 124
-    record = dict(command=command, cwd=str(cwd), exit_code=code, seconds=round(time.monotonic()-start, 2))
+    record = dict(commit=commit, command=command, cwd=str(cwd), exit_code=code, seconds=round(time.monotonic()-start, 2))
     (OUT / f'{name}.json').write_text(json.dumps(record, indent=2), encoding='utf-8')
     print(name, record, flush=True)
 

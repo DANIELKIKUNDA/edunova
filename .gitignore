@@ -4,6 +4,7 @@ __pycache__/
 .venv/
 .pytest_cache/
 .local-certification/
+.pytest_edunova*.db
 
 # Dart / Flutter
 .dart_tool/
