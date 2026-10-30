@@ -103,3 +103,44 @@ def test_callback_exact_replay_does_not_duplicate_settlement(repositories):
         assert s.scalar(select(func.count()).select_from(FinanceReceiptRow)) == 1
         assert s.scalar(select(func.count()).select_from(FinanceLedgerRow)) == 1
         assert s.scalar(select(func.count()).select_from(ProviderEventRow)) == 1
+
+
+def test_failed_callback_commits_no_finance_receipt(repositories):
+    sf, gateway, finance, now = repositories
+    result = gateway.settle_callback_atomic(
+        "sandbox", "failed-event", "intent-1", "failed",
+        "provider-failed-ref", sha256(b"failed").hexdigest(),
+        "provider_rejected", finance, now,
+    )
+    assert result.status.value == "failed"
+    assert result.failure_code == "provider_rejected"
+    with sf() as s:
+        assert s.get(PaymentIntentRow, "intent-1").status == "failed"
+        assert s.get(StudentChargeRow, "charge-1").paid_minor == 0
+        assert s.scalar(select(func.count()).select_from(FinanceReceiptRow)) == 0
+        assert s.scalar(select(func.count()).select_from(FinanceLedgerRow)) == 0
+        assert s.scalar(select(func.count()).select_from(ProviderEventRow)) == 1
+
+
+def test_atomic_callback_rejects_different_session_factory(repositories):
+    sf, gateway, finance, now = repositories
+    finance.sf = sessionmaker(bind=sf.kw["bind"])
+    with pytest.raises(RuntimeError, match="payment_finance_session_factory_mismatch"):
+        settle(gateway, finance, now)
+    with sf() as s:
+        assert s.get(PaymentIntentRow, "intent-1").status == "pending"
+        assert s.scalar(select(func.count()).select_from(ProviderEventRow)) == 0
+
+
+def test_atomic_callback_conflicting_event_digest_is_rejected(repositories):
+    sf, gateway, finance, now = repositories
+    settle(gateway, finance, now)
+    with pytest.raises(PermissionError, match="payment_provider_event_replay_conflict"):
+        gateway.settle_callback_atomic(
+            "sandbox", "event-1", "intent-1", "succeeded",
+            "provider-ref-1", sha256(b"tampered").hexdigest(),
+            None, finance, now,
+        )
+    with sf() as s:
+        assert s.scalar(select(func.count()).select_from(FinanceReceiptRow)) == 1
+        assert s.scalar(select(func.count()).select_from(ProviderEventRow)) == 1
