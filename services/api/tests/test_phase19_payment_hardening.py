@@ -343,3 +343,39 @@ def test_reversed_receipt_cannot_satisfy_provider_replay():
     repo.add_receipt.assert_not_called()
     repo.update_charge_paid.assert_not_called()
     repo.add_ledger.assert_not_called()
+
+
+def test_fallback_finance_payment_does_not_post_against_voided_charge():
+    from app.modules.student_finance.application.service import StudentFinanceService
+    from app.modules.student_finance.domain.model import ChargeState
+
+    repo = Mock()
+    repo.receipt_by_external.return_value = None
+    repo.charges.return_value = [
+        SimpleNamespace(
+            id="void-charge", currency="CDF", state=ChargeState.VOID,
+            amount_minor=2500, paid_minor=0,
+        )
+    ]
+    student_repo = Mock()
+    student_repo.get.return_value = SimpleNamespace(
+        institution_id="institution-a"
+    )
+    finance = StudentFinanceService(
+        repo=repo,
+        campus=Mock(),
+        campus_repo=Mock(),
+        student_repo=student_repo,
+        now=lambda: datetime(2026, 10, 30, tzinfo=UTC),
+    )
+
+    with pytest.raises(ValueError, match="finance_no_open_charges"):
+        finance.payment(
+            "provider:sandbox", "institution-a", "student-a",
+            2500, "CDF", "mobile_money", "void-reference",
+            internal=True,
+        )
+
+    repo.add_receipt.assert_not_called()
+    repo.update_charge_paid.assert_not_called()
+    repo.add_ledger.assert_not_called()
