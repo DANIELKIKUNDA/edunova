@@ -78,7 +78,9 @@ for name, item in records:
     commands.append(f"| [{name}]({name}.log) | `{item.get('commit','non enregistré ; tentative initiale avant instrumentation')}` | {item['exit_code']} | {item['seconds']} | `{subprocess.list2cmdline(item['command'])}` |")
     if item['exit_code'] == 0: continue
     logtext = read(name+'.log')
-    if 'android' in name:
+    if 'android' in name and 'desugaring' in logtext:
+        explanation = 'Configuration Android manquante : flutter_local_notifications exige le core library desugaring. Activer isCoreLibraryDesugaringEnabled et la bibliothèque desugar_jdk_libs suivant le README de la version installée, puis rejouer le build. Ne pas considérer le téléchargement des dépendances comme une compilation réussie.'
+    elif 'android' in name:
         explanation = 'Build Android non certifié pour cette tentative. Examiner le téléchargement SDK/NDK, les erreurs Google Maven et le daemon Gradle ; reprendre séquentiellement après vérification réseau et avec une mémoire compatible avec les 6 Go de la machine. Aucun APK ne doit être déclaré valide sans sortie zéro et artefact vérifié.'
     elif 'windows' in name:
         explanation = 'Vérifier successivement le support des symlinks, NuGet, ATL et le préfixe CMake. Ces prérequis/caches ont été corrigés au fil des reprises. Un exécutable intermédiaire ne prouve pas que le bundle INSTALL a réussi.'
@@ -110,6 +112,15 @@ pending = [name for name in jobs if not meta(name)]
 completion = ('PROVISOIRE : restent sans sortie finale : ' + ', '.join(pending)) if pending else 'Bilan terminé pour les commandes listées ; les échecs et limites ci-dessous restent explicites.'
 history = subprocess.check_output(['git','log','--format=%H %s','6607b18..HEAD'],cwd=root,text=True)
 skipped_rows = []
+phase_groups = {}
+phase_xml = out/'phase19.xml'
+if phase_xml.exists():
+    for case in ET.parse(phase_xml).getroot().iter('testcase'):
+        group = phase_groups.setdefault(case.get('classname','').split('.')[-1]+'.py', [0,0,0])
+        if case.find('skipped') is not None: group[2] += 1
+        elif case.find('failure') is not None or case.find('error') is not None: group[1] += 1
+        else: group[0] += 1
+phase_text = '\n'.join(f'- `{name}` : {counts[0]} réussis, {counts[1]} échecs, {counts[2]} ignorés.' for name,counts in phase_groups.items())
 backend_xml = out/'backend-final.xml'
 if backend_xml.exists():
     for case in ET.parse(backend_xml).getroot().iter('testcase'):
@@ -162,6 +173,8 @@ Les nombres des suites se recouvrent : ne pas les additionner comme des tests un
 
 Inventaire exhaustif des tentatives instrumentées : [COMMANDS.md](evidence/local-phase19/COMMANDS.md). Toutes les reprises sont archivées sous `*-previous-*`. Les tentatives initiales de lancement, clonage et installation sont décrites ci-dessous et dans les journaux racine d’evidence.
 
+Préparation, installations et commandes de démarrage : [BOOTSTRAP.md](evidence/local-phase19/BOOTSTRAP.md).
+
 ## PostgreSQL et finance
 
 Cluster dédié créé par `initdb -D .local-certification/postgres -U edunova_cert --auth=trust --encoding=UTF8 --locale=C`, limité à `127.0.0.1:55439`. Base : `edunova_phase19_test`. Aucune connexion aux bases existantes ou de production. Les 99 migrations 0001–0099 ont été appliquées via `psql -X -v ON_ERROR_STOP=1` ; preuve `migrations.log`.
@@ -169,6 +182,10 @@ Cluster dédié créé par `initdb -D .local-certification/postgres -U edunova_c
 La régression générale utilise SQLite isolé par processus. Les suites financières PostgreSQL utilisent une variable distincte, validée contre l’adresse/port/base dédiés et un schéma UUID par test ; leurs tables proviennent de SQLAlchemy. Les huit contrôles de contraintes, séparément, interrogent le schéma public réellement migré et testent les rejets d’écritures invalides. Ce découpage ne constitue pas une validation de tout le backend sur PostgreSQL.
 
 Contrôles financiers exécutés : callback identique simultané à quatre transactions ; payload modifié rejeté ; paiements distincts simultanés sans perte d’allocation ; référence externe conflictuelle ; référence fournisseur conflictuelle avec rollback du second intent ; rollback sur erreur d’insertion de grand livre et de mise à jour des frais ; rejet inter-universités ; frais annulés ; reçu inversé ; expiration/annulation avant callback et état obsolète après callback ; cohérence reçu/grand livre/statut ; allocation suivant les échéances et non l’ordre des UUID. Voir les JUnit et les tests `test_phase19_*`.
+
+Résultats individuels de la commande Phase 19 séparée (mocks/SQLite, complétés par la commande PostgreSQL) :
+
+{phase_text}
 
 Deux défauts critiques ont été reproduits avant correction : expiration/annulation obsolète écrasant succeeded après comptabilisation, et allocation des frais selon l’ordre des identifiants. Les traces antérieures sont conservées ; la réussite d’une reprise ne supprime pas cette histoire.
 
@@ -191,6 +208,8 @@ La présence et l’empreinte d’un artefact ne certifient ni son lancement sur
 [FAILURES.md](evidence/local-phase19/FAILURES.md) fait partie de ce rapport : commande, trace, cause probable et correction appliquée/proposée pour chaque échec pytest, Flutter résiduel et audit historique. Les traces complètes restent dans les XML/logs. Les échecs structurels ne sont ni masqués ni convertis en PASS. Leur actualisation doit être précédée d’une revue du contrat concerné.
 
 Les analyses Flutter standard restent non réussies si leur code de sortie vaut 1, même avec zéro erreur compilateur : les avertissements et informations ne sont pas supprimés. Les builds web JavaScript n’attestent pas de la compatibilité Wasm ; les avertissements de dry-run Wasm restent des réserves.
+
+La comparaison exhaustive des types/contraintes ORM contre toutes les migrations PostgreSQL n’a pas été effectuée. Les remboursements, bourses et tous les points de défaillance hors transaction financière centrale n’ont pas fait l’objet d’une campagne concurrente PostgreSQL exhaustive. L’isolation applicative testée ne constitue pas une preuve de politiques RLS ou de résistance à une forte charge.
 
 ## Non exécuté et limites
 
