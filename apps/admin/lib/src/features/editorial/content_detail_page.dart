@@ -31,7 +31,39 @@ class _K extends StatelessWidget{final String k;final dynamic v;const _K(this.k,
 
 class _Revisions extends StatelessWidget{final Map<String,dynamic> data;final bool canRestore;final ValueChanged<Map<String,dynamic>> onRestore;const _Revisions({required this.data,required this.canRestore,required this.onRestore});@override Widget build(BuildContext c){final rows=(data['revisions'] as List<dynamic>);if(rows.isEmpty)return const StudioEmptyState(icon:Icons.history_edu_outlined,title:'Aucune révision',message:'Ajoute une première révision avant la relecture.');return ListView.separated(padding:const EdgeInsets.all(24),itemCount:rows.length,separatorBuilder:(_,__)=>const SizedBox(height:10),itemBuilder:(c,i){final r=rows[rows.length-1-i] as Map<String,dynamic>;return Card(child:ExpansionTile(leading:CircleAvatar(child:Text('R${r['revision_no']}')),title:Text(r['note']?.toString().isEmpty==false?r['note']:'Révision ${r['revision_no']}',style:const TextStyle(fontWeight:FontWeight.w700)),subtitle:Text('${r['ai_generated']==true?'IA assistée':'Humaine'} • ${formatDate(r['created_at'])}'),trailing:canRestore?IconButton(tooltip:'Restaurer comme nouveau brouillon',onPressed:()=>onRestore(r),icon:const Icon(Icons.restore)):null,children:[Padding(padding:const EdgeInsets.fromLTRB(18,0,18,18),child:SelectableText(const JsonEncoder.withIndent('  ').convert(r['payload']??{}),style:Theme.of(c).textTheme.bodySmall))]));});}}
 class _Sources extends StatelessWidget{final Map<String,dynamic> data;final bool canVerify;final ValueChanged<Map<String,dynamic>> onVerify;const _Sources({required this.data,required this.canVerify,required this.onVerify});@override Widget build(BuildContext c){final rows=data['sources'] as List<dynamic>;if(rows.isEmpty)return const StudioEmptyState(icon:Icons.document_scanner_outlined,title:'Aucune source attachée',message:'Les sources arriveront depuis le pipeline d’ingestion. Les contenus à risque élevé doivent conserver une provenance traçable.');return ListView.separated(padding:const EdgeInsets.all(24),itemCount:rows.length,separatorBuilder:(_,__)=>const SizedBox(height:10),itemBuilder:(c,i){final s=rows[i] as Map<String,dynamic>;final verified=s['human_verified']==true;final confidence=s['ocr_confidence'];return Card(child:ListTile(contentPadding:const EdgeInsets.all(16),leading:Icon(verified?Icons.verified_rounded:Icons.document_scanner_outlined,color:verified?Colors.green:Colors.orange),title:Text(s['filename']??'',style:const TextStyle(fontWeight:FontWeight.w700)),subtitle:Text('SHA-256 ${s['checksum_sha256']}\n${confidence==null?'Document natif':'OCR ${(confidence*100).toStringAsFixed(0)} %'} • importé ${formatDate(s['created_at'])}'),isThreeLine:true,trailing:verified?const StatusPill('Vérifiée',color:Colors.green):canVerify?FilledButton.tonal(onPressed:()=>onVerify(s),child:const Text('Vérifier')):const StatusPill('À vérifier',color:Colors.orange)));});}}
-class _ReviewTab extends StatelessWidget{final Map<String,dynamic> data;const _ReviewTab({required this.data});@override Widget build(BuildContext c){final rows=data['reviews'] as List<dynamic>;final assignments=data['assignments'] as List<dynamic>;return ListView(padding:const EdgeInsets.all(24),children:[StudioSection(title:'Affectations',child:assignments.isEmpty?const Text('Aucune affectation explicite.'):Column(children:[for(final a in assignments.where((x)=>(x as Map)['active']==true))ListTile(contentPadding:EdgeInsets.zero,leading:const Icon(Icons.assignment_ind_outlined),title:Text('${a['stage']} • ${a['assignee_id']}'),subtitle:Text(a['due_at']==null?'Sans échéance':'Échéance ${formatDate(a['due_at'])}')]))),const SizedBox(height:14),StudioSection(title:'Décisions de revue',child:rows.isEmpty?const Text('Aucune décision enregistrée.'):Column(children:[for(final r in rows.reversed)ListTile(contentPadding:EdgeInsets.zero,leading:Icon(r['decision']=='approved'?Icons.check_circle:Icons.change_circle,color:r['decision']=='approved'?Colors.green:Colors.orange),title:Text('${r['decision']=='approved'?'Approuvé':'Corrections demandées'} • ${r['reviewer_id']}'),subtitle:Text('${r['comment']?.toString().isEmpty==false?r['comment']:'Sans commentaire'}\n${formatDate(r['created_at'])}${r['quality_score']!=null?' • qualité ${r['quality_score']} %':''}'),isThreeLine:true)]))]);}}
+class _ReviewTab extends StatelessWidget {
+  final Map<String, dynamic> data;
+  const _ReviewTab({required this.data});
+  @override
+  Widget build(BuildContext context) {
+    final reviews = data['reviews'] as List<dynamic>;
+    final assignments = data['assignments'] as List<dynamic>;
+    return ListView(padding: const EdgeInsets.all(24), children: [
+      StudioSection(title: 'Affectations', child: assignments.isEmpty
+        ? const Text('Aucune affectation explicite.')
+        : Column(children: [
+          for (final assignment in assignments.where((row) => (row as Map)['active'] == true))
+            ListTile(contentPadding: EdgeInsets.zero,
+              leading: const Icon(Icons.assignment_ind_outlined),
+              title: Text("${assignment['stage']} • ${assignment['assignee_id']}"),
+              subtitle: Text(assignment['due_at'] == null
+                ? 'Sans échéance' : "Échéance ${formatDate(assignment['due_at'])}")),
+        ])),
+      const SizedBox(height: 14),
+      StudioSection(title: 'Décisions de revue', child: reviews.isEmpty
+        ? const Text('Aucune décision enregistrée.')
+        : Column(children: [
+          for (final review in reviews.reversed)
+            ListTile(contentPadding: EdgeInsets.zero,
+              leading: Icon(review['decision'] == 'approved' ? Icons.check_circle : Icons.change_circle,
+                color: review['decision'] == 'approved' ? Colors.green : Colors.orange),
+              title: Text("${review['decision'] == 'approved' ? 'Approuvé' : 'Corrections demandées'} • ${review['reviewer_id']}"),
+              subtitle: Text("${review['comment']?.toString().isNotEmpty == true ? review['comment'] : 'Sans commentaire'}\n${formatDate(review['created_at'])}${review['quality_score'] != null ? ' • qualité ${review['quality_score']} %' : ''}"),
+              isThreeLine: true),
+        ])),
+    ]);
+  }
+}
 class _Publications extends StatelessWidget{final Map<String,dynamic> data;const _Publications({required this.data});@override Widget build(BuildContext c){final rows=data['publications'] as List<dynamic>;if(rows.isEmpty)return const StudioEmptyState(icon:Icons.publish_outlined,title:'Jamais publié',message:'Une publication apparaîtra ici avec son changelog et son auteur.');return ListView.separated(padding:const EdgeInsets.all(24),itemCount:rows.length,separatorBuilder:(_,__)=>const SizedBox(height:10),itemBuilder:(c,i){final p=rows[rows.length-1-i] as Map<String,dynamic>;return Card(child:ListTile(contentPadding:const EdgeInsets.all(16),leading:const Icon(Icons.rocket_launch_outlined),title:Text(p['changelog']??'',style:const TextStyle(fontWeight:FontWeight.w700)),subtitle:Text('Révision ${p['revision_id']} • ${p['publisher_id']}\n${formatDate(p['published_at'])}'),isThreeLine:true));});}}
 class _Audit extends StatelessWidget{final Map<String,dynamic> data;const _Audit({required this.data});@override Widget build(BuildContext c){final rows=data['audit'] as List<dynamic>? ?? const[];if(rows.isEmpty)return const StudioEmptyState(icon:Icons.history_toggle_off,title:'Aucun événement',message:'L’historique apparaîtra au fil des actions éditoriales.');return ListView.builder(padding:const EdgeInsets.all(24),itemCount:rows.length,itemBuilder:(c,i){final e=rows[i] as Map<String,dynamic>;return ListTile(leading:const Icon(Icons.history),title:Text((e['action']??'').toString().replaceAll('editorial.','').replaceAll('.',' → ')),subtitle:Text('${e['actor_id']??'système'} • ${formatDate(e['occurred_at'])}'),trailing:Tooltip(message:jsonEncode(e['metadata']??{}),child:const Icon(Icons.info_outline,size:18)));});}}
 

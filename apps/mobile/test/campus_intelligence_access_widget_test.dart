@@ -66,7 +66,8 @@ class FakeCampusGateway extends CampusIntelligenceGateway {
 
 void main() {
   Widget wrap(Widget child, FakeCampusGateway fake) => ProviderScope(
-    overrides: [campusIntelligenceGatewayProvider.overrideWithValue(fake)],
+    overrides: [campusIntelligenceGatewayProvider.overrideWithValue(fake),
+      campusVerifiedAlumniProvider.overrideWith((ref) async => [])],
     child: MaterialApp(home: child));
 
   testWidgets('membre étudiant : aucun accès aux analyses', (tester) async {
@@ -114,6 +115,8 @@ void main() {
       const InstitutionIntelligencePage(institutionId: 'i1'), fake));
     await tester.pumpAndSettle();
     expect(fake.executiveCalls, 1);
+    await tester.tap(find.text('Intelligence institutionnelle').last);
+    await tester.pumpAndSettle();
     expect(find.text('Masqué / non disponible'), findsOneWidget);
     expect(find.text('0.0 %'), findsNothing);
   });

@@ -23,7 +23,8 @@ void main() {
       ReviewRating.easy,
       now: DateTime(2026, 9, 20),
     );
-    expect(result.intervalDays, 32);
+    // Dart rounds 10 * 2.5 * 1.3 == 32.5 to 33 days.
+    expect(result.intervalDays, 33);
     expect(result.easeFactor, 2.65);
   });
 }

@@ -69,10 +69,8 @@ class CampusIntelligenceGateway {
   /// Authenticated mutations are limited to pedagogical *metadata*: no grades.
   Future<Map<String, dynamic>> _post(String path, [Map<String, dynamic>? body,
       Map<String, String>? query]) async {
-    final uri = Uri(path: path, queryParameters: query);
-    final response = await _api.dio.postUri<dynamic>(
-      Uri.parse('${_api.dio.options.baseUrl}${uri.toString()}'),
-      data: body, options: await _auth(),
+    final response = await _api.dio.post<dynamic>(
+      path, queryParameters: query, data: body, options: await _auth(),
     );
     return _map(response.data);
   }
@@ -136,14 +134,14 @@ class CampusIntelligenceGateway {
 
   /// Bounded in-memory preview; NEVER write restricted aggregates to local storage.
   Future<String> csvPreview(String iid, {String? periodId, String? unitId}) async {
-    final uri = Uri(path: '/v1/institutional-analytics/institutions/${_id(iid)}/export.csv',
-      queryParameters: {
+    final query = {
         if (periodId != null) 'academic_period_id': _id(periodId),
         if (unitId != null) 'academic_unit_id': _id(unitId),
-      });
+      };
     final options = (await _auth()).copyWith(responseType: ResponseType.plain);
-    final response = await _api.dio.getUri<String>(
-      Uri.parse('${_api.dio.options.baseUrl}${uri.toString()}'), options: options);
+    final response = await _api.dio.get<String>(
+      '/v1/institutional-analytics/institutions/${_id(iid)}/export.csv',
+      queryParameters: query, options: options);
     final body = response.data;
     final contentType = response.headers.value(Headers.contentTypeHeader) ?? '';
     if (body == null || body.length > 262144 ||
