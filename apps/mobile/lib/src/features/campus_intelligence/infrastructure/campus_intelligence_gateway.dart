@@ -28,9 +28,8 @@ class CampusIntelligenceGateway {
   }
 
   Future<dynamic> _get(String path, [Map<String, String>? query]) async {
-    final uri = Uri(path: path, queryParameters: query?.isEmpty == true ? null : query);
-    final response = await _api.dio.getUri<dynamic>(
-      Uri.parse('${_api.dio.options.baseUrl}${uri.toString()}'),
+    final response = await _api.dio.get<dynamic>(
+      path, queryParameters: query,
       options: await _auth(),
     );
     return response.data;

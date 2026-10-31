@@ -27,6 +27,9 @@ class _Local implements CloudSyncLocalRepository {
     error = lastError;
   }
   @override
+  Future<void> recordSyncError(String accountId, String error) =>
+      updateCursor(accountId, 1, lastError: error);
+  @override
   Future<void> applyCanonicalPage(String accountId, List<CloudRecord> records, int cursor,
       {required int retainedFloor, bool reset = false, DateTime? bootstrappedAt}) async {}
   @override
