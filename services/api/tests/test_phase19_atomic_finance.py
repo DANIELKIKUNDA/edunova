@@ -197,3 +197,22 @@ def test_atomic_payment_does_not_allocate_to_voided_charge(database):
         assert s.get(StudentChargeRow, "charge-1").paid_minor == 0
         assert s.scalar(select(func.count()).select_from(FinanceReceiptRow)) == 0
         assert s.scalar(select(func.count()).select_from(FinanceLedgerRow)) == 0
+
+
+def test_atomic_payment_allocates_earliest_due_charge_before_identifier_order(database):
+    from datetime import date
+    sf, repo = database
+    with sf.begin() as s:
+        s.get(StudentChargeRow, 'charge-1').due_on = date(2027, 9, 15)
+        s.add(StudentChargeRow(
+            id='charge-0', institution_id='institution-a', student_id='student-a',
+            registration_id='registration-a', fee_item_id='fee-later',
+            code='LATER', label='Later installment', amount_minor=5000,
+            paid_minor=0, currency='CDF', due_on=date(2027, 11, 15), state='open',
+            created_at=datetime(2026, 10, 30, tzinfo=UTC),
+        ))
+    repo.post_payment_atomic(receipt('ordered-due-date'), 'earliest due installment')
+    with sf() as s:
+        assert s.get(StudentChargeRow, 'charge-1').paid_minor == 2500
+        assert s.get(StudentChargeRow, 'charge-0').paid_minor == 0
+        assert s.scalar(select(FinanceLedgerRow.charge_id)) == 'charge-1'

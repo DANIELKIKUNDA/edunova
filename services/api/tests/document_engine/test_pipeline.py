@@ -10,6 +10,16 @@ from app.modules.document_engine.application.search import search_chunks
 from app.modules.document_engine.infrastructure.text import normalize_text
 
 
+def _image_font(size):
+    from PIL import ImageFont
+    for candidate in ('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', 'C:/Windows/Fonts/arial.ttf'):
+        try:
+            return ImageFont.truetype(candidate, size)
+        except OSError:
+            pass
+    return ImageFont.load_default(size=size)
+
+
 def _sample_pdf(path: Path) -> None:
     doc = fitz.open()
     page = doc.new_page()
@@ -64,10 +74,7 @@ def test_ocr_photo_pipeline(tmp_path: Path) -> None:
 
     image = Image.new('RGB', (1800, 700), 'white')
     draw = ImageDraw.Draw(image)
-    try:
-        font = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', 58)
-    except OSError:
-        font = ImageFont.load_default()
+    font = _image_font(58)
     draw.text((80, 120), 'INTERROGATION DE CHIMIE', fill='black', font=font)
     draw.text((80, 250), '1. Calculer la quantite de matiere.', fill='black', font=font)
     draw.text((80, 360), '2. Donner la formule de concentration molaire.', fill='black', font=font)
@@ -85,7 +92,7 @@ def test_question_candidates_from_interrogation_photo(tmp_path: Path) -> None:
 
     image = Image.new('RGB', (1800, 760), 'white')
     draw = ImageDraw.Draw(image)
-    font = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', 52)
+    font = _image_font(52)
     draw.text((80, 90), 'INTERROGATION DE PHYSIQUE', fill='black', font=font)
     draw.text((80, 240), '1. Definir la vitesse moyenne.', fill='black', font=font)
     draw.text((80, 355), '2. Calculer la distance parcourue.', fill='black', font=font)

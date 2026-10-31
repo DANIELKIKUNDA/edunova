@@ -246,9 +246,13 @@ class IngestionService:
         payload=self.storage.read(doc.storage_key)
         try:
             suffix=Path(doc.filename).suffix or (".pdf" if doc.detected_mime_type=="application/pdf" else ".img")
-            with tempfile.NamedTemporaryFile(suffix=suffix,delete=True) as tmp:
-                tmp.write(payload); tmp.flush()
-                processed=(pipeline or PremiumDocumentPipeline()).process(Path(tmp.name),title=Path(doc.filename).stem)
+            # PDF/OCR readers reopen the source by name. On Windows an open
+            # NamedTemporaryFile denies that second handle; close the writer
+            # before processing and still clean the file on every exit path.
+            with tempfile.TemporaryDirectory(prefix='edunova-ingestion-') as directory:
+                source = Path(directory) / f'source{suffix}'
+                source.write_bytes(payload)
+                processed=(pipeline or PremiumDocumentPipeline()).process(source,title=Path(doc.filename).stem)
             artifact_key=f"batches/{batch.id}/artifacts/{doc.id}.json"
             artifact={
                 "document_id":processed.document_id,"fingerprint_sha256":processed.fingerprint_sha256,"title":processed.title,

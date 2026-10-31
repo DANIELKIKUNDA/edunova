@@ -154,6 +154,12 @@ def _post_payment_atomic(self, receipt, note, session=None):
                 if c.state in {ChargeState.OPEN.value, ChargeState.PARTIAL.value}
                 and c.amount_minor > c.paid_minor
             ]
+            # Lock in stable ID order, then allocate by financial due date.
+            # UUID order must not decide which installment gets paid first.
+            from datetime import date
+            open_charges.sort(key=lambda c: (
+                c.due_on is None, c.due_on or date.max, c.created_at, c.id,
+            ))
             outstanding = sum(c.amount_minor - c.paid_minor for c in open_charges)
             if not open_charges:
                 raise ValueError("finance_no_open_charges")
