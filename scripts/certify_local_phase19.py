@@ -37,7 +37,7 @@ jobs = {
     'audits': ([python, str(ROOT / 'scripts/certify_phase19_audits.py')], ROOT),
 }
 for app in ('admin', 'mobile'):
-    for task, args in {'pub': ['pub', 'get'], 'analyze': ['analyze', '--no-pub'], 'test': ['test', '--no-pub', '--reporter=expanded'], 'web': ['build', 'web', '--release', '--no-pub'], 'windows': ['build', 'windows', '--release', '--no-pub'], 'android': ['build', 'apk', '--debug', '--no-pub']}.items():
+    for task, args in {'pub': ['pub', 'get'], 'analyze': ['analyze', '--no-pub'], 'test': ['test', '--no-pub', '--concurrency=1', '--reporter=expanded'], 'web': ['build', 'web', '--release', '--no-pub'], 'windows': ['build', 'windows', '--release', '--no-pub'], 'android': ['build', 'apk', '--debug', '--no-pub']}.items():
         jobs[f'{app}-{task}'] = ([flutter, *args], ROOT / 'apps' / app)
 
 def run(name):

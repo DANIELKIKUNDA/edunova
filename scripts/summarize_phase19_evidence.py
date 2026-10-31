@@ -1,7 +1,9 @@
 """Summarize actual JUnit evidence; never infer success from absent output."""
 import json
+import sys
 from pathlib import Path
 import xml.etree.ElementTree as ET
+sys.stdout.reconfigure(encoding='utf-8')
 
 root = Path(__file__).resolve().parents[1]
 out = root / 'evidence/local-phase19'

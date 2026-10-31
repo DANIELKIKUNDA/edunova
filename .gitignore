@@ -5,6 +5,8 @@ __pycache__/
 .pytest_cache/
 .local-certification/
 .pytest_edunova*.db
+# Verbose pub includes large package metadata; a filtered network trace is saved.
+/evidence/local-phase19/mobile-pub-verbose.log
 
 # Dart / Flutter
 .dart_tool/
