@@ -23,6 +23,7 @@ python = str(ROOT / '.venv/Scripts/python.exe')
 flutter = str(Path.home() / 'dev/flutter/bin/flutter.bat')
 jobs = {
     'mobile-codegen': ([str(Path.home() / 'dev/flutter/bin/dart.bat'), 'run', 'build_runner', 'build', '--delete-conflicting-outputs'], ROOT / 'apps/mobile'),
+    'mobile-privacy': ([flutter, 'test', '--no-pub', 'test/campus_intelligence_access_widget_test.dart', '--reporter=expanded'], ROOT / 'apps/mobile'),
     'compile': ([python, '-m', 'compileall', '-q', 'services/api/app', 'services/api/tests'], ROOT),
     'collect': ([python, '-m', 'pytest', '--collect-only', '-q', 'services/api/tests'], ROOT),
     'phase19': ([python, '-m', 'pytest', '-q', 'services/api/tests/test_phase19_payment_hardening.py', 'services/api/tests/test_phase19_atomic_finance.py', 'services/api/tests/test_phase19_atomic_callback.py', '--junitxml=' + str(OUT / 'phase19.xml')], ROOT),

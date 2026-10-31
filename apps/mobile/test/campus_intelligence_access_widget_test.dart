@@ -115,7 +115,8 @@ void main() {
       const InstitutionIntelligencePage(institutionId: 'i1'), fake));
     await tester.pumpAndSettle();
     expect(fake.executiveCalls, 1);
-    await tester.scrollUntilVisible(find.text('Masqué / non disponible'), 250);
+    await tester.scrollUntilVisible(find.text('Masqué / non disponible'), 250,
+      scrollable: find.byType(Scrollable).first);
     await tester.pump();
     expect(find.text('Masqué / non disponible'), findsOneWidget);
     expect(find.text('0.0 %'), findsNothing);
