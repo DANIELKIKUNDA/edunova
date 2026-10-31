@@ -26,10 +26,12 @@ jobs = {
     'phase19': ([python, '-m', 'pytest', '-q', 'services/api/tests/test_phase19_payment_hardening.py', 'services/api/tests/test_phase19_atomic_finance.py', 'services/api/tests/test_phase19_atomic_callback.py', '--junitxml=' + str(OUT / 'phase19.xml')], ROOT),
     'backend': ([python, '-m', 'pytest', '-q', 'services/api/tests', '--junitxml=' + str(OUT / 'backend.xml')], ROOT),
     'backend-final': ([python, '-m', 'pytest', '-q', '-n', '4', '--dist', 'loadfile', '--durations=20', 'services/api/tests', '--junitxml=' + str(OUT / 'backend-final.xml')], ROOT),
+    'backend-contracts': ([python, '-m', 'pytest', '-q', 'services/api/tests', '-k', 'flutter or frontend or migration_contract', '--junitxml=' + str(OUT / 'backend-contracts.xml')], ROOT),
     'pip-check': ([python, '-m', 'pip', 'check'], ROOT),
     'freeze': ([python, '-m', 'pip', 'freeze'], ROOT),
     'postgres': ([python, '-m', 'pytest', '-q', 'services/api/tests/test_phase19_atomic_finance.py', 'services/api/tests/test_phase19_atomic_callback.py', 'services/api/tests/test_phase19_postgres_concurrency.py', 'services/api/tests/test_phase19_postgres_constraints.py', '--junitxml=' + str(OUT / 'postgres.xml')], ROOT),
     'migrations': ([python, str(ROOT / 'scripts/certify_phase19_migrations.py')], ROOT),
+    'audits': ([python, str(ROOT / 'scripts/certify_phase19_audits.py')], ROOT),
 }
 for app in ('admin', 'mobile'):
     for task, args in {'pub': ['pub', 'get'], 'analyze': ['analyze', '--no-pub'], 'test': ['test', '--no-pub', '--reporter=expanded'], 'web': ['build', 'web', '--release', '--no-pub'], 'windows': ['build', 'windows', '--release', '--no-pub'], 'android': ['build', 'apk', '--debug', '--no-pub']}.items():
