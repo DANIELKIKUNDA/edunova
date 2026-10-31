@@ -17,6 +17,8 @@ env.update(EDUNOVA_ENV='test', AI_PROVIDER='fake', PAYMENT_PROVIDER='sandbox', F
 ocr = ROOT / '.local-certification/tesseract'
 if (ocr / 'tesseract.exe').exists():
     env['PATH'] = str(ocr) + os.pathsep + env.get('PATH', '')
+if (ROOT / '.local-certification/nuget.exe').exists():
+    env['PATH'] = str(ROOT / '.local-certification') + os.pathsep + env.get('PATH', '')
 python = str(ROOT / '.venv/Scripts/python.exe')
 flutter = str(Path.home() / 'dev/flutter/bin/flutter.bat')
 jobs = {
