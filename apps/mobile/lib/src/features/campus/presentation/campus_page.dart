@@ -133,7 +133,7 @@ class CampusPage extends ConsumerWidget {
                   subtitle: const Text('Accès Alumni individuel vérifié'),
                   trailing: const Icon(Icons.chevron_right),
                   onTap: () => context.push(
-                    '/campus/alumni/${Uri.encodeComponent(row['institution_id'] as String)}'))])),
+                    '/campus/alumni/${Uri.encodeComponent(row['institution_id'] as String)}'))]),
       ),
       const SizedBox(height: 18),
       const _CampusCard(icon: Icons.verified_user_outlined,

@@ -20,7 +20,7 @@ class OfflineStoragePage extends ConsumerWidget {
         Text('Cache EduNova maximal : ${_fmt(p.maxCacheBytes)}'),Text('Réserve cible d’espace libre : ${_fmt(p.minFreeBytes)}'),
         Text(p.wifiOnlyLargeDownloads?'Gros téléchargements : Wi‑Fi uniquement':'Gros téléchargements : tous réseaux'),
         const SizedBox(height:6),const Text('Les documents personnels ne sont jamais supprimés automatiquement.',style:TextStyle(fontSize:12)),
-      ]))),
+      ])))),
       const SizedBox(height:12),
       all.when(loading:()=>const LinearProgressIndicator(),error:(e,_)=>Text('$e'),data:(items){
         final used=items.where((e)=>e.ready).fold<int>(0,(a,b)=>a+(b.totalBytes??0));

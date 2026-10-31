@@ -8,5 +8,5 @@ Future<bool> hasUnownedOfflineFiles() async {
   final root = await getApplicationSupportDirectory();
   final directory = Directory(p.join(root.path, 'offline_library'));
   if (!await directory.exists()) return false;
-  return directory.list(followLinks: false).isNotEmpty;
+  return !await directory.list(followLinks: false).isEmpty;
 }

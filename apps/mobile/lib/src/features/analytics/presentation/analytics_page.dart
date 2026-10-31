@@ -32,10 +32,14 @@ class AnalyticsPage extends ConsumerWidget {
       body: reportAsync.when(
         loading: () => const _AnalyticsLoading(),
         error: (_, __) => EduNovaPageBody(
-          child: ErrorStateCard(
+          child: EmptyStateCard(
+            icon: Icons.error_outline_rounded,
             title: 'Impossible de calculer ta progression',
             message: 'Tes données restent sur cet appareil. Réessaie dans un instant.',
-            onRetry: () => ref.invalidate(analyticsReportProvider),
+            action: FilledButton(
+              onPressed: () => ref.invalidate(analyticsReportProvider),
+              child: const Text('Réessayer'),
+            ),
           ),
         ),
         data: (report) => RefreshIndicator(
@@ -440,7 +444,7 @@ class _RecommendationCard extends StatelessWidget {
     final scheme = Theme.of(context).colorScheme;
     final (priorityLabel, tone) = recommendation.priorityScore >= 82 ? ('Priorité haute', EduNovaColors.danger) : recommendation.priorityScore >= 62 ? ('À faire bientôt', EduNovaColors.accent) : ('À consolider', scheme.primary);
     final icon = switch (recommendation.kind) {
-      RecommendationKind.assessmentFocus => Icons.event_upcoming_rounded,
+      RecommendationKind.assessmentFocus => Icons.event_available_rounded,
       RecommendationKind.recoverErrors => Icons.rule_rounded,
       RecommendationKind.quizDrill => Icons.quiz_rounded,
       RecommendationKind.flashcardReview => Icons.style_rounded,

@@ -84,7 +84,7 @@ class _SecurityPageState extends ConsumerState<SecurityPage> {
                     await ref.read(identityRepositoryProvider).logoutAll();
                     if (context.mounted) context.go('/login');
                   },
-                  icon: const Icon(Icons.devices_off_rounded),
+                  icon: const Icon(Icons.devices_other_rounded),
                   label: const Text('Déconnecter tous les appareils'),
                 ),
             ]),

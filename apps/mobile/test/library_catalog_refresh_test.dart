@@ -37,6 +37,10 @@ class FakeLocalLibrary implements LibraryLocalRepository {
   Future<void> saveManifest(LibraryManifest manifest) async {}
 
   @override
+  Future<void> setCourseFollowed(String courseId, bool followed) =>
+      throw UnimplementedError('Catalog refresh does not change followed courses');
+
+  @override
   Stream<List<LibraryResourceView>> watchResources(String versionId) => const Stream.empty();
 }
 

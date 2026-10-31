@@ -306,7 +306,7 @@ class _CampusServicesPageState extends ConsumerState<CampusServicesPage>
           leading: const Icon(Icons.meeting_room_outlined),
           title: Text(resource['name']?.toString() ?? 'Ressource'),
           subtitle: Text('${resource['code'] ?? ''} · ${resource['location'] ?? ''} · Capacité : ${resource['capacity'] ?? '-'} · ${resource['service_state'] == 'maintenance' ? 'En maintenance' : 'Disponible'}'),
-          trailing: _canReserve ? Wrap(mainAxisSize: MainAxisSize.min, children: [
+          trailing: _canReserve ? Wrap(children: [
             IconButton(tooltip: 'Signaler un défaut', icon: const Icon(Icons.report_problem_outlined),
               onPressed: _saving || resource['service_state'] == 'maintenance' ? null : () => _report(resource)),
             TextButton(onPressed: _saving || resource['service_state'] == 'maintenance'

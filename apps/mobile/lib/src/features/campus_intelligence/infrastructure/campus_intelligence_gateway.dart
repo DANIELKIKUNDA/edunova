@@ -128,7 +128,7 @@ class CampusIntelligenceGateway {
     });
 
   Future<Map<String, dynamic>> archiveComparison(String iid,
-      {String? periodId, String? unitId}) =>
+      {String? periodId, String? unitId}) async =>
     _map(await _get('/v1/institutional-analytics/institutions/${_id(iid)}/comparisons', {
       'scope_type': unitId == null ? 'institution' : 'academic_unit',
       if (unitId != null) 'scope_id': _id(unitId),

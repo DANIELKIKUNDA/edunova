@@ -211,7 +211,7 @@ class _CampusAlumniState extends ConsumerState<CampusAlumniPage>
           for (final row in _pending) ListTile(
             title: Text((row['display_name'] ?? '').toString()),
             subtitle: Text('${row['program_name']} · ${row['graduation_year']}'),
-            trailing: Wrap(mainAxisSize: MainAxisSize.min, children: [
+            trailing: Wrap(children: [
               IconButton(tooltip: 'Vérifier', icon: const Icon(Icons.verified_outlined),
                 onPressed: _busy ? null : () => _decide(row, 'verified')),
               IconButton(tooltip: 'Rejeter', icon: const Icon(Icons.block_outlined),

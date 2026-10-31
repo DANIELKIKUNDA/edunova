@@ -43,7 +43,7 @@ class NativeLocalNotificationScheduler implements LocalNotificationScheduler {
     final launch=await _plugin.getNotificationAppLaunchDetails();
     _initialInteraction=_decode(launch?.notificationResponse?.payload);
     await _plugin.initialize(
-      settings,
+      settings: settings,
       onDidReceiveNotificationResponse:(response){
         final tap=_decode(response.payload);
         if(tap!=null)_interactions.add(tap);
@@ -75,10 +75,10 @@ class NativeLocalNotificationScheduler implements LocalNotificationScheduler {
       iOS:DarwinNotificationDetails(),
     );
     final payload=jsonEncode({'id':n.id,'link':n.deepLink});
-    await _plugin.zonedSchedule(_id(n.id),n.title,n.body,tz.TZDateTime.from(n.fireAt.toUtc(),tz.UTC),details,androidScheduleMode:AndroidScheduleMode.inexactAllowWhileIdle,payload:payload);
+    await _plugin.zonedSchedule(id:_id(n.id),title:n.title,body:n.body,scheduledDate:tz.TZDateTime.from(n.fireAt.toUtc(),tz.UTC),notificationDetails:details,androidScheduleMode:AndroidScheduleMode.inexactAllowWhileIdle,payload:payload);
   }
 
-  @override Future<void> cancel(String id) async {await initialize(); await _plugin.cancel(_id(id));}
+  @override Future<void> cancel(String id) async {await initialize(); await _plugin.cancel(id:_id(id));}
   @override Future<void> cancelAll() async {await initialize(); await _plugin.cancelAll();}
 }
 LocalNotificationScheduler createLocalNotificationScheduler()=>NativeLocalNotificationScheduler();

@@ -38,7 +38,10 @@ class _InstitutionIntelligencePageState extends ConsumerState<InstitutionIntelli
   bool get _executiveEnabled => const {
     'owner', 'rector', 'admin', 'academic_admin', 'faculty_admin', 'auditor',
   }.contains(_role);
-  String? get _unit => _role == 'faculty_admin' ? _membership?['unit_id']?.toString() : null;
+  String? get _unit {
+    if (_role != 'faculty_admin') return null;
+    return _membership?['unit_id']?.toString();
+  }
 
   @override
   void initState() {

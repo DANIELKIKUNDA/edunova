@@ -147,6 +147,17 @@ class FakeLocal implements CloudSyncLocalRepository {
 
   @override
   Stream<List<SyncConflictView>> watchOpenConflicts(String id) => Stream.value(conflicts);
+
+  @override
+  Future<void> recordSyncError(String id, String error) async {
+    final current = await ensureState(id);
+    await updateCursor(id, current.serverCursor, lastError: error);
+  }
+
+  @override
+  Stream<SyncDiagnostics> watchDiagnostics(String id) => Stream.value(
+    SyncDiagnostics(pending: mutations.length, deadLetters: 0,
+      openConflicts: conflicts.length, oldestPendingAt: null));
 }
 
 class FakeRemote implements CloudSyncRemoteGateway {

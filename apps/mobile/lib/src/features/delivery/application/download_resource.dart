@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import '../../identity/application/identity_repository.dart';
 import '../../library/domain/library.dart';
 import '../application/delivery_repository.dart';
+import '../domain/delivery.dart';
 
 class DownloadResource {
   DownloadResource({required this.remote,required this.local,required this.store,required this.identity,Dio? dio,Connectivity? connectivity}):_dio=dio??Dio(),_connectivity=connectivity??Connectivity();

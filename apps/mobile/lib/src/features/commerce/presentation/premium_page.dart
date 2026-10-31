@@ -120,7 +120,7 @@ class _PremiumPageState extends ConsumerState<PremiumPage> {
         const SizedBox(height: 18),
         Text('Mes reçus', style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w900)),
         const SizedBox(height: 8),
-        if (receipts.isEmpty) const Text('Aucun reçu pour le moment.') else ...receipts.take(6).map((r) => Card(child: ListTile(leading: const Icon(Icons.receipt_long_rounded), title: Text('${r.amountCdf} FC'), subtitle: Text(r.description), trailing: Text('${r.issuedAt.day}/${r.issuedAt.month}'))),
+        if (receipts.isEmpty) const Text('Aucun reçu pour le moment.') else ...receipts.take(6).map((r) => Card(child: ListTile(leading: const Icon(Icons.receipt_long_rounded), title: Text('${r.amountCdf} FC'), subtitle: Text(r.description), trailing: Text('${r.issuedAt.day}/${r.issuedAt.month}')))),
       ]),
     );
   }
