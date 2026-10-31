@@ -1,0 +1,2 @@
+COMMAND: C:\Users\cs-ap\dev\edusync-web\edunova\.venv\Scripts\python.exe -m compileall -q services/api/app services/api/tests
+CWD: C:\Users\cs-ap\dev\edusync-web\edunova

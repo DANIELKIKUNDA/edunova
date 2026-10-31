@@ -26,8 +26,13 @@ def read(name):
 def file_hash(path):
     with path.open('rb') as handle:
         return hashlib.file_digest(handle,'sha256').hexdigest()
+def read_json(path):
+    payload = path.read_bytes()
+    encoding = 'utf-16' if payload.startswith((b'\xff\xfe',b'\xfe\xff')) else 'utf-8-sig'
+    return json.loads(payload.decode(encoding))
 def meta(name):
-    return json.loads(read(name+'.json')) if read(name+'.json') else {}
+    path = out/(name+'.json')
+    return read_json(path) if path.exists() else {}
 def junit(name):
     p = out / (name+'.xml')
     if not p.exists(): return 'NON TERMINÉ / aucun JUnit final'
@@ -66,11 +71,33 @@ for p in sorted(out.glob('*.xml')):
         casepath = case.get('classname','').replace('.', '/') + '.py::' + case.get('name','')
         message = node.get('message','')
         appendix += [f"## {p.stem} — {case.get('name')}", '', f"Commande de reproduction : `.venv/Scripts/python.exe -m pytest -q '{casepath}'`.", '', cause(message), '', f'Trace complète : [{p.name}]({p.name}).', '', '```text', (node.text or message)[:3500], '```', '']
-for name in ('mobile-test','admin-test'):
-    lines = read(name+'.log').splitlines()
+test_logs = sorted([*out.glob('mobile-test*.log'),*out.glob('admin-test*.log')])
+for test_log in test_logs:
+    name = test_log.stem
+    app = 'mobile' if name.startswith('mobile-') else 'admin'
+    lines = read(test_log.name).splitlines()
     for i,line in enumerate(lines):
         if not re.match(r'^\d\d:\d\d .*\[E\]',line): continue
-        appendix += [f'## Flutter — {line}', '', f'Commande : `flutter test --no-pub --reporter=expanded` dans `apps/{name.split("-")[0]}`.', '', 'Cause probable et correction proposée : vérifier les fixtures de session, la portée Riverpod, les réponses simulées et le ciblage du widget. Ne pas désactiver les assertions de confidentialité.', '', f'Trace complète : [{name}.log]({name}.log). Extrait du flux de test :', '', '```text', '\n'.join(lines[max(0,i-45):i+5]), '```', '']
+        context = '\n'.join(lines[max(0,i-70):i+5])
+        if 'sync_push_integrity_test.dart' in line:
+            explanation = 'Le faux dépôt ne fournissait pas recordSyncError : l’erreur d’interface masquait la StateError attendue. Correctif : compléter le faux dépôt ; conserver les assertions de rejet des payloads et de non-écriture partielle.'
+        elif 'easy accelerates' in line:
+            explanation = 'Attente arithmétique incorrecte du test : 32,5 est arrondi à 33 par Dart. Corriger la valeur attendue sans changer le planificateur.'
+        elif 'home renders' in line:
+            explanation = 'Fixture d’accueil obsolète : ProviderScope absent et attente de données de démonstration. Fournir un compte local vide contrôlé et vérifier son vrai parcours de préparation.'
+        elif 'EduNova Studio affiche' in line:
+            explanation = 'Ancien libellé et restauration de session asynchrone non attendue. Simuler un stockage sécurisé vide, attendre le démarrage et vérifier les libellés Administration actuels.'
+        elif 'governance_gateway_test' in line or 'campus_intelligence_gateway_test' in line:
+            explanation = 'Les paramètres encodés dans une URI n’étaient pas exposés dans queryParameters. Utiliser les paramètres GET/POST explicites de Dio en conservant auth, scope et no-store.'
+        elif 'Too many elements' in context or 'No element' in context:
+            explanation = 'Ciblage ambigu ou absent du widget défilant. Sélectionner le premier Scrollable institutionnel et rendre l’indicateur visible avant les mêmes assertions de masquage.'
+        elif 'pumpAndSettle timed out' in context:
+            explanation = 'Un nouveau fournisseur Alumni réel restait en attente dans la fixture. Le remplacer par une réponse vide contrôlée ; conserver les assertions RBAC.'
+        elif 'TimeoutException' in context:
+            explanation = 'Chargement non conclu dans les délais. Conserver l’échec ; rejouer avec un seul worker sur la machine de 6 Go, sans exécuter simultanément de gros builds.'
+        else:
+            explanation = 'Revoir les imports, contrats d’interface et fixtures indiqués dans la trace ; réexécuter les mêmes assertions après correction. Les résultats des reprises sont séparés.'
+        appendix += [f'## Flutter — {line}', '', f'Commande : `flutter test --no-pub --reporter=expanded` dans `apps/{app}` ; les options exactes de cette tentative figurent dans COMMANDS.md.', '', explanation, '', f'Trace complète : [{name}.log]({name}.log). Extrait du flux de test :', '', '```text', context[-4500:], '```', '']
 auditpath = out / 'audits/results.json'
 audits = json.loads(auditpath.read_text()) if auditpath.exists() else []
 for item in audits:
@@ -81,8 +108,8 @@ for item in audits:
 
 records = []
 for p in sorted(out.glob('*.json')):
-    value = json.loads(p.read_text(encoding='utf-8'))
-    if isinstance(value,dict) and 'command' in value:
+    value = read_json(p)
+    if isinstance(value,dict) and {'command','cwd','exit_code','seconds'}.issubset(value):
         records.append((p.stem,value))
 commands = ['# Commandes exécutées', '', 'Chaque ligne correspond à une tentative réelle. Un code zéro d’audit structurel ou de collecte ne signifie pas que les tests fonctionnels ont été exécutés.', '', '| Tentative | Commit enregistré au lancement | Sortie | Durée s | Commande |', '|---|---|---:|---:|---|']
 for name, item in records:
@@ -96,7 +123,10 @@ for name, item in records:
     elif 'windows' in name:
         explanation = 'Vérifier successivement le support des symlinks, NuGet, ATL et le préfixe CMake. Ces prérequis/caches ont été corrigés au fil des reprises. Un exécutable intermédiaire ne prouve pas que le bundle INSTALL a réussi.'
     elif 'analyze' in name:
-        explanation = 'Les erreurs de syntaxe/import/API ont été corrigées puis réanalysées. Si seules des informations et avertissements restent, le code de sortie standard reste non nul : effectuer une remise à niveau des dépréciations/lints sans désactiver les contrôles.'
+        if 'uri_does_not_exist' in logtext and 'package:flutter/material.dart' in logtext:
+            explanation = 'Résolution des paquets non terminée au moment de cette première analyse : imports en cascade indisponibles. Terminer pub get et la génération Drift, puis réanalyser avant de conclure sur le code.'
+        else:
+            explanation = 'Les erreurs de syntaxe/import/API ont été corrigées puis réanalysées. Si seules des informations et avertissements restent, le code de sortie standard reste non nul : effectuer une remise à niveau des dépréciations/lints sans désactiver les contrôles.'
     elif 'test' in name:
         explanation = 'Voir les cas et traces du journal : anciens imports/API, fixtures incomplètes, session asynchrone, portée Riverpod ou délai de chargement. Les reprises séquentielles conservent les assertions de sécurité.'
     else:

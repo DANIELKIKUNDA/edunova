@@ -1,0 +1,73 @@
+2026-10-30 21:22:07.415 SAST [2300] LOG:  starting PostgreSQL 16.11, compiled by Visual C++ build 1944, 64-bit
+2026-10-30 21:22:07.417 SAST [2300] LOG:  listening on IPv4 address "127.0.0.1", port 55439
+2026-10-30 21:22:07.713 SAST [22724] LOG:  database system was shut down at 2026-10-30 21:18:47 SAST
+2026-10-30 21:22:07.965 SAST [2300] LOG:  database system is ready to accept connections
+2026-10-30 21:27:07.799 SAST [22892] LOG:  checkpoint starting: time
+2026-10-30 21:27:09.491 SAST [22892] LOG:  checkpoint complete: wrote 3 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.033 s, sync=0.252 s, total=1.755 s; sync files=2, longest=0.247 s, average=0.126 s; distance=0 kB, estimate=0 kB; lsn=0/1577730, redo lsn=0/15776F8
+2026-10-30 21:32:07.590 SAST [22892] LOG:  checkpoint starting: time
+2026-10-30 21:34:13.738 SAST [22892] LOG:  checkpoint complete: wrote 965 buffers (23.6%); 0 WAL file(s) added, 0 removed, 0 recycled; write=124.209 s, sync=1.754 s, total=126.151 s; sync files=300, longest=0.262 s, average=0.006 s; distance=4559 kB, estimate=4559 kB; lsn=0/19EB618, redo lsn=0/19EB5E0
+2026-10-30 22:12:10.832 SAST [22892] LOG:  checkpoint starting: time
+2026-10-30 22:13:24.053 SAST [22892] LOG:  checkpoint complete: wrote 388 buffers (9.5%); 1 WAL file(s) added, 0 removed, 0 recycled; write=52.721 s, sync=16.256 s, total=73.256 s; sync files=942, longest=0.503 s, average=0.018 s; distance=4003 kB, estimate=4504 kB; lsn=0/1F6E5E0, redo lsn=0/1DD4400
+2026-10-30 22:17:11.150 SAST [22892] LOG:  checkpoint starting: time
+2026-10-30 22:17:59.188 SAST [22892] LOG:  checkpoint complete: wrote 318 buffers (7.8%); 0 WAL file(s) added, 0 removed, 1 recycled; write=46.271 s, sync=0.584 s, total=48.045 s; sync files=248, longest=0.011 s, average=0.003 s; distance=2652 kB, estimate=4318 kB; lsn=0/206B4A0, redo lsn=0/206B468
+2026-10-30 22:22:12.955 SAST [22892] LOG:  checkpoint starting: time
+2026-10-30 22:24:17.191 SAST [22892] LOG:  checkpoint complete: wrote 683 buffers (16.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=83.619 s, sync=20.951 s, total=124.598 s; sync files=2319, longest=0.515 s, average=0.010 s; distance=9993 kB, estimate=9993 kB; lsn=0/2B85520, redo lsn=0/2A2DA08
+2026-10-30 22:26:09.533 SAST [5584] ERROR:  new row for relation "student_finance_receipts" violates check constraint "student_finance_receipts_amount_minor_check"
+2026-10-30 22:26:09.533 SAST [5584] DETAIL:  Failing row contains (c427cc74eb20444884e3233e525ed467, cert, student, receipt, 0, CDF, mobile_money, null, cert, 2026-10-30 22:26:09.528515, f).
+2026-10-30 22:26:09.533 SAST [5584] STATEMENT:  INSERT INTO student_finance_receipts (id,institution_id,student_id,reference,amount_minor,currency,payment_method,issued_by,issued_at) VALUES ($1,'cert','student','receipt',0,'CDF','mobile_money','cert',CURRENT_TIMESTAMP)
+2026-10-30 22:26:09.926 SAST [22516] ERROR:  new row for relation "student_finance_charges" violates check constraint "student_finance_charges_check"
+2026-10-30 22:26:09.926 SAST [22516] DETAIL:  Failing row contains (148fa781c4c842ba8f7d2e1d512500a0, cert, student, registration, fee, fee, Tuition, 100, 101, CDF, null, paid, 2026-10-30 22:26:09.920246).
+2026-10-30 22:26:09.926 SAST [22516] STATEMENT:  INSERT INTO student_finance_charges (id,institution_id,student_id,registration_id,fee_item_id,code,label,amount_minor,paid_minor,currency,state,created_at) VALUES ($1,'cert','student','registration','fee','fee','Tuition',100,101,'CDF','paid',CURRENT_TIMESTAMP)
+2026-10-30 22:27:12.872 SAST [22892] LOG:  checkpoint starting: time
+2026-10-30 22:29:13.480 SAST [22892] LOG:  checkpoint complete: wrote 342 buffers (8.3%); 0 WAL file(s) added, 0 removed, 1 recycled; write=46.358 s, sync=47.743 s, total=120.608 s; sync files=2052, longest=0.974 s, average=0.024 s; distance=9989 kB, estimate=9993 kB; lsn=0/33EEFD0, redo lsn=0/33EEF98
+2026-10-30 23:07:12.302 SAST [22892] LOG:  checkpoint starting: time
+2026-10-30 23:07:26.805 SAST [17176] ERROR:  duplicate key value violates unique constraint "uq_gateway_provider_ref"
+2026-10-30 23:07:26.805 SAST [17176] DETAIL:  Key (provider, provider_reference)=(sandbox, provider-ref-1) already exists.
+2026-10-30 23:07:26.805 SAST [17176] STATEMENT:  UPDATE payment_gateway_intents SET provider_reference=$1::VARCHAR, status=$2::VARCHAR, receipt_id=$3::VARCHAR WHERE payment_gateway_intents.id = $4::VARCHAR
+2026-10-30 23:07:27.374 SAST [15728] ERROR:  new row for relation "student_finance_receipts" violates check constraint "student_finance_receipts_amount_minor_check"
+2026-10-30 23:07:27.374 SAST [15728] DETAIL:  Failing row contains (cd7c37e80d984a598f2d497b24465cec, cert, student, receipt, 0, CDF, mobile_money, null, cert, 2026-10-30 23:07:27.36971, f).
+2026-10-30 23:07:27.374 SAST [15728] STATEMENT:  INSERT INTO student_finance_receipts (id,institution_id,student_id,reference,amount_minor,currency,payment_method,issued_by,issued_at) VALUES ($1,'cert','student','receipt',0,'CDF','mobile_money','cert',CURRENT_TIMESTAMP)
+2026-10-30 23:07:27.593 SAST [23956] ERROR:  new row for relation "student_finance_charges" violates check constraint "student_finance_charges_check"
+2026-10-30 23:07:27.593 SAST [23956] DETAIL:  Failing row contains (d1008e8375a8490c8958ecfcc99da910, cert, student, registration, fee, fee, Tuition, 100, 101, CDF, null, paid, 2026-10-30 23:07:27.592034).
+2026-10-30 23:07:27.593 SAST [23956] STATEMENT:  INSERT INTO student_finance_charges (id,institution_id,student_id,registration_id,fee_item_id,code,label,amount_minor,paid_minor,currency,state,created_at) VALUES ($1,'cert','student','registration','fee','fee','Tuition',100,101,'CDF','paid',CURRENT_TIMESTAMP)
+2026-10-30 23:08:26.124 SAST [22892] LOG:  checkpoint complete: wrote 463 buffers (11.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=61.037 s, sync=9.238 s, total=73.825 s; sync files=2476, longest=0.176 s, average=0.004 s; distance=7087 kB, estimate=9702 kB; lsn=0/3FBBA48, redo lsn=0/3ADABE0
+2026-10-31 10:01:47.272 SAST [2940] ERROR:  duplicate key value violates unique constraint "uq_gateway_provider_ref"
+2026-10-31 10:01:47.272 SAST [2940] DETAIL:  Key (provider, provider_reference)=(sandbox, provider-ref-1) already exists.
+2026-10-31 10:01:47.272 SAST [2940] STATEMENT:  UPDATE payment_gateway_intents SET provider_reference=$1::VARCHAR, status=$2::VARCHAR, receipt_id=$3::VARCHAR WHERE payment_gateway_intents.id = $4::VARCHAR
+2026-10-31 10:01:47.595 SAST [24188] ERROR:  new row for relation "student_finance_receipts" violates check constraint "student_finance_receipts_amount_minor_check"
+2026-10-31 10:01:47.595 SAST [24188] DETAIL:  Failing row contains (f212a9c6ff59490e90c24719c592381f, cert, student, receipt, 0, CDF, mobile_money, null, cert, 2026-10-31 10:01:47.58373, f).
+2026-10-31 10:01:47.595 SAST [24188] STATEMENT:  INSERT INTO student_finance_receipts (id,institution_id,student_id,reference,amount_minor,currency,payment_method,issued_by,issued_at) VALUES ($1,'cert','student','receipt',0,'CDF','mobile_money','cert',CURRENT_TIMESTAMP)
+2026-10-31 10:01:47.704 SAST [2540] ERROR:  new row for relation "student_finance_charges" violates check constraint "student_finance_charges_check"
+2026-10-31 10:01:47.704 SAST [2540] DETAIL:  Failing row contains (cb645f13d8ff4c539940456f99086392, cert, student, registration, fee, fee, Tuition, 100, 101, CDF, null, paid, 2026-10-31 10:01:47.702788).
+2026-10-31 10:01:47.704 SAST [2540] STATEMENT:  INSERT INTO student_finance_charges (id,institution_id,student_id,registration_id,fee_item_id,code,label,amount_minor,paid_minor,currency,state,created_at) VALUES ($1,'cert','student','registration','fee','fee','Tuition',100,101,'CDF','paid',CURRENT_TIMESTAMP)
+2026-10-31 10:02:16.613 SAST [22892] LOG:  checkpoint starting: time
+2026-10-31 10:03:22.621 SAST [22892] LOG:  checkpoint complete: wrote 435 buffers (10.6%); 0 WAL file(s) added, 0 removed, 1 recycled; write=48.639 s, sync=12.918 s, total=66.019 s; sync files=2581, longest=0.349 s, average=0.005 s; distance=15772 kB, estimate=15772 kB; lsn=0/4A4A2F0, redo lsn=0/4A41D78
+2026-10-31 11:10:58.721 SAST [25748] ERROR:  duplicate key value violates unique constraint "uq_gateway_provider_ref"
+2026-10-31 11:10:58.721 SAST [25748] DETAIL:  Key (provider, provider_reference)=(sandbox, provider-ref-1) already exists.
+2026-10-31 11:10:58.721 SAST [25748] STATEMENT:  UPDATE payment_gateway_intents SET provider_reference=$1::VARCHAR, status=$2::VARCHAR, receipt_id=$3::VARCHAR WHERE payment_gateway_intents.id = $4::VARCHAR
+2026-10-31 11:10:59.080 SAST [30820] ERROR:  new row for relation "student_finance_receipts" violates check constraint "student_finance_receipts_amount_minor_check"
+2026-10-31 11:10:59.080 SAST [30820] DETAIL:  Failing row contains (bd0180c466474e0097072d9715cd3f85, cert, student, receipt, 0, CDF, mobile_money, null, cert, 2026-10-31 11:10:59.058885, f).
+2026-10-31 11:10:59.080 SAST [30820] STATEMENT:  INSERT INTO student_finance_receipts (id,institution_id,student_id,reference,amount_minor,currency,payment_method,issued_by,issued_at) VALUES ($1,'cert','student','receipt',0,'CDF','mobile_money','cert',CURRENT_TIMESTAMP)
+2026-10-31 11:10:59.183 SAST [29456] ERROR:  new row for relation "student_finance_charges" violates check constraint "student_finance_charges_check"
+2026-10-31 11:10:59.183 SAST [29456] DETAIL:  Failing row contains (3ec6a03f8a5040a9a756b3a56a982e28, cert, student, registration, fee, fee, Tuition, 100, 101, CDF, null, paid, 2026-10-31 11:10:59.181887).
+2026-10-31 11:10:59.183 SAST [29456] STATEMENT:  INSERT INTO student_finance_charges (id,institution_id,student_id,registration_id,fee_item_id,code,label,amount_minor,paid_minor,currency,state,created_at) VALUES ($1,'cert','student','registration','fee','fee','Tuition',100,101,'CDF','paid',CURRENT_TIMESTAMP)
+2026-10-31 11:12:17.241 SAST [22892] LOG:  checkpoint starting: time
+2026-10-31 11:13:02.484 SAST [22892] LOG:  checkpoint complete: wrote 395 buffers (9.6%); 0 WAL file(s) added, 0 removed, 1 recycled; write=42.224 s, sync=2.065 s, total=45.251 s; sync files=2583, longest=0.058 s, average=0.001 s; distance=11394 kB, estimate=15334 kB; lsn=0/5562758, redo lsn=0/5562720
+2026-10-31 19:26:15.134 SAST [26996] ERROR:  duplicate key value violates unique constraint "uq_gateway_provider_ref"
+2026-10-31 19:26:15.134 SAST [26996] DETAIL:  Key (provider, provider_reference)=(sandbox, provider-ref-1) already exists.
+2026-10-31 19:26:15.134 SAST [26996] STATEMENT:  UPDATE payment_gateway_intents SET provider_reference=$1::VARCHAR, status=$2::VARCHAR, receipt_id=$3::VARCHAR WHERE payment_gateway_intents.id = $4::VARCHAR
+2026-10-31 19:26:15.550 SAST [25452] ERROR:  new row for relation "student_finance_receipts" violates check constraint "student_finance_receipts_amount_minor_check"
+2026-10-31 19:26:15.550 SAST [25452] DETAIL:  Failing row contains (3fd69b756b344bc08fc6d99f5d8b5f47, cert, student, receipt, 0, CDF, mobile_money, null, cert, 2026-10-31 19:26:15.544391, f).
+2026-10-31 19:26:15.550 SAST [25452] STATEMENT:  INSERT INTO student_finance_receipts (id,institution_id,student_id,reference,amount_minor,currency,payment_method,issued_by,issued_at) VALUES ($1,'cert','student','receipt',0,'CDF','mobile_money','cert',CURRENT_TIMESTAMP)
+2026-10-31 19:26:15.731 SAST [25956] ERROR:  new row for relation "student_finance_charges" violates check constraint "student_finance_charges_check"
+2026-10-31 19:26:15.731 SAST [25956] DETAIL:  Failing row contains (3b7b6dbfc4be497389a19bf22f6da89b, cert, student, registration, fee, fee, Tuition, 100, 101, CDF, null, paid, 2026-10-31 19:26:15.729649).
+2026-10-31 19:26:15.731 SAST [25956] STATEMENT:  INSERT INTO student_finance_charges (id,institution_id,student_id,registration_id,fee_item_id,code,label,amount_minor,paid_minor,currency,state,created_at) VALUES ($1,'cert','student','registration','fee','fee','Tuition',100,101,'CDF','paid',CURRENT_TIMESTAMP)
+2026-10-31 19:27:25.678 SAST [22892] LOG:  checkpoint starting: time
+2026-10-31 19:28:09.175 SAST [22892] LOG:  checkpoint complete: wrote 349 buffers (8.5%); 0 WAL file(s) added, 0 removed, 1 recycled; write=37.816 s, sync=3.115 s, total=43.501 s; sync files=2578, longest=0.021 s, average=0.002 s; distance=11293 kB, estimate=14930 kB; lsn=0/6069C58, redo lsn=0/6069C20
+2026-10-31 19:45:45.848 SAST [2300] LOG:  received fast shutdown request
+2026-10-31 19:45:45.877 SAST [2300] LOG:  aborting any active transactions
+2026-10-31 19:45:46.018 SAST [2300] LOG:  background worker "logical replication launcher" (PID 22656) exited with exit code 1
+2026-10-31 19:45:46.029 SAST [22892] LOG:  shutting down
+2026-10-31 19:45:46.036 SAST [22892] LOG:  checkpoint starting: shutdown immediate
+2026-10-31 19:45:46.097 SAST [22892] LOG:  checkpoint complete: wrote 0 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.012 s, sync=0.002 s, total=0.067 s; sync files=0, longest=0.000 s, average=0.000 s; distance=0 kB, estimate=13437 kB; lsn=0/6069D08, redo lsn=0/6069D08
+2026-10-31 19:45:46.479 SAST [2300] LOG:  database system is shut down

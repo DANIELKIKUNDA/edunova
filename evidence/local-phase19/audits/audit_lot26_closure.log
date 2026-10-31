@@ -1,0 +1,12 @@
+PASS migration_0044
+PASS adr_044
+PASS announcements
+PASS absence_workflow
+PASS calendar
+PASS operations_dashboard
+PASS auto_absent
+PASS notifications
+PASS api_routes
+FAIL version_api
+FAIL version_mobile
+FAIL version_admin

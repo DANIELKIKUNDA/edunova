@@ -1,0 +1,21 @@
+FAIL v0.17.1 API
+PASS adaptive v2
+PASS confidence band
+PASS knowledge gaps
+PASS exam readiness
+PASS exam focus
+PASS evidence
+PASS history endpoint
+PASS history repo
+PASS migration 0017
+FAIL mobile 0.17.1
+FAIL admin 0.17.1
+PASS premium metrics
+PASS exam UI
+PASS gaps UI
+PASS explainability UI
+PASS Volcano Tech
+PASS final tests
+PASS final docs
+PASS no mastery certainty
+17/20 PASS

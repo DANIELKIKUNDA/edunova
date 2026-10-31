@@ -1,0 +1,55 @@
+COMMAND: C:\Users\cs-ap\dev\flutter\bin\flutter.bat build apk --debug --no-pub
+CWD: C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile
+Running Gradle task 'assembleDebug'...                          
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>if "Windows_NT" == "Windows_NT" setlocal
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>set DEFAULT_JVM_OPTS= 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>set DIRNAME=C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android\ 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>if "C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android\" == "" set DIRNAME=. 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>set APP_BASE_NAME=gradlew 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>set APP_HOME=C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android\ 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>if defined JAVA_HOME goto findJavaFromJavaHome 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>set JAVA_HOME=C:\Program Files\Android\Android Studio\jbr 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>set JAVA_EXE=C:\Program Files\Android\Android Studio\jbr/bin/java.exe 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>if exist "C:\Program Files\Android\Android Studio\jbr/bin/java.exe" goto init 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>if not "Windows_NT" == "Windows_NT" goto win9xME_args 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>if "@eval[2+2]" == "4" goto 4NT_args 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>set CMD_LINE_ARGS= 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>set _SKIP=2 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>if "x-q" == "x" goto execute 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>set CMD_LINE_ARGS=-q -Ptarget-platform=android-arm,android-arm64,android-x64 -Ptarget=lib\main.dart -Pbase-application-name=android.app.Application -Pdart-defines=RkxVVFRFUl9WRVJTSU9OPTMuMzUuNA==,RkxVVFRFUl9DSEFOTkVMPXN0YWJsZQ==,RkxVVFRFUl9HSVRfVVJMPWh0dHBzOi8vZ2l0aHViLmNvbS9mbHV0dGVyL2ZsdXR0ZXIuZ2l0,RkxVVFRFUl9GUkFNRVdPUktfUkVWSVNJT049ZDY5M2I0YjlkYg==,RkxVVFRFUl9FTkdJTkVfUkVWSVNJT049YzI5ODA5MTM1MQ==,RkxVVFRFUl9EQVJUX1ZFUlNJT049My45LjI= -Pdart-obfuscation=false -Ptrack-widget-creation=true -Ptree-shake-icons=false assembleDebug 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>goto execute 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>set CLASSPATH=C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android\\gradle\wrapper\gradle-wrapper.jar 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>"C:\Program Files\Android\Android Studio\jbr/bin/java.exe"    "-Dorg.gradle.appname=gradlew" -classpath "C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android\\gradle\wrapper\gradle-wrapper.jar" org.gradle.wrapper.GradleWrapperMain -q -Ptarget-platform=android-arm,android-arm64,android-x64 -Ptarget=lib\main.dart -Pbase-application-name=android.app.Application -Pdart-defines=RkxVVFRFUl9WRVJTSU9OPTMuMzUuNA==,RkxVVFRFUl9DSEFOTkVMPXN0YWJsZQ==,RkxVVFRFUl9HSVRfVVJMPWh0dHBzOi8vZ2l0aHViLmNvbS9mbHV0dGVyL2ZsdXR0ZXIuZ2l0,RkxVVFRFUl9GUkFNRVdPUktfUkVWSVNJT049ZDY5M2I0YjlkYg==,RkxVVFRFUl9FTkdJTkVfUkVWSVNJT049YzI5ODA5MTM1MQ==,RkxVVFRFUl9EQVJUX1ZFUlNJT049My45LjI= -Pdart-obfuscation=false -Ptrack-widget-creation=true -Ptree-shake-icons=false assembleDebug 
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+3 warnings
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+3 warnings
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>if "0" == "0" goto mainEnd 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>if "Windows_NT" == "Windows_NT" endlocal
+Running Gradle task 'assembleDebug'...                           2708.8s
+√ Built build\app\outputs\flutter-apk\app-debug.apk

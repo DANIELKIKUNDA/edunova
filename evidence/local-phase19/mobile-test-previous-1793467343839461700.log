@@ -1,0 +1,73 @@
+COMMAND: C:\Users\cs-ap\dev\flutter\bin\flutter.bat test --no-pub --reporter=expanded
+CWD: C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile
+00:00 +0: loading C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/adaptive_planning_test.dart
+00:00 +0: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/adaptive_planning_test.dart: high cognitive work is skipped in low energy window
+../../runtime/platform/allocation.cc: 30: error: Out of memory.
+00:00 +1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/adaptive_planning_test.dart: planner respects study capacity and breaks
+00:01 +2: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/adaptive_planning_test.dart: deferred work gains explicit priority reason
+00:02 +3: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/analytics/analytics_engine_test.dart: momentum is explainable and improving
+00:02 +4: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/analytics/analytics_engine_test.dart: urgent low readiness course is prioritized
+00:02 +5: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/analytics/analytics_engine_test.dart: recommendations remain diversified
+00:02 +6: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/analytics/analytics_engine_test.dart: activity timeline is preserved for premium UI
+00:03 +7: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/analytics/analytics_engine_test.dart: course insight exposes drilldown dimensions
+00:03 +8: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/analytics/analytics_engine_test.dart: course recommendation links keep the human title
+381:57 +9 -1: loading C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_academic_alumni_gateway_test.dart [E]
+  TimeoutException after 0:12:00.000000: Test timed out after 12 minutes.
+  package:test_api/src/backend/invoker.dart 362:28  Invoker._handleError.<fn>
+  dart:async/zone.dart 1517:47                      _rootRun
+  dart:async/zone.dart 1422:19                      _CustomZone.run
+  package:test_api/src/backend/invoker.dart 360:10  Invoker._handleError
+  package:test_api/src/backend/invoker.dart 315:9   Invoker.heartbeat.<fn>.<fn>
+  dart:async/zone.dart 1525:13                      _rootRun
+  dart:async/zone.dart 1422:19                      _CustomZone.run
+  package:test_api/src/backend/invoker.dart 314:38  Invoker.heartbeat.<fn>
+  dart:async-patch/timer_patch.dart 18:15           Timer._createTimer.<fn>
+  dart:isolate-patch/timer_impl.dart 423:19         _Timer._runTimers
+  dart:isolate-patch/timer_impl.dart 454:5          _Timer._handleMessage
+  dart:isolate-patch/isolate_patch.dart 193:12      _RawReceivePort._handleMessage
+  
+381:58 +9 -2: loading C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_alerts_gateway_test.dart [E]
+  TimeoutException after 0:12:00.000000: Test timed out after 12 minutes.
+  package:test_api/src/backend/invoker.dart 362:28  Invoker._handleError.<fn>
+  dart:async/zone.dart 1517:47                      _rootRun
+  dart:async/zone.dart 1422:19                      _CustomZone.run
+  package:test_api/src/backend/invoker.dart 360:10  Invoker._handleError
+  package:test_api/src/backend/invoker.dart 315:9   Invoker.heartbeat.<fn>.<fn>
+  dart:async/zone.dart 1525:13                      _rootRun
+  dart:async/zone.dart 1422:19                      _CustomZone.run
+  package:test_api/src/backend/invoker.dart 314:38  Invoker.heartbeat.<fn>
+  dart:async-patch/timer_patch.dart 18:15           Timer._createTimer.<fn>
+  dart:isolate-patch/timer_impl.dart 423:19         _Timer._runTimers
+  dart:isolate-patch/timer_impl.dart 454:5          _Timer._handleMessage
+  dart:isolate-patch/isolate_patch.dart 193:12      _RawReceivePort._handleMessage
+  
+381:58 +9 -3: loading C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_events_gateway_test.dart [E]
+  TimeoutException after 0:12:00.000000: Test timed out after 12 minutes.
+  package:test_api/src/backend/invoker.dart 362:28  Invoker._handleError.<fn>
+  dart:async/zone.dart 1517:47                      _rootRun
+  dart:async/zone.dart 1422:19                      _CustomZone.run
+  package:test_api/src/backend/invoker.dart 360:10  Invoker._handleError
+  package:test_api/src/backend/invoker.dart 315:9   Invoker.heartbeat.<fn>.<fn>
+  dart:async/zone.dart 1525:13                      _rootRun
+  dart:async/zone.dart 1422:19                      _CustomZone.run
+  package:test_api/src/backend/invoker.dart 314:38  Invoker.heartbeat.<fn>
+  dart:async-patch/timer_patch.dart 18:15           Timer._createTimer.<fn>
+  dart:isolate-patch/timer_impl.dart 423:19         _Timer._runTimers
+  dart:isolate-patch/timer_impl.dart 454:5          _Timer._handleMessage
+  dart:isolate-patch/isolate_patch.dart 193:12      _RawReceivePort._handleMessage
+  
+381:58 +9 -4: loading C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart [E]
+  TimeoutException after 0:12:00.000000: Test timed out after 12 minutes.
+  package:test_api/src/backend/invoker.dart 362:28  Invoker._handleError.<fn>
+  dart:async/zone.dart 1517:47                      _rootRun
+  dart:async/zone.dart 1422:19                      _CustomZone.run
+  package:test_api/src/backend/invoker.dart 360:10  Invoker._handleError
+  package:test_api/src/backend/invoker.dart 315:9   Invoker.heartbeat.<fn>.<fn>
+  dart:async/zone.dart 1525:13                      _rootRun
+  dart:async/zone.dart 1422:19                      _CustomZone.run
+  package:test_api/src/backend/invoker.dart 314:38  Invoker.heartbeat.<fn>
+  dart:async-patch/timer_patch.dart 18:15           Timer._createTimer.<fn>
+  dart:isolate-patch/timer_impl.dart 423:19         _Timer._runTimers
+  dart:isolate-patch/timer_impl.dart 454:5          _Timer._handleMessage
+  dart:isolate-patch/isolate_patch.dart 193:12      _RawReceivePort._handleMessage
+  
