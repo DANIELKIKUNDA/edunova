@@ -64,7 +64,12 @@ def run(name):
     record = dict(commit=commit, command=command, cwd=str(cwd), exit_code=code, seconds=round(time.monotonic()-start, 2))
     (OUT / f'{name}.json').write_text(json.dumps(record, indent=2), encoding='utf-8')
     print(name, record, flush=True)
+    return code
 
 if __name__ == '__main__':
+    overall_code = 0
     for name in sys.argv[1:]:
-        run(name)
+        result_code = run(name)
+        if result_code != 0 and overall_code == 0:
+            overall_code = result_code
+    sys.exit(overall_code)

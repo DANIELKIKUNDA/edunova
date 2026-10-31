@@ -4,17 +4,28 @@ from zoneinfo import ZoneInfo
 from pathlib import Path
 import hashlib
 import json
+import os
 import re
 import shutil
 import subprocess
 import xml.etree.ElementTree as ET
+import zipfile
 
 root = Path(__file__).resolve().parents[1]
 out = root / 'evidence/local-phase19'
 head = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=root, text=True).strip()
+product_head = subprocess.check_output(['git','log','-1','--format=%H','--','apps','services/api'],cwd=root,text=True).strip()
+declared_names = re.findall(r'^([A-Za-z_][A-Za-z0-9_]*)=',(root/'.env.example').read_text(encoding='utf-8'),re.M)
+(out/'ENVIRONMENT.json').write_text(json.dumps({'project_env_file_present':(root/'.env').exists(),'declared_variable_presence_only':{name:bool(os.getenv(name)) for name in declared_names},'values_disclosed':False,'test_overrides':{'EDUNOVA_ENV':'test','AI_PROVIDER':'fake','PAYMENT_PROVIDER':'sandbox','FCM_ENABLED':'false'}},indent=2),encoding='utf-8')
+for source,destination in [('postgres-server.log','postgres-server.log'),('server.conf','postgres-test-server.conf')]:
+    path = root/'.local-certification'/source
+    if path.exists(): shutil.copyfile(path,out/destination)
 def read(name):
     p = out / name
     return p.read_text(encoding='utf-8', errors='replace') if p.exists() else ''
+def file_hash(path):
+    with path.open('rb') as handle:
+        return hashlib.file_digest(handle,'sha256').hexdigest()
 def meta(name):
     return json.loads(read(name+'.json')) if read(name+'.json') else {}
 def junit(name):
@@ -93,6 +104,12 @@ for name, item in records:
     excerpt = logtext if len(logtext)<4500 else logtext[:1000]+'\n[extrait ; trace intégrale dans le journal]\n'+logtext[-3000:]
     appendix += [f'## Tentative non réussie — {name}', '', f"Commande : `{subprocess.list2cmdline(item['command'])}` dans `{item['cwd']}`. Code {item['exit_code']}.", '', explanation, '', f'Trace intégrale : [{name}.log]({name}.log).', '', '```text', excerpt, '```', '']
 (out/'FAILURES.md').write_text('\n'.join(appendix), encoding='utf-8')
+recorded_names = {name for name,_ in records}
+for orphan in sorted(out.glob('*.log')):
+    if orphan.stem in recorded_names: continue
+    first_lines = orphan.read_text(encoding='utf-8',errors='replace').splitlines()[:2]
+    if first_lines and first_lines[0].startswith('COMMAND: '):
+        commands.append(f"| [{orphan.stem}]({orphan.name}) | non enregistré | en cours ou interrompu, aucune sortie finale enregistrée | — | `{first_lines[0][9:]}` |")
 (out/'COMMANDS.md').write_text('\n'.join(commands), encoding='utf-8')
 for app in ('mobile','admin'):
     lock = root / 'apps' / app / 'pubspec.lock'
@@ -131,9 +148,23 @@ artifact_rows = []
 for job, relative in [('mobile-web','apps/mobile/build/web/main.dart.js'),('admin-web','apps/admin/build/web/main.dart.js'),('mobile-windows','apps/mobile/build/windows/x64/runner/Release/edunova.exe'),('admin-windows','apps/admin/build/windows/x64/runner/Release/edunova_admin.exe'),('mobile-android','apps/mobile/build/app/outputs/flutter-apk/app-debug.apk'),('admin-android','apps/admin/build/app/outputs/flutter-apk/app-debug.apk')]:
     path = root/relative
     if meta(job).get('exit_code') == 0:
-        artifact_rows.append({'job':job,'path':relative,'exists':path.exists(),'sha256':hashlib.sha256(path.read_bytes()).hexdigest() if path.exists() else None})
+        record = {'job':job,'path':relative,'exists':path.exists(),'size_bytes':path.stat().st_size if path.exists() else None,'sha256':file_hash(path) if path.exists() else None}
+        if job.endswith('-android') and path.exists():
+            with zipfile.ZipFile(path) as archive:
+                record['abis'] = sorted({name.split('/')[1] for name in archive.namelist() if name.startswith('lib/') and name.endswith('.so')})
+        artifact_rows.append(record)
 (out/'ARTIFACTS.json').write_text(json.dumps(artifact_rows,indent=2),encoding='utf-8')
-artifact_text = '\n'.join(f"- `{a['path']}` : SHA-256 `{a['sha256']}` ; présence vérifiée : {a['exists']}." for a in artifact_rows)
+artifact_text = '\n'.join(f"- `{a['path']}` : SHA-256 `{a['sha256']}` ; présence vérifiée : {a['exists']}." + (f" ABI constatées dans l’APK : {', '.join(a['abis'])}." if 'abis' in a else '') for a in artifact_rows)
+tree_proofs = []
+for job, paths in [('backend-final',['services/api/app','services/api/tests']),('mobile-test',['apps/mobile/lib','apps/mobile/test']),('admin-test',['apps/admin/lib','apps/admin/test']),('mobile-web',['apps/mobile/lib','apps/mobile/web']),('admin-web',['apps/admin/lib','apps/admin/web']),('mobile-windows',['apps/mobile/lib','apps/mobile/windows']),('admin-windows',['apps/admin/lib','apps/admin/windows']),('mobile-android',['apps/mobile/lib','apps/mobile/android']),('admin-android',['apps/admin/lib','apps/admin/android'])]:
+    tested = meta(job).get('commit')
+    if not tested: continue
+    for path in paths:
+        tested_tree = subprocess.check_output(['git','rev-parse',tested+':'+path],cwd=root,text=True).strip()
+        current_tree = subprocess.check_output(['git','rev-parse','HEAD:'+path],cwd=root,text=True).strip()
+        tree_proofs.append({'suite':job,'tested_commit':tested,'delivery_commit':head,'path':path,'tested_tree':tested_tree,'delivery_tree':current_tree,'identical':tested_tree==current_tree})
+(out/'TREE_IDENTITY.json').write_text(json.dumps(tree_proofs,indent=2),encoding='utf-8')
+tree_text = '\n'.join(f"- `{item['path']}` : arbre Git identique au commit exécuté `{item['tested_commit']}` : **{item['identical']}**." for item in tree_proofs)
 text = f'''# EduNova — certification locale jusqu’à la Phase 19
 
 Rapport généré le {datetime.now(ZoneInfo('Africa/Lubumbashi')).isoformat(timespec='seconds')}.
@@ -149,9 +180,14 @@ Les réussites ci-dessous sont limitées aux contrôles effectivement exécutés
 - Dépôt : DANIELKIKUNDA/edunova ; branche import/edunova-v0.57.12.
 - Import initial propre : `6607b18da64eb44c2de017192ccefded21659a35`.
 - HEAD source lors de la génération : `{head}`. Les commits exacts de chaque suite sont inscrits dans le tableau et les JSON. Les contrôles couvrent plusieurs commits successifs ; ne pas attribuer tous les anciens résultats à HEAD.
+- Dernier commit modifiant les applications ou le backend : `{product_head}`. Les commits documentaires ultérieurs ne remplacent pas les références des exécutions.
 - PR #1 vérifiée ouverte, non fusionnée et en brouillon. Aucun changement demandé à main.
 - Les corrections sont des commits locaux non poussés ; la PR distante est restée sur le commit d’import au dernier contrôle. Ne pas chercher les nouveaux commits sur GitHub avant leur publication explicite.
 - Dossier local : `C:/Users/cs-ap/dev/edusync-web/edunova`. Le dépôt parent edusync-web et ses modifications locales sont conservés.
+
+Correspondance des sources exécutées avec la livraison, vérifiée par les identifiants d’arbres Git dans [TREE_IDENTITY.json](evidence/local-phase19/TREE_IDENTITY.json) :
+
+{tree_text}
 
 ## Environnement
 
@@ -165,9 +201,15 @@ Les SDK étaient absents du PATH initial mais présents sur disque. Docker clien
 
 Le clone ne contenait pas de `.env`. Les noms des variables du modèle ont été vérifiés sans afficher de secrets. Le runner retire les variables sensibles héritées, impose le mode test et n’utilise pas de prestataire de paiement réel. Les dépendances Python déclarées ont été installées ; `freeze.log` conserve les versions résolues et `pip-check.log` leur cohérence. Les résolutions Flutter sont conservées dans les fichiers `*-dependencies.lock`. Aucune opération financière réelle ni aucun service payant n’a été utilisé.
 
+Les seules présences de variables, sans valeurs, sont conservées dans [ENVIRONMENT.json](evidence/local-phase19/ENVIRONMENT.json).
+
 ## Résultats et commandes
 
 Les nombres des suites se recouvrent : ne pas les additionner comme des tests uniques. La collecte seule et les audits structurels ne sont pas des suites fonctionnelles.
+
+La régression complète finale utilise quatre processus pytest avec répartition par fichier (`--dist loadfile`) et bases séparées. L’ancienne tentative séquentielle est conservée avec ses échecs ; elle n’a pas été intégralement répétée après toutes les corrections. La réussite parallèle ne prouve donc pas à elle seule l’absence de dépendance à l’ordre global des anciens tests.
+
+Audits structurels exécutés : {sum(item['exit_code']==0 for item in audits)} scripts réussis et {sum(item['exit_code']!=0 for item in audits)} en échec sur {len(audits)}. Il s’agit de codes de sortie de scripts, pas d’un total d’assertions fonctionnelles.
 
 {chr(10).join(table)}
 
@@ -178,6 +220,8 @@ Préparation, installations et commandes de démarrage : [BOOTSTRAP.md](evidence
 ## PostgreSQL et finance
 
 Cluster dédié créé par `initdb -D .local-certification/postgres -U edunova_cert --auth=trust --encoding=UTF8 --locale=C`, limité à `127.0.0.1:55439`. Base : `edunova_phase19_test`. Aucune connexion aux bases existantes ou de production. Les 99 migrations 0001–0099 ont été appliquées via `psql -X -v ON_ERROR_STOP=1` ; preuve `migrations.log`.
+
+Le cluster a été arrêté après les essais : `postgres-stop.log`. Le journal serveur et la configuration dédiée sont conservés dans evidence. Les tests négatifs peuvent produire des ERROR PostgreSQL attendues tout en réussissant leurs assertions ; les conclusions de suite restent celles de JUnit.
 
 La régression générale utilise SQLite isolé par processus. Les suites financières PostgreSQL utilisent une variable distincte, validée contre l’adresse/port/base dédiés et un schéma UUID par test ; leurs tables proviennent de SQLAlchemy. Les huit contrôles de contraintes, séparément, interrogent le schéma public réellement migré et testent les rejets d’écritures invalides. Ce découpage ne constitue pas une validation de tout le backend sur PostgreSQL.
 

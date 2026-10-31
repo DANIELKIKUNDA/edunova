@@ -10,6 +10,7 @@ __pycache__/
 
 # Dart / Flutter
 .dart_tool/
+.kotlin/
 build/
 .flutter-plugins
 .flutter-plugins-dependencies
