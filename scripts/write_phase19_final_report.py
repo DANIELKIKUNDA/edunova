@@ -8,6 +8,7 @@ import shutil
 import subprocess
 import xml.etree.ElementTree as ET
 import zipfile
+from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT/'evidence/phase19-final'
@@ -39,6 +40,27 @@ def generate():
         if isinstance(data,dict) and all(k in data for k in ('command','cwd','exit_code','commit')) and '-previous-' not in path.stem:
             jobs[path.stem]=data
     audits=read('audits/results.json') or []
+    diagnostics=['# Tentatives non réussies et corrections','',
+                 'Les codes non nuls restent conservés, même après une reprise réussie. Les JSON associés contiennent la commande, le commit et le répertoire exacts.', '',
+                 '- FastAPI 0.162 utilise des routeurs inclus effectifs : trois tests inspectaient seulement la liste de premier niveau. Adaptation à `iter_route_contexts`, sans suppression des assertions d’unicité, de méthode ni de dépendance `current_auth` ; ajout de requêtes internes sans authentification exigeant 401.',
+                 '- Le nouveau test workspace a révélé un débordement de 22 px : titres de rangées non contraints. Correction avec Expanded ; assertion d’absence d’exception conservée.',
+                 '- Le premier double Admin tentait de surcharger des méthodes d’extension Dart : deux avertissements de surcharge inexistante. Le test intercepte désormais les vraies requêtes HTTP via MockClient, sans modifier l’API de production.',
+                 '- Dépréciation Drift web : information résiduelle ; les analyses Mobile de code 1 ne sont pas des PASS.',
+                 '- Premier audit pip : 100 entrées signalées dans cinq paquets. Mises à jour testées séparément ; les résultats avant correction restent disponibles.', '']
+    for path in sorted(OUT.glob('*-previous-*.json')):
+        record=read(path.name)
+        if isinstance(record,dict) and record.get('exit_code',0)!=0 and 'command' in record:
+            log=path.with_suffix('.log')
+            diagnostics += [f'## {path.stem}', '',f'Commande : `{subprocess.list2cmdline(record["command"])}`.',
+                            f'Code : {record["exit_code"]}. Commit : `{record["commit"]}`.',
+                            f'Trace : [{log.name}]({log.name}).', '']
+    for path in sorted(OUT.glob('*-previous-*.xml')):
+        for case in ET.parse(path).getroot().findall('.//testcase'):
+            error=case.find('failure')
+            if error is None: error=case.find('error')
+            if error is not None:
+                diagnostics += [f'### {case.attrib["name"]}', '',f'JUnit : [{path.name}]({path.name}).','', '```text',error.text or error.attrib.get('message',''), '```','']
+    (OUT/'DIAGNOSTICS.md').write_text('\n'.join(diagnostics),encoding='utf8')
     artifacts=[]
     bundles=[]
     original=json.loads((ROOT/'evidence/local-phase19/ARTIFACTS.json').read_text(encoding='utf8'))
@@ -63,7 +85,7 @@ def generate():
     proofs=[]
     for name,job in jobs.items():
         paths=['services/api/app','services/api/tests','services/api/requirements.txt'] if name in ('backend-final','phase19','postgres') else []
-        if name=='backend': paths=['services/api/app','services/api/tests']  # sequential baseline uses the original dependencies
+        if name=='backend': paths=['services/api/app']  # baseline also predates effective-router test adaptation
         for app in ('mobile','admin'):
             if name.startswith(app+'-'):
                 paths=[f'apps/{app}/lib',f'apps/{app}/pubspec.yaml']
@@ -77,6 +99,15 @@ def generate():
     (OUT/'TREE_IDENTITY.json').write_text(json.dumps(proofs,indent=2),encoding='utf8')
     deps=read('dependency-audit.json') or {}
     vulnerable=[d for d in deps.get('dependencies',[]) if d.get('vulns')]
+    security=[]
+    xml=OUT/'backend-final.xml'
+    if xml.exists():
+        for case in ET.parse(xml).getroot().findall('.//testcase'):
+            suite=case.attrib.get('classname','')
+            if any(token in suite for token in ('identity_security','tenant_policy','license_status_authorization','security_headers','security_storage','test_preflight','phase19','campus_lot22_hardening','platform_governance')):
+                status='FAIL' if any(case.find(t) is not None for t in ('error','failure')) else 'SKIP' if case.find('skipped') is not None else 'PASS'
+                security.append({'suite':suite,'name':case.attrib['name'],'status':status})
+    (OUT/'SECURITY_COVERAGE.json').write_text(json.dumps(security,indent=2),encoding='utf8')
     required=['audits','backend-final','phase19','postgres','migrations','mobile-pub','admin-pub','mobile-test','admin-test',
               'mobile-web','admin-web','mobile-windows','admin-windows','mobile-android','admin-android']
     missing=[n for n in required if n not in jobs]
@@ -84,13 +115,14 @@ def generate():
     verdict='PARTIELLEMENT CERTIFIÉ'
     # Static analysis, dependency findings and known illustrative screens are
     # explicit reservations even when functional suites pass.
-    lines=['# EduNova — certification finale de la Phase 19','',f'Généré le {datetime.now().astimezone().isoformat()}.',
+    lines=['# EduNova — certification finale de la Phase 19','',f'Généré le {datetime.now(ZoneInfo("Africa/Lubumbashi")).isoformat()}.',
            '',f'## Verdict : {verdict}','',
            'Cette certification locale n’autorise pas une mise en production. Les constats sont issus des exécutions conservées ; aucune réussite n’est déduite d’un ancien build.',
            '', '## Livraison et provenance', '',
            f'HEAD de préparation du rapport : `{head}`. Les commits documentaires de livraison peuvent lui succéder ; le SHA final publié est consigné dans la conversation PR #1 et dans le bilan de livraison.',
            'Branche : `import/edunova-v0.57.12`. Aucun merge dans main. La publication finale et le statut brouillon doivent être vérifiés après le push ; voir [publication.json](evidence/phase19-final/publication.json).',
            'Les commits testés sont indiqués individuellement ci-dessous. [TREE_IDENTITY.json](evidence/phase19-final/TREE_IDENTITY.json) compare les sources réellement exécutées aux sources livrées, y compris les dépendances déclarées.',
+           'Les échecs, commandes, traces et correctifs intermédiaires figurent dans [DIAGNOSTICS.md](evidence/phase19-final/DIAGNOSTICS.md).',
            '', '## Environnement et reproduction', '',
            'Windows 11 x64, Git 2.51.0, Python 3.13.14 ; environnement initial `.venv` conservé et environnement corrigé `.local-certification/security-venv` séparé. Flutter 3.35.4 / Dart 3.9.2, PostgreSQL 16.11 local : `127.0.0.1:55439`, utilisateur de test `edunova_cert`. SDK Android local, Java 21, Visual Studio 2022 avec ATL, NuGet et Tesseract locaux.',
            'PowerShell : `$env:EDUNOVA_CERT_EVIDENCE="phase19-final"`, puis `.venv/Scripts/python.exe scripts/certify_local_phase19.py <noms-des-contrôles>`. Le runner retire les secrets hérités, impose test/fake/sandbox et conserve commande, répertoire, code de sortie, durée et commit. Les tests SQL exigent explicitement la cible locale autorisée. Aucune production ni transaction réelle.',
@@ -107,7 +139,7 @@ def generate():
     for name in ('backend','backend-final','phase19','postgres','backend-contracts'):
         result=junit(name)
         if result: lines.append(f'| {name} | {result["passed"]} | {result["failed"]} | {result["skipped"]} |')
-    lines+=['', 'La suite `backend` est séquentielle, sans xdist, dans l’environnement initial conservé. Elle utilise les versions antérieures des dépendances ; elle n’est pas une preuve de leur mise à jour. La suite `backend-final` utilise les dépendances corrigées et deux workers pour limiter les ressources. La nouvelle pile complète n’a pas été rejouée séquentiellement : la preuve d’absence de dépendance à l’ordre après mise à jour reste limitée. Les fichiers applicatifs sont comparés par arbres Git ; la différence des dépendances de la suite initiale est conservée explicitement.',
+    lines+=['', 'La suite `backend` est séquentielle, sans xdist, dans l’environnement initial conservé. Elle utilise les versions antérieures des dépendances et les tests de routes antérieurs à leur adaptation ; elle n’est pas une preuve de leur mise à jour. La suite `backend-final` utilise les dépendances corrigées et deux workers pour limiter les ressources. La nouvelle pile complète n’a pas été rejouée séquentiellement : la preuve d’absence de dépendance à l’ordre après mise à jour reste limitée. Les fichiers applicatifs sont comparés par arbres Git ; la différence des dépendances et des tests de routes de la suite initiale est conservée explicitement.',
             'La suite générale utilise SQLite et des simulateurs ; elle ne prouve pas la concurrence PostgreSQL. La sélection `postgres` utilise le moteur réel : callbacks identiques/modifiés concurrents, référence conflictuelle, paiements simultanés, rollback, tenant, charges annulées, course callback/expiration/annulation et cohérence reçu/ledger/statut. La priorité des échéances dispose du test adversarial ajouté lors de la première mission.',
             'Les 17 SKIP de la régression générale concernent les 9 cas de concurrence et 8 cas de contraintes nécessitant la variable PostgreSQL. Leur correspondance individuelle avec la suite réelle est fournie ci-dessous.', '']
     backendxml=OUT/'backend.xml'; pgxml=OUT/'postgres.xml'
@@ -118,7 +150,7 @@ def generate():
                 name=case.attrib['name']; c=pgcases.get(name)
                 ok=c is not None and not any(c.find(t) is not None for t in ('error','failure','skipped'))
                 lines.append(f'- `{name}` : PostgreSQL séparé **{"PASS" if ok else "NON VALIDÉ"}**.')
-    lines+=['', 'Authentification/restauration de session, permissions, isolation tenant, validation des entrées, journalisation sensible et paiements sont couverts par les tests de la suite complète. Cela reste une validation des scénarios testés, sans pentest externe ni preuve exhaustive de toutes les configurations de déploiement.',
+    lines+=['', 'Authentification/restauration de session, permissions, isolation tenant, validation des entrées, journalisation sensible et paiements sont couverts par les tests de la suite complète. Une sélection individuelle des cas exécutés figure dans [SECURITY_COVERAGE.json](evidence/phase19-final/SECURITY_COVERAGE.json), avec les SKIP distincts. Cela reste une validation des scénarios testés, sans pentest externe ni preuve exhaustive de toutes les configurations de déploiement.',
             '', '## Les 55 audits structurels','',
             'Les 17 échecs initiaux ont été reproduits individuellement : [baseline](evidence/phase19-final/baseline/results.json). Décision motivée et cause par audit : [contrats historiques](docs/PHASE19_AUDIT_CONTRACT_DECISION.md). Les anciens journaux restent inchangés. Les minima numériques remplacent uniquement les versions historiques incompatibles ; les contrôles métier restent obligatoires. Les cinq vérifications lexicales ont été remplacées par des vérifications structurelles plus précises. Deux tests négatifs vérifient versions insuffisantes, invalides et métadonnées API débranchées.',
             f'Résultat : {sum(a["exit_code"]==0 for a in audits)}/{len(audits)} scripts réussis. Les audits structurels ne sont pas des tests fonctionnels.',
