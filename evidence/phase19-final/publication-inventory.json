@@ -1,0 +1,8 @@
+{
+  "scope": "tracked working-tree files and new Git history blobs; heuristic, not an exhaustive secret scanner",
+  "commit": "9424aa1ce5e928aa0e3c5f30daba6ec773c1a509",
+  "findings_without_values": [],
+  "historical_findings_without_values": [],
+  "oversized_files": [],
+  "forbidden_files": []
+}

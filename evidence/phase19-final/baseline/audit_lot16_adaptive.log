@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "C:\Users\cs-ap\dev\edusync-web\edunova\scripts\audit_lot16_adaptive.py", line 4, in <module>
+    assert '0.17.0' in (p/'services/api/app/main.py').read_text();assert 'adaptive-learning' in (p/'services/api/app/main.py').read_text();print('LOT16 AUDIT: 10/10 PASS')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "C:\Users\cs-ap\dev\edusync-web\edunova\scripts\audit_lot21_tutor.py", line 17, in <module>
+    main=(R/'services/api/app/main.py').read_text();assert '0.22.0' in main and '/v1/tutor' in main
+                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

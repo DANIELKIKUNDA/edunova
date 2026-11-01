@@ -1,0 +1,19 @@
+{
+  "commit": "edb7876cb26c131ec13c15e33f40b98022801e33",
+  "command": [
+    "C:\\Users\\cs-ap\\dev\\edusync-web\\edunova\\.local-certification\\security-venv\\Scripts\\python.exe",
+    "-m",
+    "pytest",
+    "-q",
+    "-n",
+    "2",
+    "--dist",
+    "loadfile",
+    "--durations=20",
+    "services/api/tests",
+    "--junitxml=C:\\Users\\cs-ap\\dev\\edusync-web\\edunova\\evidence\\phase19-final\\backend-final.xml"
+  ],
+  "cwd": "C:\\Users\\cs-ap\\dev\\edusync-web\\edunova",
+  "exit_code": 1,
+  "seconds": 1370.15
+}

@@ -1,0 +1,8 @@
+PASS pilot service
+PASS pilot tests
+PASS pwa manifest
+PASS offline fallback
+PASS service worker
+PASS pilot ui
+PASS branding
+LOT31 AUDIT: 7/7 PASS

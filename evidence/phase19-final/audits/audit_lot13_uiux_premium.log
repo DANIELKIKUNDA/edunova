@@ -1,0 +1,24 @@
+PASS admin 0.14.2+22
+PASS mobile 0.14.2+22
+PASS api 0.14.2
+PASS kpi responsive
+PASS search
+PASS state filters
+PASS quality sorting
+PASS master detail
+PASS mobile review sheet
+PASS review tabs
+PASS source evidence
+PASS asset filtering
+PASS loading state
+PASS empty state
+PASS no results state
+PASS error retry
+PASS human governance
+PASS no auto publish
+PASS accessibility semantics
+PASS selectable evidence
+PASS pull refresh
+PASS doc
+PASS acceptance
+23/23 PASS

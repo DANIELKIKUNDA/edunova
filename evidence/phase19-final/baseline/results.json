@@ -1,0 +1,70 @@
+[
+  {
+    "script": "scripts\\audit_lot10_uiux_maximal.py",
+    "exit_code": 1
+  },
+  {
+    "script": "scripts\\audit_lot11_maximal.py",
+    "exit_code": 1
+  },
+  {
+    "script": "scripts\\audit_lot12_ingestion.py",
+    "exit_code": 1
+  },
+  {
+    "script": "scripts\\audit_lot13_final.py",
+    "exit_code": 1
+  },
+  {
+    "script": "scripts\\audit_lot13_uiux_premium.py",
+    "exit_code": 1
+  },
+  {
+    "script": "scripts\\audit_lot14_final.py",
+    "exit_code": 1
+  },
+  {
+    "script": "scripts\\audit_lot15_final.py",
+    "exit_code": 1
+  },
+  {
+    "script": "scripts\\audit_lot15_learning_experience.py",
+    "exit_code": 1
+  },
+  {
+    "script": "scripts\\audit_lot15_student_delight.py",
+    "exit_code": 1
+  },
+  {
+    "script": "scripts\\audit_lot16_adaptive.py",
+    "exit_code": 1
+  },
+  {
+    "script": "scripts\\audit_lot16_final.py",
+    "exit_code": 1
+  },
+  {
+    "script": "scripts\\audit_lot17_planner.py",
+    "exit_code": 1
+  },
+  {
+    "script": "scripts\\audit_lot21_tutor.py",
+    "exit_code": 1
+  },
+  {
+    "script": "scripts\\audit_lot22.py",
+    "exit_code": 1
+  },
+  {
+    "script": "scripts\\audit_lot22_deep.py",
+    "exit_code": 1
+  },
+  {
+    "script": "scripts\\audit_lot26.py",
+    "exit_code": 1
+  },
+  {
+    "script": "scripts\\audit_lot26_closure.py",
+    "exit_code": 1
+  }
+]

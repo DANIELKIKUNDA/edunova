@@ -1,0 +1,648 @@
+[
+  {
+    "job": "mobile-web",
+    "commit": "f92878e7196711cbdbb30eb004f6252a3541eb44",
+    "files": [
+      {
+        "path": "apps/mobile/build/web/.last_build_id",
+        "size_bytes": 32,
+        "sha256": "2b742254a309ee43faf55bfd551f2c9e6938a0564d36d4ce44833d6fa704d733"
+      },
+      {
+        "path": "apps/mobile/build/web/assets/AssetManifest.bin",
+        "size_bytes": 548,
+        "sha256": "71c5d3d715aa055a051bbf23774ad71c8ea460b1a1c6602412016aef2a0944ad"
+      },
+      {
+        "path": "apps/mobile/build/web/assets/AssetManifest.bin.json",
+        "size_bytes": 734,
+        "sha256": "8d2d83afe20f7327dd3f4cc5d518c58c2da7c341a485d11ce6cd2863fa7e9a5a"
+      },
+      {
+        "path": "apps/mobile/build/web/assets/AssetManifest.json",
+        "size_bytes": 505,
+        "sha256": "cbe2ea66e3db5bf8f30b12994608211a11dc827fbcd9bf410f0295e31b104598"
+      },
+      {
+        "path": "apps/mobile/build/web/assets/assets/branding/app_icon.png",
+        "size_bytes": 753420,
+        "sha256": "4a8ec2468510d1c75d58ba8ee7ea1ab3c44dd311a6462f0ca5d37f37a6cbe5d3"
+      },
+      {
+        "path": "apps/mobile/build/web/assets/assets/branding/edunova_logo_official.png",
+        "size_bytes": 1314020,
+        "sha256": "eaf45a280062f6f2bcd2c785cc505650f5c507b8516cfe5cfcab5a64e71c9597"
+      },
+      {
+        "path": "apps/mobile/build/web/assets/FontManifest.json",
+        "size_bytes": 208,
+        "sha256": "cd7e03645bc44b2dd47b7cb626f51c4ecbf55a197ab77241628b47ac165fbe21"
+      },
+      {
+        "path": "apps/mobile/build/web/assets/fonts/MaterialIcons-Regular.otf",
+        "size_bytes": 43784,
+        "sha256": "61eefc9c5d6ba1e81a77138e89b3682f62d3afe5dd1a75164096cd8886f92b82"
+      },
+      {
+        "path": "apps/mobile/build/web/assets/NOTICES",
+        "size_bytes": 1855368,
+        "sha256": "7509c61cb1a143e4ba7651785a0dfc86fa97bb235b5bd7ba7d1d04390b13e16a"
+      },
+      {
+        "path": "apps/mobile/build/web/assets/packages/cupertino_icons/assets/CupertinoIcons.ttf",
+        "size_bytes": 1472,
+        "sha256": "3d90c370aa4cf00dc57ee2b902f6652147c0f81e03e483df584a9c08b1687c9d"
+      },
+      {
+        "path": "apps/mobile/build/web/assets/packages/pdfrx/assets/pdfium.wasm",
+        "size_bytes": 3960317,
+        "sha256": "b2c466e4324701c45ac1470baaae2fe7bf89334f06fac01a66d17246db11cc94"
+      },
+      {
+        "path": "apps/mobile/build/web/assets/packages/pdfrx/assets/pdfium_client.js",
+        "size_bytes": 1856,
+        "sha256": "1ac8729c01dd67d03008f410fda7e2f9928d695c0a81e65ebd65bdf622ae5e65"
+      },
+      {
+        "path": "apps/mobile/build/web/assets/packages/pdfrx/assets/pdfium_worker.js",
+        "size_bytes": 48247,
+        "sha256": "e86fcaabd2aca1839e8e6e49cab2bb1c5cb2ce4d68679ec52da271376a01ac8f"
+      },
+      {
+        "path": "apps/mobile/build/web/assets/shaders/ink_sparkle.frag",
+        "size_bytes": 8867,
+        "sha256": "e01b61b394cf66a641bea87e3b4fe3787d372f636c8bc8a2a67438cdc29da6f6"
+      },
+      {
+        "path": "apps/mobile/build/web/canvaskit/canvaskit.js",
+        "size_bytes": 86619,
+        "sha256": "8bf473e4b3d5d3f3a14f5e0081b68ccf7194b8a04919b579099c90a662848df0"
+      },
+      {
+        "path": "apps/mobile/build/web/canvaskit/canvaskit.js.symbols",
+        "size_bytes": 1337304,
+        "sha256": "d318dbf9a3c3a781579fa20ec3beddcdf9355b0f5c4376d76cf5ad6fe58cc2ef"
+      },
+      {
+        "path": "apps/mobile/build/web/canvaskit/canvaskit.wasm",
+        "size_bytes": 7052864,
+        "sha256": "20e2f59919d514cc194444ec3b38adafcc898ba38e3283a4e525ecfbd2514117"
+      },
+      {
+        "path": "apps/mobile/build/web/canvaskit/chromium/canvaskit.js",
+        "size_bytes": 86256,
+        "sha256": "c4513441303e717ea14bf60814727bc994ce4381188e4b4c0b02a003885d1df7"
+      },
+      {
+        "path": "apps/mobile/build/web/canvaskit/chromium/canvaskit.js.symbols",
+        "size_bytes": 1259162,
+        "sha256": "eceb9c53341eca8fd2449b10049ce5f98d7b1aa8cd60dd168657591f5daac448"
+      },
+      {
+        "path": "apps/mobile/build/web/canvaskit/chromium/canvaskit.wasm",
+        "size_bytes": 5678018,
+        "sha256": "5e1f801de136a593d29c555b3c8dea235e761e59a1b370a1a4dba684cb80278a"
+      },
+      {
+        "path": "apps/mobile/build/web/canvaskit/skwasm.js",
+        "size_bytes": 60281,
+        "sha256": "9fdb1272529878ad8f2f56b4e435251204f84b1497e8f45c0b380516b4c5df2c"
+      },
+      {
+        "path": "apps/mobile/build/web/canvaskit/skwasm.js.symbols",
+        "size_bytes": 1441359,
+        "sha256": "830b39ff018fe796b9d0ea83478ca2f15ff2736914b9727a9b6929314522bc36"
+      },
+      {
+        "path": "apps/mobile/build/web/canvaskit/skwasm.wasm",
+        "size_bytes": 3443467,
+        "sha256": "eab8f0df5027670550425a66f06bf537d99032a50b2a2fb176e3f82ef50cce3c"
+      },
+      {
+        "path": "apps/mobile/build/web/canvaskit/skwasm_heavy.js",
+        "size_bytes": 60394,
+        "sha256": "811359f46a22b5c1aab6667d167e1fa479275a09cb6eba9cbfbb548f4462313f"
+      },
+      {
+        "path": "apps/mobile/build/web/canvaskit/skwasm_heavy.js.symbols",
+        "size_bytes": 1560177,
+        "sha256": "1418b55dbb2fc3172e36aca16c32437912acc9d3ae3b270cbc4c9080000d8bfb"
+      },
+      {
+        "path": "apps/mobile/build/web/canvaskit/skwasm_heavy.wasm",
+        "size_bytes": 4933843,
+        "sha256": "4c9edc9a9bd8817c12ac650bd24a3e5a21fb1b857758728e9819f62c5c013a22"
+      },
+      {
+        "path": "apps/mobile/build/web/favicon.png",
+        "size_bytes": 7058,
+        "sha256": "77e94bdd46de2ad3572edb2c849288a0b5aca3727dbd2bc67188d0701a903057"
+      },
+      {
+        "path": "apps/mobile/build/web/flutter.js",
+        "size_bytes": 9262,
+        "sha256": "e3081edda6d2ee9064d700a98f7ba8bb634aea05d735980272ff8d2179e48016"
+      },
+      {
+        "path": "apps/mobile/build/web/flutter_bootstrap.js",
+        "size_bytes": 9590,
+        "sha256": "961284430f7bb7db15f34d9dd479c182010a083340f9901b1381c0162b04169f"
+      },
+      {
+        "path": "apps/mobile/build/web/flutter_service_worker.js",
+        "size_bytes": 8966,
+        "sha256": "fc6c59a024e74bfe30474ab44dfd1a59d44b735ff5cf9cf4350269ed43cc5101"
+      },
+      {
+        "path": "apps/mobile/build/web/icons/Icon-192.png",
+        "size_bytes": 43514,
+        "sha256": "b6c80dd7cef613aa73cbddb16be529efaff221ca2d248bfebd95954a58113c25"
+      },
+      {
+        "path": "apps/mobile/build/web/icons/Icon-512.png",
+        "size_bytes": 239284,
+        "sha256": "fba225c8d8ed3931ae5bd1ccd2fc008bd8248b8912f7cd4da52f195b7c800757"
+      },
+      {
+        "path": "apps/mobile/build/web/icons/Icon-maskable-192.png",
+        "size_bytes": 5594,
+        "sha256": "d2c842e22a9f4ec9d996b23373a905c88d9a203b220c5c151885ad621f974b5c"
+      },
+      {
+        "path": "apps/mobile/build/web/icons/Icon-maskable-512.png",
+        "size_bytes": 20998,
+        "sha256": "6aee06cdcab6b2aef74b1734c4778f4421d2da100b0ff9e52b21b55240202929"
+      },
+      {
+        "path": "apps/mobile/build/web/index.html",
+        "size_bytes": 1233,
+        "sha256": "706b2e99ab607bdbcddc0e81861339b78942294152d6b4ae242939a2066edde2"
+      },
+      {
+        "path": "apps/mobile/build/web/main.dart.js",
+        "size_bytes": 4510008,
+        "sha256": "2128736be2a9efa44ceb97e489acd16714a517049c477c50748ccdbe2d313325"
+      },
+      {
+        "path": "apps/mobile/build/web/manifest.json",
+        "size_bytes": 522,
+        "sha256": "e71deea9e12973bad0034ca8b7e5d8cb55fd2d451dce25d25e734b0b55ae475f"
+      },
+      {
+        "path": "apps/mobile/build/web/offline.html",
+        "size_bytes": 335,
+        "sha256": "ee868291e232973f62d41481ac9ebd08a1372738685cc2549c588d5f620eebd8"
+      },
+      {
+        "path": "apps/mobile/build/web/sw.js",
+        "size_bytes": 297,
+        "sha256": "0dd8af45679b69cc7c7d74dfba7706cb9f8272447dcc17c812625965d6a21e21"
+      },
+      {
+        "path": "apps/mobile/build/web/version.json",
+        "size_bytes": 89,
+        "sha256": "85ed8b0490aee6a5470aa5eb3b41a213f1dc1c976d1f15b8bf0b5419eeb37626"
+      }
+    ]
+  },
+  {
+    "job": "admin-web",
+    "commit": "b4a8eabafa7d6a1f50f4cc4cc43fc610a1040fbb",
+    "files": [
+      {
+        "path": "apps/admin/build/web/.last_build_id",
+        "size_bytes": 32,
+        "sha256": "d361c2ea86b3442e3382495ebde2e17d4962d3452326f2480d8f33f537043151"
+      },
+      {
+        "path": "apps/admin/build/web/assets/AssetManifest.bin",
+        "size_bytes": 170,
+        "sha256": "d01544c024076a1b6e0ced9cfd448e7151ccad050b72a52ddbdf4e4cdd70fff5"
+      },
+      {
+        "path": "apps/admin/build/web/assets/AssetManifest.bin.json",
+        "size_bytes": 230,
+        "sha256": "e488a7c7be96b15a407c1f9bc241ad5c998ca2875ee69ce911c4343acefbff08"
+      },
+      {
+        "path": "apps/admin/build/web/assets/AssetManifest.json",
+        "size_bytes": 155,
+        "sha256": "39c3f813884fe18396a67cdbd00ab94f09d5d7f22178c8c2f3cd3dff0a16bd23"
+      },
+      {
+        "path": "apps/admin/build/web/assets/assets/branding/app_icon.png",
+        "size_bytes": 753420,
+        "sha256": "4a8ec2468510d1c75d58ba8ee7ea1ab3c44dd311a6462f0ca5d37f37a6cbe5d3"
+      },
+      {
+        "path": "apps/admin/build/web/assets/assets/branding/edunova_logo_official.png",
+        "size_bytes": 1314020,
+        "sha256": "eaf45a280062f6f2bcd2c785cc505650f5c507b8516cfe5cfcab5a64e71c9597"
+      },
+      {
+        "path": "apps/admin/build/web/assets/FontManifest.json",
+        "size_bytes": 82,
+        "sha256": "28b1eb2b3d2e1ad60b8c8b0f9100b1ccbf492f7fa97f5bebb51ea97e73926e7d"
+      },
+      {
+        "path": "apps/admin/build/web/assets/fonts/MaterialIcons-Regular.otf",
+        "size_bytes": 25312,
+        "sha256": "649405d3a9fb96c159064b7d29add3c9c6a8afcaae8f98f8215715164593c1db"
+      },
+      {
+        "path": "apps/admin/build/web/assets/NOTICES",
+        "size_bytes": 1738479,
+        "sha256": "5510123a4f07b1b24c18177189792b0a092076afaf67b89b33e8c81dbdccf455"
+      },
+      {
+        "path": "apps/admin/build/web/assets/shaders/ink_sparkle.frag",
+        "size_bytes": 8867,
+        "sha256": "e01b61b394cf66a641bea87e3b4fe3787d372f636c8bc8a2a67438cdc29da6f6"
+      },
+      {
+        "path": "apps/admin/build/web/canvaskit/canvaskit.js",
+        "size_bytes": 86619,
+        "sha256": "8bf473e4b3d5d3f3a14f5e0081b68ccf7194b8a04919b579099c90a662848df0"
+      },
+      {
+        "path": "apps/admin/build/web/canvaskit/canvaskit.js.symbols",
+        "size_bytes": 1337304,
+        "sha256": "d318dbf9a3c3a781579fa20ec3beddcdf9355b0f5c4376d76cf5ad6fe58cc2ef"
+      },
+      {
+        "path": "apps/admin/build/web/canvaskit/canvaskit.wasm",
+        "size_bytes": 7052864,
+        "sha256": "20e2f59919d514cc194444ec3b38adafcc898ba38e3283a4e525ecfbd2514117"
+      },
+      {
+        "path": "apps/admin/build/web/canvaskit/chromium/canvaskit.js",
+        "size_bytes": 86256,
+        "sha256": "c4513441303e717ea14bf60814727bc994ce4381188e4b4c0b02a003885d1df7"
+      },
+      {
+        "path": "apps/admin/build/web/canvaskit/chromium/canvaskit.js.symbols",
+        "size_bytes": 1259162,
+        "sha256": "eceb9c53341eca8fd2449b10049ce5f98d7b1aa8cd60dd168657591f5daac448"
+      },
+      {
+        "path": "apps/admin/build/web/canvaskit/chromium/canvaskit.wasm",
+        "size_bytes": 5678018,
+        "sha256": "5e1f801de136a593d29c555b3c8dea235e761e59a1b370a1a4dba684cb80278a"
+      },
+      {
+        "path": "apps/admin/build/web/canvaskit/skwasm.js",
+        "size_bytes": 60281,
+        "sha256": "9fdb1272529878ad8f2f56b4e435251204f84b1497e8f45c0b380516b4c5df2c"
+      },
+      {
+        "path": "apps/admin/build/web/canvaskit/skwasm.js.symbols",
+        "size_bytes": 1441359,
+        "sha256": "830b39ff018fe796b9d0ea83478ca2f15ff2736914b9727a9b6929314522bc36"
+      },
+      {
+        "path": "apps/admin/build/web/canvaskit/skwasm.wasm",
+        "size_bytes": 3443467,
+        "sha256": "eab8f0df5027670550425a66f06bf537d99032a50b2a2fb176e3f82ef50cce3c"
+      },
+      {
+        "path": "apps/admin/build/web/canvaskit/skwasm_heavy.js",
+        "size_bytes": 60394,
+        "sha256": "811359f46a22b5c1aab6667d167e1fa479275a09cb6eba9cbfbb548f4462313f"
+      },
+      {
+        "path": "apps/admin/build/web/canvaskit/skwasm_heavy.js.symbols",
+        "size_bytes": 1560177,
+        "sha256": "1418b55dbb2fc3172e36aca16c32437912acc9d3ae3b270cbc4c9080000d8bfb"
+      },
+      {
+        "path": "apps/admin/build/web/canvaskit/skwasm_heavy.wasm",
+        "size_bytes": 4933843,
+        "sha256": "4c9edc9a9bd8817c12ac650bd24a3e5a21fb1b857758728e9819f62c5c013a22"
+      },
+      {
+        "path": "apps/admin/build/web/favicon.png",
+        "size_bytes": 917,
+        "sha256": "7ab2525f4b86b65d3e4c70358a17e5a1aaf6f437f99cbcc046dad73d59bb9015"
+      },
+      {
+        "path": "apps/admin/build/web/flutter.js",
+        "size_bytes": 9262,
+        "sha256": "e3081edda6d2ee9064d700a98f7ba8bb634aea05d735980272ff8d2179e48016"
+      },
+      {
+        "path": "apps/admin/build/web/flutter_bootstrap.js",
+        "size_bytes": 9590,
+        "sha256": "8fc8382c7e95562ebe2afb017a7098d06bc066181efb48ac50c7aa5d092e6fca"
+      },
+      {
+        "path": "apps/admin/build/web/flutter_service_worker.js",
+        "size_bytes": 8522,
+        "sha256": "5361744084ff8f1e201329462316f27d0c2cacd4385eaba61359c1e5c835542d"
+      },
+      {
+        "path": "apps/admin/build/web/icons/Icon-192.png",
+        "size_bytes": 5292,
+        "sha256": "3dce99077602f70421c1c6b2a240bc9b83d64d86681d45f2154143310c980be3"
+      },
+      {
+        "path": "apps/admin/build/web/icons/Icon-512.png",
+        "size_bytes": 8252,
+        "sha256": "baccb205ae45f0b421be1657259b4943ac40c95094ab877f3bcbe12cd544dcbe"
+      },
+      {
+        "path": "apps/admin/build/web/icons/Icon-maskable-192.png",
+        "size_bytes": 5594,
+        "sha256": "d2c842e22a9f4ec9d996b23373a905c88d9a203b220c5c151885ad621f974b5c"
+      },
+      {
+        "path": "apps/admin/build/web/icons/Icon-maskable-512.png",
+        "size_bytes": 20998,
+        "sha256": "6aee06cdcab6b2aef74b1734c4778f4421d2da100b0ff9e52b21b55240202929"
+      },
+      {
+        "path": "apps/admin/build/web/index.html",
+        "size_bytes": 1245,
+        "sha256": "5100fdf33c82a626af1122721afaa1cad9985e02579b18311abb0b453ff915e6"
+      },
+      {
+        "path": "apps/admin/build/web/main.dart.js",
+        "size_bytes": 3148883,
+        "sha256": "b4a2ca514e2be2af31b679a34e110b322fd8478d30a350ffeed6d5cc9769b60a"
+      },
+      {
+        "path": "apps/admin/build/web/manifest.json",
+        "size_bytes": 957,
+        "sha256": "b734769fe2212c513dc0b4b95a0f7aac30190eb7734e730be8baf4cc94435dcd"
+      },
+      {
+        "path": "apps/admin/build/web/version.json",
+        "size_bytes": 101,
+        "sha256": "b87ae23978f6a64d6bac2d5f26cbd98f729b39c8359522f8ac6dc697a5357428"
+      }
+    ]
+  },
+  {
+    "job": "mobile-windows",
+    "commit": "9424aa1ce5e928aa0e3c5f30daba6ec773c1a509",
+    "files": [
+      {
+        "path": "apps/mobile/build/windows/x64/runner/Release/connectivity_plus_plugin.dll",
+        "size_bytes": 99840,
+        "sha256": "6fabfb5aafc71f1ee9fd2fba86d1247096aa1abc13f2c9bee112faf353af9f77"
+      },
+      {
+        "path": "apps/mobile/build/windows/x64/runner/Release/data/app.so",
+        "size_bytes": 11404208,
+        "sha256": "00cd061d9b4f279294a4e6029d1bad62f2c877246d025f500a927f25bcadf2d7"
+      },
+      {
+        "path": "apps/mobile/build/windows/x64/runner/Release/data/flutter_assets/AssetManifest.bin",
+        "size_bytes": 548,
+        "sha256": "71c5d3d715aa055a051bbf23774ad71c8ea460b1a1c6602412016aef2a0944ad"
+      },
+      {
+        "path": "apps/mobile/build/windows/x64/runner/Release/data/flutter_assets/AssetManifest.json",
+        "size_bytes": 505,
+        "sha256": "cbe2ea66e3db5bf8f30b12994608211a11dc827fbcd9bf410f0295e31b104598"
+      },
+      {
+        "path": "apps/mobile/build/windows/x64/runner/Release/data/flutter_assets/assets/branding/app_icon.png",
+        "size_bytes": 753420,
+        "sha256": "4a8ec2468510d1c75d58ba8ee7ea1ab3c44dd311a6462f0ca5d37f37a6cbe5d3"
+      },
+      {
+        "path": "apps/mobile/build/windows/x64/runner/Release/data/flutter_assets/assets/branding/edunova_logo_official.png",
+        "size_bytes": 1314020,
+        "sha256": "eaf45a280062f6f2bcd2c785cc505650f5c507b8516cfe5cfcab5a64e71c9597"
+      },
+      {
+        "path": "apps/mobile/build/windows/x64/runner/Release/data/flutter_assets/FontManifest.json",
+        "size_bytes": 208,
+        "sha256": "cd7e03645bc44b2dd47b7cb626f51c4ecbf55a197ab77241628b47ac165fbe21"
+      },
+      {
+        "path": "apps/mobile/build/windows/x64/runner/Release/data/flutter_assets/fonts/MaterialIcons-Regular.otf",
+        "size_bytes": 1645184,
+        "sha256": "d9865b671a09d683d13a863089d8825e0f61a37696ce5d7d448bc8023aa62453"
+      },
+      {
+        "path": "apps/mobile/build/windows/x64/runner/Release/data/flutter_assets/NativeAssetsManifest.json",
+        "size_bytes": 45,
+        "sha256": "9548a31e4a048135c1d94f919328bfb62ae2c7bb3cab96557c7941daa97776cb"
+      },
+      {
+        "path": "apps/mobile/build/windows/x64/runner/Release/data/flutter_assets/NOTICES.Z",
+        "size_bytes": 107739,
+        "sha256": "490fcfd76244231d03255639a3b488f24b9cbb5b2b2825e69e27c3c44a90d682"
+      },
+      {
+        "path": "apps/mobile/build/windows/x64/runner/Release/data/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf",
+        "size_bytes": 257628,
+        "sha256": "67c44fe9183b002e79dde7f6977e2988661c9a3e4a3c5fce968787efdbed823c"
+      },
+      {
+        "path": "apps/mobile/build/windows/x64/runner/Release/data/flutter_assets/packages/pdfrx/assets/pdfium.wasm",
+        "size_bytes": 3960317,
+        "sha256": "b2c466e4324701c45ac1470baaae2fe7bf89334f06fac01a66d17246db11cc94"
+      },
+      {
+        "path": "apps/mobile/build/windows/x64/runner/Release/data/flutter_assets/packages/pdfrx/assets/pdfium_client.js",
+        "size_bytes": 1856,
+        "sha256": "1ac8729c01dd67d03008f410fda7e2f9928d695c0a81e65ebd65bdf622ae5e65"
+      },
+      {
+        "path": "apps/mobile/build/windows/x64/runner/Release/data/flutter_assets/packages/pdfrx/assets/pdfium_worker.js",
+        "size_bytes": 48247,
+        "sha256": "e86fcaabd2aca1839e8e6e49cab2bb1c5cb2ce4d68679ec52da271376a01ac8f"
+      },
+      {
+        "path": "apps/mobile/build/windows/x64/runner/Release/data/flutter_assets/shaders/ink_sparkle.frag",
+        "size_bytes": 21320,
+        "sha256": "e5e61d50c9549bc35382bbbd1c9548d46c4fb9ddf40c3a698415ac7e005516c8"
+      },
+      {
+        "path": "apps/mobile/build/windows/x64/runner/Release/data/icudtl.dat",
+        "size_bytes": 778864,
+        "sha256": "c12537022ef818991a7bfed41a76d8d6ae962ffbc0e6511ac762a5d0845e7f7c"
+      },
+      {
+        "path": "apps/mobile/build/windows/x64/runner/Release/edunova.exe",
+        "size_bytes": 785920,
+        "sha256": "c835cb2382a2bf3b18708c87a72d78b6f38fdb42244206705e43f1705d0afa01"
+      },
+      {
+        "path": "apps/mobile/build/windows/x64/runner/Release/edunova.exp",
+        "size_bytes": 1034,
+        "sha256": "b5ba7de91464c7e04de325e64e333794d71834058adb0e6a085416b25b08eacc"
+      },
+      {
+        "path": "apps/mobile/build/windows/x64/runner/Release/edunova.lib",
+        "size_bytes": 2092,
+        "sha256": "3ba1455dfbefb770421eef614e0b2f57e78700436ff5fcbbc635a3ca93f069ee"
+      },
+      {
+        "path": "apps/mobile/build/windows/x64/runner/Release/file_selector_windows_plugin.dll",
+        "size_bytes": 111616,
+        "sha256": "9c6632a6629980c217ad65fa748089e476c8e684e2e99458e9801e716db0ebb7"
+      },
+      {
+        "path": "apps/mobile/build/windows/x64/runner/Release/firebase_core_plugin.lib",
+        "size_bytes": 937494,
+        "sha256": "4e1eb3be3f656d2728dfbfe924b1f50d297c23843407e634ffe7ca3094e7774b"
+      },
+      {
+        "path": "apps/mobile/build/windows/x64/runner/Release/flutter_local_notifications_windows.dll",
+        "size_bytes": 91136,
+        "sha256": "d9822c13f308da21161ca90f02286ecafad0629b83ddee129e560c1bd2c0587b"
+      },
+      {
+        "path": "apps/mobile/build/windows/x64/runner/Release/flutter_secure_storage_windows_plugin.dll",
+        "size_bytes": 159744,
+        "sha256": "96e959d54bddc7f3a5f5a0d3114ff0d756459ecb1ad9efc2cb89a0e11a828386"
+      },
+      {
+        "path": "apps/mobile/build/windows/x64/runner/Release/flutter_tts_plugin.dll",
+        "size_bytes": 160768,
+        "sha256": "e209574aa3fb10e296da91faa8c1ad795dc9da693ba1acafcc35433475c3d4f9"
+      },
+      {
+        "path": "apps/mobile/build/windows/x64/runner/Release/flutter_windows.dll",
+        "size_bytes": 19036160,
+        "sha256": "6840b8129fb105dd246f05f14eab97d7e8e9eade1428f9afde95de6b8e1a7808"
+      },
+      {
+        "path": "apps/mobile/build/windows/x64/runner/Release/native_assets.json",
+        "size_bytes": 45,
+        "sha256": "9548a31e4a048135c1d94f919328bfb62ae2c7bb3cab96557c7941daa97776cb"
+      },
+      {
+        "path": "apps/mobile/build/windows/x64/runner/Release/pdfium.dll",
+        "size_bytes": 5718016,
+        "sha256": "8eeb77316548c21b68cd52d1856e819dba600dab20a1a974283f507f82e7d585"
+      },
+      {
+        "path": "apps/mobile/build/windows/x64/runner/Release/pdfrx.dll",
+        "size_bytes": 12800,
+        "sha256": "6735fedd16ce4b7ab2e733785a92e4669f25b824f9adde9c3653b94bc7226694"
+      },
+      {
+        "path": "apps/mobile/build/windows/x64/runner/Release/sqlite3.dll",
+        "size_bytes": 1479168,
+        "sha256": "b091f878bc521dfa4fc9861bab0ba6ed813035a1d80b64e36e7b54a2f79c79a3"
+      },
+      {
+        "path": "apps/mobile/build/windows/x64/runner/Release/sqlite3_flutter_libs_plugin.dll",
+        "size_bytes": 9728,
+        "sha256": "da24ae3254cbf3048ddd3b5e97ad3cfc07315b01c7700b59b81a8e84a42eb724"
+      },
+      {
+        "path": "apps/mobile/build/windows/x64/runner/Release/url_launcher_windows_plugin.dll",
+        "size_bytes": 98304,
+        "sha256": "46297f26ca24516f44df95dc556c65d3a0842c18d489a89ff276d0eaee73b657"
+      }
+    ]
+  },
+  {
+    "job": "admin-windows",
+    "commit": "b4a8eabafa7d6a1f50f4cc4cc43fc610a1040fbb",
+    "files": [
+      {
+        "path": "apps/admin/build/windows/x64/runner/Release/data/app.so",
+        "size_bytes": 7013296,
+        "sha256": "ccdaaa097a120702e56737c09893b810b60d3e4ea086b3b20f06cf01343d9ed1"
+      },
+      {
+        "path": "apps/admin/build/windows/x64/runner/Release/data/flutter_assets/AssetManifest.bin",
+        "size_bytes": 170,
+        "sha256": "d01544c024076a1b6e0ced9cfd448e7151ccad050b72a52ddbdf4e4cdd70fff5"
+      },
+      {
+        "path": "apps/admin/build/windows/x64/runner/Release/data/flutter_assets/AssetManifest.json",
+        "size_bytes": 155,
+        "sha256": "39c3f813884fe18396a67cdbd00ab94f09d5d7f22178c8c2f3cd3dff0a16bd23"
+      },
+      {
+        "path": "apps/admin/build/windows/x64/runner/Release/data/flutter_assets/assets/branding/app_icon.png",
+        "size_bytes": 753420,
+        "sha256": "4a8ec2468510d1c75d58ba8ee7ea1ab3c44dd311a6462f0ca5d37f37a6cbe5d3"
+      },
+      {
+        "path": "apps/admin/build/windows/x64/runner/Release/data/flutter_assets/assets/branding/edunova_logo_official.png",
+        "size_bytes": 1314020,
+        "sha256": "eaf45a280062f6f2bcd2c785cc505650f5c507b8516cfe5cfcab5a64e71c9597"
+      },
+      {
+        "path": "apps/admin/build/windows/x64/runner/Release/data/flutter_assets/FontManifest.json",
+        "size_bytes": 82,
+        "sha256": "28b1eb2b3d2e1ad60b8c8b0f9100b1ccbf492f7fa97f5bebb51ea97e73926e7d"
+      },
+      {
+        "path": "apps/admin/build/windows/x64/runner/Release/data/flutter_assets/fonts/MaterialIcons-Regular.otf",
+        "size_bytes": 1645184,
+        "sha256": "d9865b671a09d683d13a863089d8825e0f61a37696ce5d7d448bc8023aa62453"
+      },
+      {
+        "path": "apps/admin/build/windows/x64/runner/Release/data/flutter_assets/NativeAssetsManifest.json",
+        "size_bytes": 45,
+        "sha256": "9548a31e4a048135c1d94f919328bfb62ae2c7bb3cab96557c7941daa97776cb"
+      },
+      {
+        "path": "apps/admin/build/windows/x64/runner/Release/data/flutter_assets/NOTICES.Z",
+        "size_bytes": 87341,
+        "sha256": "40a015331ea0582c9c1c8427711d2170852a5c433f609880a2a29af6cf5eeea2"
+      },
+      {
+        "path": "apps/admin/build/windows/x64/runner/Release/data/flutter_assets/shaders/ink_sparkle.frag",
+        "size_bytes": 21320,
+        "sha256": "e5e61d50c9549bc35382bbbd1c9548d46c4fb9ddf40c3a698415ac7e005516c8"
+      },
+      {
+        "path": "apps/admin/build/windows/x64/runner/Release/data/icudtl.dat",
+        "size_bytes": 778864,
+        "sha256": "c12537022ef818991a7bfed41a76d8d6ae962ffbc0e6511ac762a5d0845e7f7c"
+      },
+      {
+        "path": "apps/admin/build/windows/x64/runner/Release/edunova_admin.exe",
+        "size_bytes": 91136,
+        "sha256": "6bd81e51799c41c1bc2198187fc852fcae81d29a61d2e5d0dd72e0f719660d76"
+      },
+      {
+        "path": "apps/admin/build/windows/x64/runner/Release/flutter_secure_storage_windows_plugin.dll",
+        "size_bytes": 159744,
+        "sha256": "92895600381f3596797293a2d58208adb0846d3ca987a3ac3870c953d1799df3"
+      },
+      {
+        "path": "apps/admin/build/windows/x64/runner/Release/flutter_windows.dll",
+        "size_bytes": 19036160,
+        "sha256": "6840b8129fb105dd246f05f14eab97d7e8e9eade1428f9afde95de6b8e1a7808"
+      },
+      {
+        "path": "apps/admin/build/windows/x64/runner/Release/native_assets.json",
+        "size_bytes": 45,
+        "sha256": "9548a31e4a048135c1d94f919328bfb62ae2c7bb3cab96557c7941daa97776cb"
+      }
+    ]
+  },
+  {
+    "job": "mobile-android",
+    "commit": "9424aa1ce5e928aa0e3c5f30daba6ec773c1a509",
+    "files": [
+      {
+        "path": "apps/mobile/build/app/outputs/flutter-apk/app-debug.apk",
+        "size_bytes": 180579690,
+        "sha256": "e7029554f745f3981dbbb13bcdca682984f35ccd032a6aabb859326b6189a625"
+      }
+    ]
+  },
+  {
+    "job": "admin-android",
+    "commit": "edb7876cb26c131ec13c15e33f40b98022801e33",
+    "files": [
+      {
+        "path": "apps/admin/build/app/outputs/flutter-apk/app-debug.apk",
+        "size_bytes": 166384868,
+        "sha256": "cdf6309b3248c2bd6e6c4a6ab97af3507e304f9f73149b0eb2dbc8f6af6f176a"
+      }
+    ]
+  }
+]
