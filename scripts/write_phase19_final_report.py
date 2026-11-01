@@ -56,7 +56,8 @@ def generate():
         shutil.copyfile(ROOT/f'apps/{app}/pubspec.lock',OUT/f'{app}-dependencies.lock')
     proofs=[]
     for name,job in jobs.items():
-        paths=['services/api/app','services/api/tests','services/api/requirements.txt'] if name in ('backend','backend-final','phase19','postgres') else []
+        paths=['services/api/app','services/api/tests','services/api/requirements.txt'] if name in ('backend-final','phase19','postgres') else []
+        if name=='backend': paths=['services/api/app','services/api/tests']  # sequential baseline uses the original dependencies
         for app in ('mobile','admin'):
             if name.startswith(app+'-'):
                 paths=[f'apps/{app}/lib',f'apps/{app}/pubspec.yaml']
@@ -70,7 +71,7 @@ def generate():
     (OUT/'TREE_IDENTITY.json').write_text(json.dumps(proofs,indent=2),encoding='utf8')
     deps=read('dependency-audit.json') or {}
     vulnerable=[d for d in deps.get('dependencies',[]) if d.get('vulns')]
-    required=['audits','backend','phase19','postgres','migrations','mobile-pub','admin-pub','mobile-test','admin-test',
+    required=['audits','backend-final','phase19','postgres','migrations','mobile-pub','admin-pub','mobile-test','admin-test',
               'mobile-web','admin-web','mobile-windows','admin-windows','mobile-android','admin-android']
     missing=[n for n in required if n not in jobs]
     failed=[n for n in required if n in jobs and jobs[n]['exit_code']!=0]
@@ -100,7 +101,8 @@ def generate():
     for name in ('backend','backend-final','phase19','postgres','backend-contracts'):
         result=junit(name)
         if result: lines.append(f'| {name} | {result["passed"]} | {result["failed"]} | {result["skipped"]} |')
-    lines+=['', 'La suite `backend` est séquentielle, sans xdist. La suite générale utilise SQLite et des simulateurs ; elle ne prouve pas la concurrence PostgreSQL. La sélection `postgres` utilise le moteur réel : callbacks identiques/modifiés concurrents, référence conflictuelle, paiements simultanés, rollback, tenant, charges annulées, course callback/expiration/annulation et cohérence reçu/ledger/statut. La priorité des échéances dispose du test adversarial ajouté lors de la première mission.',
+    lines+=['', 'La suite `backend` est séquentielle, sans xdist, dans l’environnement initial conservé. Elle utilise les versions antérieures des dépendances ; elle n’est pas une preuve de leur mise à jour. La suite `backend-final` utilise les dépendances corrigées et deux workers pour limiter les ressources. La nouvelle pile complète n’a pas été rejouée séquentiellement : la preuve d’absence de dépendance à l’ordre après mise à jour reste limitée. Les fichiers applicatifs sont comparés par arbres Git ; la différence des dépendances de la suite initiale est conservée explicitement.',
+            'La suite générale utilise SQLite et des simulateurs ; elle ne prouve pas la concurrence PostgreSQL. La sélection `postgres` utilise le moteur réel : callbacks identiques/modifiés concurrents, référence conflictuelle, paiements simultanés, rollback, tenant, charges annulées, course callback/expiration/annulation et cohérence reçu/ledger/statut. La priorité des échéances dispose du test adversarial ajouté lors de la première mission.',
             'Les 17 SKIP de la régression générale concernent les 9 cas de concurrence et 8 cas de contraintes nécessitant la variable PostgreSQL. Leur correspondance individuelle avec la suite réelle est fournie ci-dessous.', '']
     backendxml=OUT/'backend.xml'; pgxml=OUT/'postgres.xml'
     if backendxml.exists() and pgxml.exists():

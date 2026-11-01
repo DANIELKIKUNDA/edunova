@@ -17,12 +17,12 @@ assert not subprocess.check_output(['git','status','--porcelain','--','apps','se
 for target in re.findall(r'\[[^\]]+\]\(([^)]+)\)',re.sub(r'```.*?```','',body,flags=re.S)):
     if not target.startswith(('https://','http://','#')):
         assert (report.parent/target).exists(), target
-required=('audits','backend','phase19','postgres','migrations','mobile-pub','admin-pub','mobile-test','admin-test',
+required=('audits','backend-final','phase19','postgres','migrations','mobile-pub','admin-pub','mobile-test','admin-test',
           'mobile-web','admin-web','mobile-windows','admin-windows','mobile-android','admin-android','pip-check')
 for name in required: assert data(name+'.json')['exit_code']==0, name
 audits=data('audits/results.json')
 assert len(audits)==55 and all(a['exit_code']==0 for a in audits)
-for name in ('backend','phase19','postgres'):
+for name in ('backend-final','phase19','postgres'):
     cases=list(ET.parse(out/(name+'.xml')).getroot().iter('testcase'))
     assert cases and not any(c.find('error') is not None or c.find('failure') is not None for c in cases), name
 proofs=data('TREE_IDENTITY.json')

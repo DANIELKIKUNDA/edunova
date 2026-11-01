@@ -30,7 +30,7 @@ jobs = {
     'collect': ([python, '-m', 'pytest', '--collect-only', '-q', 'services/api/tests'], ROOT),
     'phase19': ([python, '-m', 'pytest', '-q', 'services/api/tests/test_phase19_payment_hardening.py', 'services/api/tests/test_phase19_atomic_finance.py', 'services/api/tests/test_phase19_atomic_callback.py', '--junitxml=' + str(OUT / 'phase19.xml')], ROOT),
     'backend': ([python, '-m', 'pytest', '-q', 'services/api/tests', '--junitxml=' + str(OUT / 'backend.xml')], ROOT),
-    'backend-final': ([python, '-m', 'pytest', '-q', '-n', '4', '--dist', 'loadfile', '--durations=20', 'services/api/tests', '--junitxml=' + str(OUT / 'backend-final.xml')], ROOT),
+    'backend-final': ([python, '-m', 'pytest', '-q', '-n', os.environ.get('EDUNOVA_CERT_WORKERS', '4'), '--dist', 'loadfile', '--durations=20', 'services/api/tests', '--junitxml=' + str(OUT / 'backend-final.xml')], ROOT),
     'backend-contracts': ([python, '-m', 'pytest', '-q', 'services/api/tests', '-k', 'flutter or frontend or migration_contract', '--junitxml=' + str(OUT / 'backend-contracts.xml')], ROOT),
     'pip-check': ([python, '-m', 'pip', 'check'], ROOT),
     'freeze': ([python, '-m', 'pip', 'freeze'], ROOT),
