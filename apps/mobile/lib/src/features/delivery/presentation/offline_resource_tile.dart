@@ -27,8 +27,10 @@ class _OfflineResourceTileState extends ConsumerState<OfflineResourceTile>{
     try {
       await ref.read(offlineDeliveryRepositoryProvider).setPinned(widget.resource.id, !currentlyPinned);
     } catch (_) {
-      if (mounted) ScaffoldMessenger.of(context).showSnackBar(
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Impossible de modifier l’épinglage hors connexion. Réessaie.')));
+      }
     } finally {
       if (mounted) setState(() => busy = false);
     }

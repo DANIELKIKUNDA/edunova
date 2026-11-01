@@ -159,7 +159,7 @@ class _PedagogicalGovernancePanelState extends State<PedagogicalGovernancePanel>
             style: Theme.of(context).textTheme.titleSmall),
           const Text('Une association postérieure à l’évaluation ne prouve pas '
             'qu’elle existait lors de la notation.'),
-          DropdownButtonFormField<String>(value: _selectedObjective, isExpanded: true,
+          DropdownButtonFormField<String>(initialValue: _selectedObjective, isExpanded: true,
             decoration: const InputDecoration(labelText: 'Objectif enregistré'),
             items: _objectives.map((row) => DropdownMenuItem<String>(
               value: row['objective_id']?.toString(), child: Text(_label(row),

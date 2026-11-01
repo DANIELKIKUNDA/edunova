@@ -82,7 +82,7 @@ class _CampusPaidCheckoutDialogState extends ConsumerState<CampusPaidCheckoutDia
     title:const Text('Renouvellement Campus'),
     content:Column(mainAxisSize:MainAxisSize.min,children:[
       const Text('Le paiement est confirmé par le serveur, jamais par cette fenêtre.'),
-      DropdownButtonFormField<String>(value: selectedOfferCode, isExpanded: true, decoration: const InputDecoration(labelText:'Offre Campus'), items: availableOffers.map((offer) => DropdownMenuItem<String>(value: offer['code'].toString(), child: Text("${offer['label']} · ${offer['price_cdf']} FC · ${offer['seats']} places / ${offer['duration_days']} j", overflow: TextOverflow.ellipsis))).toList(), onChanged: busy || orderId != null ? null : (value) => setState(() => selectedOfferCode = value)),
+      DropdownButtonFormField<String>(initialValue: selectedOfferCode, isExpanded: true, decoration: const InputDecoration(labelText:'Offre Campus'), items: availableOffers.map((offer) => DropdownMenuItem<String>(value: offer['code'].toString(), child: Text("${offer['label']} · ${offer['price_cdf']} FC · ${offer['seats']} places / ${offer['duration_days']} j", overflow: TextOverflow.ellipsis))).toList(), onChanged: busy || orderId != null ? null : (value) => setState(() => selectedOfferCode = value)),
       TextField(controller:phone,keyboardType:TextInputType.phone,decoration:const InputDecoration(labelText:'Numéro Mobile Money')),
       if(message!=null) Padding(padding:const EdgeInsets.only(top:12),child:Text(message!)),
     ]),

@@ -302,7 +302,7 @@ class _InstitutionIntelligencePageState extends ConsumerState<InstitutionIntelli
               const SizedBox(height: 10),
               if (_offerings.isEmpty) const _InfoCard('Aucun enseignement attribué dans votre espace. Les analyses nécessitent une offre de cours autorisée.'),
               if (_offerings.isNotEmpty)
-                DropdownButtonFormField<String>(value: _offering, isExpanded: true,
+                DropdownButtonFormField<String>(initialValue: _offering, isExpanded: true,
                   decoration: const InputDecoration(labelText: 'Enseignement autorisé', border: OutlineInputBorder()),
                   items: _offerings.map((x) => DropdownMenuItem<String>(
                     value: x['id']?.toString(),
@@ -324,7 +324,7 @@ class _InstitutionIntelligencePageState extends ConsumerState<InstitutionIntelli
               const SizedBox(height: 28),
               Text('Intelligence institutionnelle · Phase 15', style: Theme.of(context).textTheme.titleLarge),
               const SizedBox(height: 10),
-              DropdownButtonFormField<String>(value: _period, isExpanded: true,
+              DropdownButtonFormField<String>(initialValue: _period, isExpanded: true,
                 decoration: const InputDecoration(labelText: 'Période du rapport', border: OutlineInputBorder()),
                 items: [const DropdownMenuItem<String>(value: null, child: Text('Toutes les périodes autorisées')),
                   ..._periods.map((p) => DropdownMenuItem<String>(value: p['id']?.toString(),
@@ -449,7 +449,7 @@ class _InstitutionIntelligencePageState extends ConsumerState<InstitutionIntelli
     const _InfoCard('Comparaison entre périodes distinctes et actives. Les archives peuvent couvrir des périodes historiques ; le serveur valide chaque comparaison.'),
     for (final previous in [true, false]) Padding(padding: const EdgeInsets.only(top: 8),
       child: DropdownButtonFormField<String>(
-        value: previous ? _previous : _current, isExpanded: true,
+        initialValue: previous ? _previous : _current, isExpanded: true,
         decoration: InputDecoration(labelText: previous ? 'Période précédente' : 'Période actuelle',
           border: const OutlineInputBorder()),
         items: _periods.map((p) => DropdownMenuItem<String>(value: p['id']?.toString(),

@@ -35,7 +35,7 @@ class CalendarPage extends ConsumerWidget {
           title: const Text('Nouvelle échéance'),
           content: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.min, children: [
             TextField(controller: title, enabled: !saving, decoration: const InputDecoration(labelText: 'Titre')),
-            DropdownButtonFormField<AcademicEventKind>(value: kind,
+            DropdownButtonFormField<AcademicEventKind>(initialValue: kind,
               items: AcademicEventKind.values.where((e) => e != AcademicEventKind.course)
                   .map((e) => DropdownMenuItem(value: e, child: Text(e.name))).toList(),
               onChanged: saving ? null : (v) { if (v != null) setDialogState(() => kind = v); },
@@ -83,7 +83,7 @@ class CalendarPage extends ConsumerWidget {
           title: const Text('Ajouter un cours à l’horaire'),
           content: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.min, children: [
             TextField(controller: title, enabled: !saving, decoration: const InputDecoration(labelText: 'Cours')),
-            DropdownButtonFormField<int>(value: weekday,
+            DropdownButtonFormField<int>(initialValue: weekday,
               items: List.generate(6, (i) => DropdownMenuItem(value: i + 1, child: Text(['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'][i]))),
               onChanged: saving ? null : (v) { if (v != null) setDialogState(() => weekday = v); },
               decoration: const InputDecoration(labelText: 'Jour')),

@@ -127,8 +127,10 @@ class _PhysicalLibraryPageState extends ConsumerState<PhysicalLibraryPage>
           (error.response?.statusCode == 401 || error.response?.statusCode == 403)) {
         await _reload();
       }
-      if (mounted) ScaffoldMessenger.of(context).showSnackBar(
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(_message(error))));
+      }
     } finally {
       if (mounted) setState(() => _saving = false);
     }
@@ -150,9 +152,11 @@ class _PhysicalLibraryPageState extends ConsumerState<PhysicalLibraryPage>
               Navigator.pop(ctx, [title.text.trim(), author.text.trim()]);
             }, child: const Text('Créer')),
           ]));
-      if (result != null && mounted) await _mutate(() async {
+      if (result != null && mounted) {
+        await _mutate(() async {
         await _api.addPhysicalBook(widget.institutionId, title: result[0], author: result[1]);
       });
+      }
     } finally { title.dispose(); author.dispose(); }
   }
 
@@ -171,10 +175,12 @@ class _PhysicalLibraryPageState extends ConsumerState<PhysicalLibraryPage>
               Navigator.pop(ctx, barcode.text.trim());
             }, child: const Text('Ajouter')),
           ]));
-      if (result != null && mounted) await _mutate(() async {
+      if (result != null && mounted) {
+        await _mutate(() async {
         await _api.addPhysicalCopy(widget.institutionId,
             bookId: book['id'] as String, barcode: result);
       });
+      }
     } finally { barcode.dispose(); }
   }
 
@@ -260,7 +266,9 @@ class _PhysicalLibraryPageState extends ConsumerState<PhysicalLibraryPage>
         ],
       ));
     if (confirmed != true || !mounted || !_admin || _revision != revision ||
-        widget.institutionId != tenant) return;
+        widget.institutionId != tenant) {
+      return;
+    }
     await _mutate(() async {
       await _api.reportPhysicalLoanIncident(tenant,
           loan['id'] as String, loan['row_version'] as int, condition);

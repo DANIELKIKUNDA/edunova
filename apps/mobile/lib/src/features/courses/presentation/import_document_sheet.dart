@@ -1,4 +1,3 @@
-import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
@@ -77,7 +76,7 @@ class _ImportDocumentSheetState extends ConsumerState<ImportDocumentSheet> {
             TextField(controller: _course, decoration: const InputDecoration(labelText: 'Matière / cours (facultatif)')),
             const SizedBox(height: 12),
             DropdownButtonFormField<PersonalDocumentType>(
-              value: _type,
+              initialValue: _type,
               decoration: const InputDecoration(labelText: 'Type'),
               items: PersonalDocumentType.values.map((value) => DropdownMenuItem(value: value, child: Text(_label(value)))).toList(),
               onChanged: (value) => setState(() => _type = value ?? _type),

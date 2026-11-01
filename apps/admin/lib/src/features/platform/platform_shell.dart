@@ -56,7 +56,7 @@ class _PlatformShellState extends State<PlatformShell>{
       content:Column(mainAxisSize:MainAxisSize.min,children:[
         TextField(controller:idController,enabled:current==null,decoration:const InputDecoration(labelText:'Identifiant du compte')),
         const SizedBox(height:12),
-        DropdownButtonFormField<String>(value:role,isExpanded:true,items:roleNames.entries.map((e)=>DropdownMenuItem(value:e.key,child:Text(e.value,overflow:TextOverflow.ellipsis))).toList(),onChanged:(value){if(value!=null)setDialogState(()=>role=value);}),
+        DropdownButtonFormField<String>(initialValue:role,isExpanded:true,items:roleNames.entries.map((e)=>DropdownMenuItem(value:e.key,child:Text(e.value,overflow:TextOverflow.ellipsis))).toList(),onChanged:(value){if(value!=null)setDialogState(()=>role=value);}),
         if(role=='owner')const Padding(padding:EdgeInsets.only(top:12),child:Text('Rôle propriétaire : accès sensible réservé à la direction Volcano Tech. Vérifiez l’identité du bénéficiaire.')),
         if(current!=null)const Padding(padding:EdgeInsets.only(top:12),child:Text('Les changements utilisent la version du serveur pour éviter les écrasements concurrents.')),
       ]),
@@ -91,7 +91,7 @@ class _PlatformShellState extends State<PlatformShell>{
       title:Text(current==null?'Contrôler un établissement existant':'Changer le statut institutionnel'),
       content:Column(mainAxisSize:MainAxisSize.min,children:[
         TextField(controller:idController,enabled:current==null,decoration:const InputDecoration(labelText:'Identifiant institutionnel')),
-        DropdownButtonFormField<String>(value:state,items:const[DropdownMenuItem(value:'active',child:Text('Actif')),DropdownMenuItem(value:'suspended',child:Text('Suspendu'))],onChanged:(v){if(v!=null)setLocal(()=>state=v);}),
+        DropdownButtonFormField<String>(initialValue:state,items:const[DropdownMenuItem(value:'active',child:Text('Actif')),DropdownMenuItem(value:'suspended',child:Text('Suspendu'))],onChanged:(v){if(v!=null)setLocal(()=>state=v);}),
         TextField(controller:reasonController,maxLength:500,maxLines:3,decoration:const InputDecoration(labelText:'Motif obligatoire (10 caractères minimum)')),
         const Text('Décision auditée ; ne donne aucun accès aux données privées.'),
       ]),actions:[TextButton(onPressed:()=>Navigator.pop(ctx,false),child:const Text('Annuler')),FilledButton(onPressed:()=>Navigator.pop(ctx,true),child:const Text('Confirmer'))],

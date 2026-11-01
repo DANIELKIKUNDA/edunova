@@ -206,7 +206,7 @@ class _IngestionBatchPageState extends State<IngestionBatchPage> {
   Future<void> _pickImageBundle() async {
     final batch=data?['batch'] as Map<String,dynamic>?; if(batch?['state']!='draft')return;
     final selection=await FilePicker.platform.pickFiles(allowMultiple:true,withData:true,type:FileType.custom,allowedExtensions:const ['png','jpg','jpeg','webp']);
-    if(selection==null||selection.files.isEmpty)return;
+    if(!mounted||selection==null||selection.files.isEmpty)return;
     final nameController=TextEditingController(text:'Interrogation scannée');
     final bundleName=await showDialog<String>(context:context,builder:(c)=>AlertDialog(title:const Text('Regrouper les photos'),content:TextField(controller:nameController,decoration:const InputDecoration(labelText:'Nom du document',helperText:'Les photos seront assemblées dans l’ordre sélectionné.')),actions:[TextButton(onPressed:()=>Navigator.pop(c),child:const Text('Annuler')),FilledButton(onPressed:()=>Navigator.pop(c,nameController.text.trim()),child:const Text('Assembler'))]));
     if(bundleName==null||bundleName.isEmpty)return;
@@ -214,15 +214,15 @@ class _IngestionBatchPageState extends State<IngestionBatchPage> {
     for(final f in selection.files){if(f.bytes!=null)entries.add(MapEntry(f.name,f.bytes!));}
     if(entries.isEmpty)return;
     setState(()=>busy=true);
-    try{await widget.api.uploadImageBundle(widget.batchId,bundleName,entries,idempotencyKey:'bundle-${widget.batchId}-${entries.map((e)=>e.key).join('|')}');if(mounted)ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text('${entries.length} photo(s) regroupée(s) en un document')));await _load();}
-    catch(e){if(mounted)ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text('Assemblage impossible : $e')));}
+    try{await widget.api.uploadImageBundle(widget.batchId,bundleName,entries,idempotencyKey:'bundle-${widget.batchId}-${entries.map((e)=>e.key).join('|')}');if(mounted && context.mounted)ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text('${entries.length} photo(s) regroupée(s) en un document')));await _load();}
+    catch(e){if(mounted && context.mounted)ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text('Assemblage impossible : $e')));}
     finally{if(mounted)setState(()=>busy=false);}
   }
 
   Future<void> _start() async {
     setState(() => busy = true);
     try { await widget.api.startIngestionBatch(widget.batchId, priority: 70); await _load(); }
-    catch(e){ if(mounted)ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text('Démarrage impossible : $e'))); }
+    catch(e){ if(mounted && context.mounted)ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text('Démarrage impossible : $e'))); }
     finally { if(mounted)setState(()=>busy=false); }
   }
 
@@ -260,7 +260,7 @@ class _IngestionBatchPageState extends State<IngestionBatchPage> {
             trailing:Wrap(spacing:4,crossAxisAlignment:WrapCrossAlignment.center,children:[
               if(result?['needs_human_verification']==true)const Tooltip(message:'Vérification humaine requise',child:Icon(Icons.verified_user_outlined,color:Colors.orange)),
               if(d['editorial_item_id']!=null)const Tooltip(message:'Brouillon Studio créé',child:Icon(Icons.fact_check_outlined)),
-              if(job?['state']=='dead_letter')IconButton(tooltip:'Réessayer',icon:const Icon(Icons.replay_rounded),onPressed:()async{try{await widget.api.retryIngestionJob(job!['id'] as String);await _load();}catch(e){if(mounted)ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text('Retry impossible : $e')));}}),
+              if(job?['state']=='dead_letter')IconButton(tooltip:'Réessayer',icon:const Icon(Icons.replay_rounded),onPressed:()async{try{await widget.api.retryIngestionJob(job!['id'] as String);await _load();}catch(e){if(mounted && context.mounted)ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text('Retry impossible : $e')));}}),
             ]),
             onTap:d['state']=='succeeded'?()=>_showPreview(d):null,
           ));
@@ -282,7 +282,7 @@ class _IngestionBatchPageState extends State<IngestionBatchPage> {
         SelectableText((preview['page']?['text']??'Aucun texte exploitable').toString()),
         if((preview['questions'] as List? ?? const []).isNotEmpty)...[const SizedBox(height:20),Text('Questions détectées',style:Theme.of(c).textTheme.titleMedium?.copyWith(fontWeight:FontWeight.w800)),const SizedBox(height:8),...(preview['questions'] as List).map((q)=>ListTile(leading:const Icon(Icons.help_outline_rounded),title:Text(q['text'].toString())))],
       ]))));
-    }catch(e){if(mounted)ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text('Aperçu indisponible : $e')));}
+    }catch(e){if(mounted && context.mounted)ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text('Aperçu indisponible : $e')));}
   }
 }
 
@@ -297,8 +297,8 @@ class _CreateBatchDialogState extends State<CreateBatchDialog>{
     TextField(controller:name,decoration:const InputDecoration(labelText:'Nom du lot',hintText:'BAC1 — Physiologie — Septembre')),
     const SizedBox(height:10),TextField(controller:faculty,decoration:const InputDecoration(labelText:'Faculté / domaine')),const SizedBox(height:10),TextField(controller:program,decoration:const InputDecoration(labelText:'Programme')),const SizedBox(height:10),
     Row(children:[Expanded(child:TextField(controller:level,decoration:const InputDecoration(labelText:'Niveau'))),const SizedBox(width:10),Expanded(child:TextField(controller:semester,decoration:const InputDecoration(labelText:'Semestre')))]),const SizedBox(height:10),
-    DropdownButtonFormField(value:kind,decoration:const InputDecoration(labelText:'Type'),items:const[DropdownMenuItem(value:'course',child:Text('Cours')),DropdownMenuItem(value:'assessment',child:Text('Interrogation / examen')),DropdownMenuItem(value:'question_set',child:Text('Banque de questions'))],onChanged:(v)=>setState(()=>kind=v??kind)),const SizedBox(height:10),
-    Row(children:[Expanded(child:DropdownButtonFormField(value:risk,decoration:const InputDecoration(labelText:'Risque'),items:const[DropdownMenuItem(value:'standard',child:Text('Standard')),DropdownMenuItem(value:'medical',child:Text('Médical')),DropdownMenuItem(value:'high_stakes',child:Text('High-stakes'))],onChanged:(v)=>setState(()=>risk=v??risk))),const SizedBox(width:10),Expanded(child:DropdownButtonFormField(value:rights,decoration:const InputDecoration(labelText:'Droits'),items:const[DropdownMenuItem(value:'authorized',child:Text('Autorisé')),DropdownMenuItem(value:'internal_only',child:Text('Interne')),DropdownMenuItem(value:'unknown',child:Text('À vérifier'))],onChanged:(v)=>setState(()=>rights=v??rights)))])
+    DropdownButtonFormField(initialValue:kind,decoration:const InputDecoration(labelText:'Type'),items:const[DropdownMenuItem(value:'course',child:Text('Cours')),DropdownMenuItem(value:'assessment',child:Text('Interrogation / examen')),DropdownMenuItem(value:'question_set',child:Text('Banque de questions'))],onChanged:(v)=>setState(()=>kind=v??kind)),const SizedBox(height:10),
+    Row(children:[Expanded(child:DropdownButtonFormField(initialValue:risk,decoration:const InputDecoration(labelText:'Risque'),items:const[DropdownMenuItem(value:'standard',child:Text('Standard')),DropdownMenuItem(value:'medical',child:Text('Médical')),DropdownMenuItem(value:'high_stakes',child:Text('High-stakes'))],onChanged:(v)=>setState(()=>risk=v??risk))),const SizedBox(width:10),Expanded(child:DropdownButtonFormField(initialValue:rights,decoration:const InputDecoration(labelText:'Droits'),items:const[DropdownMenuItem(value:'authorized',child:Text('Autorisé')),DropdownMenuItem(value:'internal_only',child:Text('Interne')),DropdownMenuItem(value:'unknown',child:Text('À vérifier'))],onChanged:(v)=>setState(()=>rights=v??rights)))])
   ]))),actions:[TextButton(onPressed:()=>Navigator.pop(c),child:const Text('Annuler')),FilledButton(onPressed:()=>Navigator.pop(c,{'name':name.text.trim(),'defaults':{'content_kind':kind,'faculty_domain':faculty.text.trim(),'program':program.text.trim(),'level':level.text.trim(),'semester':semester.text.trim().isEmpty?null:semester.text.trim(),'risk':risk,'rights_status':rights,'rights_note':''}}),child:const Text('Créer le lot'))]);
 }
 

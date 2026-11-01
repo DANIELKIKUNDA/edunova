@@ -35,8 +35,10 @@ class _CampusAlumniState extends ConsumerState<CampusAlumniPage>
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) { _reload(); return; }
     ++_revision;
-    if (mounted) setState(() { _mine = null; _directory = []; _pending = [];
+    if (mounted) {
+      setState(() { _mine = null; _directory = []; _pending = [];
       _opportunities = []; _admin = false; _canApply = false; _loading = true; });
+    }
   }
   Future<void> _reload() async {
     final req = ++_revision;
@@ -84,8 +86,10 @@ class _CampusAlumniState extends ConsumerState<CampusAlumniPage>
       if (e is DioException && (e.response?.statusCode == 401 || e.response?.statusCode == 403)) {
         await _reload();
       }
-      if (mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Opération refusée ou version expirée. Actualisez vos données.')));
+      }
     } finally { if (mounted) setState(() => _busy = false); }
   }
 
@@ -114,7 +118,9 @@ class _CampusAlumniState extends ConsumerState<CampusAlumniPage>
             FilledButton(onPressed: () {
               final y = int.tryParse(year.text);
               if (y == null || y < 1950 || y > DateTime.now().year ||
-                  name.text.trim().length < 2 || program.text.trim().length < 2) return;
+                  name.text.trim().length < 2 || program.text.trim().length < 2) {
+                return;
+              }
               Navigator.pop(ctx, {'name': name.text.trim(), 'program': program.text.trim(),
                 'year': y, 'headline': headline.text.trim(), 'visible': visible});
             }, child: const Text('Soumettre')),
@@ -160,7 +166,9 @@ class _CampusAlumniState extends ConsumerState<CampusAlumniPage>
         actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Annuler')),
           FilledButton(onPressed: () {
             if (title.text.trim().length < 4 || description.text.trim().length < 10 ||
-                (url.text.trim().isNotEmpty && !url.text.trim().startsWith('https://'))) return;
+                (url.text.trim().isNotEmpty && !url.text.trim().startsWith('https://'))) {
+              return;
+            }
             Navigator.pop(ctx, {'title': title.text.trim(), 'description': description.text.trim(),
               'url': url.text.trim()});
           }, child: const Text('Publier'))],

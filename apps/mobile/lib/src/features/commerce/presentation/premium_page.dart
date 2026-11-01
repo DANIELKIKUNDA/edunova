@@ -39,7 +39,7 @@ class _PremiumPageState extends ConsumerState<PremiumPage> {
       final availableProviders = ref.read(paymentProvidersProvider).valueOrNull ?? const <PaymentProviderOption>[];
       if (availableProviders.isEmpty) throw StateError('payment_unavailable');
       final providerCode = selectedProvider ?? availableProviders.first.code;
-      var payment = await gateway.createCheckout(planCode: plan.code, phoneNumber: phone.text.trim(), provider: providerCode);
+      final payment = await gateway.createCheckout(planCode: plan.code, phoneNumber: phone.text.trim(), provider: providerCode);
       await local.savePayment(payment);
       if (payment.actionValue != null && (payment.actionType == 'redirect' || payment.actionType == 'ussd')) {
         final uri = Uri.tryParse(payment.actionValue!);
@@ -103,7 +103,7 @@ class _PremiumPageState extends ConsumerState<PremiumPage> {
           data: (items) {
             if (items.isEmpty) return const Card(child: Padding(padding: EdgeInsets.all(14), child: Text('Paiement temporairement indisponible. Tes données restent accessibles.')));
             return DropdownButtonFormField<String>(
-              value: selectedProvider ?? items.first.code,
+              initialValue: selectedProvider ?? items.first.code,
               decoration: const InputDecoration(labelText: 'Canal de paiement', prefixIcon: Icon(Icons.account_balance_wallet_outlined)),
               items: items.map((p) => DropdownMenuItem(value: p.code, child: Text(p.label))).toList(),
               onChanged: loading ? null : (v) => setState(() => selectedProvider = v),

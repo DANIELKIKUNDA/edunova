@@ -53,6 +53,7 @@ class _Local implements CloudSyncLocalRepository {
     }
   }
 
+  @override
   Future<void> markMutationApplied(String accountId, String mutationId, CloudRecord? record) async { applied++; }
   @override
   dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);

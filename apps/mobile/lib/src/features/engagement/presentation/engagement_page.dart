@@ -467,7 +467,7 @@ class _PreferencesSection extends StatelessWidget {
             const SizedBox(height: 16),
             Text('Objectif quotidien', style: TextStyle(color: scheme.onSurfaceVariant, fontWeight: FontWeight.w700)),
             const SizedBox(height: 8),
-            DropdownButtonFormField<int>(value: prefs.dailyGoalMinutes, decoration: const InputDecoration(prefixIcon: Icon(Icons.timer_outlined)), items: [15,30,45,60,90,120].map((v) => DropdownMenuItem(value: v, child: Text('$v min'))).toList(), onChanged: (v) { if (v != null) onSave(prefs.copyWith(dailyGoalMinutes: v)); }),
+            DropdownButtonFormField<int>(initialValue: prefs.dailyGoalMinutes, decoration: const InputDecoration(prefixIcon: Icon(Icons.timer_outlined)), items: [15,30,45,60,90,120].map((v) => DropdownMenuItem(value: v, child: Text('$v min'))).toList(), onChanged: (v) { if (v != null) onSave(prefs.copyWith(dailyGoalMinutes: v)); }),
           ]),
         );
         if (!wide) return Column(children: [schedule, const SizedBox(height: 12), limits]);

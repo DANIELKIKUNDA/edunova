@@ -116,8 +116,10 @@ class _CampusServicesPageState extends ConsumerState<CampusServicesPage>
           error.response?.statusCode == 403)) {
         await _reload();
       }
-      if (mounted) ScaffoldMessenger.of(context).showSnackBar(
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(_message(error))));
+      }
     } finally {
       if (mounted) setState(() => _saving = false);
     }
@@ -151,7 +153,9 @@ class _CampusServicesPageState extends ConsumerState<CampusServicesPage>
             FilledButton(onPressed: () {
               final amount = int.tryParse(capacity.text);
               if (code.text.trim().isEmpty || name.text.trim().isEmpty ||
-                  amount == null || amount < 1 || amount > 5000) return;
+                  amount == null || amount < 1 || amount > 5000) {
+                return;
+              }
               Navigator.pop(ctx, {'kind': kind, 'code': code.text.trim(),
                 'name': name.text.trim(), 'location': location.text.trim(), 'capacity': amount});
             }, child: const Text('Enregistrer')),

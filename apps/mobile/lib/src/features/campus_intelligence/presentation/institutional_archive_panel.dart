@@ -119,7 +119,9 @@ class _InstitutionalArchivePanelState extends State<InstitutionalArchivePanel>
             child: const Text('Confirmer la capture')),
         ]));
     if (confirmed != true || !mounted || generation != _generation ||
-        !widget.allowCapture) return;
+        !widget.allowCapture) {
+      return;
+    }
     setState(() { _busy = true; _error = null; _notice = null;
       _previewCsv = null; });
     try {

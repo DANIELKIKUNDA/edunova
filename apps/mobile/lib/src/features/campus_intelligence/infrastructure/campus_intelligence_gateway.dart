@@ -165,12 +165,16 @@ class CampusIntelligenceGateway {
 /// No client-side inference from hidden data: only explicit released values.
 String releasedPercent(dynamic value, String status) {
   if (status != 'available' || value is! num || !value.isFinite ||
-      value < 0 || value > 100) return 'Masqué / non disponible';
+      value < 0 || value > 100) {
+    return 'Masqué / non disponible';
+  }
   return '${value.toStringAsFixed(1)} %';
 }
 
 String releasedDelta(dynamic value, String status) {
   if (status != 'comparable' || value is! num || !value.isFinite ||
-      value < -100 || value > 100) return 'Comparaison indisponible';
+      value < -100 || value > 100) {
+    return 'Comparaison indisponible';
+  }
   return '${value >= 0 ? '+' : ''}${value.toStringAsFixed(1)} points';
 }

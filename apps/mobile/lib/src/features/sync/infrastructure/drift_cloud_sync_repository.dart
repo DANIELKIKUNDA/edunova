@@ -335,7 +335,9 @@ class DriftCloudSyncRepository implements CloudSyncLocalRepository {
     // bookkeeping. Those paths must not roll back a newer pull's ledger.
     if (existing != null &&
         (existing.version >= record.version ||
-            existing.serverSeq >= record.serverSeq)) return;
+            existing.serverSeq >= record.serverSeq)) {
+      return;
+    }
     await db.into(db.localAccountSyncEntityVersions).insertOnConflictUpdate(LocalAccountSyncEntityVersionsCompanion.insert(
       accountId:accountId,entityType:record.entityType,entityId:record.entityId,version:record.version,serverSeq:record.serverSeq,
       payloadJson:Value(jsonEncode(record.payload)),deleted:Value(record.deleted),updatedAt:record.updatedAt,

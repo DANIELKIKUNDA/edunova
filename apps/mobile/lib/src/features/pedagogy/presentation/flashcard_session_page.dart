@@ -16,7 +16,6 @@ class FlashcardSessionPage extends ConsumerStatefulWidget {
 class _FlashcardSessionPageState extends ConsumerState<FlashcardSessionPage> {
   int _index = 0;
   bool _revealed = false;
-  int _reviewed = 0;
   bool _saving = false;
   String? _saveError;
 
@@ -114,7 +113,6 @@ class _FlashcardSessionPageState extends ConsumerState<FlashcardSessionPage> {
     await repo.saveFlashcardReview(next, rating: rating, previous: current, reviewedAt: DateTime.now());
     if (!mounted) return;
     setState(() {
-      _reviewed += 1;
       _revealed = false;
       _index += 1;
     });

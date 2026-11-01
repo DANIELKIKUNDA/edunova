@@ -26,7 +26,7 @@ class ApiIdentityRepository implements IdentityRepository {
     // cloud sync was never initialized. Do not silently claim it for a new user.
     // An authenticated legacy session is upgraded by SecureSessionStore.read().
     final owner = _store is SecureSessionStore
-        ? await (_store as SecureSessionStore).ownerAccountId()
+        ? await (_store).ownerAccountId()
         : (await _store.read())?.accountId;
     if (owner != null) {
       if (owner != accountId) throw StateError('local_data_owned_by_another_account');

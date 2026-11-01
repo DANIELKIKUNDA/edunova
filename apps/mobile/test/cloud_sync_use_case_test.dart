@@ -52,6 +52,7 @@ class FakeLocal implements CloudSyncLocalRepository {
     }
   }
 
+  @override
   Future<void> markMutationApplied(String id, String mutationId, CloudRecord? record) async {
     expect(id, accountId);
     mutations.removeWhere((m) => m.id == mutationId);

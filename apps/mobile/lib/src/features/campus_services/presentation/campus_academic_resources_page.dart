@@ -133,9 +133,11 @@ class _CampusAcademicResourcesState extends ConsumerState<CampusAcademicResource
         }
         if (mounted) await _reload();
       } catch (e) {
-        if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(
           e is DioException && e.response?.statusCode == 409
             ? 'Salle déjà occupée, réservée ou indisponible.' : 'Affectation impossible.')));
+        }
         if (e is DioException && (e.response?.statusCode == 401 || e.response?.statusCode == 403)) {
           if (mounted) await _reload();
         }

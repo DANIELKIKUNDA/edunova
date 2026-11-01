@@ -80,9 +80,9 @@ class _SyncStatusPageState extends ConsumerState<SyncStatusPage>{
             try{
               await ref.read(cloudSyncRemoteGatewayProvider).revokeDevice(d.deviceId);
               ref.invalidate(syncDevicesProvider);
-              if(mounted)ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content:Text('Appareil révoqué.')));
+              if(mounted && context.mounted)ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content:Text('Appareil révoqué.')));
             }catch(e){
-              if(mounted)ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text('Révocation impossible : $e')));
+              if(mounted && context.mounted)ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text('Révocation impossible : $e')));
             }finally{
               if(mounted)setState(()=>busy=false);
             }
@@ -102,9 +102,9 @@ class _SyncStatusPageState extends ConsumerState<SyncStatusPage>{
             await ref.read(cloudSyncLocalRepositoryProvider).resolveConflict(accountId,c.id,keepLocal:v=='local');
             ref.invalidate(syncConflictsProvider);
             ref.invalidate(syncDiagnosticsProvider);
-            if(mounted)ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content:Text('Conflit résolu. Synchronisez pour transmettre les changements.')));
+            if(mounted && context.mounted)ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content:Text('Conflit résolu. Synchronisez pour transmettre les changements.')));
           }catch(e){
-            if(mounted)ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text('Résolution impossible : $e')));
+            if(mounted && context.mounted)ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text('Résolution impossible : $e')));
           }finally{if(mounted)setState(()=>busy=false);}
         },itemBuilder:(_)=>const [PopupMenuItem(value:'cloud',child:Text('Garder la version cloud')),PopupMenuItem(value:'local',child:Text('Garder cet appareil'))]),
       ))).toList())),

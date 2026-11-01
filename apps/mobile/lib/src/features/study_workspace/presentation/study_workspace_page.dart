@@ -22,7 +22,6 @@ class _StudyWorkspacePageState extends State<StudyWorkspacePage> {
   @override Widget build(BuildContext context) {
     final width = MediaQuery.sizeOf(context).width;
     final wide = width >= 980;
-    final scheme = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: AppBar(
         title: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

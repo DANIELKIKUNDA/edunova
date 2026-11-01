@@ -51,11 +51,13 @@ class _CampusEventsPageState extends ConsumerState<CampusEventsPage>
       _reload();
     } else {
       ++_revision;
-      if (mounted) setState(() {
+      if (mounted) {
+        setState(() {
         _events = [];
         _role = null;
         _loading = true;
       });
+      }
     }
   }
 
@@ -83,7 +85,9 @@ class _CampusEventsPageState extends ConsumerState<CampusEventsPage>
         return institution is Map && institution['id'] == widget.institutionId;
       }).toList();
       if (mine.length != 1 || mine.single['membership'] is! Map ||
-          mine.single['institution'] is! Map) throw const FormatException();
+          mine.single['institution'] is! Map) {
+        throw const FormatException();
+      }
       final membership = mine.single['membership'] as Map;
       final institution = mine.single['institution'] as Map;
       if (membership['state'] != 'active' || institution['state'] != 'active') {
@@ -120,8 +124,10 @@ class _CampusEventsPageState extends ConsumerState<CampusEventsPage>
           (error.response?.statusCode == 401 || error.response?.statusCode == 403)) {
         await _reload();
       }
-      if (mounted) ScaffoldMessenger.of(context).showSnackBar(
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(_message(error))));
+      }
     } finally {
       if (mounted) setState(() => _saving = false);
     }

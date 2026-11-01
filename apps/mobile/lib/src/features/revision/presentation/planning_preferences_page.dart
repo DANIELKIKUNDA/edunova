@@ -53,11 +53,11 @@ class _PlanningPreferencesPageState extends ConsumerState<PlanningPreferencesPag
     int weekday=DateTime.now().weekday.clamp(1,7).toInt();int start=18*60;int end=20*60;EnergyLevel energy=EnergyLevel.medium;
     final ok=await showDialog<bool>(context:context,builder:(context)=>StatefulBuilder(builder:(context,setState)=>AlertDialog(
       title:const Text('Ajouter une plage d’étude'),content:Column(mainAxisSize:MainAxisSize.min,children:[
-        DropdownButtonFormField(value:weekday,items:List.generate(7,(i)=>DropdownMenuItem(value:i+1,child:Text(['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'][i]))),onChanged:(v)=>setState(()=>weekday=v!),decoration:const InputDecoration(labelText:'Jour')),
+        DropdownButtonFormField(initialValue:weekday,items:List.generate(7,(i)=>DropdownMenuItem(value:i+1,child:Text(['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'][i]))),onChanged:(v)=>setState(()=>weekday=v!),decoration:const InputDecoration(labelText:'Jour')),
         const SizedBox(height:10),
         Row(children:[Expanded(child:TextFormField(initialValue:'18:00',decoration:const InputDecoration(labelText:'Début'),onChanged:(v)=>start=_parse(v,start))),const SizedBox(width:10),Expanded(child:TextFormField(initialValue:'20:00',decoration:const InputDecoration(labelText:'Fin'),onChanged:(v)=>end=_parse(v,end)))]),
         const SizedBox(height:10),
-        DropdownButtonFormField(value:energy,items:EnergyLevel.values.map((e)=>DropdownMenuItem(value:e,child:Text(switch(e){EnergyLevel.low=>'Énergie faible',EnergyLevel.medium=>'Énergie normale',EnergyLevel.high=>'Énergie élevée'}))).toList(),onChanged:(v)=>setState(()=>energy=v!),decoration:const InputDecoration(labelText:'Niveau d’énergie habituel')),
+        DropdownButtonFormField(initialValue:energy,items:EnergyLevel.values.map((e)=>DropdownMenuItem(value:e,child:Text(switch(e){EnergyLevel.low=>'Énergie faible',EnergyLevel.medium=>'Énergie normale',EnergyLevel.high=>'Énergie élevée'}))).toList(),onChanged:(v)=>setState(()=>energy=v!),decoration:const InputDecoration(labelText:'Niveau d’énergie habituel')),
       ]),actions:[TextButton(onPressed:()=>Navigator.pop(context,false),child:const Text('Annuler')),FilledButton(onPressed:()=>Navigator.pop(context,true),child:const Text('Ajouter'))])));
     if(ok==true&&end>start){await ref.read(adaptivePlanningRepositoryProvider).saveAvailabilityRule(AvailabilityRule(id:const Uuid().v4(),weekday:weekday,startMinute:start,endMinute:end,energy:energy));}
   }
