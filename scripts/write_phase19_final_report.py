@@ -86,6 +86,8 @@ def generate():
     for name,job in jobs.items():
         paths=['services/api/app','services/api/tests','services/api/requirements.txt'] if name in ('backend-final','phase19','postgres') else []
         if name=='backend': paths=['services/api/app']  # baseline also predates effective-router test adaptation
+        if name=='migrations': paths=['services/api/migrations','scripts/certify_phase19_migrations.py']
+        if name in ('security-audit','pip-check','freeze'): paths=['services/api/requirements.txt']
         for app in ('mobile','admin'):
             if name.startswith(app+'-'):
                 paths=[f'apps/{app}/lib',f'apps/{app}/pubspec.yaml']
