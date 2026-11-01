@@ -17,4 +17,51 @@ bringing up nodes...
 ....................................................................ssss [ 70%]
 sssss.........................ssssssss.................................. [ 76%]
 ........................................................................ [ 82%]
-...................................
+........................................................................ [ 88%]
+........................................................................ [ 94%]
+..................................................................       [100%]
+============================== warnings summary ===============================
+.local-certification\security-venv\Lib\site-packages\fastapi\testclient.py:1
+.local-certification\security-venv\Lib\site-packages\fastapi\testclient.py:1
+  C:\Users\cs-ap\dev\edusync-web\edunova\.local-certification\security-venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: DeprecationWarning: builtin type SwigPyPacked has no __module__ attribute
+
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: DeprecationWarning: builtin type SwigPyObject has no __module__ attribute
+
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: DeprecationWarning: builtin type swigvarlink has no __module__ attribute
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+============================ slowest 20 durations =============================
+36.31s call     services/api/tests/editorial/test_library_projector.py::test_archive_hides_projected_course
+28.86s call     services/api/tests/editorial/test_library_projector.py::test_course_projection_creates_catalog_version_and_resources
+24.12s setup    services/api/tests/test_phase18_paid_checkout_flow.py::test_renewal_extends_existing_term
+23.88s call     services/api/tests/test_phase17_central_read_models.py::test_platform_audit_filters_other_domains_and_private_metadata
+19.54s setup    services/api/tests/test_phase18_paid_checkout_flow.py::test_inactive_offer_cannot_checkout
+16.21s setup    services/api/tests/test_phase18_paid_checkout_flow.py::test_reused_idempotency_with_changed_offer_is_rejected
+14.44s setup    services/api/tests/test_phase18_paid_checkout_flow.py::test_unprivileged_user_cannot_checkout
+13.79s setup    services/api/tests/test_phase18_paid_checkout_flow.py::test_failed_payment_cannot_grant
+13.78s setup    services/api/tests/editorial/test_editorial_service.py::test_search_filters_and_pagination
+13.74s setup    services/api/tests/test_phase13_student_success.py::test_reassessment_does_not_call_missing_attendance_an_improvement
+12.97s setup    services/api/tests/test_phase18_paid_checkout_flow.py::test_verified_payment_fulfills_once
+12.25s setup    services/api/tests/test_phase14_score_reconciliation.py::test_v2_tampering_fails_closed_without_old_grade_fallback[<lambda>9]
+12.12s setup    services/api/tests/test_phase18_paid_checkout_flow.py::test_amount_mismatch_never_grants
+11.95s setup    services/api/tests/test_phase14_score_reconciliation.py::test_v2_tampering_fails_closed_without_old_grade_fallback[<lambda>1]
+11.65s setup    services/api/tests/test_phase14_pedagogical_intelligence.py::test_older_missing_submission_cannot_override_submitted_newer_grade
+11.61s setup    services/api/tests/editorial/test_editorial_service.py::test_dashboard_counts_workflow
+11.58s setup    services/api/tests/test_phase14_score_reconciliation.py::test_v2_tampering_fails_closed_without_old_grade_fallback[<lambda>2]
+11.58s setup    services/api/tests/test_phase14_score_reconciliation.py::test_v2_tampering_fails_closed_without_old_grade_fallback[<lambda>11]
+11.56s setup    services/api/tests/test_phase14_score_reconciliation.py::test_v2_tampering_fails_closed_without_old_grade_fallback[<lambda>6]
+11.52s setup    services/api/tests/test_phase14_pedagogical_intelligence.py::test_corrupt_graded_result_totals_never_count_as_objective_evidence[0-0-0-0]
+1201 passed, 17 skipped, 12 warnings in 1031.46s (0:17:11)

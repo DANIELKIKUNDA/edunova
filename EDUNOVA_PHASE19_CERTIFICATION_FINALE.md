@@ -1,6 +1,6 @@
 # EduNova — certification finale de la Phase 19
 
-Généré le 2026-11-01T22:13:40.246977+02:00.
+Généré le 2026-11-01T22:24:05.463726+02:00.
 
 ## Verdict : PARTIELLEMENT CERTIFIÉ
 
@@ -8,8 +8,8 @@ Cette certification locale n’autorise pas une mise en production. Les constats
 
 ## Livraison et provenance
 
-HEAD de préparation du rapport : `08d1143736ba014e0822454675d6b9ea3a5d2bd4`. Les commits documentaires de livraison peuvent lui succéder ; le SHA final publié est consigné dans la conversation PR #1 et dans le bilan de livraison.
-Branche : `import/edunova-v0.57.12`. Aucun merge dans main. La publication finale et le statut brouillon doivent être vérifiés après le push ; voir [publication.json](evidence/phase19-final/publication.json).
+HEAD de préparation du rapport : `161f2b8492fc0f2713853e7e8463776a5c6733db`. Les commits documentaires de livraison peuvent lui succéder ; le SHA final publié est consigné dans la conversation PR #1 et dans le bilan de livraison.
+Branche : `import/edunova-v0.57.12`. Aucun merge dans main. Le [contrôle avant publication](evidence/phase19-final/PR_BEFORE_PUBLICATION.json) est une photographie historique. Le SHA HEAD final publié et la liste complète incluant le commit documentaire sont consignés dans la description de la [PR #1](https://github.com/DANIELKIKUNDA/edunova/pull/1) après vérification du push ; le rapport ne prétend pas contenir son propre hash Git.
 Les commits testés sont indiqués individuellement ci-dessous. [TREE_IDENTITY.json](evidence/phase19-final/TREE_IDENTITY.json) compare les sources réellement exécutées aux sources livrées, y compris les dépendances déclarées.
 Les échecs, commandes, traces et correctifs intermédiaires figurent dans [DIAGNOSTICS.md](evidence/phase19-final/DIAGNOSTICS.md).
 
@@ -18,6 +18,7 @@ Les échecs, commandes, traces et correctifs intermédiaires figurent dans [DIAG
 Windows 11 x64, Git 2.51.0, Python 3.13.14 ; environnement initial `.venv` conservé et environnement corrigé `.local-certification/security-venv` séparé. Flutter 3.35.4 / Dart 3.9.2, PostgreSQL 16.11 local : `127.0.0.1:55439`, utilisateur de test `edunova_cert`. SDK Android local, Java 21, Visual Studio 2022 avec ATL, NuGet et Tesseract locaux.
 PowerShell : `$env:EDUNOVA_CERT_EVIDENCE="phase19-final"`, puis `.venv/Scripts/python.exe scripts/certify_local_phase19.py <noms-des-contrôles>`. Le runner retire les secrets hérités, impose test/fake/sandbox et conserve commande, répertoire, code de sortie, durée et commit. Les tests SQL exigent explicitement la cible locale autorisée. Aucune production ni transaction réelle.
 Pour rejouer les suites corrigées : `$env:EDUNOVA_CERT_PYTHON="C:/Users/cs-ap/dev/edusync-web/edunova/.local-certification/security-venv/Scripts/python.exe"`. Installer `services/api/requirements-certification.txt` et `pip-audit==2.10.1` dans cet environnement ; son pip est 26.2.2. Les versions réellement installées sont dans `freeze.log`.
+La [reproduction détaillée](evidence/phase19-final/BOOTSTRAP.md) distingue les deux environnements, les bases locales et les tentatives préliminaires.
 Migrations : seconde base neuve `edunova_phase19_final_test`, choisie par `$env:EDUNOVA_MIGRATION_TEST_DATABASE`. Les contraintes financières sont testées séparément sur la base migrée `edunova_phase19_test`. Les anciennes bases/preuves sont préservées.
 
 ## Exécutions de cette mission
@@ -30,11 +31,12 @@ Migrations : seconde base neuve `edunova_phase19_final_test`, choisie par `$env:
 | admin-test | 0 | `f92878e7196711cbdbb30eb004f6252a3541eb44` | [admin-test.log](evidence/phase19-final/admin-test.log) |
 | admin-web | 0 | `b4a8eabafa7d6a1f50f4cc4cc43fc610a1040fbb` | [admin-web.log](evidence/phase19-final/admin-web.log) |
 | admin-windows | 0 | `b4a8eabafa7d6a1f50f4cc4cc43fc610a1040fbb` | [admin-windows.log](evidence/phase19-final/admin-windows.log) |
-| audit-contract-tests | 0 | `edb7876cb26c131ec13c15e33f40b98022801e33` | [audit-contract-tests.log](evidence/phase19-final/audit-contract-tests.log) |
+| audit-contract-tests | 0 | `c63d31a0541bd0ff07572613e5e90b3394cc2ef1` | [audit-contract-tests.log](evidence/phase19-final/audit-contract-tests.log) |
 | audits | 0 | `9424aa1ce5e928aa0e3c5f30daba6ec773c1a509` | [audits.log](evidence/phase19-final/audits.log) |
 | backend | 0 | `716a11fcb8c98073e218290bdc020ed98ade5886` | [backend.log](evidence/phase19-final/backend.log) |
 | backend-contracts | 0 | `9424aa1ce5e928aa0e3c5f30daba6ec773c1a509` | [backend-contracts.log](evidence/phase19-final/backend-contracts.log) |
-| compile | 0 | `716a11fcb8c98073e218290bdc020ed98ade5886` | [compile.log](evidence/phase19-final/compile.log) |
+| backend-final | 0 | `9424aa1ce5e928aa0e3c5f30daba6ec773c1a509` | [backend-final.log](evidence/phase19-final/backend-final.log) |
+| compile | 0 | `c63d31a0541bd0ff07572613e5e90b3394cc2ef1` | [compile.log](evidence/phase19-final/compile.log) |
 | freeze | 0 | `edb7876cb26c131ec13c15e33f40b98022801e33` | [freeze.log](evidence/phase19-final/freeze.log) |
 | migrations | 0 | `b4a8eabafa7d6a1f50f4cc4cc43fc610a1040fbb` | [migrations.log](evidence/phase19-final/migrations.log) |
 | mobile-analyze | 1 | `f92878e7196711cbdbb30eb004f6252a3541eb44` | [mobile-analyze.log](evidence/phase19-final/mobile-analyze.log) |
@@ -49,7 +51,7 @@ Migrations : seconde base neuve `edunova_phase19_final_test`, choisie par `$env:
 | pub-dependency-audit | 0 | `339100bad268775b8e055f8f311535539d3b52bf` | [pub-dependency-audit.log](evidence/phase19-final/pub-dependency-audit.log) |
 | security-audit | 0 | `edb7876cb26c131ec13c15e33f40b98022801e33` | [security-audit.log](evidence/phase19-final/security-audit.log) |
 
-Contrôles obligatoires absents : ['backend-final']. Codes non nuls parmi ces contrôles : aucun.
+Contrôles obligatoires absents : aucun. Codes non nuls parmi ces contrôles : aucun.
 
 ### Commandes exactes
 
@@ -59,11 +61,12 @@ Contrôles obligatoires absents : ['backend-final']. Codes non nuls parmi ces co
 - **admin-test**, dans `C:\Users\cs-ap\dev\edusync-web\edunova\apps\admin` : `C:\Users\cs-ap\dev\flutter\bin\flutter.bat test --no-pub --concurrency=1 --reporter=expanded`.
 - **admin-web**, dans `C:\Users\cs-ap\dev\edusync-web\edunova\apps\admin` : `C:\Users\cs-ap\dev\flutter\bin\flutter.bat build web --release --no-pub`.
 - **admin-windows**, dans `C:\Users\cs-ap\dev\edusync-web\edunova\apps\admin` : `C:\Users\cs-ap\dev\flutter\bin\flutter.bat build windows --release --no-pub`.
-- **audit-contract-tests**, dans `C:\Users\cs-ap\dev\edusync-web\edunova` : `C:\Users\cs-ap\dev\edusync-web\edunova\.venv\Scripts\python.exe C:\Users\cs-ap\dev\edusync-web\edunova\scripts\test_audit_contracts.py`.
+- **audit-contract-tests**, dans `C:\Users\cs-ap\dev\edusync-web\edunova` : `C:\Users\cs-ap\dev\edusync-web\edunova\.local-certification\security-venv\Scripts\python.exe C:\Users\cs-ap\dev\edusync-web\edunova\scripts\test_audit_contracts.py`.
 - **audits**, dans `C:\Users\cs-ap\dev\edusync-web\edunova` : `C:\Users\cs-ap\dev\edusync-web\edunova\.local-certification\security-venv\Scripts\python.exe C:\Users\cs-ap\dev\edusync-web\edunova\scripts\certify_phase19_audits.py`.
 - **backend**, dans `C:\Users\cs-ap\dev\edusync-web\edunova` : `C:\Users\cs-ap\dev\edusync-web\edunova\.venv\Scripts\python.exe -m pytest -q services/api/tests --junitxml=C:\Users\cs-ap\dev\edusync-web\edunova\evidence\phase19-final\backend.xml`.
 - **backend-contracts**, dans `C:\Users\cs-ap\dev\edusync-web\edunova` : `C:\Users\cs-ap\dev\edusync-web\edunova\.local-certification\security-venv\Scripts\python.exe -m pytest -q services/api/tests -k "flutter or frontend or migration_contract" --junitxml=C:\Users\cs-ap\dev\edusync-web\edunova\evidence\phase19-final\backend-contracts.xml`.
-- **compile**, dans `C:\Users\cs-ap\dev\edusync-web\edunova` : `C:\Users\cs-ap\dev\edusync-web\edunova\.venv\Scripts\python.exe -m compileall -q services/api/app services/api/tests`.
+- **backend-final**, dans `C:\Users\cs-ap\dev\edusync-web\edunova` : `C:\Users\cs-ap\dev\edusync-web\edunova\.local-certification\security-venv\Scripts\python.exe -m pytest -q -n 2 --dist loadfile --durations=20 services/api/tests --junitxml=C:\Users\cs-ap\dev\edusync-web\edunova\evidence\phase19-final\backend-final.xml`.
+- **compile**, dans `C:\Users\cs-ap\dev\edusync-web\edunova` : `C:\Users\cs-ap\dev\edusync-web\edunova\.local-certification\security-venv\Scripts\python.exe -m compileall -q services/api/app services/api/tests`.
 - **freeze**, dans `C:\Users\cs-ap\dev\edusync-web\edunova` : `C:\Users\cs-ap\dev\edusync-web\edunova\.local-certification\security-venv\Scripts\python.exe -m pip freeze`.
 - **migrations**, dans `C:\Users\cs-ap\dev\edusync-web\edunova` : `C:\Users\cs-ap\dev\edusync-web\edunova\.venv\Scripts\python.exe C:\Users\cs-ap\dev\edusync-web\edunova\scripts\certify_phase19_migrations.py`.
 - **mobile-analyze**, dans `C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile` : `C:\Users\cs-ap\dev\flutter\bin\flutter.bat analyze --no-pub`.
@@ -83,9 +86,13 @@ Contrôles obligatoires absents : ['backend-final']. Codes non nuls parmi ces co
 | Suite | PASS | FAIL | SKIP |
 |---|---:|---:|---:|
 | backend | 1201 | 0 | 17 |
+| backend-final | 1201 | 0 | 17 |
 | phase19 | 32 | 0 | 0 |
 | postgres | 34 | 0 | 0 |
 | backend-contracts | 21 | 0 | 0 |
+
+Rejeu SQL : **99 migrations tentées**, code 0. Marqueur de fin complète présent : True.
+Le cluster dédié a été arrêté proprement après les tests PostgreSQL ; [journal d’arrêt](evidence/phase19-final/postgres-stop.log). Les données locales restent conservées.
 
 La suite `backend` est séquentielle, sans xdist, dans l’environnement initial conservé. Elle utilise les versions antérieures des dépendances et les tests de routes antérieurs à leur adaptation ; elle n’est pas une preuve de leur mise à jour. La suite `backend-final` utilise les dépendances corrigées et deux workers pour limiter les ressources. La nouvelle pile complète n’a pas été rejouée séquentiellement : la preuve d’absence de dépendance à l’ordre après mise à jour reste limitée. Les fichiers applicatifs sont comparés par arbres Git ; la différence des dépendances et des tests de routes de la suite initiale est conservée explicitement.
 La suite générale utilise SQLite et des simulateurs ; elle ne prouve pas la concurrence PostgreSQL. La sélection `postgres` utilise le moteur réel : callbacks identiques/modifiés concurrents, référence conflictuelle, paiements simultanés, rollback, tenant, charges annulées, course callback/expiration/annulation et cohérence reçu/ledger/statut. La priorité des échéances dispose du test adversarial ajouté lors de la première mission.
@@ -222,6 +229,7 @@ Le contrôle [publication-inventory.json](evidence/phase19-final/publication-inv
 - Providers de paiement, FCM, S3 et Redis de production non testés ; aucun paiement réel, secret de production ou service payant utilisé.
 - Pas de pentest ni de charge prolongée ; les invariants financiers sont validés dans les scénarios réels explicitement exécutés.
 - Avertissements tiers Python SWIG/PyMuPDF et adaptateur TestClient/httpx déprécié conservés dans les logs ; aucun statut PASS déduit de leur seule absence d’exception.
+- Des avertissements de compilation tiers (CMake/Firebase, polices Cupertino dans le build Admin web et compatibilité WASM) restent visibles dans les logs. Les codes de sortie zéro prouvent les builds demandés, pas une recette visuelle exhaustive.
 
 ## Commits de la mission et historiques publiés
 
@@ -258,4 +266,9 @@ f92878e7196711cbdbb30eb004f6252a3541eb44 fix: constrain study workspace headings
 9424aa1ce5e928aa0e3c5f30daba6ec773c1a509 test: inspect effective FastAPI routes and exercise unauthenticated access [skip ci]
 339100bad268775b8e055f8f311535539d3b52bf cert: audit public Dart packages and preserve diagnostic provenance [skip ci]
 08d1143736ba014e0822454675d6b9ea3a5d2bd4 docs: distinguish Python and Dart vulnerability audit scopes [skip ci]
+ffa1306fd81ebc947d98d8e1f80bbfb0eba0d6e5 docs: verify resolver inputs separately from executed application trees [skip ci]
+15918f78ed93d656db70db8b4647a2de508798e3 cert: require completed Python and Dart advisory checks in report validation [skip ci]
+18369ade5109bb9efa38d2fbf67e66c7d8c6eb44 cert: trace migrated SQL and audited dependency inputs [skip ci]
+c63d31a0541bd0ff07572613e5e90b3394cc2ef1 docs: separate pre-publication snapshot from final GitHub receipt [skip ci]
+161f2b8492fc0f2713853e7e8463776a5c6733db docs: retain native build warnings and database shutdown evidence [skip ci]
 ```

@@ -41,14 +41,6 @@
   },
   {
     "job": "admin-pub",
-    "path": "apps/admin/lib",
-    "tested_commit": "716a11fcb8c98073e218290bdc020ed98ade5886",
-    "tested_tree": "81a16c8641009dc7ef437cf71310a13fccfd26ff",
-    "delivered_tree": "81a16c8641009dc7ef437cf71310a13fccfd26ff",
-    "identical": true
-  },
-  {
-    "job": "admin-pub",
     "path": "apps/admin/pubspec.yaml",
     "tested_commit": "716a11fcb8c98073e218290bdc020ed98ade5886",
     "tested_tree": "55c2248b2edd9ff387d70d99eacd86b09b39e9f6",
@@ -128,11 +120,59 @@
     "identical": true
   },
   {
+    "job": "backend-final",
+    "path": "services/api/app",
+    "tested_commit": "9424aa1ce5e928aa0e3c5f30daba6ec773c1a509",
+    "tested_tree": "43169d8f24de797a0274658bf8462ff05b3c9837",
+    "delivered_tree": "43169d8f24de797a0274658bf8462ff05b3c9837",
+    "identical": true
+  },
+  {
+    "job": "backend-final",
+    "path": "services/api/tests",
+    "tested_commit": "9424aa1ce5e928aa0e3c5f30daba6ec773c1a509",
+    "tested_tree": "216e1dabce99950c778bfa472d72f069d0f1a828",
+    "delivered_tree": "216e1dabce99950c778bfa472d72f069d0f1a828",
+    "identical": true
+  },
+  {
+    "job": "backend-final",
+    "path": "services/api/requirements.txt",
+    "tested_commit": "9424aa1ce5e928aa0e3c5f30daba6ec773c1a509",
+    "tested_tree": "0166036d088cbcdac62a0656daddb82a29153761",
+    "delivered_tree": "0166036d088cbcdac62a0656daddb82a29153761",
+    "identical": true
+  },
+  {
     "job": "backend",
     "path": "services/api/app",
     "tested_commit": "716a11fcb8c98073e218290bdc020ed98ade5886",
     "tested_tree": "43169d8f24de797a0274658bf8462ff05b3c9837",
     "delivered_tree": "43169d8f24de797a0274658bf8462ff05b3c9837",
+    "identical": true
+  },
+  {
+    "job": "freeze",
+    "path": "services/api/requirements.txt",
+    "tested_commit": "edb7876cb26c131ec13c15e33f40b98022801e33",
+    "tested_tree": "0166036d088cbcdac62a0656daddb82a29153761",
+    "delivered_tree": "0166036d088cbcdac62a0656daddb82a29153761",
+    "identical": true
+  },
+  {
+    "job": "migrations",
+    "path": "services/api/migrations",
+    "tested_commit": "b4a8eabafa7d6a1f50f4cc4cc43fc610a1040fbb",
+    "tested_tree": "59cb49a73e5561eac5722336ff508d2cabfca62c",
+    "delivered_tree": "59cb49a73e5561eac5722336ff508d2cabfca62c",
+    "identical": true
+  },
+  {
+    "job": "migrations",
+    "path": "scripts/certify_phase19_migrations.py",
+    "tested_commit": "b4a8eabafa7d6a1f50f4cc4cc43fc610a1040fbb",
+    "tested_tree": "a17bbae3f31a8cbe38d796e2a152713c491fa216",
+    "delivered_tree": "a17bbae3f31a8cbe38d796e2a152713c491fa216",
     "identical": true
   },
   {
@@ -174,14 +214,6 @@
     "tested_tree": "d5be78d05dd15688e5fdcc49f5dc9cb8776c34a6",
     "delivered_tree": "d5be78d05dd15688e5fdcc49f5dc9cb8776c34a6",
     "identical": true
-  },
-  {
-    "job": "mobile-pub",
-    "path": "apps/mobile/lib",
-    "tested_commit": "716a11fcb8c98073e218290bdc020ed98ade5886",
-    "tested_tree": "b00f4373effacd140381de513da0b8c800564e15",
-    "delivered_tree": "3dcb4ca497de0f5fff437dbb6cb01655b3ec483a",
-    "identical": false
   },
   {
     "job": "mobile-pub",
@@ -288,6 +320,14 @@
     "identical": true
   },
   {
+    "job": "pip-check",
+    "path": "services/api/requirements.txt",
+    "tested_commit": "edb7876cb26c131ec13c15e33f40b98022801e33",
+    "tested_tree": "0166036d088cbcdac62a0656daddb82a29153761",
+    "delivered_tree": "0166036d088cbcdac62a0656daddb82a29153761",
+    "identical": true
+  },
+  {
     "job": "postgres",
     "path": "services/api/app",
     "tested_commit": "9424aa1ce5e928aa0e3c5f30daba6ec773c1a509",
@@ -307,6 +347,14 @@
     "job": "postgres",
     "path": "services/api/requirements.txt",
     "tested_commit": "9424aa1ce5e928aa0e3c5f30daba6ec773c1a509",
+    "tested_tree": "0166036d088cbcdac62a0656daddb82a29153761",
+    "delivered_tree": "0166036d088cbcdac62a0656daddb82a29153761",
+    "identical": true
+  },
+  {
+    "job": "security-audit",
+    "path": "services/api/requirements.txt",
+    "tested_commit": "edb7876cb26c131ec13c15e33f40b98022801e33",
     "tested_tree": "0166036d088cbcdac62a0656daddb82a29153761",
     "delivered_tree": "0166036d088cbcdac62a0656daddb82a29153761",
     "identical": true
