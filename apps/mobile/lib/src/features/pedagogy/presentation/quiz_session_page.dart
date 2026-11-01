@@ -159,7 +159,14 @@ class _QuizSessionPageState extends ConsumerState<QuizSessionPage> {
     switch (question.kind) {
       case QuizQuestionKind.singleChoice:
       case QuizQuestionKind.trueFalse:
-        return question.options.map((option) => _singleOption(question, option)).toList(growable: false);
+        return [RadioGroup<String>(
+          groupValue: _selectedIds.isEmpty ? null : _selectedIds.first,
+          onChanged: (value) {
+            if (_checked || value == null) return;
+            setState(() { _selectedIds..clear()..add(value); });
+          },
+          child: Column(children: question.options.map((option) => _singleOption(question, option)).toList(growable: false)),
+        )];
       case QuizQuestionKind.multipleChoice:
         return question.options.map((option) => _multipleOption(question, option)).toList(growable: false);
       case QuizQuestionKind.numeric:
@@ -195,8 +202,7 @@ class _QuizSessionPageState extends ConsumerState<QuizSessionPage> {
       child: Card(
         child: RadioListTile<String>(
           value: option.id,
-          groupValue: _selectedIds.isEmpty ? null : _selectedIds.first,
-          onChanged: _checked ? null : (value) => setState(() { _selectedIds..clear()..add(value!); }),
+          enabled: !_checked,
           secondary: shouldShowCorrect ? const Icon(Icons.check_circle_rounded) : shouldShowWrong ? const Icon(Icons.cancel_rounded) : null,
           title: Text(option.text, style: const TextStyle(fontWeight: FontWeight.w700)),
         ),

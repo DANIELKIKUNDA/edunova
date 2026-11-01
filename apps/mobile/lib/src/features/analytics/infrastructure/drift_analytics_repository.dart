@@ -108,5 +108,3 @@ class DriftAnalyticsRepository implements AnalyticsRepository {
     await db.into(db.localAnalyticsRecommendationFeedback).insertOnConflictUpdate(LocalAnalyticsRecommendationFeedbackCompanion.insert(recommendationId:f.recommendationId,state:f.state.name,snoozedUntil:Value(f.snoozedUntil),updatedAt:f.updatedAt));
   }
 }
-
-
