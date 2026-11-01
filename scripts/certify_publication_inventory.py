@@ -23,10 +23,25 @@ for name in filter(None, files):
     for kind, pattern in patterns.items():
         for match in re.finditer(pattern, content):
             findings.append({'path': name, 'line': content[:match.start()].count(b'\n')+1, 'kind': kind})
-result = {'scope': 'tracked working-tree files; heuristic, not an exhaustive secret scanner',
+history=[]
+objects=subprocess.check_output(['git','rev-list','--objects','6607b18da64eb44c2de017192ccefded21659a35..HEAD'],cwd=root,text=True).splitlines()
+process=subprocess.Popen(['git','cat-file','--batch'],cwd=root,stdin=subprocess.PIPE,stdout=subprocess.PIPE)
+try:
+    for entry in objects:
+        sha,_,name=entry.partition(' ')
+        process.stdin.write((sha+'\n').encode()); process.stdin.flush()
+        header=process.stdout.readline().decode().split()
+        content=process.stdout.read(int(header[2])); process.stdout.read(1)
+        if header[1]!='blob': continue
+        for kind,pattern in patterns.items():
+            if re.search(pattern,content): history.append({'blob':sha,'path':name,'kind':kind})
+finally:
+    process.stdin.close(); process.wait(timeout=30)
+result = {'scope': 'tracked working-tree files and new Git history blobs; heuristic, not an exhaustive secret scanner',
           'commit': subprocess.check_output(['git','rev-parse','HEAD'],cwd=root,text=True).strip(),
-          'findings_without_values': findings, 'oversized_files': oversized, 'forbidden_files': forbidden}
+          'findings_without_values': findings, 'historical_findings_without_values':history,
+          'oversized_files': oversized, 'forbidden_files': forbidden}
 out = root/'evidence/phase19-final/publication-inventory.json'
 out.write_text(json.dumps(result,indent=2),encoding='utf8')
 print(json.dumps(result,indent=2))
-raise SystemExit(bool(findings or forbidden))
+raise SystemExit(bool(findings or history or forbidden))

@@ -40,6 +40,7 @@ def generate():
             jobs[path.stem]=data
     audits=read('audits/results.json') or []
     artifacts=[]
+    bundles=[]
     original=json.loads((ROOT/'evidence/local-phase19/ARTIFACTS.json').read_text(encoding='utf8'))
     for item in original:
         path=ROOT/item['path']; name=item['job']; job=jobs.get(name)
@@ -51,7 +52,12 @@ def generate():
                 with zipfile.ZipFile(path) as z:
                     result['abis']=sorted({n.split('/')[1] for n in z.namelist() if n.startswith('lib/') and n.endswith('.so')})
         artifacts.append(result)
+        if job and job['exit_code']==0 and path.exists():
+            files=[path] if path.suffix=='.apk' else sorted(p for p in path.parent.rglob('*') if p.is_file())
+            bundles.append({'job':name,'commit':job['commit'],'files':[
+                {'path':p.relative_to(ROOT).as_posix(),'size_bytes':p.stat().st_size,'sha256':digest(p)} for p in files]})
     (OUT/'ARTIFACTS.json').write_text(json.dumps(artifacts,indent=2),encoding='utf8')
+    (OUT/'BUNDLE_MANIFESTS.json').write_text(json.dumps(bundles,indent=2),encoding='utf8')
     for app in ('mobile','admin'):
         shutil.copyfile(ROOT/f'apps/{app}/pubspec.lock',OUT/f'{app}-dependencies.lock')
     proofs=[]
@@ -124,10 +130,25 @@ def generate():
             'Corrections : imports/casts inutiles, blocs de contrôle, champs inutilisés, formulaires `initialValue`, contexte monté après les awaits, prévention de setState après fermeture du détail, migration RadioGroup avec garde de réponse validée. Aucune désactivation globale du linter.',
             'Analyse Admin : voir son code exact dans le tableau. Analyse Mobile : dépréciation de `drift/web.dart` conservée sans suppression ; migrer vers WASM implique assets/worker, compatibilité navigateurs et migration du stockage existant, hors correction mécanique. Cette limite empêche de déclarer `flutter analyze` entièrement réussi.',
             'Les tests Flutter sont exécutés avec un seul worker. Les résumés exacts et erreurs éventuelles figurent dans les journaux mobile-test/admin-test, pas dans un résultat déduit de la compilation.',
-            '', '| Build | Mode | Code | Artefact | SHA-256 |', '|---|---|---:|---|---|']
+            '', '| Tests Flutter | PASS | FAIL | SKIP |', '|---|---:|---:|---:|']
+    for app in ('mobile','admin'):
+        path=OUT/f'{app}-test.log'
+        matches=re.findall(r'\+(\d+)(?: ~(\d+))?(?: -(\d+))?: (?:All tests passed!|Some tests failed\.)',path.read_text(encoding='utf8')) if path.exists() else []
+        if matches:
+            passed,skipped,failed_tests=matches[-1]
+            lines.append(f'| {app} | {passed} | {failed_tests or 0} | {skipped or 0} |')
+        else: lines.append(f'| {app} | NON MESURÉ | NON MESURÉ | NON MESURÉ |')
+    lines+=['', '| Analyse | Erreurs | Avertissements | Informations | Code |','|---|---:|---:|---:|---:|']
+    for app in ('mobile','admin'):
+        path=OUT/f'{app}-analyze.log'
+        if path.exists():
+            log=path.read_text(encoding='utf8')
+            counts=[len(re.findall(r'^\s*'+level+r' -',log,re.M)) for level in ('error','warning','info')]
+            lines.append(f'| {app} | {counts[0]} | {counts[1]} | {counts[2]} | {jobs.get(app+"-analyze",{}).get("exit_code","NON EXÉCUTÉ")} |')
+    lines+=['', '| Build | Mode | Code | Artefact | SHA-256 |', '|---|---|---:|---|---|']
     for artifact in artifacts:
         lines.append(f'| {artifact["job"]} | {"debug" if "android" in artifact["job"] else "release"} | {artifact["exit_code"]} | `{artifact["path"]}` (présent : {artifact["exists"]}) | `{artifact.get("sha256","NON CALCULÉ")}` |')
-    lines+=['', 'Les APK sont debug, non signés pour la production. Les exécutables Windows requièrent leur bundle et les builds web leur répertoire complet ; les empreintes ci-dessus identifient les artefacts principaux, pas une signature de déploiement. Android : les ABI effectives sont dans [ARTIFACTS.json](evidence/phase19-final/ARTIFACTS.json).',
+    lines+=['', 'Les APK sont debug, non signés pour la production. Les exécutables Windows requièrent leur bundle et les builds web leur répertoire complet ; les empreintes ci-dessus identifient les artefacts principaux, pas une signature de déploiement. [BUNDLE_MANIFESTS.json](evidence/phase19-final/BUNDLE_MANIFESTS.json) contient aussi les SHA-256 de tous les fichiers du bundle web et Windows, dont le code AOT. Android : les ABI effectives sont dans [ARTIFACTS.json](evidence/phase19-final/ARTIFACTS.json).',
             '', '## Dépendances et absence de secrets','',
             'Commande : `.venv/Scripts/python.exe -m pip_audit --format=json --output=evidence/phase19-final/dependency-audit.json`. Voir [avis complets](evidence/phase19-final/dependency-audit.json). Les entrées peuvent avoir des doublons ou alias ; elles ne doivent pas être présentées comme autant de vulnérabilités uniques.',
             '', '| Paquet | Version auditée | Entrées retournées | Identifiants distincts |', '|---|---|---:|---:|']
