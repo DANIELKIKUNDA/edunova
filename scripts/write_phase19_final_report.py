@@ -89,6 +89,7 @@ def generate():
         for app in ('mobile','admin'):
             if name.startswith(app+'-'):
                 paths=[f'apps/{app}/lib',f'apps/{app}/pubspec.yaml']
+                if name.endswith('-pub'): paths=[f'apps/{app}/pubspec.yaml']
                 if name.endswith('-test'): paths.append(f'apps/{app}/test')
                 for platform in ('web','windows','android'):
                     if name.endswith('-'+platform): paths.append(f'apps/{app}/{platform}')
@@ -128,6 +129,7 @@ def generate():
            'Windows 11 x64, Git 2.51.0, Python 3.13.14 ; environnement initial `.venv` conservé et environnement corrigé `.local-certification/security-venv` séparé. Flutter 3.35.4 / Dart 3.9.2, PostgreSQL 16.11 local : `127.0.0.1:55439`, utilisateur de test `edunova_cert`. SDK Android local, Java 21, Visual Studio 2022 avec ATL, NuGet et Tesseract locaux.',
            'PowerShell : `$env:EDUNOVA_CERT_EVIDENCE="phase19-final"`, puis `.venv/Scripts/python.exe scripts/certify_local_phase19.py <noms-des-contrôles>`. Le runner retire les secrets hérités, impose test/fake/sandbox et conserve commande, répertoire, code de sortie, durée et commit. Les tests SQL exigent explicitement la cible locale autorisée. Aucune production ni transaction réelle.',
            'Pour rejouer les suites corrigées : `$env:EDUNOVA_CERT_PYTHON="C:/Users/cs-ap/dev/edusync-web/edunova/.local-certification/security-venv/Scripts/python.exe"`. Installer `services/api/requirements-certification.txt` et `pip-audit==2.10.1` dans cet environnement ; son pip est 26.2.2. Les versions réellement installées sont dans `freeze.log`.',
+           'La [reproduction détaillée](evidence/phase19-final/BOOTSTRAP.md) distingue les deux environnements, les bases locales et les tentatives préliminaires.',
            'Migrations : seconde base neuve `edunova_phase19_final_test`, choisie par `$env:EDUNOVA_MIGRATION_TEST_DATABASE`. Les contraintes financières sont testées séparément sur la base migrée `edunova_phase19_test`. Les anciennes bases/preuves sont préservées.',
            '', '## Exécutions de cette mission', '', '| Contrôle | Code | Commit exécuté | Preuve |','|---|---:|---|---|']
     for name,job in sorted(jobs.items()):
@@ -140,6 +142,8 @@ def generate():
     for name in ('backend','backend-final','phase19','postgres','backend-contracts'):
         result=junit(name)
         if result: lines.append(f'| {name} | {result["passed"]} | {result["failed"]} | {result["skipped"]} |')
+    migrations=(OUT/'migrations.log').read_text(encoding='utf8') if (OUT/'migrations.log').exists() else ''
+    lines+=['',f'Rejeu SQL : **{len(re.findall(r"^APPLY ",migrations,re.M))} migrations tentées**, code {jobs.get("migrations",{}).get("exit_code","NON EXÉCUTÉ")}. Marqueur de fin complète présent : {"ALL MIGRATIONS APPLIED" in migrations}.']
     lines+=['', 'La suite `backend` est séquentielle, sans xdist, dans l’environnement initial conservé. Elle utilise les versions antérieures des dépendances et les tests de routes antérieurs à leur adaptation ; elle n’est pas une preuve de leur mise à jour. La suite `backend-final` utilise les dépendances corrigées et deux workers pour limiter les ressources. La nouvelle pile complète n’a pas été rejouée séquentiellement : la preuve d’absence de dépendance à l’ordre après mise à jour reste limitée. Les fichiers applicatifs sont comparés par arbres Git ; la différence des dépendances et des tests de routes de la suite initiale est conservée explicitement.',
             'La suite générale utilise SQLite et des simulateurs ; elle ne prouve pas la concurrence PostgreSQL. La sélection `postgres` utilise le moteur réel : callbacks identiques/modifiés concurrents, référence conflictuelle, paiements simultanés, rollback, tenant, charges annulées, course callback/expiration/annulation et cohérence reçu/ledger/statut. La priorité des échéances dispose du test adversarial ajouté lors de la première mission.',
             'Les 17 SKIP de la régression générale concernent les 9 cas de concurrence et 8 cas de contraintes nécessitant la variable PostgreSQL. Leur correspondance individuelle avec la suite réelle est fournie ci-dessous.', '']
