@@ -1,7 +1,8 @@
+from historical_audit_contracts import release_at_least
 from pathlib import Path
 root=Path(__file__).resolve().parents[1]
 checks={
-'api_0_16':'version="0.16.0"' in (root/'services/api/app/main.py').read_text(),
+'api_0_16':release_at_least(root, 'api', '0.16.0'),
 'migration_0014':(root/'services/api/migrations/0014_learning_experience_v0_16_0.sql').exists(),
 'hex_domain':(root/'services/api/app/modules/learning_experience/domain/model.py').exists(),
 'hex_service':(root/'services/api/app/modules/learning_experience/application/service.py').exists(),
@@ -15,10 +16,10 @@ checks={
 'optimistic_lock':'expected_version' in (root/'services/api/app/modules/learning_experience/application/service.py').read_text(),
 'home_resume':"'/home'" in (root/'services/api/app/modules/learning_experience/api/router.py').read_text(),
 'workspace_ui':(root/'apps/mobile/lib/src/features/study_workspace/presentation/study_workspace_page.dart').exists(),
-'responsive_ui':'width>=900' in (root/'apps/mobile/lib/src/features/study_workspace/presentation/study_workspace_page.dart').read_text(),
-'focus_mode':'Mode concentration' in (root/'apps/mobile/lib/src/features/study_workspace/presentation/study_workspace_page.dart').read_text(),
-'offline_affordance':'Hors connexion' in (root/'apps/mobile/lib/src/features/study_workspace/presentation/study_workspace_page.dart').read_text(),
-'mobile_version':'version: 0.16.0+25' in (root/'apps/mobile/pubspec.yaml').read_text(),
+'responsive_ui':all(token in (root/'apps/mobile/lib/src/features/study_workspace/presentation/study_workspace_page.dart').read_text() for token in ['width >= 980', 'wide ? _desktop(context) : _mobile(context)', 'NavigationBar']),
+'focus_mode':all(token in (root/'apps/mobile/lib/src/features/study_workspace/presentation/study_workspace_page.dart').read_text() for token in ['Mode Focus', 'Terminer le Focus', 'focus = !focus', 'if (!focus)']),
+'offline_affordance':all(token in (root/'apps/mobile/lib/src/features/study_workspace/presentation/study_workspace_page.dart').read_text() for token in ['Disponible hors connexion', 'Icons.offline_pin_rounded']),
+'mobile_version':release_at_least(root, 'mobile', '0.16.0+25'),
 'tests':(root/'services/api/tests/test_learning_experience_lot15.py').exists(),
 }
 for k,v in checks.items(): print(('PASS' if v else 'FAIL'),k)

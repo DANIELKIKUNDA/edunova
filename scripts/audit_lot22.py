@@ -1,3 +1,4 @@
+from historical_audit_contracts import release_at_least
 from pathlib import Path
 root=Path(__file__).resolve().parents[1]
 checks={
@@ -15,6 +16,6 @@ failed=[]
 for name,p in checks.items():
  ok=p.exists() and p.stat().st_size>100;print(('PASS' if ok else 'FAIL'),name,p.relative_to(root));failed += [] if ok else [name]
 main=(root/'services/api/app/main.py').read_text();runtime=(root/'services/api/app/runtime.py').read_text();migration=(root/'services/api/migrations/0031_campus_core_v0_23_0.sql').read_text()
-for name,ok in [('version_0_23_0','0.23.0' in main),('campus_router','campus_router' in main),('runtime_wiring','CampusService' in runtime),('tenant_columns',migration.count('institution_id')>=10),('brand_signature','From Volcano Tech' in (root/'apps/mobile/lib/src/features/campus/presentation/campus_page.dart').read_text())]:
+for name,ok in [('version_0_23_0',release_at_least(root, 'api', '0.23.0')),('campus_router','campus_router' in main),('runtime_wiring','CampusService' in runtime),('tenant_columns',migration.count('institution_id')>=10),('brand_signature','From Volcano Tech' in (root/'apps/mobile/lib/src/features/campus/presentation/campus_page.dart').read_text())]:
  print(('PASS' if ok else 'FAIL'),name);failed += [] if ok else [name]
 raise SystemExit(1 if failed else 0)

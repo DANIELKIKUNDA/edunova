@@ -1,7 +1,8 @@
+from historical_audit_contracts import release_at_least
 from pathlib import Path
 r=Path(__file__).resolve().parents[1]
 checks={
-'v0.17.1 API':'0.17.1' in (r/'services/api/app/main.py').read_text(),
+'v0.17.1 API':release_at_least(r, 'api', '0.17.1'),
 'adaptive v2':'adaptive-v2' in (r/'services/api/app/modules/adaptive_learning/domain/model.py').read_text(),
 'confidence band':'ConfidenceBand' in (r/'services/api/app/modules/adaptive_learning/domain/model.py').read_text(),
 'knowledge gaps':'KnowledgeGap' in (r/'services/api/app/modules/adaptive_learning/domain/model.py').read_text(),
@@ -11,8 +12,8 @@ checks={
 'history endpoint':"'/history'" in (r/'services/api/app/modules/adaptive_learning/api/router.py').read_text(),
 'history repo':'def history' in (r/'services/api/app/modules/adaptive_learning/infrastructure/sqlalchemy_repo.py').read_text(),
 'migration 0017':(r/'services/api/migrations/0017_adaptive_learning_hardening_v0_17_1.sql').exists(),
-'mobile 0.17.1':'0.17.1+29' in (r/'apps/mobile/pubspec.yaml').read_text(),
-'admin 0.17.1':'0.17.1+29' in (r/'apps/admin/pubspec.yaml').read_text(),
+'mobile 0.17.1':release_at_least(r, 'mobile', '0.17.1+29'),
+'admin 0.17.1':release_at_least(r, 'admin', '0.17.1+29'),
 'premium metrics':'Confiance' in (r/'apps/mobile/lib/src/features/adaptive_learning/presentation/adaptive_learning_page.dart').read_text(),
 'exam UI':'Examen en vue' in (r/'apps/mobile/lib/src/features/adaptive_learning/presentation/adaptive_learning_page.dart').read_text(),
 'gaps UI':'Lacunes' in (r/'apps/mobile/lib/src/features/adaptive_learning/presentation/adaptive_learning_page.dart').read_text(),

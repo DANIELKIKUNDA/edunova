@@ -1,3 +1,4 @@
+from historical_audit_contracts import release_at_least
 from pathlib import Path
 import re, sys
 ROOT=Path(__file__).resolve().parents[1]
@@ -6,7 +7,7 @@ def has(path,*needles):
     text=(ROOT/path).read_text(encoding='utf-8')
     return all(n in text for n in needles)
 def ck(name,ok): checks.append((name,bool(ok)))
-ck('api_version_0_12_1',has('services/api/app/main.py','version="0.12.1"','"version": "0.12.1"'))
+ck('api_version_0_12_1',release_at_least(ROOT, 'api', '0.12.1'))
 ck('migration_0008', (ROOT/'services/api/migrations/0008_editorial_hardening_v0_12_1.sql').exists())
 ck('optimistic_locking',has('services/api/app/modules/editorial/infrastructure/sqlalchemy_repo.py','row_version','editorial_concurrent_modification'))
 ck('structured_review_checklist',has('services/api/app/modules/editorial/application/service.py','review_checklist_incomplete','HIGH_RISK_CHECKS','STANDARD_CHECKS'))

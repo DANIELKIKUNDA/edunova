@@ -1,3 +1,4 @@
+from historical_audit_contracts import release_at_least
 from pathlib import Path
 r=Path(__file__).resolve().parents[1]
 checks={
@@ -10,9 +11,9 @@ checks={
 'auto_absent':'auto_absent_on_close' in (r/'services/api/app/modules/campus_operations/application/service.py').read_text(),
 'notifications':'NotificationIntent' in (r/'services/api/app/modules/campus_operations/application/service.py').read_text(),
 'api_routes':'absence-requests' in (r/'services/api/app/modules/campus_operations/api/router.py').read_text(),
-'version_api':'0.27.2' in (r/'services/api/app/main.py').read_text(),
-'version_mobile':'0.27.2+56' in (r/'apps/mobile/pubspec.yaml').read_text(),
-'version_admin':'0.27.2+56' in (r/'apps/admin/pubspec.yaml').read_text(),
+'version_api':release_at_least(r, 'api', '0.27.2'),
+'version_mobile':release_at_least(r, 'mobile', '0.27.2+56'),
+'version_admin':release_at_least(r, 'admin', '0.27.2+56'),
 }
 for k,v in checks.items():print(('PASS' if v else 'FAIL'),k)
 raise SystemExit(0 if all(checks.values()) else 1)

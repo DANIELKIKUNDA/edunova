@@ -1,3 +1,4 @@
+from historical_audit_contracts import release_at_least
 from pathlib import Path
 root=Path(__file__).resolve().parents[1]
 study=(root/'apps/mobile/lib/src/features/study_workspace/presentation/study_workspace_page.dart').read_text()
@@ -19,9 +20,9 @@ checks={
  'home deadline hero':'PROCHAINE ÉCHÉANCE' in home,
  'onboarding academic personalization':'Configure ton parcours' in onboarding,
  'optional university':'facultative' in onboarding,
- 'version mobile':'version: 0.16.2+27' in (root/'apps/mobile/pubspec.yaml').read_text(),
- 'version admin':'version: 0.16.2+27' in (root/'apps/admin/pubspec.yaml').read_text(),
- 'api version':'version="0.16.2"' in (root/'services/api/app/main.py').read_text(),
+ 'version mobile':release_at_least(root, 'mobile', '0.16.2+27'),
+ 'version admin':release_at_least(root, 'admin', '0.16.2+27'),
+ 'api version':release_at_least(root, 'api', '0.16.2'),
  'student delight documentation':(root/'docs/LOT15_STUDENT_DELIGHT_v0.16.2.md').exists(),
 }
 failed=[k for k,v in checks.items() if not v]

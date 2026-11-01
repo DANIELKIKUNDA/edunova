@@ -1,12 +1,13 @@
 """Run the repository's read-only historical structural audits locally."""
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
 
 root = Path(__file__).resolve().parents[1]
-out = root / 'evidence/local-phase19/audits'
-out.mkdir(exist_ok=True)
+out = root / 'evidence' / os.environ.get('EDUNOVA_CERT_EVIDENCE', 'local-phase19') / 'audits'
+out.mkdir(exist_ok=True, parents=True)
 results = []
 for script in sorted((root / 'scripts').glob('audit_*.py')):
     with (out / (script.stem + '.log')).open('w', encoding='utf-8') as log:

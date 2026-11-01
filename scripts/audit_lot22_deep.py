@@ -1,3 +1,4 @@
+from historical_audit_contracts import release_at_least
 from pathlib import Path
 root=Path(__file__).resolve().parents[1]
 checks={
@@ -13,9 +14,9 @@ checks={
  'hardening tests':(root/'services/api/tests/test_campus_lot22_hardening.py').exists(),
  'adr 032':(root/'docs/ADR-032-campus-scoped-administration-defense-in-depth.md').exists(),
  'lot22 hardening doc':(root/'docs/LOT22_ENTERPRISE_HARDENING_v0.23.1.md').exists(),
- 'api version': '0.23.1' in (root/'services/api/app/main.py').read_text(),
- 'mobile version': '0.23.1+44' in (root/'apps/mobile/pubspec.yaml').read_text(),
- 'admin version': '0.23.1+44' in (root/'apps/admin/pubspec.yaml').read_text(),
+ 'api version': release_at_least(root, 'api', '0.23.1'),
+ 'mobile version': release_at_least(root, 'mobile', '0.23.1+44'),
+ 'admin version': release_at_least(root, 'admin', '0.23.1+44'),
 }
 for k,v in checks.items():print(('PASS' if v else 'FAIL'),k)
 print(f"{sum(checks.values())}/{len(checks)} PASS")

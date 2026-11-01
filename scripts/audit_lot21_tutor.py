@@ -1,3 +1,4 @@
+from historical_audit_contracts import release_at_least
 from pathlib import Path
 R=Path(__file__).resolve().parents[1]
 checks={
@@ -14,5 +15,5 @@ checks={
 for k,p in checks.items():assert p.exists() and p.stat().st_size>20,k
 text=(R/'services/api/app/modules/tutor/application/service.py').read_text()
 for token in ['SOCRATIC','PREREQUISITE','REMEDIATE','ABSTAIN','mutation_id','tutor_version_conflict']:assert token in text,token
-main=(R/'services/api/app/main.py').read_text();assert '0.22.0' in main and '/v1/tutor' in main
+main=(R/'services/api/app/main.py').read_text();assert release_at_least(R, 'api', '0.22.0') and '/v1/tutor' in main
 print('LOT21 AUDIT: 15/15 PASS')

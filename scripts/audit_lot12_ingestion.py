@@ -1,3 +1,4 @@
+from historical_audit_contracts import release_at_least
 from pathlib import Path
 import re, sys
 ROOT=Path(__file__).resolve().parents[1]
@@ -10,9 +11,9 @@ def has(path,*needles):
 def exists(path): return (ROOT/path).exists()
 def ck(name, ok): checks.append((name,bool(ok)))
 
-ck('api_version_0_13_1',has('services/api/app/main.py','version="0.13.1"','"version": "0.13.1"'))
-ck('mobile_version_0_13_1',has('apps/mobile/pubspec.yaml','version: 0.13.1+19'))
-ck('admin_version_0_13_1',has('apps/admin/pubspec.yaml','version: 0.13.1+19'))
+ck('api_version_0_13_1',release_at_least(ROOT, 'api', '0.13.1'))
+ck('mobile_version_0_13_1',release_at_least(ROOT, 'mobile', '0.13.1+19'))
+ck('admin_version_0_13_1',release_at_least(ROOT, 'admin', '0.13.1+19'))
 ck('migration_0009',exists('services/api/migrations/0009_ingestion_industrielle_v0_13_0.sql'))
 ck('migration_tables',has('services/api/migrations/0009_ingestion_industrielle_v0_13_0.sql','ingestion_batches','ingestion_documents','ingestion_jobs','ingestion_results','artifact_sha256','pipeline_version'))
 ck('domain_batch_document_job_result',has('services/api/app/modules/ingestion/domain/model.py','class IngestionBatch','class IngestionDocument','class IngestionJob','class IngestionResult'))

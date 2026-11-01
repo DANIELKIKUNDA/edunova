@@ -7,7 +7,7 @@ import sys
 import time
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / 'evidence' / 'local-phase19'
+OUT = ROOT / 'evidence' / os.environ.get('EDUNOVA_CERT_EVIDENCE', 'local-phase19')
 OUT.mkdir(exist_ok=True)
 env = os.environ.copy()
 for key in list(env):

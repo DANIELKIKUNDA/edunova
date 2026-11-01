@@ -1,3 +1,4 @@
+from historical_audit_contracts import release_at_least
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 page=(ROOT/'apps/mobile/lib/src/features/analytics/presentation/analytics_page.dart').read_text()
@@ -9,7 +10,7 @@ providers=(ROOT/'apps/mobile/lib/src/core/di/providers.dart').read_text()
 router=(ROOT/'apps/mobile/lib/src/app/router.dart').read_text()
 pubspec=(ROOT/'apps/mobile/pubspec.yaml').read_text()
 checks={
-  'version_mobile_0111': 'version: 0.11.1+15' in pubspec,
+  'version_mobile_0111': release_at_least(ROOT, 'api', '0.11.1+15'),
   'analytics_route': "path: '/analytics'" in router,
   'page_body_constrained': 'EduNovaPageBody' in page,
   'responsive_desktop_split': 'constraints.maxWidth >= 980' in page,

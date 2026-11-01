@@ -1,10 +1,11 @@
+from historical_audit_contracts import release_at_least
 from pathlib import Path
 r=Path(__file__).resolve().parents[1]
 p=(r/'apps/admin/lib/src/features/editorial/content_factory_page.dart').read_text()
 checks={
-'admin 0.14.2+22':'version: 0.14.2+22' in (r/'apps/admin/pubspec.yaml').read_text(),
-'mobile 0.14.2+22':'version: 0.14.2+22' in (r/'apps/mobile/pubspec.yaml').read_text(),
-'api 0.14.2':'version="0.14.2"' in (r/'services/api/app/main.py').read_text(),
+'admin 0.14.2+22':release_at_least(r, 'admin', '0.14.2+22'),
+'mobile 0.14.2+22':release_at_least(r, 'mobile', '0.14.2+22'),
+'api 0.14.2':release_at_least(r, 'api', '0.14.2'),
 'kpi responsive':'_KpiGrid' in p and 'crossAxisCount:cols' in p,
 'search':'Rechercher un run' in p,
 'state filters':'À relire' in p and 'Bloqués' in p,

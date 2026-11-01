@@ -1,3 +1,4 @@
+from historical_audit_contracts import release_at_least
 from pathlib import Path
 root=Path(__file__).resolve().parents[1]
 checks={
@@ -13,5 +14,5 @@ assert 'qr_ttl_seconds' in svc and 'attendance_already_recorded' in svc
 assert 'require_device_binding' in svc and 'location_latitude' in svc
 assert 'NEEDS_REVIEW' in svc and 'risk=min(100,risk)' in svc
 assert 'UNIQUE(attendance_session_id,student_account_id)' in mig
-assert '0.27.0' in main and 'campus_operations_router' in main
+assert release_at_least(root, 'api', '0.27.0') and 'campus_operations_router' in main
 print('LOT26 AUDIT: 12/12 PASS')

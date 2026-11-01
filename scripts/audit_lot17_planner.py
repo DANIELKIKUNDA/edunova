@@ -1,7 +1,8 @@
+from historical_audit_contracts import release_at_least
 from pathlib import Path
 R=Path(__file__).resolve().parents[1]
 checks={
-'api_0_18':'version="0.18.1"' in (R/'services/api/app/main.py').read_text(),
+'api_0_18':release_at_least(R, 'api', '0.18.1'),
 'router': '/v1/study-planner' in (R/'services/api/app/main.py').read_text(),
 'bounded_context':(R/'services/api/app/modules/study_orchestration/application/service.py').exists(),
 'migration_0018':(R/'services/api/migrations/0018_adaptive_study_planner_v0_18_0.sql').exists(),

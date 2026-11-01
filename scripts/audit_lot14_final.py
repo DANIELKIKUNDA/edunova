@@ -1,9 +1,10 @@
+from historical_audit_contracts import release_at_least
 from pathlib import Path
 r=Path(__file__).resolve().parents[1]
 checks={
-'api 0.15.1':'version="0.15.1"' in (r/'services/api/app/main.py').read_text(),
-'admin 0.15.1+24':'0.15.1+24' in (r/'apps/admin/pubspec.yaml').read_text(),
-'mobile 0.15.1+24':'0.15.1+24' in (r/'apps/mobile/pubspec.yaml').read_text(),
+'api 0.15.1':release_at_least(r, 'api', '0.15.1'),
+'admin 0.15.1+24':release_at_least(r, 'admin', '0.15.1+24'),
+'mobile 0.15.1+24':release_at_least(r, 'mobile', '0.15.1+24'),
 'migration 0013':(r/'services/api/migrations/0013_publication_hardening_v0_15_1.sql').exists(),
 'rollout DB check':'ck_publication_rollout_percentage' in (r/'services/api/migrations/0013_publication_hardening_v0_15_1.sql').read_text(),
 'due scheduler index':'ix_publication_due_scheduler' in (r/'services/api/migrations/0013_publication_hardening_v0_15_1.sql').read_text(),
