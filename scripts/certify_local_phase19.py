@@ -19,7 +19,7 @@ if (ocr / 'tesseract.exe').exists():
     env['PATH'] = str(ocr) + os.pathsep + env.get('PATH', '')
 if (ROOT / '.local-certification/nuget.exe').exists():
     env['PATH'] = str(ROOT / '.local-certification') + os.pathsep + env.get('PATH', '')
-python = str(ROOT / '.venv/Scripts/python.exe')
+python = os.environ.get('EDUNOVA_CERT_PYTHON', str(ROOT / '.venv/Scripts/python.exe'))
 flutter = str(Path.home() / 'dev/flutter/bin/flutter.bat')
 jobs = {
     'mobile-codegen': ([str(Path.home() / 'dev/flutter/bin/dart.bat'), 'run', 'build_runner', 'build', '--delete-conflicting-outputs'], ROOT / 'apps/mobile'),
