@@ -18,7 +18,8 @@ for target in re.findall(r'\[[^\]]+\]\(([^)]+)\)',re.sub(r'```.*?```','',body,fl
     if not target.startswith(('https://','http://','#')):
         assert (report.parent/target).exists(), target
 required=('audits','backend-final','phase19','postgres','migrations','mobile-pub','admin-pub','mobile-test','admin-test',
-          'mobile-web','admin-web','mobile-windows','admin-windows','mobile-android','admin-android','pip-check')
+          'mobile-web','admin-web','mobile-windows','admin-windows','mobile-android','admin-android','pip-check',
+          'security-audit','pub-dependency-audit','audit-contract-tests','backend-contracts')
 for name in required: assert data(name+'.json')['exit_code']==0, name
 audits=data('audits/results.json')
 assert len(audits)==55 and all(a['exit_code']==0 for a in audits)
@@ -36,6 +37,10 @@ for artifact in artifacts:
     with (root/artifact['path']).open('rb') as stream:
         assert hashlib.file_digest(stream,'sha256').hexdigest()==artifact['sha256']
 assert data('admin-analyze.json')['exit_code']==0
+dependencies=data('dependency-audit.json')['dependencies']
+assert dependencies and not any(item.get('vulns') for item in dependencies)
+pub=data('pub-dependency-audit-results.json')
+assert pub['public_package_versions_checked']>0 and not pub['incomplete'] and not pub['findings']
 mobile=(out/'mobile-analyze.log').read_text(encoding='utf8')
 assert not re.search(r'^\s*(error|warning) -',mobile,re.M)
 assert 'drift/web.dart' in mobile  # documented residual info; not a clean analysis
