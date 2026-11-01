@@ -30,6 +30,7 @@ def request(auth,body=None):
 
 def main():
     parser=argparse.ArgumentParser(); parser.add_argument('--update-summary',type=Path)
+    parser.add_argument('--output',type=Path,default=ROOT/'evidence/phase19-final/publication.json')
     args=parser.parse_args(); auth=token(); pr=request(auth)
     if (pr['head']['ref'],pr['base']['ref'],pr['state'],pr['draft'],pr['merged']) != ('import/edunova-v0.57.12','main','open',True,False):
         raise SystemExit('PR state differs from authorized draft/main boundary; no update performed')
@@ -46,7 +47,7 @@ def main():
     result={'url':pr['html_url'],'state':pr['state'],'draft':pr['draft'],'merged':pr['merged'],
             'head_ref':pr['head']['ref'],'remote_head_sha':pr['head']['sha'],
             'base_ref':pr['base']['ref'],'summary_updated':bool(args.update_summary)}
-    (ROOT/'evidence/phase19-final/publication.json').write_text(json.dumps(result,indent=2),encoding='utf8')
+    args.output.write_text(json.dumps(result,indent=2),encoding='utf8')
     print(json.dumps(result,indent=2))
 
 if __name__=='__main__': main()

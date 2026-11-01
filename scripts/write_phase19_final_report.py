@@ -124,7 +124,7 @@ def generate():
            'Cette certification locale n’autorise pas une mise en production. Les constats sont issus des exécutions conservées ; aucune réussite n’est déduite d’un ancien build.',
            '', '## Livraison et provenance', '',
            f'HEAD de préparation du rapport : `{head}`. Les commits documentaires de livraison peuvent lui succéder ; le SHA final publié est consigné dans la conversation PR #1 et dans le bilan de livraison.',
-           'Branche : `import/edunova-v0.57.12`. Aucun merge dans main. La publication finale et le statut brouillon doivent être vérifiés après le push ; voir [publication.json](evidence/phase19-final/publication.json).',
+           'Branche : `import/edunova-v0.57.12`. Aucun merge dans main. Le [contrôle avant publication](evidence/phase19-final/PR_BEFORE_PUBLICATION.json) est une photographie historique. Le SHA HEAD final publié et la liste complète incluant le commit documentaire sont consignés dans la description de la [PR #1](https://github.com/DANIELKIKUNDA/edunova/pull/1) après vérification du push ; le rapport ne prétend pas contenir son propre hash Git.',
            'Les commits testés sont indiqués individuellement ci-dessous. [TREE_IDENTITY.json](evidence/phase19-final/TREE_IDENTITY.json) compare les sources réellement exécutées aux sources livrées, y compris les dépendances déclarées.',
            'Les échecs, commandes, traces et correctifs intermédiaires figurent dans [DIAGNOSTICS.md](evidence/phase19-final/DIAGNOSTICS.md).',
            '', '## Environnement et reproduction', '',
