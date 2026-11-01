@@ -1,5 +1,7 @@
 """Frontend-BE bridge must target existing authenticated, read-only campus API routes."""
 from app.main import app
+from fastapi.routing import iter_route_contexts
+from fastapi.testclient import TestClient
 
 
 def test_phase14_15_frontend_paths_are_real_get_endpoints():
@@ -13,14 +15,15 @@ def test_phase14_15_frontend_paths_are_real_get_endpoints():
         '/v1/institutional-analytics/institutions/{iid}/intelligence/period-comparison',
     }
     for path in paths:
-        routes = [r for r in app.routes if getattr(r, 'path', None) == path and 'GET' in getattr(r, 'methods', set())]
+        routes = [r for r in iter_route_contexts(app.routes) if getattr(r, 'path', None) == path and 'GET' in getattr(r, 'methods', set())]
         assert len(routes) == 1, path
         assert any(getattr(dep.call, '__name__', '') == 'current_auth'
                    for dep in routes[0].dependant.dependencies), path
+        assert TestClient(app).get(path).status_code == 401, path
 
 
 def test_frontend_intelligence_routes_do_not_write_gradebook_or_jury():
-    for r in app.routes:
+    for r in iter_route_contexts(app.routes):
         if not getattr(r, 'path', '').startswith(('/v1/pedagogical-intelligence/institutions/',
                                                  '/v1/institutional-analytics/institutions/')):
             continue
