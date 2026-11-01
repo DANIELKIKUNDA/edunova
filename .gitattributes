@@ -1,3 +1,4 @@
 # Preserve original certification output bytes and diagnostic whitespace.
 evidence/local-phase19/** -text -whitespace
 evidence/local_phase19_*.log -text -whitespace
+evidence/phase19-final/** -text -whitespace

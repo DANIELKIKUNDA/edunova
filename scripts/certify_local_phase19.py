@@ -22,6 +22,8 @@ if (ROOT / '.local-certification/nuget.exe').exists():
 python = os.environ.get('EDUNOVA_CERT_PYTHON', str(ROOT / '.venv/Scripts/python.exe'))
 flutter = str(Path.home() / 'dev/flutter/bin/flutter.bat')
 jobs = {
+    'audit-contract-tests': ([python, str(ROOT / 'scripts/test_audit_contracts.py')], ROOT),
+    'security-audit': ([python, '-m', 'pip_audit', '--format=json', '--output=' + str(OUT / 'dependency-audit.json')], ROOT),
     'mobile-codegen': ([str(Path.home() / 'dev/flutter/bin/dart.bat'), 'run', 'build_runner', 'build', '--delete-conflicting-outputs'], ROOT / 'apps/mobile'),
     'mobile-privacy': ([flutter, 'test', '--no-pub', 'test/campus_intelligence_access_widget_test.dart', '--reporter=expanded'], ROOT / 'apps/mobile'),
     'compile': ([python, '-m', 'compileall', '-q', 'services/api/app', 'services/api/tests'], ROOT),
