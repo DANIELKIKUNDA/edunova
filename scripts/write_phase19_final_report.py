@@ -99,6 +99,7 @@ def generate():
     (OUT/'TREE_IDENTITY.json').write_text(json.dumps(proofs,indent=2),encoding='utf8')
     deps=read('dependency-audit.json') or {}
     vulnerable=[d for d in deps.get('dependencies',[]) if d.get('vulns')]
+    pub_audit=read('pub-dependency-audit-results.json')
     security=[]
     xml=OUT/'backend-final.xml'
     if xml.exists():
@@ -188,6 +189,7 @@ def generate():
         lines.append(f'| {dep["name"]} | {dep["version"]} | {len(dep["vulns"])} | {len({v["id"] for v in dep["vulns"]})} |')
     lines+=['', f'Paquets encore signalés par le dernier audit : **{len(vulnerable)}**. Le premier audit signalait 100 entrées (doublons/alias inclus) dans 5 paquets ; les résultats avant correction sont conservés dans [dependency-audit-before-fix.json](evidence/phase19-final/dependency-audit-before-fix.json).',
             'Mises à jour isolées : FastAPI 0.162.0, Starlette 1.10.0, cryptography 50.0.2, Pillow 13.0.0, pytest 9.2.0 ; pip de certification 26.2.2. La simulation de résolution [security-upgrade-resolution.log](evidence/phase19-final/security-upgrade-resolution.log) ne vaut ni installation ni validation ; seuls les résultats des suites corrigées et du nouvel audit font foi. Le scan ne couvre pas automatiquement les dépendances Dart, Android, NuGet ou les bibliothèques natives.',
+            f'Audit Dart complémentaire via l’[API officielle OSV](https://google.github.io/osv.dev/api/) : {pub_audit["public_package_versions_checked"] if pub_audit else "NON EXÉCUTÉ"} couples paquet/version publics ; {len(pub_audit["findings"]) if pub_audit else "NON MESURÉ"} paquet(s) signalé(s). Réponse incomplète : {pub_audit["incomplete"] if pub_audit else "NON MESURÉ"}. [Résultat exact](evidence/phase19-final/pub-dependency-audit-results.json). Cela ne couvre ni le SDK Flutter ni les binaires natifs transitifs.',
             'Le contrôle [publication-inventory.json](evidence/phase19-final/publication-inventory.json) vérifie les fichiers suivis sans afficher les valeurs détectées. C’est un contrôle heuristique, non une garantie exhaustive. `.env`, cluster PostgreSQL, caches et binaires de build ne sont pas publiés.',
             '', '## Limites et anomalies restantes','',
             f'- Paquets Python signalés par le dernier audit : {len(vulnerable)}. Un résultat vide ne garantit pas l’absence de vulnérabilités inconnues.',
@@ -196,6 +198,7 @@ def generate():
             '- iOS/macOS/Linux non exécutés sur Windows. Pas de validation sur appareil physique, de signature release Android, ni de recette visuelle complète des applications natives.',
             '- Providers de paiement, FCM, S3 et Redis de production non testés ; aucun paiement réel, secret de production ou service payant utilisé.',
             '- Pas de pentest ni de charge prolongée ; les invariants financiers sont validés dans les scénarios réels explicitement exécutés.',
+            '- Avertissements tiers Python SWIG/PyMuPDF et adaptateur TestClient/httpx déprécié conservés dans les logs ; aucun statut PASS déduit de leur seule absence d’exception.',
             '', '## Commits de la mission et historiques publiés','',
             'La liste ci-dessous couvre les commits locaux depuis l’import de référence ; la visibilité GitHub doit être confirmée après publication. Les messages `[skip ci]` évitent les déclenchements Actions inutiles lors du push.', '','```text',
             git('log','--reverse','--format=%H %s','6607b18da64eb44c2de017192ccefded21659a35..HEAD'),'```','']
