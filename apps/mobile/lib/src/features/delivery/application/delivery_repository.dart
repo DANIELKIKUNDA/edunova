@@ -1,7 +1,6 @@
 import '../../library/domain/library.dart';
 import '../../library/application/library_repository.dart';
 import '../domain/delivery.dart';
-import 'download_resource.dart';
 
 abstract interface class DeliveryRemoteGateway {
   Future<DeliveryGrantView> grant({required String resourceId,required String deliveryToken});
@@ -66,12 +65,8 @@ class RunDownloadQueue {
         await downloader.call(resource);
         await local.removeQueueForResource(q.resourceId); done++;
       }catch(e){
-        // A device going offline is not a failed resource. Keep the job queued
-        // without consuming its five retry attempts; retry on the next drain.
-        if (e is StateError && e.message == 'network_unavailable') {
-          await local.updateQueue(q.id,state:'queued',attempts:q.attempts,
-            nextAttemptAt:DateTime.now().toUtc().add(const Duration(seconds:30)),
-            lastError:'En attente de connexion réseau');
+        if(e is StateError && e.message=='network_unavailable'){
+          await local.updateQueue(q.id,state:'queued',attempts:q.attempts,nextAttemptAt:DateTime.now().toUtc().add(const Duration(seconds:30)),lastError:'En attente de connexion réseau');
           break;
         }
         final attempts=q.attempts+1; final dead=attempts>=5;
