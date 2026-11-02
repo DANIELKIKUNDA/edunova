@@ -99,14 +99,8 @@ jobs:
       - name: Run real browser journeys and capture evidence
         run: |
           mkdir -p certification-results/e2e
-          npx http-server apps/mobile/build/web -a 127.0.0.1 -p 8080 -c-1 > certification-results/e2e/web-server.log 2>&1 &
-          server_pid=$!
-          trap 'kill $server_pid 2>/dev/null || true' EXIT
-          for attempt in {1..30}; do
-            curl -fsS http://127.0.0.1:8080/ >/dev/null && break
-            sleep 1
-          done
-          npx playwright test tests/e2e/phase20-web.spec.js --reporter=line
+          npx playwright test tests/e2e/phase20-web.spec.js \
+            --config=tests/e2e/playwright.config.js --reporter=line
       - uses: actions/upload-artifact@v4
         if: always()
         with:
