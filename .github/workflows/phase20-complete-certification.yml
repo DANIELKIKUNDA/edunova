@@ -94,12 +94,12 @@ jobs:
       - name: Install browser test runtime
         run: |
           npm init -y
-          npm install --save-dev @playwright/test@1.56.1
+          npm install --save-dev @playwright/test@1.56.1 http-server@14.1.1
           npx playwright install --with-deps chromium
       - name: Run real browser journeys and capture evidence
         run: |
           mkdir -p certification-results/e2e
-          python3 -m http.server 8080 --directory apps/mobile/build/web > certification-results/e2e/web-server.log 2>&1 &
+          npx http-server apps/mobile/build/web -a 127.0.0.1 -p 8080 -c-1 > certification-results/e2e/web-server.log 2>&1 &
           server_pid=$!
           trap 'kill $server_pid 2>/dev/null || true' EXIT
           for attempt in {1..30}; do
