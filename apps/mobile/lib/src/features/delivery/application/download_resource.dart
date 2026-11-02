@@ -41,7 +41,7 @@ class DownloadResource {
       final response=await _dio.get<ResponseBody>(grant.url,options:Options(responseType:ResponseType.stream,headers:headers,validateStatus:(s)=>s==200||s==206));
       if(offset>0 && response.statusCode==200){await store.resetPartial(resource.id);offset=0;}
       if(offset>0 && response.statusCode==206){
-        final contentRange=response.headers.value(Headers.contentRangeHeader);
+        final contentRange=response.headers.value('content-range');
         if(!_validContentRange(contentRange,offset,grant.sizeBytes)){
           await store.resetPartial(resource.id);
           throw StateError('download_content_range_mismatch');
