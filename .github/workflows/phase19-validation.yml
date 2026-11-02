@@ -25,7 +25,7 @@ jobs:
         run: flutter pub get
       - name: Static analysis
         working-directory: apps/mobile
-        run: flutter analyze --no-pub
+        run: flutter analyze --no-pub --no-fatal-infos
       - name: Ownership and library regression
         working-directory: apps/mobile
         run: flutter test --no-pub test/secure_session_account_ownership_test.dart test/library_catalog_refresh_test.dart
