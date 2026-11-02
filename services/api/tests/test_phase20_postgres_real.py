@@ -41,13 +41,7 @@ def pg_engine():
                 PRIMARY KEY (tenant_id, item_id)
             )
         """))
-        connection.execute(text("""
-            DO $ BEGIN
-              IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'phase20_app') THEN
-                CREATE ROLE phase20_app NOLOGIN NOSUPERUSER;
-              END IF;
-            END $;
-        """))
+        connection.execute(text("CREATE ROLE phase20_app NOLOGIN NOSUPERUSER"))
         connection.execute(text("GRANT USAGE ON SCHEMA public TO phase20_app"))
         connection.execute(text("GRANT SELECT, INSERT, DELETE ON phase20_tenant_probe TO phase20_app"))
         connection.execute(text("ALTER TABLE phase20_tenant_probe ENABLE ROW LEVEL SECURITY"))
