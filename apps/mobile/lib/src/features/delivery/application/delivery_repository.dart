@@ -1,6 +1,7 @@
 import '../../library/domain/library.dart';
 import '../../library/application/library_repository.dart';
 import '../domain/delivery.dart';
+import 'download_resource.dart';
 
 abstract interface class DeliveryRemoteGateway {
   Future<DeliveryGrantView> grant({required String resourceId,required String deliveryToken});
