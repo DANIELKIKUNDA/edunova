@@ -1,5 +1,7 @@
 name: EduNova Phase 20 Complete Certification
 
+# Full evidence: PostgreSQL, degraded E2E and native compilation.
+
 on:
   pull_request:
     branches: [import/edunova-v0.57.12]
