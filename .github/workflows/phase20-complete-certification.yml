@@ -194,6 +194,7 @@ jobs:
           flutter config --enable-windows-desktop
           flutter create --platforms=windows --org tech.volcano.edunova .
           $env:CMAKE_POLICY_VERSION_MINIMUM = "3.5"
+          $env:CL = "/D_SILENCE_EXPERIMENTAL_COROUTINE_DEPRECATION_WARNINGS"
           flutter pub get
           flutter build windows --release
       - uses: actions/upload-artifact@v4
