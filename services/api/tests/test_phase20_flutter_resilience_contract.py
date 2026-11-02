@@ -11,7 +11,7 @@ def _source(relative: str) -> str:
 def test_download_resume_validates_server_range_before_appending():
     source = _source("apps/mobile/lib/src/features/delivery/application/download_resource.dart")
     assert "download_content_range_mismatch" in source
-    assert "Headers.contentRangeHeader" in source
+    assert "value('content-range')" in source
     assert "start==offset" in source
     assert "length==total" in source
 
