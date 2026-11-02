@@ -131,6 +131,7 @@ jobs:
         run: |
           flutter create --platforms=android --org tech.volcano.edunova .
           sed -i -E 's#gradle-[0-9.]+-#gradle-8.14-#' android/gradle/wrapper/gradle-wrapper.properties
+          sed -i 's/8.9.1/8.11.1/g' android/settings.gradle.kts
           flutter pub get
           flutter build apk --release
       - uses: actions/upload-artifact@v4
