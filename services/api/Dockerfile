@@ -5,7 +5,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends tesseract-ocr t
  && groupadd --system edunova && useradd --system --gid edunova --home /app edunova
 COPY requirements.txt .
 RUN python -m pip install --no-cache-dir --upgrade "setuptools>=78.1.1" \
- && pip install --no-cache-dir -r requirements.txt
+ && pip install --no-cache-dir -r requirements.txt \
+ && python -m pip uninstall -y pip setuptools
 COPY --chown=edunova:edunova app ./app
 USER edunova
 EXPOSE 8000
