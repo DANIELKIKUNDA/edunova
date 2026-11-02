@@ -1,6 +1,6 @@
 name: EduNova Phase 20 Complete Certification
 
-# Full evidence: PostgreSQL, degraded E2E, browser screenshots and native compilation.
+# Full evidence: PostgreSQL 16, degraded E2E, browser screenshots and native compilation.
 
 on:
   pull_request:
