@@ -1,61 +1,92 @@
-# EduNova — Phase 20 : industrialisation, performance et fiabilité
+# EduNova — Rapport de certification Phase 20
 
-Date de contrôle : 2 novembre 2026  
-Branche : `codex/phase20-industrialisation-fiabilite`  
-Référence auditée : `import/edunova-v0.57.12` à `ef3d52fb149067cd46fbd433370cddba05982afa`
+Date: 2 novembre 2026  
+Branche: `codex/phase20-industrialisation-fiabilite`  
+Révision fonctionnelle certifiée: `4e49f83955ab207fafeea65cf8dfc51107f239d2`  
+Base: `import/edunova-v0.57.12` (`ef3d52fb149067cd46fbd433370cddba05982afa`)
 
-## État initial vérifié
+## 1. État vérifié à la reprise
 
-- La PR historique n°1 est encore ouverte et en brouillon ; aucune fusion dans `main`.
-- La certification Phase 19 publiée reste **partielle**.
-- Les preuves historiques indiquent 1 201 tests backend, 32 contrôles financiers, 34 tests PostgreSQL, 55 audits, 96 tests Mobile, 2 tests Admin et six builds. Ces résultats n'ont pas été réattribués à la Phase 20.
-- Aucun ticket GitHub ouvert n'a été trouvé au début de la mission.
+- `main` ne contenait que le commit initial; la base réelle de développement était `import/edunova-v0.57.12`.
+- La PR #1 documentait une certification Phase 19 partielle.
+- Les chiffres historiques (1 201 backend, 32 finance, 34 PostgreSQL réel, 55 audits, 96 mobile, 2 admin et six builds) ont été retrouvés dans les rapports du dépôt. Ils ne sont pas assimilés à une nouvelle exécution.
+- Aucun issue GitHub ouvert n'était présent lors de l'audit.
+- Les correctifs Phase 20 ci-dessous n'étaient pas publiés sur la branche de référence.
 
-## Corrections Phase 20
+## 2. Corrections Phase 20
 
-### Téléchargements et fonctionnement dégradé
+### Téléchargements fiables
 
-- validation stricte de `Content-Range` avant ajout à un fichier partiel ;
-- refus et remise à zéro d'une reprise incohérente ;
-- contrôle réseau préalable conservé ;
-- conservation des contrôles de taille, ETag et SHA-256 avant finalisation ;
-- les coupures transitoires ne consomment plus deux fois le budget de tentatives ;
-- une file hors ligne reste en attente sans être classée en échec définitif.
+- validation du statut partiel et de l'en-tête `Content-Range` avant reprise;
+- abandon du fragment local si le serveur répond sur une plage incohérente;
+- conservation des validations taille, ETag et SHA-256 avant finalisation;
+- politique de reprise bornée sans double consommation du budget lors d'une panne réseau transitoire.
 
-### Synchronisation, sécurité et asynchronisme
+### Offline-first et synchronisation
 
-- les garanties existantes ont été rejouées : appareils enregistrés, idempotence, conflits optimistes, fusion monotone, isolation par compte, replay et compaction ;
-- aucun assouplissement des contrôles multi-tenant ou des autorisations n'a été introduit.
+- maintien en file de l'opération lorsque le réseau est indisponible;
+- absence d'incrément artificiel du nombre d'échecs hors ligne;
+- tests de contrat sur la prévention des doublons et la reprise.
 
-### Observabilité
+### Observabilité et sécurité
 
-- événements JSON structurés avec champs de corrélation ;
-- identifiants de requête entrants validés et remplacés s'ils permettent une injection ;
-- valeurs bornées, sur une ligne et expurgées des secrets usuels ;
-- erreurs HTTP corrélées avec durée, méthode et chemin sans journaliser le corps ni la chaîne de requête.
+- événements JSON structurés, identifiant de corrélation contrôlé et durée des requêtes;
+- neutralisation des retours ligne et bornage des valeurs;
+- masquage de `Authorization`, cookies, mots de passe, jetons, secrets et clés API;
+- dépendances `urllib3` et `msgpack` corrigées;
+- image d'exécution débarrassée des copies vulnérables embarquées par pip/setuptools;
+- scanner Trivy corrigé vers une version officielle disponible;
+- Tesseract explicitement installé dans les runners backend afin que les scénarios OCR soient réellement exécutés.
 
-## Tests exécutés
+### Compatibilité Flutter
 
-| Contrôle | Résultat |
+- correction du composant d'espace d'étude pour fournir un ancêtre `Material` aux `ListTile`;
+- analyse statique conservant les erreurs et avertissements bloquants, avec l'information de dépréciation Drift web rendue non bloquante;
+- compilation Flutter web maintenue dans les workflows.
+
+## 3. Résultats exécutés
+
+### GitHub Actions — révision fonctionnelle `4e49f83`
+
+| Workflow / contrôle | Résultat vérifié |
 |---|---:|
-| Phase 20 + delivery + sync ciblés | 37 réussis, 0 échec |
-| Régression backend complète du socle local | 1 175 réussis, 0 échec |
-| Compilation Python (`compileall`) | réussie |
-| Audits statiques modernes lots 19–32 | contrôles principaux réussis ; anciens scripts à versions figées non retenus comme preuve globale |
+| EduNova CI | succès |
+| Backend complet | 1 207 réussis, 17 ignorés, 6 avertissements tiers |
+| Flutter mobile complet | 96 réussis |
+| Tests ciblés Flutter gouvernance | 7 + 4 réussis |
+| Flutter Admin | 2 réussis |
+| Build Flutter Web (CI) | réussi |
+| Build conteneur API | réussi |
+| Phase 19 technique | succès |
+| Régression sécurité/synchronisation Phase 19 | 31 réussis |
+| Phase 16 certification | succès |
+| Régression backend complète Phase 16 | 1 207 réussis, 17 ignorés |
+| Build Flutter Web Phase 16 | réussi |
+| Phase 17 gouvernance | succès |
+| Audit dépendances | succès |
+| Scan Trivy de l'image | succès |
 
-La régression complète a duré 277,54 secondes. Six avertissements de dépréciation provenant de dépendances tierces ont été observés, sans échec.
+Exécutions GitHub: CI #97, Security #97, Phase 19 #43, Phase 16 #89, Phase 17 #82.
 
-## Limites de cette exécution
+### Exécution locale complémentaire
 
-- Le terminal ne disposait pas de Flutter/Dart : aucun nouveau `flutter test`, `flutter analyze` ou build Flutter n'est revendiqué.
-- Docker et PostgreSQL client/serveur n'étaient pas disponibles : aucun nouveau test PostgreSQL réel n'est revendiqué.
-- Le clonage HTTPS privé n'était pas authentifié dans le terminal. Les fichiers modifiés ont été synchronisés depuis le commit GitHub exact et publiés par la connexion GitHub autorisée ; le socle local provenait de l'archive persistante v0.56.6. Le total local de 1 175 tests ne doit donc pas être comparé mécaniquement aux 1 201 tests de la preuve Phase 19.
-- Les builds historiques restent des références et non des builds Phase 20.
+- backend: 1 175 réussis, 0 échec (socle local synchronisé avant les dernières publications);
+- tests ciblés Phase 20: 37 réussis;
+- compilation Python: réussie.
 
-## Verdict
+Les résultats GitHub ci-dessus priment pour la révision publiée.
 
-**PHASE 20 — LOT DE DURCISSEMENT CERTIFIÉ SUR LE PÉRIMÈTRE BACKEND ET CONTRATS FLUTTER ; CERTIFICATION GLOBALE PARTIELLE.**
+## 4. Limites et travaux restant ouverts
 
-Les changements publiés sont couverts par une régression backend complète sans échec. La certification globale ne pourra devenir complète qu'après exécution, sur le commit final de la branche, des tests/builds Flutter et des tests PostgreSQL réels dans un environnement qui fournit ces outils.
+- Aucun nouveau test contre une instance PostgreSQL réelle n'a été exécuté dans cette mission; les 34 tests historiques restent une preuve antérieure.
+- Aucun profilage sur appareil Android/iOS modeste réel n'a été exécuté.
+- Les builds natifs Android, iOS et desktop n'ont pas été refaits; les preuves nouvelles couvrent Flutter Web et l'image conteneur.
+- `drift/web.dart` reste une dette technique. La migration vers WasmDatabase doit inclure les artefacts wasm/worker et une recette de migration des données navigateur.
+- Les 17 tests backend ignorés doivent être examinés séparément avant une certification globale sans réserve.
+- Les six builds historiques n'ont pas tous été reproduits.
 
-From Volcano Tech.
+## 5. Verdict
+
+**Phase 20: implémentation logicielle validée et intégrable, certification globale encore partielle.**
+
+Les axes fiabilité des téléchargements, reprise hors ligne, observabilité, sécurité de la chaîne asynchrone et non-régression sont couverts par du code et des tests verts. Une certification complète de la plateforme reste conditionnée à PostgreSQL réel, aux builds natifs et au profilage sur appareils modestes. La PR demeure en brouillon et ne doit pas être fusionnée sans revue.
