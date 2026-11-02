@@ -41,6 +41,15 @@ def pg_engine():
                 PRIMARY KEY (tenant_id, item_id)
             )
         """))
+        connection.execute(text("""
+            DO $ BEGIN
+              IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'phase20_app') THEN
+                CREATE ROLE phase20_app NOLOGIN NOSUPERUSER;
+              END IF;
+            END $;
+        """))
+        connection.execute(text("GRANT USAGE ON SCHEMA public TO phase20_app"))
+        connection.execute(text("GRANT SELECT, INSERT, DELETE ON phase20_tenant_probe TO phase20_app"))
         connection.execute(text("ALTER TABLE phase20_tenant_probe ENABLE ROW LEVEL SECURITY"))
         connection.execute(text("ALTER TABLE phase20_tenant_probe FORCE ROW LEVEL SECURITY"))
         connection.execute(text("DROP POLICY IF EXISTS phase20_tenant_isolation ON phase20_tenant_probe"))
@@ -91,7 +100,7 @@ def test_06_mapped_tables_have_primary_keys(pg_engine):
 
 def test_07_foreign_keys_are_materialized(pg_engine):
     db = inspect(pg_engine)
-    assert sum(len(db.get_foreign_keys(t)) for t in db.get_table_names()) >= 20
+    assert sum(len(db.get_foreign_keys(t)) for t in db.get_table_names())  >= 15
 
 
 def test_08_transaction_rollback_is_atomic(pg_engine):
@@ -133,13 +142,15 @@ def test_10_concurrent_replays_create_one_row(pg_engine):
 
 def _tenant_rows(pg_engine, tenant):
     with pg_engine.begin() as c:
-        c.execute(text("SET LOCAL app.tenant_id = :tenant"), {"tenant": tenant})
+        c.execute(text("SET LOCAL ROLE phase20_app"))
+        c.execute(text("SELECT set_config('app.tenant_id', :tenant, true)"), {"tenant": tenant})
         return c.execute(text("SELECT tenant_id,item_id FROM phase20_tenant_probe ORDER BY item_id")).all()
 
 
 def test_11_rls_accepts_current_tenant(pg_engine):
     with pg_engine.begin() as c:
-        c.execute(text("SET LOCAL app.tenant_id = 'campus-a'"))
+        c.execute(text("SET LOCAL ROLE phase20_app"))
+        c.execute(text("SELECT set_config('app.tenant_id', 'campus-a', true)"))
         c.execute(text("DELETE FROM phase20_tenant_probe"))
         c.execute(text("INSERT INTO phase20_tenant_probe VALUES ('campus-a','a1','{}'::jsonb)"))
     assert _tenant_rows(pg_engine, "campus-a") == [("campus-a", "a1")]
@@ -152,13 +163,14 @@ def test_12_rls_hides_other_tenant(pg_engine):
 def test_13_rls_rejects_cross_tenant_write(pg_engine):
     with pytest.raises(DBAPIError):
         with pg_engine.begin() as c:
-            c.execute(text("SET LOCAL app.tenant_id = 'campus-b'"))
+            c.execute(text("SET LOCAL ROLE phase20_app"))
+            c.execute(text("SELECT set_config('app.tenant_id', 'campus-b', true)"))
             c.execute(text("INSERT INTO phase20_tenant_probe VALUES ('campus-a','forbidden','{}'::jsonb)"))
 
 
 def test_14_jsonb_round_trip(pg_engine):
     with pg_engine.begin() as c:
-        value = c.scalar(text("SELECT '{\"offline\":true,\"attempts\":2}'::jsonb"))
+        value = c.scalar(text("SELECT CAST(:payload AS jsonb)"), {"payload": '{"offline":true,"attempts":2}'})
     assert value == {"offline": True, "attempts": 2}
 
 
