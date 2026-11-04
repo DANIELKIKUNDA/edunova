@@ -9,7 +9,7 @@ module.exports = defineConfig({
     trace: 'retain-on-failure',
   },
   webServer: {
-    command: 'npx http-server apps/mobile/build/web -a 127.0.0.1 -p 8080 -c-1',
+    command: 'npx http-server ../../apps/mobile/build/web -a 127.0.0.1 -p 8080 -c-1',
     url: 'http://127.0.0.1:8080',
     reuseExistingServer: false,
     timeout: 120000,
