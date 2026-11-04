@@ -10,7 +10,7 @@ permissions:
   contents: read
 jobs:
   flutter-phase19:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, x64, volcano-ci]
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
@@ -36,7 +36,7 @@ jobs:
         working-directory: apps/mobile
         run: flutter build web --release --no-pub
   backend-phase19:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, x64, volcano-ci]
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
