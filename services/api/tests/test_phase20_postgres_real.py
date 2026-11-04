@@ -18,6 +18,11 @@ from app.shared.infrastructure.database import Base, build_engine
 # Importing Runtime registers every mapped production table on Base.metadata.
 import app.runtime  # noqa: F401,E402
 
+pytestmark = pytest.mark.skipif(
+    "PHASE20_POSTGRES_URL" not in os.environ,
+    reason="requires the dedicated real PostgreSQL certification service",
+)
+
 
 @pytest.fixture(scope="session")
 def pg_engine():
