@@ -3,7 +3,7 @@ on: [push, pull_request]
 permissions: {contents: read, security-events: write}
 jobs:
   dependency-audit:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, x64, volcano-ci]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -11,7 +11,7 @@ jobs:
       - run: pip install pip-audit
       - run: pip-audit -r services/api/requirements.txt
   image-scan:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, x64, volcano-ci]
     steps:
       - uses: actions/checkout@v4
       - run: docker build -t edunova-api:scan services/api
