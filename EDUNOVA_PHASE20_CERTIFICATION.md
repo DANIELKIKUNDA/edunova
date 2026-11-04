@@ -90,3 +90,34 @@ Les résultats GitHub ci-dessus priment pour la révision publiée.
 **Phase 20: implémentation logicielle validée et intégrable, certification globale encore partielle.**
 
 Les axes fiabilité des téléchargements, reprise hors ligne, observabilité, sécurité de la chaîne asynchrone et non-régression sont couverts par du code et des tests verts. Une certification complète de la plateforme reste conditionnée à PostgreSQL réel, aux builds natifs et au profilage sur appareils modestes. La PR demeure en brouillon et ne doit pas être fusionnée sans revue.
+
+
+## 6. Extension de certification — 4 novembre 2026
+
+Révision finale préparée: `76bf07504873f865e81136fa1635b3f1ac46f31b`.
+
+Preuves supplémentaires réellement obtenues avant l'épuisement des minutes GitHub Actions:
+
+- PostgreSQL 16 réel: succès, 20 contrôles Phase 20 couvrant schéma de production, clés, transactions, concurrence, idempotence, RLS multi-tenant, JSONB, Unicode, UTC, timeout, index, latence et récupération;
+- scénarios Phase 20 delivery/synchronisation exécutés dans le job PostgreSQL;
+- build Linux desktop release: succès;
+- build Windows desktop release: succès;
+- compilation iOS simulateur non signée: succès;
+- Flutter Web release: compilation réussie avant le lancement Playwright;
+- captures E2E et APK Android: runners corrigés, mais dernière exécution non obtenue.
+
+Correctifs issus de ces exécutions:
+
+- migration `pdfrx` 1.3.5 vers 2.11.0 pour Dart 3.13 et les plateformes natives;
+- mise à niveau Gradle 8.14 et Android Gradle Plugin 8.11.1;
+- compatibilité CMake et coroutine MSVC actuelle;
+- cycle de vie du serveur E2E confié à Playwright;
+- séparation explicite des tests PostgreSQL réels de la suite SQLite ordinaire.
+
+Le 4 novembre, GitHub a refusé tous les jobs avant leur première étape, y compris les workflows CI et sécurité inchangés. La relance manuelle a produit le même résultat: six jobs terminés immédiatement, zéro étape et zéro log. Il s'agit d'un blocage de capacité/minutes GitHub Actions. Par conséquent, l'APK Android et les captures Playwright finales ne sont pas revendiqués comme réussis.
+
+### Verdict actualisé
+
+**Phase 20 techniquement mise en œuvre; certification étendue fortement, mais clôture globale encore bloquée par deux preuves non exécutées: APK Android final et E2E Playwright avec captures.**
+
+Les builds Linux, Windows et iOS simulateur ainsi que PostgreSQL 16 réel ne sont plus des réserves.
