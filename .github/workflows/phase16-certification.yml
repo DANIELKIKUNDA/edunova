@@ -25,7 +25,7 @@ concurrency:
 
 jobs:
   backend-phase16:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, x64, volcano-ci]
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
@@ -57,7 +57,7 @@ jobs:
           retention-days: 30
 
   flutter-phase16:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, x64, volcano-ci]
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
@@ -95,7 +95,7 @@ jobs:
     name: Complete backend regression (after Phase 16)
     needs: backend-phase16
     if: ${{ !cancelled() && needs.backend-phase16.result == 'success' }}
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, x64, volcano-ci]
     timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
@@ -124,7 +124,7 @@ jobs:
 
   flutter-admin:
     name: Flutter editorial administration checks
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, x64, volcano-ci]
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
