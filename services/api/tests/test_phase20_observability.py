@@ -55,3 +55,31 @@ def test_request_context_preserves_valid_correlation_id():
 
     response = TestClient(app).get("/health", headers={"X-Request-ID": "phase20-test-123"})
     assert response.headers["X-Request-ID"] == "phase20-test-123"
+
+
+def test_redaction_covers_sensitive_values_with_s_and_structured_fields():
+    formatter = JsonFormatter()
+    record = logging.LogRecord(
+        "edunova.worker", logging.ERROR, __file__, 10,
+        "request failed token=sensitive-value", (), None,
+    )
+    record.event = "task.failed password=sensitive-value"
+    record.api_key = "sensitive-value"
+    record.attempt = 4
+
+    payload = json.loads(formatter.format(record))
+    assert "sensitive-value" not in json.dumps(payload)
+    assert "[REDACTED]" in payload["message"]
+    assert "[REDACTED]" in payload["event"]
+    assert payload["api_key"] == "[REDACTED]"
+    assert payload["attempt"] == 4
+
+
+def test_redaction_applies_to_default_event():
+    record = logging.LogRecord(
+        "edunova.worker", logging.WARNING, __file__, 10,
+        "token=sensitive-value", (), None,
+    )
+    payload = json.loads(JsonFormatter().format(record))
+    assert payload["event"] == "token=[REDACTED]"
+    assert "sensitive-value" not in json.dumps(payload)
