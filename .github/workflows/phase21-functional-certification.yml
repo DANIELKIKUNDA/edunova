@@ -246,6 +246,7 @@ jobs:
       EDUNOVA_ENV: test
       JWT_SECRET: phase21-ci-only-not-a-production-secret-xxxxxxxxxxxxxxxxxxxxxxxx
       EDUNOVA_API_URL: http://127.0.0.1:8000
+      CORS_ORIGINS: http://127.0.0.1:8080
       TZ: UTC
     steps:
       - uses: actions/checkout@v4
