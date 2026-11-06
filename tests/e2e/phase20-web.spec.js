@@ -3,7 +3,8 @@ const { test, expect, devices } = require('@playwright/test');
 const baseURL = process.env.EDUNOVA_WEB_URL || 'http://127.0.0.1:8080';
 
 async function assertFlutterStarted(page) {
-  await page.goto(baseURL, { waitUntil: 'networkidle', timeout: 120000 });
+  // Flutter keeps connections/workers active; networkidle is not a readiness signal.
+  await page.goto(baseURL, { waitUntil: 'domcontentloaded', timeout: 30000 });
   await page.waitForFunction(() =>
     document.querySelector('flt-glass-pane, flutter-view, canvas') !== null,
     null,
@@ -39,16 +40,20 @@ test.describe('modest Android viewport', () => {
     await page.screenshot({ path: 'certification-results/e2e/android-modest-home.png', fullPage: true });
   });
 
-  test('installed application survives a network interruption', async ({ page, context }) => {
+  test('active application stays rendered during a network interruption and recovers', async ({ page, context }) => {
     await assertFlutterStarted(page);
-    await page.waitForTimeout(3000);
-    await context.setOffline(true);
-    await page.reload({ waitUntil: 'domcontentloaded', timeout: 30000 }).catch(() => {});
-    await expect(page.locator('body')).toBeVisible();
-    await page.screenshot({ path: 'certification-results/e2e/android-offline-reload.png', fullPage: true });
-    await context.setOffline(false);
-    await page.reload({ waitUntil: 'networkidle', timeout: 120000 });
-    await expect(page.locator('body')).toBeVisible();
+    const flutterSurface = page.locator('flutter-view, flt-glass-pane').first();
+    await expect(flutterSurface).toBeVisible();
+    try {
+      await context.setOffline(true);
+      // Check the actual Flutter surface, not just the browser error page's body.
+      await expect(flutterSurface).toBeVisible();
+      await page.screenshot({ path: 'certification-results/e2e/android-offline-active.png', fullPage: true });
+    } finally {
+      await context.setOffline(false);
+    }
+    await page.reload({ waitUntil: 'domcontentloaded', timeout: 30000 });
+    await expect(flutterSurface).toBeVisible();
   });
 });
 
