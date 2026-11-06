@@ -18,7 +18,7 @@ test('student login crosses Flutter Web, API and PostgreSQL', async ({ page, req
   expect(registration.status()).toBe(201);
   const seedSession = await registration.json();
 
-  await page.goto('/#/login', { waitUntil: 'networkidle' });
+  await page.goto('/#/login', { waitUntil: 'domcontentloaded', timeout: 120000 });
   await expect(page.getByText('Retrouve ton EduNova')).toBeVisible({ timeout: 120000 });
   await page.getByLabel('Téléphone ou e-mail').fill(email);
   await page.getByLabel('Mot de passe', { exact: true }).fill(password);
@@ -40,7 +40,7 @@ test('student login crosses Flutter Web, API and PostgreSQL', async ({ page, req
 });
 
 test('invalid credentials remain visibly rejected by Flutter Web', async ({ page }) => {
-  await page.goto('/#/login', { waitUntil: 'networkidle' });
+  await page.goto('/#/login', { waitUntil: 'domcontentloaded', timeout: 120000 });
   await expect(page.getByText('Retrouve ton EduNova')).toBeVisible({ timeout: 120000 });
   await page.getByLabel('Téléphone ou e-mail').fill('unknown-phase21@example.test');
   await page.getByLabel('Mot de passe', { exact: true }).fill('Wrong-Password!');

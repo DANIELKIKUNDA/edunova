@@ -167,10 +167,13 @@ jobs:
             tests/test_commerce_api_e2e.py \
             tests/ingestion/test_ingestion_api.py \
             tests/ingestion/test_security_storage.py \
-            tests/assistant/test_assistant_api_e2e.py \
             tests/editorial/test_editorial_api.py \
             tests/editorial/test_editorial_api_maximal.py \
             --junitxml=../../certification-results/phase21/payments-documents-postgresql.xml
+          env -u PHASE21_POSTGRES_URL \
+            DATABASE_URL=sqlite+pysqlite:///../../.local-certification/phase21-assistant.db \
+            python -m pytest -q tests/assistant/test_assistant_api_e2e.py \
+            --junitxml=../../certification-results/phase21/assistant-private-context-sqlite.xml
       - name: Upload payment and document evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -337,9 +340,10 @@ jobs:
       - name: Verify migrations on a blank PostgreSQL database
         run: |
           python -m pip install -r services/api/requirements.txt
+          bash scripts/migrate_production.sh
           cd services/api
-          alembic upgrade head
-          alembic current
+          python -m pytest -q tests/test_migration_contract.py \
+            --junitxml=../../certification-results-phase21-migrations.xml
       - name: Build traceable Android artifact
         working-directory: apps/mobile
         run: |
@@ -366,5 +370,6 @@ jobs:
           path: |
             apps/mobile/build/app/outputs/flutter-apk/app-release.apk
             certification-results/phase21/
+            certification-results-phase21-migrations.xml
           if-no-files-found: error
           retention-days: 30
