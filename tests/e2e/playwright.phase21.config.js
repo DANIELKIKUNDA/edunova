@@ -7,6 +7,7 @@ module.exports = defineConfig({
   workers: 1,
   use: {
     baseURL: 'http://127.0.0.1:8080',
+    channel: 'chrome',
     trace: 'retain-on-failure',
   },
   webServer: {

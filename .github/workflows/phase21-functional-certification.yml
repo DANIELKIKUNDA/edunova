@@ -282,7 +282,7 @@ jobs:
         run: |
           npm init -y
           npm install --save-dev @playwright/test@1.56.1 http-server@14.1.1
-          npx playwright install --with-deps chromium
+          google-chrome --version
       - name: Run real Flutter Web journeys
         run: |
           mkdir -p certification-results/phase21
