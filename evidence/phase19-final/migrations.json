@@ -1,0 +1,10 @@
+{
+  "commit": "b4a8eabafa7d6a1f50f4cc4cc43fc610a1040fbb",
+  "command": [
+    "C:\\Users\\cs-ap\\dev\\edusync-web\\edunova\\.venv\\Scripts\\python.exe",
+    "C:\\Users\\cs-ap\\dev\\edusync-web\\edunova\\scripts\\certify_phase19_migrations.py"
+  ],
+  "cwd": "C:\\Users\\cs-ap\\dev\\edusync-web\\edunova",
+  "exit_code": 0,
+  "seconds": 30.36
+}

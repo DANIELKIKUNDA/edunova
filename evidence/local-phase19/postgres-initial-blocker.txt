@@ -1,0 +1,11 @@
+Initial PostgreSQL pytest attempt: failed before test execution.
+The initial numeric exit record was superseded before archival; do not infer a
+test count from this attempt.
+Command:
+.venv/Scripts/python.exe -m pytest -q services/api/tests/test_phase19_atomic_finance.py services/api/tests/test_phase19_atomic_callback.py services/api/tests/test_phase19_postgres_concurrency.py --junitxml=evidence/local-phase19/postgres.xml
+ImportError while loading services/api/tests/conftest.py:
+TEST_DB.unlink() raised PermissionError [WinError 32], services/api/.pytest_edunova.db
+was already open in the concurrent backend run.
+Correction: conftest now allocates a UUID SQLite filename per pytest process under
+the ignored .local-certification directory; no shared database is unlinked.
+No PostgreSQL assertion had run during this failed initial attempt.

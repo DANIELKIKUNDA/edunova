@@ -1,0 +1,19 @@
+PASS SQL policy table
+PASS SQL policy CAS
+PASS SQL policy bounds
+PASS Mapped row
+PASS Borrow in-transaction policy
+PASS Policy tenant lock
+PASS Policy compare and swap
+PASS Renew dynamic period
+PASS RBAC update
+PASS API GET
+PASS API PUT
+PASS Flutter policy auth gateway
+PASS Flutter tenant guard
+PASS Flutter no stale policy
+PASS Flutter policy editable
+PASS Flutter policy dynamic display
+PASS Flutter authored contract test
+PASS Backend adversarial tests
+STATIC WIRING: 18/18

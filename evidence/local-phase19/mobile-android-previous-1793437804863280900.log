@@ -1,0 +1,3 @@
+COMMAND: C:\Users\cs-ap\dev\flutter\bin\flutter.bat build apk --debug --no-pub
+CWD: C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile
+[!] Your app is using an unsupported Gradle project. To fix this problem, create a new project by running `flutter create -t app <app-directory>` and then move the dart code, assets and pubspec.yaml to the new project.

@@ -1,0 +1,32 @@
+Requirement already satisfied: fastapi>=0.128.2 in .\.venv\Lib\site-packages (0.128.2)
+Collecting starlette>=1.3.1
+  Downloading starlette-1.10.0-py3-none-any.whl.metadata (6.6 kB)
+Collecting cryptography>=50.0.0
+  Downloading cryptography-50.0.2-cp311-abi3-win_amd64.whl.metadata (4.4 kB)
+Collecting Pillow>=13.0.0
+  Downloading pillow-13.0.0-cp313-cp313-win_amd64.whl.metadata (9.3 kB)
+Collecting pytest>=9.0.3
+  Downloading pytest-9.2.0-py3-none-any.whl.metadata (7.9 kB)
+INFO: pip is looking at multiple versions of fastapi to determine which version is compatible with other requirements. This could take a while.
+Collecting fastapi>=0.128.2
+  Downloading fastapi-0.162.0-py3-none-any.whl.metadata (26 kB)
+Requirement already satisfied: pydantic>=2.9.0 in .\.venv\Lib\site-packages (from fastapi>=0.128.2) (2.13.4)
+Requirement already satisfied: typing-extensions>=4.8.0 in .\.venv\Lib\site-packages (from fastapi>=0.128.2) (4.16.0)
+Requirement already satisfied: typing-inspection>=0.4.2 in .\.venv\Lib\site-packages (from fastapi>=0.128.2) (0.4.4)
+Requirement already satisfied: annotated-doc>=0.0.2 in .\.venv\Lib\site-packages (from fastapi>=0.128.2) (0.0.5)
+Requirement already satisfied: opentelemetry-api>=1.44.0 in .\.venv\Lib\site-packages (from fastapi>=0.128.2) (1.45.2)
+Requirement already satisfied: anyio<5,>=4.0.0 in .\.venv\Lib\site-packages (from starlette>=1.3.1) (4.15.1)
+Requirement already satisfied: idna>=2.8 in .\.venv\Lib\site-packages (from anyio<5,>=4.0.0->starlette>=1.3.1) (3.20)
+Requirement already satisfied: cffi>=2.0.0 in .\.venv\Lib\site-packages (from cryptography>=50.0.0) (2.1.1)
+Requirement already satisfied: colorama>=0.4 in .\.venv\Lib\site-packages (from pytest>=9.0.3) (0.4.6)
+Requirement already satisfied: iniconfig>=2 in .\.venv\Lib\site-packages (from pytest>=9.0.3) (2.3.1)
+Requirement already satisfied: packaging>=24 in .\.venv\Lib\site-packages (from pytest>=9.0.3) (26.3)
+Requirement already satisfied: pluggy<2,>=1.6 in .\.venv\Lib\site-packages (from pytest>=9.0.3) (1.7.0)
+Requirement already satisfied: pygments>=2.15 in .\.venv\Lib\site-packages (from pytest>=9.0.3) (2.21.0)
+Requirement already satisfied: pycparser in .\.venv\Lib\site-packages (from cffi>=2.0.0->cryptography>=50.0.0) (3.12)
+Requirement already satisfied: annotated-types>=0.6.0 in .\.venv\Lib\site-packages (from pydantic>=2.9.0->fastapi>=0.128.2) (0.8.0)
+Requirement already satisfied: pydantic-core==2.46.4 in .\.venv\Lib\site-packages (from pydantic>=2.9.0->fastapi>=0.128.2) (2.46.4)
+Would install cryptography-50.0.2 fastapi-0.162.0 pillow-13.0.0 pytest-9.2.0 starlette-1.10.0
+
+[notice] A new release of pip is available: 26.1.2 -> 26.2.2
+[notice] To update, run: C:\Users\cs-ap\dev\edusync-web\edunova\.venv\Scripts\python.exe -m pip install --upgrade pip

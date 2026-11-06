@@ -1,0 +1,11 @@
+EduNova v0.51.8 — PREUVES RÉELLES
+Parent SHA-256 : 2561c98e57f6df88edbd900bfc06c3b328083a981342c110ea821c8a07592702
+Regression : DATABASE_URL=sqlite+pysqlite:////mnt/data/edunova_work/canonical_regression.db PYTHONPATH=services/api python -m pytest -q services/api/tests
+Code sortie : 0
+Fin pytest : 1057 passed in 236.45s
+Tests ciblés Phase16/migrations : 16 passed in 5.86s
+Compilation Python : python -m compileall -q services/api/app — exit 0
+Audit statique : 18/18 PASS
+Migrations 0093,0094,0095 : CREATE TABLE SQLite ciblés — PASS
+Flutter/Dart exécutés : NON (outils absents)
+Exécution concurrente non recevable : 54 failed, 998 passed (base SQLite partagée) ; remplacée par la regression isolée ci-dessus.

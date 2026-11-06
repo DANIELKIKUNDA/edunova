@@ -1,0 +1,21 @@
+PASS Migration 0088 renewal field
+PASS Migration 0088 data constraint
+PASS Migration 0088 due index
+PASS DB field renewal count
+PASS DB check constraint
+PASS Borrower transactional advisory lock
+PASS Borrower quota
+PASS Borrower overdue block
+PASS Renew limit
+PASS Renew CAS
+PASS Renew borrower scoped
+PASS API renew endpoint
+PASS API overdue flag
+PASS API server-controlled renewal visibility
+PASS Service audit on renewal
+PASS Flutter authenticated gateway
+PASS Flutter renewal interface
+PASS Flutter deadline warning
+PASS Flutter contract test authored
+PASS Backend adversarial tests authored
+STATIC WIRING: 20/20

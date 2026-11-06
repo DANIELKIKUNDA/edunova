@@ -1,0 +1,8 @@
+{
+  "commit": "79ffe15a4eef6165f8395c0921abc498552c35ee",
+  "command": ".venv/Scripts/python.exe scripts/certify_local_phase19.py admin-analyze pip-check",
+  "admin_analyze_exit_code": 1,
+  "subsequent_pip_check_exit_code": 0,
+  "observed_runner_exit_code": 1,
+  "purpose": "A failed check remains a failure even when a subsequent check succeeds."
+}

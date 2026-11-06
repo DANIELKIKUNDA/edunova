@@ -1,0 +1,74 @@
+EDUNOVA v0.49.10 — PHASE14 ATTEMPT AND GRADE RESULT INTEGRITY
+SOURCE: EduNova_v0.49.9_RC_PHASE14_IDENTITY_PROVENANCE.zip
+SOURCE SHA-256 VERIFIED: c4864bbc866963ed8978d78e0d059971dbd8ec59c43f213406f70482052b11dc
+
+BASELINE BACKEND — v0.49.9 (extracted unchanged source)
+Command: PYTHONPATH=services/api python -m pytest -q services/api/tests
+Exit: 0 (completed, observed)
+........................................................................ [ 10%]
+........................................................................ [ 20%]
+........................................................................ [ 31%]
+........................................................................ [ 41%]
+........................................................................ [ 52%]
+........................................................................ [ 62%]
+........................................................................ [ 73%]
+........................................................................ [ 83%]
+........................................................................ [ 94%]
+.......................................                                  [100%]
+687 passed in 77.36s (0:01:17)
+
+FINAL BACKEND — v0.49.10 (complete regression)
+Command: PYTHONPATH=services/api python -m pytest -q services/api/tests
+Exit: 0 (asynchronous process exited; exit-file checked)
+........................................................................ [ 10%]
+........................................................................ [ 20%]
+........................................................................ [ 30%]
+........................................................................ [ 41%]
+........................................................................ [ 51%]
+........................................................................ [ 61%]
+........................................................................ [ 72%]
+........................................................................ [ 82%]
+........................................................................ [ 92%]
+..................................................                       [100%]
+698 passed in 77.57s (0:01:17)
+
+FOCUSED PHASE 14 — v0.49.10
+Command: PYTHONPATH=services/api python -m pytest -q services/api/tests/test_phase14_pedagogical_intelligence.py
+Exit: 0
+........................................................................ [ 93%]
+.....                                                                    [100%]
+77 passed in 3.31s
+
+COMPILATION PYTHON
+Command: python -m compileall -q services/api/app services/api/tests
+Exit: 0
+
+STRUCTURAL AUDIT
+Command: python scripts/audit_lot32_global.py
+Exit: 0
+PASS migration chain contiguous through latest
+PASS trust personal-space boundary
+PASS persistent sessions
+PASS commerce licensing
+PASS campus core
+PASS teaching
+PASS assignments
+PASS gradebook
+PASS institutional analytics
+PASS knowledge graph
+PASS tutor
+PASS pilot readiness
+PASS pwa offline
+PASS production compose
+PASS ci and release
+PASS backup restore
+PASS no TODO/FIXME/NotImplementedError
+LOT32 GLOBAL AUDIT: 17/17 PASS
+
+MIGRATIONS
+No new SQL migration, latest is 0082_pedagogical_objective_evidence_v0_49_2.sql.
+
+EXECUTION BOUNDARIES
+Local SQLite SQLAlchemy ORM exercise and in-memory FastAPI tests only.
+NOT RUN: real PostgreSQL, Redis, workers, object storage, external providers, Flutter/Dart compilation or physical device certification.
+No legal or cryptographically signed immutable audit trail is claimed.

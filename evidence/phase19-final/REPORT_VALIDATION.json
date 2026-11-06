@@ -1,0 +1,9 @@
+{
+  "report_links": "valid",
+  "source_proofs": 45,
+  "verified_builds": 6,
+  "audits_passed": 55,
+  "functional_checks": "verified",
+  "mobile_analysis": "residual Drift info",
+  "verdict": "PARTIELLEMENT CERTIFIÉ"
+}

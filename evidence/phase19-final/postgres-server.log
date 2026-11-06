@@ -1,0 +1,33 @@
+2026-11-01 18:33:35.620 GMT [14840] LOG:  starting PostgreSQL 16.11, compiled by Visual C++ build 1944, 64-bit
+2026-11-01 18:33:35.623 GMT [14840] LOG:  listening on IPv4 address "127.0.0.1", port 55439
+2026-11-01 18:33:35.823 GMT [12676] LOG:  database system was shut down at 2026-10-31 17:45:46 GMT
+2026-11-01 18:33:35.990 GMT [14840] LOG:  database system is ready to accept connections
+2026-11-01 18:34:54.249 GMT [19952] ERROR:  duplicate key value violates unique constraint "uq_gateway_provider_ref"
+2026-11-01 18:34:54.249 GMT [19952] DETAIL:  Key (provider, provider_reference)=(sandbox, provider-ref-1) already exists.
+2026-11-01 18:34:54.249 GMT [19952] STATEMENT:  UPDATE payment_gateway_intents SET provider_reference=$1::VARCHAR, status=$2::VARCHAR, receipt_id=$3::VARCHAR WHERE payment_gateway_intents.id = $4::VARCHAR
+2026-11-01 18:34:54.604 GMT [20108] ERROR:  new row for relation "student_finance_receipts" violates check constraint "student_finance_receipts_amount_minor_check"
+2026-11-01 18:34:54.604 GMT [20108] DETAIL:  Failing row contains (185889edfc204eabadd843848f4d8c4d, cert, student, receipt, 0, CDF, mobile_money, null, cert, 2026-11-01 18:34:54.585368, f).
+2026-11-01 18:34:54.604 GMT [20108] STATEMENT:  INSERT INTO student_finance_receipts (id,institution_id,student_id,reference,amount_minor,currency,payment_method,issued_by,issued_at) VALUES ($1,'cert','student','receipt',0,'CDF','mobile_money','cert',CURRENT_TIMESTAMP)
+2026-11-01 18:34:54.670 GMT [19800] ERROR:  new row for relation "student_finance_charges" violates check constraint "student_finance_charges_check"
+2026-11-01 18:34:54.670 GMT [19800] DETAIL:  Failing row contains (47e343632b6e46c2b30641304efc8725, cert, student, registration, fee, fee, Tuition, 100, 101, CDF, null, paid, 2026-11-01 18:34:54.666291).
+2026-11-01 18:34:54.670 GMT [19800] STATEMENT:  INSERT INTO student_finance_charges (id,institution_id,student_id,registration_id,fee_item_id,code,label,amount_minor,paid_minor,currency,state,created_at) VALUES ($1,'cert','student','registration','fee','fee','Tuition',100,101,'CDF','paid',CURRENT_TIMESTAMP)
+2026-11-01 18:38:36.271 GMT [22900] LOG:  checkpoint starting: time
+2026-11-01 18:41:48.077 GMT [22900] LOG:  checkpoint complete: wrote 1702 buffers (41.6%); 0 WAL file(s) added, 0 removed, 1 recycled; write=183.254 s, sync=7.075 s, total=192.378 s; sync files=3967, longest=0.233 s, average=0.002 s; distance=21312 kB, estimate=21312 kB; lsn=0/7550940, redo lsn=0/7539E60
+2026-11-01 20:06:08.893 GMT [18224] ERROR:  duplicate key value violates unique constraint "uq_gateway_provider_ref"
+2026-11-01 20:06:08.893 GMT [18224] DETAIL:  Key (provider, provider_reference)=(sandbox, provider-ref-1) already exists.
+2026-11-01 20:06:08.893 GMT [18224] STATEMENT:  UPDATE payment_gateway_intents SET provider_reference=$1::VARCHAR, status=$2::VARCHAR, receipt_id=$3::VARCHAR WHERE payment_gateway_intents.id = $4::VARCHAR
+2026-11-01 20:06:09.562 GMT [22700] ERROR:  new row for relation "student_finance_receipts" violates check constraint "student_finance_receipts_amount_minor_check"
+2026-11-01 20:06:09.562 GMT [22700] DETAIL:  Failing row contains (61bf0fed5aee45a7827824a9fa5c0abd, cert, student, receipt, 0, CDF, mobile_money, null, cert, 2026-11-01 20:06:09.54694, f).
+2026-11-01 20:06:09.562 GMT [22700] STATEMENT:  INSERT INTO student_finance_receipts (id,institution_id,student_id,reference,amount_minor,currency,payment_method,issued_by,issued_at) VALUES ($1,'cert','student','receipt',0,'CDF','mobile_money','cert',CURRENT_TIMESTAMP)
+2026-11-01 20:06:09.721 GMT [15616] ERROR:  new row for relation "student_finance_charges" violates check constraint "student_finance_charges_check"
+2026-11-01 20:06:09.721 GMT [15616] DETAIL:  Failing row contains (b6b17c709c5c44b6954aa26fb8b8a620, cert, student, registration, fee, fee, Tuition, 100, 101, CDF, null, paid, 2026-11-01 20:06:09.716949).
+2026-11-01 20:06:09.721 GMT [15616] STATEMENT:  INSERT INTO student_finance_charges (id,institution_id,student_id,registration_id,fee_item_id,code,label,amount_minor,paid_minor,currency,state,created_at) VALUES ($1,'cert','student','registration','fee','fee','Tuition',100,101,'CDF','paid',CURRENT_TIMESTAMP)
+2026-11-01 20:08:36.407 GMT [22900] LOG:  checkpoint starting: time
+2026-11-01 20:09:24.291 GMT [22900] LOG:  checkpoint complete: wrote 347 buffers (8.5%); 0 WAL file(s) added, 0 removed, 1 recycled; write=38.582 s, sync=6.400 s, total=48.132 s; sync files=2577, longest=0.393 s, average=0.003 s; distance=11417 kB, estimate=20322 kB; lsn=0/80602F0, redo lsn=0/80602B8
+2026-11-01 20:14:17.152 GMT [14840] LOG:  received fast shutdown request
+2026-11-01 20:14:17.158 GMT [14840] LOG:  aborting any active transactions
+2026-11-01 20:14:17.948 GMT [14840] LOG:  background worker "logical replication launcher" (PID 16244) exited with exit code 1
+2026-11-01 20:14:17.953 GMT [22900] LOG:  shutting down
+2026-11-01 20:14:17.959 GMT [22900] LOG:  checkpoint starting: shutdown immediate
+2026-11-01 20:14:17.991 GMT [22900] LOG:  checkpoint complete: wrote 0 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.004 s, sync=0.003 s, total=0.038 s; sync files=0, longest=0.000 s, average=0.000 s; distance=0 kB, estimate=18290 kB; lsn=0/80603A0, redo lsn=0/80603A0
+2026-11-01 20:14:18.038 GMT [14840] LOG:  database system is shut down

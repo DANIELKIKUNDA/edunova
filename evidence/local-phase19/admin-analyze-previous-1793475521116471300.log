@@ -1,0 +1,31 @@
+COMMAND: C:\Users\cs-ap\dev\flutter\bin\flutter.bat analyze --no-pub
+CWD: C:\Users\cs-ap\dev\edusync-web\edunova\apps\admin
+Analyzing admin...                                              
+
+warning - Unnecessary cast - lib\src\features\editorial\content_detail_page.dart:9:130 - unnecessary_cast
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\src\features\editorial\content_detail_page.dart:74:614 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\src\features\editorial\content_detail_page.dart:74:965 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\src\features\editorial\content_detail_page.dart:77:1435 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\src\features\editorial\content_detail_page.dart:77:1793 - deprecated_member_use
+   info - Statements in an if should be enclosed in a block - lib\src\features\editorial\content_detail_page.dart:80:2456 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\src\features\editorial\content_detail_page.dart:80:2469 - curly_braces_in_flow_control_structures
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\src\features\editorial\content_list_page.dart:43:94 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\src\features\editorial\content_list_page.dart:43:255 - use_build_context_synchronously
+   info - Statements in a for should be enclosed in a block - lib\src\features\editorial\content_list_page.dart:53:91 - curly_braces_in_flow_control_structures
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\src\features\editorial\content_list_page.dart:54:374 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\src\features\editorial\content_list_page.dart:54:853 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\src\features\editorial\content_list_page.dart:54:1702 - deprecated_member_use
+   info - Don't use 'BuildContext's across async gaps - lib\src\features\editorial\ingestion_page.dart:211:47 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\src\features\editorial\ingestion_page.dart:263:251 - use_build_context_synchronously
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\src\features\editorial\ingestion_page.dart:300:29 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\src\features\editorial\ingestion_page.dart:301:58 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\src\features\editorial\ingestion_page.dart:301:421 - deprecated_member_use
+warning - Unnecessary cast - lib\src\features\editorial\publication_center_page.dart:14:310 - unnecessary_cast
+warning - Unnecessary cast - lib\src\features\editorial\publication_center_page.dart:14:348 - unnecessary_cast
+   info - The variable name '_K' isn't a lowerCamelCase identifier - lib\src\features\editorial\publication_center_page.dart:26:10 - non_constant_identifier_names
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\src\features\editorial\question_factory_page.dart:4:1292 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\src\features\editorial\team_page.dart:12:686 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\src\features\platform\platform_shell.dart:59:41 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\src\features\platform\platform_shell.dart:94:41 - deprecated_member_use
+
+25 issues found. (ran in 10.3s)

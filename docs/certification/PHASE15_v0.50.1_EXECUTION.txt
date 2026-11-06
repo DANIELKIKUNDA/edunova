@@ -1,0 +1,50 @@
+EduNova v0.50.1 — Preuves locales de vérification — 2026-10-14
+
+SOURCE : EduNova_v0.50.0_RC_PHASE15_INSTITUTIONAL_INTELLIGENCE_FOUNDATION.zip
+SHA256_SOURCE : eb441d643f525eb7ade8ebc69fdc61b0da062a1f7ea8d5a35f886a46d109b688
+
+BASELINE : PYTHONPATH=services/api python -m pytest -q services/api/tests
+.................................................................        [100%]
+785 passed in 55.33s
+BASELINE_CODE_SORTIE : 0
+
+REGRESSION FINALE : PYTHONPATH=services/api python -m pytest -q services/api/tests
+........................................................................ [  9%]
+........................................................................ [ 18%]
+........................................................................ [ 27%]
+........................................................................ [ 36%]
+........................................................................ [ 45%]
+........................................................................ [ 54%]
+........................................................................ [ 63%]
+........................................................................ [ 72%]
+........................................................................ [ 81%]
+........................................................................ [ 90%]
+........................................................................ [ 99%]
+....                                                                     [100%]
+796 passed in 57.34s
+REGRESSION_CODE_SORTIE : 0
+
+AUDIT : python scripts/audit_lot32_global.py
+PASS migration chain contiguous through latest
+PASS trust personal-space boundary
+PASS persistent sessions
+PASS commerce licensing
+PASS campus core
+PASS teaching
+PASS assignments
+PASS gradebook
+PASS institutional analytics
+PASS knowledge graph
+PASS tutor
+PASS pilot readiness
+PASS pwa offline
+PASS production compose
+PASS ci and release
+PASS backup restore
+PASS no TODO/FIXME/NotImplementedError
+LOT32 GLOBAL AUDIT: 17/17 PASS
+AUDIT_CODE_SORTIE : 0
+
+COMPILATION : python -m compileall -q services/api/app services/api/tests
+COMPILATION_CODE_SORTIE : 0
+CERTIFICATIONS EXTERNES : NON EXECUTEES

@@ -1,0 +1,33 @@
+EDUNOVA v0.50.3 — preuves locales réelles — 2026-10-14
+
+Base canonique: EduNova_v0.50.2_RC_PHASE15_SOURCE_LINEAGE_COMPLETENESS.zip
+SHA-256 de base recalculé: 4ee047cc659902fa3e4a9035453fbd8cb65ed84caa666f9e47899be0a3b36af3
+Test ZIP source: zipfile.testzip() = None (archive intègre)
+
+Régression baseline avant changements:
+PYTHONPATH=services/api python -m pytest -q services/api/tests
+Exit code: 0
+816 passed in 103.38s (0:01:43)
+
+Tests ciblés après dernier changement:
+PYTHONPATH=services/api python -m pytest -q services/api/tests/test_phase15_hierarchical_privacy_executive.py services/api/tests/test_phase15_source_lineage_completeness.py services/api/tests/test_phase15_period_comparison.py services/api/tests/test_phase15_institutional_intelligence.py
+Exit code: 0
+57 passed in 19.45s
+
+Régression backend FINALE après dernière modification (stdout v0503_final_full.log, code de sortie conservé):
+PYTHONPATH=services/api python -m pytest -q services/api/tests
+Exit code: 0
+827 passed in 104.38s (0:01:44)
+
+Audit structurel : python scripts/audit_lot32_global.py
+Exit code: 0
+LOT32 GLOBAL AUDIT: 17/17 PASS
+
+Compilation Python: python -m compileall -q services/api/app services/api/tests
+Exit code: 0
+
+Non exécutés: PostgreSQL réel, Redis réel, object storage réel, compilations Flutter,
+appareils réels, fournisseurs externes, confidentialité différentielle,
+audit sécurité indépendant, certification juridique.
+
+Les échecs ciblés intermédiaires ont été corrigés avant la régression finale.

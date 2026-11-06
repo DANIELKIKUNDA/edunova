@@ -1,0 +1,8 @@
+{
+  "source": "https://api.osv.dev/v1/querybatch",
+  "ecosystem": "Pub",
+  "public_package_versions_checked": 160,
+  "incomplete": false,
+  "findings": [],
+  "scope": "Hosted pub.dev packages only; excludes Flutter SDK and native transitive binaries"
+}

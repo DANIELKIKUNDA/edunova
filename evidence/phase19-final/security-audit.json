@@ -1,0 +1,13 @@
+{
+  "commit": "edb7876cb26c131ec13c15e33f40b98022801e33",
+  "command": [
+    "C:\\Users\\cs-ap\\dev\\edusync-web\\edunova\\.local-certification\\security-venv\\Scripts\\python.exe",
+    "-m",
+    "pip_audit",
+    "--format=json",
+    "--output=C:\\Users\\cs-ap\\dev\\edusync-web\\edunova\\evidence\\phase19-final\\dependency-audit.json"
+  ],
+  "cwd": "C:\\Users\\cs-ap\\dev\\edusync-web\\edunova",
+  "exit_code": 0,
+  "seconds": 128.21
+}

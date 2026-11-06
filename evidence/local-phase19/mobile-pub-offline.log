@@ -1,0 +1,5 @@
+Resolving dependencies...
+Because edunova depends on device_info_plus any which doesn't exist (could not find package device_info_plus in cache), version solving failed.
+
+Try again without --offline!
+Failed to update packages.

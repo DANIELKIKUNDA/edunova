@@ -1,0 +1,23 @@
+PASS unassigned_staff_guard
+PASS future_unassigned_calendar
+PASS future_unassigned_teaching
+PASS reconciliation_count
+PASS alumni_account_scoping
+PASS verified_only_alumni
+PASS alumni_membership_revocation
+PASS alumni_tenant_active
+PASS alumni_cannot_edit_expired_membership
+PASS alumni_no_dossier_reference
+PASS academic_unassigned_route
+PASS alumni_discovery_route
+PASS mobile_verified_alumni_entry
+PASS alumni_readonly_expired
+PASS room_unassigned_selector
+PASS tenant_screen_invalidation
+PASS gateway_no_store
+PASS gateway_alumni_discovery
+PASS gateway_reconciliation
+PASS flutter_contract_test
+PASS backend_negative_test
+PASS ci_flutter_build
+22/22 checks (structural only)

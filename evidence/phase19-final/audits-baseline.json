@@ -1,0 +1,222 @@
+[
+  {
+    "script": "scripts\\audit_campus_intelligence_flutter.py",
+    "exit_code": 0
+  },
+  {
+    "script": "scripts\\audit_lot10_analytics.py",
+    "exit_code": 0
+  },
+  {
+    "script": "scripts\\audit_lot10_uiux_maximal.py",
+    "exit_code": 1
+  },
+  {
+    "script": "scripts\\audit_lot11_editorial.py",
+    "exit_code": 0
+  },
+  {
+    "script": "scripts\\audit_lot11_maximal.py",
+    "exit_code": 1
+  },
+  {
+    "script": "scripts\\audit_lot12_ingestion.py",
+    "exit_code": 1
+  },
+  {
+    "script": "scripts\\audit_lot13_content_factory.py",
+    "exit_code": 0
+  },
+  {
+    "script": "scripts\\audit_lot13_final.py",
+    "exit_code": 1
+  },
+  {
+    "script": "scripts\\audit_lot13_uiux_premium.py",
+    "exit_code": 1
+  },
+  {
+    "script": "scripts\\audit_lot14_final.py",
+    "exit_code": 1
+  },
+  {
+    "script": "scripts\\audit_lot14_publication.py",
+    "exit_code": 0
+  },
+  {
+    "script": "scripts\\audit_lot15_final.py",
+    "exit_code": 1
+  },
+  {
+    "script": "scripts\\audit_lot15_learning_experience.py",
+    "exit_code": 1
+  },
+  {
+    "script": "scripts\\audit_lot15_student_delight.py",
+    "exit_code": 1
+  },
+  {
+    "script": "scripts\\audit_lot16_adaptive.py",
+    "exit_code": 1
+  },
+  {
+    "script": "scripts\\audit_lot16_final.py",
+    "exit_code": 1
+  },
+  {
+    "script": "scripts\\audit_lot17_planner.py",
+    "exit_code": 1
+  },
+  {
+    "script": "scripts\\audit_lot18_assessment.py",
+    "exit_code": 0
+  },
+  {
+    "script": "scripts\\audit_lot18_cognitive_intelligence.py",
+    "exit_code": 0
+  },
+  {
+    "script": "scripts\\audit_lot18_question_factory.py",
+    "exit_code": 0
+  },
+  {
+    "script": "scripts\\audit_lot19_remediation.py",
+    "exit_code": 0
+  },
+  {
+    "script": "scripts\\audit_lot19_tutor.py",
+    "exit_code": 0
+  },
+  {
+    "script": "scripts\\audit_lot19_v0202.py",
+    "exit_code": 0
+  },
+  {
+    "script": "scripts\\audit_lot20_knowledge_graph.py",
+    "exit_code": 0
+  },
+  {
+    "script": "scripts\\audit_lot20_knowledge_graph_v0211.py",
+    "exit_code": 0
+  },
+  {
+    "script": "scripts\\audit_lot20_knowledge_graph_v0212.py",
+    "exit_code": 0
+  },
+  {
+    "script": "scripts\\audit_lot21_tutor.py",
+    "exit_code": 1
+  },
+  {
+    "script": "scripts\\audit_lot22.py",
+    "exit_code": 1
+  },
+  {
+    "script": "scripts\\audit_lot22_deep.py",
+    "exit_code": 1
+  },
+  {
+    "script": "scripts\\audit_lot23.py",
+    "exit_code": 0
+  },
+  {
+    "script": "scripts\\audit_lot23_maximal.py",
+    "exit_code": 0
+  },
+  {
+    "script": "scripts\\audit_lot24.py",
+    "exit_code": 0
+  },
+  {
+    "script": "scripts\\audit_lot24_closure.py",
+    "exit_code": 0
+  },
+  {
+    "script": "scripts\\audit_lot25.py",
+    "exit_code": 0
+  },
+  {
+    "script": "scripts\\audit_lot25_closure.py",
+    "exit_code": 0
+  },
+  {
+    "script": "scripts\\audit_lot25_maximal.py",
+    "exit_code": 0
+  },
+  {
+    "script": "scripts\\audit_lot26.py",
+    "exit_code": 1
+  },
+  {
+    "script": "scripts\\audit_lot26_closure.py",
+    "exit_code": 1
+  },
+  {
+    "script": "scripts\\audit_lot26_v0271.py",
+    "exit_code": 0
+  },
+  {
+    "script": "scripts\\audit_lot26_v0273.py",
+    "exit_code": 0
+  },
+  {
+    "script": "scripts\\audit_lot27.py",
+    "exit_code": 0
+  },
+  {
+    "script": "scripts\\audit_lot27_final.py",
+    "exit_code": 0
+  },
+  {
+    "script": "scripts\\audit_lot27_v0281.py",
+    "exit_code": 0
+  },
+  {
+    "script": "scripts\\audit_lot28.py",
+    "exit_code": 0
+  },
+  {
+    "script": "scripts\\audit_lot29.py",
+    "exit_code": 0
+  },
+  {
+    "script": "scripts\\audit_lot29_final.py",
+    "exit_code": 0
+  },
+  {
+    "script": "scripts\\audit_lot30.py",
+    "exit_code": 0
+  },
+  {
+    "script": "scripts\\audit_lot31.py",
+    "exit_code": 0
+  },
+  {
+    "script": "scripts\\audit_lot32_global.py",
+    "exit_code": 0
+  },
+  {
+    "script": "scripts\\audit_lot9_ux.py",
+    "exit_code": 0
+  },
+  {
+    "script": "scripts\\audit_phase16_closure_v0_51_9.py",
+    "exit_code": 0
+  },
+  {
+    "script": "scripts\\audit_phase16_library_governance_v0_51_2.py",
+    "exit_code": 0
+  },
+  {
+    "script": "scripts\\audit_phase16_physical_library.py",
+    "exit_code": 0
+  },
+  {
+    "script": "scripts\\audit_phase16_tenant_policy_v0_51_3.py",
+    "exit_code": 0
+  },
+  {
+    "script": "scripts\\audit_phase16_v0_51_8.py",
+    "exit_code": 0
+  }
+]

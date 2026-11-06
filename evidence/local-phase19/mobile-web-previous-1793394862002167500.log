@@ -1,0 +1,4 @@
+COMMAND: C:\Users\cs-ap\dev\flutter\bin\flutter.bat build web --release --no-pub
+CWD: C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile
+This project is not configured for the web.
+To configure this project for the web, run flutter create . --platforms web

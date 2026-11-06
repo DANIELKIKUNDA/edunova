@@ -1,0 +1,19 @@
+PASS : alumni service
+PASS : alumni SQL repository
+PASS : academic allocation repository
+PASS : teaching session allocation repository
+PASS : alumni Flutter page
+PASS : academic room Flutter page
+PASS : Flutter alumni route
+PASS : Flutter academic route
+PASS : gateway alumni endpoint
+PASS : gateway teaching endpoint
+PASS : gateway no-cache semantics
+PASS : Flutter test source
+PASS : CI Flutter analyze
+PASS : CI Flutter tests
+PASS : CI Phase16 specific test
+PASS : SQL migration 0093
+PASS : SQL migration 0094
+PASS : SQL migration 0095
+18/18 contrôles statiques réussis.

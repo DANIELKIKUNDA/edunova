@@ -1,0 +1,10 @@
+{
+  "commit": "716a11fcb8c98073e218290bdc020ed98ade5886",
+  "command": [
+    "C:\\Users\\cs-ap\\dev\\edusync-web\\edunova\\.venv\\Scripts\\python.exe",
+    "C:\\Users\\cs-ap\\dev\\edusync-web\\edunova\\scripts\\certify_phase19_audits.py"
+  ],
+  "cwd": "C:\\Users\\cs-ap\\dev\\edusync-web\\edunova",
+  "exit_code": 0,
+  "seconds": 12.85
+}

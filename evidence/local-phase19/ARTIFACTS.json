@@ -1,0 +1,54 @@
+[
+  {
+    "job": "mobile-web",
+    "path": "apps/mobile/build/web/main.dart.js",
+    "exists": true,
+    "size_bytes": 4506328,
+    "sha256": "b4b977930d5177edafc0c88bc142bd41c6f1c2f9e6f77413aa7267266792a0d1"
+  },
+  {
+    "job": "admin-web",
+    "path": "apps/admin/build/web/main.dart.js",
+    "exists": true,
+    "size_bytes": 3148753,
+    "sha256": "7b64454b494c5372e8bbc7e856ac49a74b94ff984e14511bc55f936df8654f00"
+  },
+  {
+    "job": "mobile-windows",
+    "path": "apps/mobile/build/windows/x64/runner/Release/edunova.exe",
+    "exists": true,
+    "size_bytes": 785920,
+    "sha256": "c835cb2382a2bf3b18708c87a72d78b6f38fdb42244206705e43f1705d0afa01"
+  },
+  {
+    "job": "admin-windows",
+    "path": "apps/admin/build/windows/x64/runner/Release/edunova_admin.exe",
+    "exists": true,
+    "size_bytes": 91136,
+    "sha256": "6bd81e51799c41c1bc2198187fc852fcae81d29a61d2e5d0dd72e0f719660d76"
+  },
+  {
+    "job": "mobile-android",
+    "path": "apps/mobile/build/app/outputs/flutter-apk/app-debug.apk",
+    "exists": true,
+    "size_bytes": 180579690,
+    "sha256": "672353a821ebbe2d3d3b4fccc685560a97710eaaa8e877b6056a82e0bd12ae3d",
+    "abis": [
+      "arm64-v8a",
+      "armeabi-v7a",
+      "x86_64"
+    ]
+  },
+  {
+    "job": "admin-android",
+    "path": "apps/admin/build/app/outputs/flutter-apk/app-debug.apk",
+    "exists": true,
+    "size_bytes": 148357586,
+    "sha256": "2c81263c7d732626cfc5fdce7e2ad9293de2cbc7084e6052198999a9fedd5628",
+    "abis": [
+      "arm64-v8a",
+      "armeabi-v7a",
+      "x86_64"
+    ]
+  }
+]

@@ -1,0 +1,4 @@
+COMMAND: C:\Users\cs-ap\dev\flutter\bin\flutter.bat analyze --no-pub
+CWD: C:\Users\cs-ap\dev\edusync-web\edunova\apps\admin
+Analyzing admin...                                              
+No issues found! (ran in 13.1s)

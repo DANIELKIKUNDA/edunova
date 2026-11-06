@@ -1,0 +1,23 @@
+  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
+                                 Dload  Upload  Total   Spent   Left   Speed
+  0      0   0      0   0      0      0      0                              0  0  13727   0      0   0      0      0      0           00:01              0  0  13727   0      0   0      0      0      0           00:01              0  0  13727   0      0   0      0      0      0           00:01              0
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: no-transform
+Cache-Control: public
+Cache-Control: max-age=86400
+Content-Disposition: attachment
+Content-Length: 13727
+Content-Security-Policy: default-src 'none'
+Content-Type: application/octet-stream
+Etag: "25942e5"
+Last-Modified: Mon, 18 Mar 2024 18:03:06 GMT
+Server: downloads
+Vary: Accept-Encoding
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+X-Identity-Content-Length: 13727
+X-Xss-Protection: 0
+Date: Sat, 31 Oct 2026 17:10:42 GMT
+Alt-Svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+

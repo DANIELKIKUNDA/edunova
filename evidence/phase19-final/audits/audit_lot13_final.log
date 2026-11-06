@@ -1,0 +1,15 @@
+PASS api 0.14.1
+PASS admin 0.14.1+21
+PASS mobile 0.14.1+21
+PASS quality module
+PASS quote grounding
+PASS hash integrity
+PASS numeric grounding
+PASS duplicate guard
+PASS review package
+PASS publication blocked
+PASS cancel endpoint
+PASS source compare UI
+PASS final acceptance
+PASS no TODO core
+14/14 PASS

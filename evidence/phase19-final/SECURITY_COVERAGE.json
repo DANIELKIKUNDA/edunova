@@ -1,0 +1,572 @@
+[
+  {
+    "suite": "services.api.tests.test_phase16_library_tenant_policy_v0_51_3",
+    "name": "test_default_policy_is_readable_to_member_without_creating_row",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase16_library_tenant_policy_v0_51_3",
+    "name": "test_policy_customisation_borrow_quota_and_renewal",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase16_library_tenant_policy_v0_51_3",
+    "name": "test_policy_updates_only_affect_future_borrowing_and_renewals",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase16_library_tenant_policy_v0_51_3",
+    "name": "test_zero_renewals_and_no_renewal_eligibility",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase16_library_tenant_policy_v0_51_3",
+    "name": "test_tenant_separation_policies_and_memberships",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase16_library_tenant_policy_v0_51_3",
+    "name": "test_unauthorized_roles_revoked_and_inactive_institution",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase16_library_tenant_policy_v0_51_3",
+    "name": "test_stale_version_and_replay_are_rejected_unchanged",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase16_library_tenant_policy_v0_51_3",
+    "name": "test_bad_policy_fields_rejected_before_write[loan_days-0]",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase16_library_tenant_policy_v0_51_3",
+    "name": "test_bad_policy_fields_rejected_before_write[loan_days-61]",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase16_library_tenant_policy_v0_51_3",
+    "name": "test_bad_policy_fields_rejected_before_write[max_open_loans-0]",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase16_library_tenant_policy_v0_51_3",
+    "name": "test_bad_policy_fields_rejected_before_write[max_open_loans-11]",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase16_library_tenant_policy_v0_51_3",
+    "name": "test_bad_policy_fields_rejected_before_write[max_renewals--1]",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase16_library_tenant_policy_v0_51_3",
+    "name": "test_bad_policy_fields_rejected_before_write[max_renewals-3]",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase16_library_tenant_policy_v0_51_3",
+    "name": "test_bad_policy_fields_rejected_before_write[renewal_days-0]",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase16_library_tenant_policy_v0_51_3",
+    "name": "test_bad_policy_fields_rejected_before_write[renewal_days-31]",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase16_library_tenant_policy_v0_51_3",
+    "name": "test_bad_policy_fields_rejected_before_write[loan_days-True]",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase16_library_tenant_policy_v0_51_3",
+    "name": "test_bad_policy_fields_rejected_before_write[max_open_loans-1.5]",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase16_library_tenant_policy_v0_51_3",
+    "name": "test_bad_policy_fields_rejected_before_write[max_renewals-1]",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase16_library_tenant_policy_v0_51_3",
+    "name": "test_bad_cas_version_denied[-1]",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase16_library_tenant_policy_v0_51_3",
+    "name": "test_bad_cas_version_denied[True]",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase16_library_tenant_policy_v0_51_3",
+    "name": "test_bad_cas_version_denied[1.5]",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase16_library_tenant_policy_v0_51_3",
+    "name": "test_bad_cas_version_denied[0]",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase16_library_tenant_policy_v0_51_3",
+    "name": "test_db_checks_reject_direct_out_of_range_policy",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase16_library_tenant_policy_v0_51_3",
+    "name": "test_policy_cannot_increase_existing_loan_due_at",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase16_library_tenant_policy_v0_51_3",
+    "name": "test_policy_audit_is_generated_only_after_success",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase16_library_tenant_policy_v0_51_3",
+    "name": "test_http_policy_read_write_rbac_tenants_cas_and_invalid_input",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_payment_hardening",
+    "name": "test_idempotency_key_cannot_be_reused_with_another_payer",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_payment_hardening",
+    "name": "test_invalid_signed_callback_does_not_record_provider_event",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_payment_hardening",
+    "name": "test_invalid_signature_cannot_create_payment_or_provider_event",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_payment_hardening",
+    "name": "test_identical_callback_replay_does_not_create_another_receipt",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_payment_hardening",
+    "name": "test_replay_with_modified_payload_is_rejected",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_payment_hardening",
+    "name": "test_student_from_another_institution_cannot_start_payment",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_payment_hardening",
+    "name": "test_provider_observation_does_not_settle_payment",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_payment_hardening",
+    "name": "test_cross_institution_provider_observation_is_rejected",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_payment_hardening",
+    "name": "test_finance_external_reference_cannot_be_reused_for_another_student",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_payment_hardening",
+    "name": "test_finance_external_reference_replay_returns_matching_receipt",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_payment_hardening",
+    "name": "test_terminal_payment_rejects_new_callback_without_persisting_event[failed]",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_payment_hardening",
+    "name": "test_terminal_payment_rejects_new_callback_without_persisting_event[expired]",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_payment_hardening",
+    "name": "test_terminal_payment_rejects_new_callback_without_persisting_event[cancelled]",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_payment_hardening",
+    "name": "test_reversed_receipt_cannot_satisfy_provider_replay",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_payment_hardening",
+    "name": "test_fallback_finance_payment_does_not_post_against_voided_charge",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_atomic_finance",
+    "name": "test_atomic_payment_posts_receipt_charge_and_ledger_together",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_campus_lot22_hardening",
+    "name": "test_admin_cannot_create_or_invite_owner",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_campus_lot22_hardening",
+    "name": "test_rector_cannot_create_owner",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_campus_lot22_hardening",
+    "name": "test_faculty_admin_is_confined_to_own_subtree",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_campus_lot22_hardening",
+    "name": "test_faculty_admin_requires_scope",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_campus_lot22_hardening",
+    "name": "test_period_kind_hierarchy_is_enforced",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_campus_lot22_hardening",
+    "name": "test_child_period_requires_parent_and_year_is_root",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_campus_lot22_hardening",
+    "name": "test_suspended_institution_blocks_mutations_but_owner_can_read",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_campus_lot22_hardening",
+    "name": "test_member_role_change_has_privilege_guards_and_locking",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_campus_lot22_hardening",
+    "name": "test_non_owner_cannot_promote_to_rector_or_admin_peer",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_campus_lot22_hardening",
+    "name": "test_scoped_member_listing_does_not_leak_other_faculty",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_atomic_finance",
+    "name": "test_atomic_payment_rolls_back_when_ledger_insert_fails",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_atomic_finance",
+    "name": "test_atomic_payment_replay_does_not_allocate_twice",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_atomic_finance",
+    "name": "test_atomic_payment_spreads_amount_over_multiple_charges",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_atomic_finance",
+    "name": "test_atomic_payment_rejects_overpayment_without_partial_writes",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_atomic_finance",
+    "name": "test_atomic_payment_conflicting_reference_preserves_first_settlement",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_atomic_finance",
+    "name": "test_atomic_payment_rejects_reversed_reference",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_atomic_finance",
+    "name": "test_atomic_payment_rolls_back_when_charge_update_fails",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_atomic_finance",
+    "name": "test_atomic_payment_cannot_allocate_to_another_institution",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_atomic_finance",
+    "name": "test_atomic_payment_does_not_allocate_to_voided_charge",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_atomic_finance",
+    "name": "test_atomic_payment_allocates_earliest_due_charge_before_identifier_order",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_identity_security",
+    "name": "test_registration_hashes_password_and_access_token_authenticates",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_identity_security",
+    "name": "test_duplicate_login_is_rejected",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_identity_security",
+    "name": "test_refresh_token_rotation_blocks_replay",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_identity_security",
+    "name": "test_bad_password_is_rejected",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_identity_security",
+    "name": "test_short_jwt_secret_is_rejected",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_identity_security",
+    "name": "test_refresh_token_reuse_revokes_all_sessions_and_access_tokens",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_identity_security",
+    "name": "test_sessions_can_be_listed_and_one_device_revoked",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_identity_security",
+    "name": "test_password_change_revokes_every_session_and_old_password",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_identity_security",
+    "name": "test_password_recovery_code_expires_and_is_single_use",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_identity_security",
+    "name": "test_password_recovery_limits_wrong_attempts_without_account_enumeration",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_postgres_concurrency",
+    "name": "test_concurrent_identical_callbacks_settle_once",
+    "status": "SKIP"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_postgres_concurrency",
+    "name": "test_concurrent_modified_callback_rejected",
+    "status": "SKIP"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_postgres_concurrency",
+    "name": "test_concurrent_distinct_payments_do_not_lose_allocation",
+    "status": "SKIP"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_postgres_concurrency",
+    "name": "test_concurrent_conflicting_reference_preserves_one_payment",
+    "status": "SKIP"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_postgres_concurrency",
+    "name": "test_callback_racing_stale_terminal_save_cannot_erase_settlement[expired]",
+    "status": "SKIP"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_postgres_concurrency",
+    "name": "test_callback_racing_stale_terminal_save_cannot_erase_settlement[cancelled]",
+    "status": "SKIP"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_postgres_concurrency",
+    "name": "test_terminal_operation_committed_first_blocks_callback[expired]",
+    "status": "SKIP"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_postgres_concurrency",
+    "name": "test_terminal_operation_committed_first_blocks_callback[cancelled]",
+    "status": "SKIP"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_postgres_concurrency",
+    "name": "test_provider_reference_conflict_rolls_back_second_intent",
+    "status": "SKIP"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_postgres_constraints",
+    "name": "test_migrated_finance_rejects_nonpositive_receipt",
+    "status": "SKIP"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_postgres_constraints",
+    "name": "test_migrated_charge_rejects_overallocation",
+    "status": "SKIP"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_postgres_constraints",
+    "name": "test_migrated_unique_constraints_exist[uq_gateway_idempotency]",
+    "status": "SKIP"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_postgres_constraints",
+    "name": "test_migrated_unique_constraints_exist[uq_gateway_merchant_ref]",
+    "status": "SKIP"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_postgres_constraints",
+    "name": "test_migrated_unique_constraints_exist[uq_gateway_provider_ref]",
+    "status": "SKIP"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_postgres_constraints",
+    "name": "test_migrated_unique_constraints_exist[uq_gateway_provider_event]",
+    "status": "SKIP"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_postgres_constraints",
+    "name": "test_migrated_unique_constraints_exist[uq_finance_external_ref]",
+    "status": "SKIP"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_postgres_constraints",
+    "name": "test_migrated_unique_constraints_exist[uq_finance_reference]",
+    "status": "SKIP"
+  },
+  {
+    "suite": "services.api.tests.test_platform_governance_recovery",
+    "name": "test_seven_roles_are_distinct_and_least_privilege",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_platform_governance_recovery",
+    "name": "test_owner_can_grant_role_and_role_cannot_manage_roles",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_platform_governance_recovery",
+    "name": "test_finance_dashboard_has_finance_scope_without_private_content_scope",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_platform_governance_recovery",
+    "name": "test_optimistic_lock_blocks_stale_role_update",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_platform_governance_recovery",
+    "name": "test_owner_cannot_self_deactivate",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_platform_governance_recovery",
+    "name": "test_last_owner_cannot_demote_self",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_platform_governance_recovery",
+    "name": "test_owner_can_transfer_control_after_second_owner_exists",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_atomic_callback",
+    "name": "test_callback_settlement_commits_finance_and_provider_state",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_atomic_callback",
+    "name": "test_callback_settlement_rollback_on_ledger_failure",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_atomic_callback",
+    "name": "test_callback_exact_replay_does_not_duplicate_settlement",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_atomic_callback",
+    "name": "test_failed_callback_commits_no_finance_receipt",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_atomic_callback",
+    "name": "test_atomic_callback_rejects_different_session_factory",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase19_atomic_callback",
+    "name": "test_atomic_callback_conflicting_event_digest_is_rejected",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.ingestion.test_preflight",
+    "name": "test_preflight_detects_real_signature_not_extension",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.ingestion.test_preflight",
+    "name": "test_preflight_rejects_declared_mime_mismatch",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.ingestion.test_preflight",
+    "name": "test_preflight_rejects_unsupported_signature_and_size_limits",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.ingestion.test_preflight",
+    "name": "test_preflight_image_dimensions",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.ingestion.test_preflight",
+    "name": "test_preflight_rejects_encrypted_pdf",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase18_license_status_authorization",
+    "name": "test_campus_license_status_denies_inactive_members[None]",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase18_license_status_authorization",
+    "name": "test_campus_license_status_denies_inactive_members[membership1]",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_phase18_license_status_authorization",
+    "name": "test_campus_license_status_allows_active_members",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.ingestion.test_security_storage",
+    "name": "test_local_staging_blocks_path_traversal",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.ingestion.test_security_storage",
+    "name": "test_clamav_scanner_accepts_clean_and_rejects_malware",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_platform_governance_owner_isolation",
+    "name": "test_owner_grants_and_last_owner_guards",
+    "status": "PASS"
+  },
+  {
+    "suite": "services.api.tests.test_security_headers_lot28",
+    "name": "test_security_headers_are_present",
+    "status": "PASS"
+  }
+]

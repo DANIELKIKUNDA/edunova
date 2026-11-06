@@ -1,0 +1,10 @@
+COMMAND: C:\Users\cs-ap\dev\edusync-web\edunova\.local-certification\security-venv\Scripts\python.exe C:\Users\cs-ap\dev\edusync-web\edunova\scripts\certify_pub_dependencies.py
+CWD: C:\Users\cs-ap\dev\edusync-web\edunova
+{
+  "source": "https://api.osv.dev/v1/querybatch",
+  "ecosystem": "Pub",
+  "public_package_versions_checked": 160,
+  "incomplete": false,
+  "findings": [],
+  "scope": "Hosted pub.dev packages only; excludes Flutter SDK and native transitive binaries"
+}

@@ -1,0 +1,10 @@
+{
+  "commit": "c63d31a0541bd0ff07572613e5e90b3394cc2ef1",
+  "command": [
+    "C:\\Users\\cs-ap\\dev\\edusync-web\\edunova\\.local-certification\\security-venv\\Scripts\\python.exe",
+    "C:\\Users\\cs-ap\\dev\\edusync-web\\edunova\\scripts\\test_audit_contracts.py"
+  ],
+  "cwd": "C:\\Users\\cs-ap\\dev\\edusync-web\\edunova",
+  "exit_code": 0,
+  "seconds": 1.14
+}

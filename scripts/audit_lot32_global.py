@@ -1,0 +1,25 @@
+from pathlib import Path
+import re
+R=Path(__file__).resolve().parents[1]
+checks={}
+migs=sorted(int(p.name[:4]) for p in (R/'services/api/migrations').glob('[0-9][0-9][0-9][0-9]_*.sql'))
+checks['migration chain contiguous through latest']=bool(migs and migs==list(range(migs[0],migs[-1]+1)) and migs[-1]>=52)
+checks['trust personal-space boundary']='PERSONAL_ONLY' in (R/'services/api/app/modules/trust_governance/application/service.py').read_text()
+checks['persistent sessions']='expires_at=None' in (R/'services/api/app/modules/identity/application/service.py').read_text()
+checks['commerce licensing']=(R/'services/api/app/modules/commerce/application/commercial_service.py').exists()
+checks['campus core']=(R/'services/api/app/modules/campus/application/service.py').exists()
+checks['teaching']=(R/'services/api/app/modules/teaching/application/service.py').exists()
+checks['assignments']=(R/'services/api/app/modules/assignments/application/service.py').exists()
+checks['gradebook']=(R/'services/api/app/modules/gradebook/application/service.py').exists()
+checks['institutional analytics']=(R/'services/api/app/modules/institutional_analytics/application/service.py').exists()
+checks['knowledge graph']=(R/'services/api/app/modules/knowledge_graph/application/service.py').exists()
+checks['tutor']=(R/'services/api/app/modules/tutor/application/service.py').exists()
+checks['pilot readiness']=(R/'services/api/app/modules/pilot_readiness/application/service.py').exists()
+checks['pwa offline']=all((R/x).exists() for x in ['apps/mobile/web/manifest.json','apps/mobile/web/sw.js','apps/mobile/web/offline.html'])
+checks['production compose']=(R/'docker-compose.production.yml').exists()
+checks['ci and release']=all((R/x).exists() for x in ['.github/workflows/ci.yml','.github/workflows/release.yml'])
+checks['backup restore']=all((R/x).exists() for x in ['scripts/backup_postgres.sh','scripts/restore_postgres.sh','scripts/backup_object_storage.sh','scripts/restore_object_storage.sh'])
+checks['no TODO/FIXME/NotImplementedError']=not any(re.search(r'\b(TODO|FIXME|NotImplementedError)\b',p.read_text(errors='ignore')) for p in (R/'services/api/app').rglob('*.py'))
+for k,v in checks.items(): print(('PASS' if v else 'FAIL'),k)
+print(f"LOT32 GLOBAL AUDIT: {sum(checks.values())}/{len(checks)} PASS")
+raise SystemExit(0 if all(checks.values()) else 1)

@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS admission_committees (id VARCHAR(64) PRIMARY KEY,institution_id VARCHAR(64) NOT NULL,campaign_id VARCHAR(64) NOT NULL,name VARCHAR(200) NOT NULL,chair_account_id VARCHAR(64) NOT NULL,quorum INTEGER NOT NULL CHECK(quorum>0),active BOOLEAN NOT NULL DEFAULT TRUE,created_at TIMESTAMPTZ NOT NULL);
+CREATE INDEX IF NOT EXISTS ix_admission_committees_institution_campaign ON admission_committees(institution_id,campaign_id);
+CREATE TABLE IF NOT EXISTS admission_committee_members (committee_id VARCHAR(64) NOT NULL,account_id VARCHAR(64) NOT NULL,voting BOOLEAN NOT NULL DEFAULT TRUE,PRIMARY KEY(committee_id,account_id));
+CREATE TABLE IF NOT EXISTS admission_committee_votes (id VARCHAR(64) PRIMARY KEY,committee_id VARCHAR(64) NOT NULL,review_id VARCHAR(64) NOT NULL,voter_account_id VARCHAR(64) NOT NULL,recommendation VARCHAR(24) NOT NULL,note VARCHAR(1000),voted_at TIMESTAMPTZ NOT NULL,CONSTRAINT uq_admission_committee_vote UNIQUE(committee_id,review_id,voter_account_id));
+CREATE INDEX IF NOT EXISTS ix_admission_committee_votes_review ON admission_committee_votes(review_id);
+CREATE TABLE IF NOT EXISTS admission_events (id VARCHAR(64) PRIMARY KEY,review_id VARCHAR(64) NOT NULL,actor_id VARCHAR(64) NOT NULL,event_type VARCHAR(80) NOT NULL,from_state VARCHAR(32),to_state VARCHAR(32),note VARCHAR(1000),created_at TIMESTAMPTZ NOT NULL);
+CREATE INDEX IF NOT EXISTS ix_admission_events_review_created ON admission_events(review_id,created_at);

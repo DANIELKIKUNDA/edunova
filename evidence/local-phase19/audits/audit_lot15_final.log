@@ -1,0 +1,12 @@
+FAIL api 0.16.1
+FAIL mobile 0.16.1+26
+FAIL admin 0.16.1+26
+PASS migration 0015
+PASS exam plans
+PASS error review
+PASS recommendations
+PASS constraints
+FAIL exam UI
+PASS mastery UI
+PASS machine gate
+7/11 PASS

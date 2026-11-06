@@ -1,0 +1,21 @@
+EduNova v0.51.6 — preuves locales de vérification
+
+Source ZIP : EduNova_v0.51.5_RC_PHASE16_CAMPUS_MAINTENANCE_LIFECYCLE.zip
+Source SHA-256 calculé : 30c77fb419b84671ecd9579d8fef5b62d4058a9579e78fa6e9de127704197ccc
+
+Ciblé : PYTHONPATH=services/api python -m pytest -q services/api/tests/test_phase16_event_registration_v0_51_6.py services/api/tests/test_migration_contract.py
+Résultat : 20 passed in 6.29s ; code retour 0 (fichier TARGETED_PHASE16_v0.51.6.txt).
+
+Global : PYTHONPATH=services/api python -m pytest -q services/api/tests
+Résultat : 1030 passed in 205.37s (0:03:25) ; code retour 0 (fichier REGRESSION_BACKEND_v0.51.6.txt).
+
+Python : PYTHONPATH=services/api python -m compileall -q services/api/app
+Résultat : terminé sans erreur.
+
+Audit structurel propriétaire : 12/12 PASS (STATIC_AUDIT_PHASE16_v0.51.6.txt). Il ne remplace pas flutter analyze.
+
+Nouvelle migration SQL : 0092_campus_event_registrations_v0_51_6.sql. Test du contrat des migrations : PASS dans la suite ciblée/globale.
+
+Flutter / Dart : SDK non disponible, flutter analyze / flutter test / flutter build NON EXÉCUTÉS.
+PostgreSQL réel, Redis réel, stockage objet, providers externes, appareils réels NON EXÉCUTÉS.
+SQLite de tests ≠ certification de concurrence PostgreSQL.

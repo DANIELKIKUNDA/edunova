@@ -1,0 +1,13 @@
+COMMAND: C:\Users\cs-ap\dev\flutter\bin\flutter.bat analyze --no-pub
+CWD: C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile
+
+┌─────────────────────────────────────────────────────────┐
+│ A new version of Flutter is available!                  │
+│                                                         │
+│ To update to the latest version, run "flutter upgrade". │
+└─────────────────────────────────────────────────────────┘
+Analyzing mobile...                                             
+
+   info - 'package:drift/web.dart' is deprecated and shouldn't be used. This variant of web support has downsides compared to `package:drift/wasm.dart` and is in a deprecated bugfix-only mode. Please consider migrating to the new web APIS: https://drift.simonbinder.eu/web - lib\src\core\database\connection\connection_web.dart:2:1 - deprecated_member_use
+
+1 issue found. (ran in 21.9s)

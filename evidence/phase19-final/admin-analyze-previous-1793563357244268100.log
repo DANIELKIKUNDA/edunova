@@ -1,0 +1,8 @@
+COMMAND: C:\Users\cs-ap\dev\flutter\bin\flutter.bat analyze --no-pub
+CWD: C:\Users\cs-ap\dev\edusync-web\edunova\apps\admin
+Analyzing admin...                                              
+
+warning - The method doesn't override an inherited method - test\content_factory_evidence_test.dart:10:25 - override_on_non_overriding_member
+warning - The method doesn't override an inherited method - test\content_factory_evidence_test.dart:14:32 - override_on_non_overriding_member
+
+2 issues found. (ran in 19.5s)

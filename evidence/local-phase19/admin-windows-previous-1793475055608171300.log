@@ -1,0 +1,4 @@
+COMMAND: C:\Users\cs-ap\dev\flutter\bin\flutter.bat build windows --release --no-pub
+CWD: C:\Users\cs-ap\dev\edusync-web\edunova\apps\admin
+Building Windows application...                                    41.3s
+√ Built build\windows\x64\runner\Release\edunova_admin.exe

@@ -1,0 +1,123 @@
+COMMAND: C:\Users\cs-ap\dev\flutter\bin\flutter.bat test --no-pub --concurrency=1 --reporter=expanded
+CWD: C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile
+00:00 +0: loading C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/adaptive_planning_test.dart
+00:00 +0: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/adaptive_planning_test.dart: high cognitive work is skipped in low energy window
+00:00 +1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/adaptive_planning_test.dart: planner respects study capacity and breaks
+00:00 +2: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/adaptive_planning_test.dart: deferred work gains explicit priority reason
+00:00 +3: loading C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/analytics/analytics_engine_test.dart
+00:03 +3: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/analytics/analytics_engine_test.dart: momentum is explainable and improving
+00:03 +4: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/analytics/analytics_engine_test.dart: urgent low readiness course is prioritized
+00:03 +5: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/analytics/analytics_engine_test.dart: recommendations remain diversified
+00:03 +6: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/analytics/analytics_engine_test.dart: activity timeline is preserved for premium UI
+00:03 +7: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/analytics/analytics_engine_test.dart: course insight exposes drilldown dimensions
+00:03 +8: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/analytics/analytics_engine_test.dart: course recommendation links keep the human title
+00:03 +9: loading C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_academic_alumni_gateway_test.dart
+00:07 +9: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_academic_alumni_gateway_test.dart: Affection d’un événement du calendrier, libération CAS, tenant
+00:07 +10: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_academic_alumni_gateway_test.dart: Réconciliation des séances et découverte Alumni vérifiée, sans cache
+00:07 +11: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_academic_alumni_gateway_test.dart: Alumni : consentement explicite, validation et opportunités gouvernées
+00:07 +12: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_academic_alumni_gateway_test.dart: Isolation du chemin d’université et absence de session
+00:08 +13: loading C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_alerts_gateway_test.dart
+00:11 +13: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_alerts_gateway_test.dart: Alertes personnelles : GET scellé au tenant, bearer, no-cache
+00:11 +14: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_alerts_gateway_test.dart: Réponses malformées et doublons ne doivent pas être affichés
+00:12 +15: loading C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_events_gateway_test.dart
+00:15 +15: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_events_gateway_test.dart: Événements : routes scellées au tenant et au bearer; versions conservées
+00:16 +16: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_events_gateway_test.dart: Identifiants de tenants dangereux rejetés sans requête réseau
+00:16 +17: loading C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart
+00:40 +17: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: membre étudiant : aucun accès aux analyses
+00:44 +18: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: invitation non acceptée : accès interdit
+00:44 +19: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: URL directe vers autre université : aucune requête analytique
+00:44 +20: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: auditeur actif : accès aux indicateurs, pas à la gestion pédagogique
+00:45 +21: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: direction : masque les pourcentages supprimés
+00:46 +22: loading C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_archive_scope_widget_test.dart
+00:55 +22: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_archive_scope_widget_test.dart: une réponse CSV périmée ne réapparaît pas après changement de période
+00:58 +23: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_archive_scope_widget_test.dart: passage en arrière-plan efface le CSV et invalide les requêtes
+00:58 +24: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_archive_scope_widget_test.dart: révocation de capture pendant la confirmation empêche le POST
+00:59 +25: loading C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_completion_widget_test.dart
+01:03 +25: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_completion_widget_test.dart: ph14: formulaire lié au vrai cours sans altération des notes
+01:06 +26: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_completion_widget_test.dart: ph15: un auditeur ne reçoit aucun contrôle de capture
+01:06 +27: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_completion_widget_test.dart: ph15: archive bloquée ne divulgue jamais son payload
+01:06 +28: loading C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_gateway_test.dart
+01:10 +28: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_gateway_test.dart: Confidentialité: aucune valeur masquée déduite côté Flutter valeurs nulles, invalides et non libérées restent indisponibles
+01:10 +29: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_gateway_test.dart: API institutionnelle authentifiée selection, scope, jeton et absence de mutation
+01:11 +30: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_gateway_test.dart: API institutionnelle authentifiée tenant path injection et comparaison absurde refusés avant le réseau
+01:11 +31: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_gateway_test.dart: API institutionnelle authentifiée aucune requête sans session authentifiée
+01:11 +32: loading C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_governance_gateway_test.dart
+01:16 +32: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_governance_gateway_test.dart: ph14 objectifs: lecture et POST seulement sur métadonnées autorisées
+01:16 +33: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_governance_gateway_test.dart: ph15 archives: périmètre faculté, export volatil, historique gouverné
+01:16 +34: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_governance_gateway_test.dart: chemins injectés, champs invalides et session absente bloqués
+01:16 +35: loading C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_tenant_transition_widget_test.dart
+01:22 +35: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_tenant_transition_widget_test.dart: référence de cours ambiguë : aucune analyse exécutée
+01:24 +36: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_tenant_transition_widget_test.dart: 403 après publication : le tableau privé précédent est effacé
+01:27 +37: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_tenant_transition_widget_test.dart: changement de tenant : une réponse tardive de A ne divulgue rien dans B
+01:27 +38: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_tenant_transition_widget_test.dart: A-B-A : une ancienne requête du même cours ne remplace pas la récente
+01:28 +39: loading C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_services_gateway_test.dart
+01:31 +39: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_services_gateway_test.dart: Ressources, réservations et annulation restent liées à une institution
+01:31 +40: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_services_gateway_test.dart: Identifiants chemin malformés et absence de session sont refusés
+01:31 +41: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_services_gateway_test.dart: Bibliothèque physique : prêts, retours et exemplaires authentifiés
+01:31 +42: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_services_gateway_test.dart: Prolongations : identité issue du token et version anti-rejeu
+01:31 +43: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_services_gateway_test.dart: Politique de bibliothèque : lecture et sauvegarde avec CAS
+01:31 +44: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_services_gateway_test.dart: Politique : interdiction de chemin interuniversitaire invalide
+01:31 +45: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_services_gateway_test.dart: Identifiants emprunts malformés et session manquante sont rejetés
+01:31 +46: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_services_gateway_test.dart: Incidents : perte et détérioration versionnées, même université
+01:31 +47: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_services_gateway_test.dart: Incidents : restauration versionnée et entrée falsifiée refusée
+01:31 +48: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_services_gateway_test.dart: Maintenance : signalement et transition avec isolation institutionnelle
+01:31 +49: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_services_gateway_test.dart: Maintenance : chemins malformés et action inconnue refusés
+01:32 +50: loading C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/cloud_sync_use_case_test.dart
+01:37 +50: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/cloud_sync_use_case_test.dart: failed acknowledgement preserves a committed bootstrap cursor
+01:37 +51: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/cloud_sync_use_case_test.dart: registers, pushes, bootstraps and acknowledges new device per account
+01:37 +52: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/cloud_sync_use_case_test.dart: reset_required rebuilds canonical state without touching local-only documents
+01:37 +53: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/cloud_sync_use_case_test.dart: reset_required preserves offline state when canonical snapshot is invalid
+01:37 +54: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/cloud_sync_use_case_test.dart: rejects out-of-order delta before writing any record
+01:37 +55: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/cloud_sync_use_case_test.dart: rejects malformed bootstrap before applying any snapshot record
+01:37 +56: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/cloud_sync_use_case_test.dart: rejects malformed delta before applying any record
+01:37 +57: loading C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/combined_access_test.dart
+01:40 +57: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/combined_access_test.dart: Campus does not grant personal Premium
+01:40 +58: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/combined_access_test.dart: Suspended Campus does not remove personal Premium
+01:40 +59: loading C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/commerce_domain_test.dart
+01:45 +59: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/commerce_domain_test.dart: offline premium requires both lease and subscription to be valid
+01:46 +60: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/commerce_domain_test.dart: payment terminal states are explicit
+01:46 +61: loading C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/engagement/engagement_domain_test.dart
+01:50 +61: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/engagement/engagement_domain_test.dart: preferences copyWith preserves untouched values
+01:50 +62: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/engagement/engagement_domain_test.dart: notification model keeps priority and expiry
+01:50 +63: loading C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/import_personal_document_test.dart
+01:52 +63: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/import_personal_document_test.dart: personal import persists metadata and queues outbox event
+01:52 +64: loading C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/library_catalog_refresh_test.dart
+01:56 +64: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/library_catalog_refresh_test.dart: complete paginated catalog is reconciled atomically
+01:56 +65: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/library_catalog_refresh_test.dart: etag change during pagination keeps previous cache untouched
+01:56 +66: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/library_catalog_refresh_test.dart: 304 does not rewrite local catalog
+01:56 +67: loading C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/local_quiz_evaluator_test.dart
+02:02 +67: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/local_quiz_evaluator_test.dart: multiple choice partial scoring penalizes guessing
+02:03 +68: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/local_quiz_evaluator_test.dart: numeric supports absolute tolerance
+02:03 +69: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/local_quiz_evaluator_test.dart: free text supports accepted variants
+02:03 +70: loading C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/pedagogy_scheduler_test.dart
+02:08 +70: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/pedagogy_scheduler_test.dart: again resets repetition and records a lapse
+02:09 +71: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/pedagogy_scheduler_test.dart: easy accelerates interval
+02:09 +72: loading C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/planning_engine_test.dart
+02:11 +72: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/planning_engine_test.dart: planning engine prioritizes imminent weak course and respects budget
+02:11 +73: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/planning_engine_test.dart: emergency plan consumes requested budget
+02:11 +74: loading C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/schedule_text_parser_test.dart
+02:13 +74: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/schedule_text_parser_test.dart: parses French OCR timetable rows conservatively
+02:13 +75: loading C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/secure_session_account_ownership_test.dart
+02:17 +75: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/secure_session_account_ownership_test.dart: logout retains ownership and blocks another account
+02:17 +76: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/secure_session_account_ownership_test.dart: concurrent saves cannot claim the same installation twice
+02:17 +77: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/secure_session_account_ownership_test.dart: reading a legacy authenticated session immediately pins ownership
+02:17 +78: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/secure_session_account_ownership_test.dart: legacy authenticated session is pinned on logout
+02:17 +79: loading C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/sync_push_integrity_test.dart
+02:21 +79: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/sync_push_integrity_test.dart: late unknown disposition never partially acknowledges outbox
+02:21 +80: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/sync_push_integrity_test.dart: late conflict without canonical never partially acknowledges outbox
+02:21 +81: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/sync_push_integrity_test.dart: mismatched successful canonical record cannot modify another entity
+02:21 +82: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/sync_push_integrity_test.dart: mismatched conflict canonical record is rejected before writes
+02:21 +83: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/sync_push_integrity_test.dart: invalid canonical version is rejected before writes
+02:21 +84: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/sync_push_integrity_test.dart: regressing pull cursor is rejected before acknowledgement
+02:21 +85: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/sync_push_integrity_test.dart: non-progressing paginated pull cursor is rejected
+02:21 +86: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/sync_push_integrity_test.dart: missing push outcome blocks pull and keeps outbox
+02:21 +87: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/sync_push_integrity_test.dart: duplicate push outcome blocks pull and keeps outbox
+02:21 +88: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/sync_push_integrity_test.dart: unknown push outcome blocks pull and keeps outbox
+02:21 +89: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/sync_push_integrity_test.dart: account switch during push cannot commit old account outcomes
+02:21 +90: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/sync_push_integrity_test.dart: simultaneous triggers share a single push and release lock after failure
+02:21 +91: loading C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/ux/premium_surface_test.dart
+02:25 +91: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/ux/premium_surface_test.dart: PremiumPanel remains usable with large text
+02:26 +92: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/ux/premium_surface_test.dart: EmptyStateCard exposes clear title and action
+02:27 +93: loading C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/widget_test.dart
+02:29 +93: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/widget_test.dart: home renders preparation for an empty local account
+02:31 +94: All tests passed!

@@ -1,0 +1,28 @@
+00:00 +0: loading C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/study_workspace_contract_test.dart
+00:00 +0: compact workspace keeps navigation and restores it after focus
+00:05 +1: desktop workspace keeps content while focus hides side panels
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: null
+  Actual: FlutterError:<A RenderFlex overflowed by 22 pixels on the right.>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/study_workspace_contract_test.dart:42:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/study_workspace_contract_test.dart line 42
+The test description was:
+  desktop workspace keeps content while focus hides side panels
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:06 +1 -1: desktop workspace keeps content while focus hides side panels [E]
+  Test failed. See exception logs above.
+  The test description was: desktop workspace keeps content while focus hides side panels
+  
+00:06 +1 -1: Some tests failed.

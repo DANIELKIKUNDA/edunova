@@ -1,0 +1,20 @@
+-- EduNova v0.23.1 LOT 22 — enterprise tenancy hardening.
+ALTER TABLE campus_institutions ADD CONSTRAINT ck_campus_institution_state CHECK (state IN ('active','suspended','archived'));
+ALTER TABLE campus_academic_units ADD CONSTRAINT ck_campus_unit_kind CHECK (kind IN ('campus','faculty','department','program'));
+ALTER TABLE campus_academic_periods ADD CONSTRAINT ck_campus_period_kind CHECK (kind IN ('academic_year','semester','term'));
+ALTER TABLE campus_memberships ADD CONSTRAINT ck_campus_membership_role CHECK (role IN ('owner','rector','admin','academic_admin','faculty_admin','teacher','student','auditor'));
+ALTER TABLE campus_memberships ADD CONSTRAINT ck_campus_membership_state CHECK (state IN ('invited','active','suspended','revoked'));
+ALTER TABLE campus_academic_units ADD CONSTRAINT fk_campus_unit_institution FOREIGN KEY(institution_id) REFERENCES campus_institutions(id) ON DELETE RESTRICT;
+ALTER TABLE campus_academic_units ADD CONSTRAINT fk_campus_unit_parent FOREIGN KEY(parent_id) REFERENCES campus_academic_units(id) ON DELETE RESTRICT;
+ALTER TABLE campus_academic_periods ADD CONSTRAINT fk_campus_period_institution FOREIGN KEY(institution_id) REFERENCES campus_institutions(id) ON DELETE RESTRICT;
+ALTER TABLE campus_academic_periods ADD CONSTRAINT fk_campus_period_parent FOREIGN KEY(parent_id) REFERENCES campus_academic_periods(id) ON DELETE RESTRICT;
+ALTER TABLE campus_memberships ADD CONSTRAINT fk_campus_membership_institution FOREIGN KEY(institution_id) REFERENCES campus_institutions(id) ON DELETE RESTRICT;
+ALTER TABLE campus_memberships ADD CONSTRAINT fk_campus_membership_unit FOREIGN KEY(unit_id) REFERENCES campus_academic_units(id) ON DELETE RESTRICT;
+ALTER TABLE campus_cohorts ADD CONSTRAINT fk_campus_cohort_institution FOREIGN KEY(institution_id) REFERENCES campus_institutions(id) ON DELETE RESTRICT;
+ALTER TABLE campus_cohorts ADD CONSTRAINT fk_campus_cohort_program FOREIGN KEY(program_unit_id) REFERENCES campus_academic_units(id) ON DELETE RESTRICT;
+ALTER TABLE campus_cohorts ADD CONSTRAINT fk_campus_cohort_period FOREIGN KEY(academic_period_id) REFERENCES campus_academic_periods(id) ON DELETE RESTRICT;
+ALTER TABLE campus_enrollments ADD CONSTRAINT fk_campus_enrollment_institution FOREIGN KEY(institution_id) REFERENCES campus_institutions(id) ON DELETE RESTRICT;
+ALTER TABLE campus_enrollments ADD CONSTRAINT fk_campus_enrollment_cohort FOREIGN KEY(cohort_id) REFERENCES campus_cohorts(id) ON DELETE RESTRICT;
+CREATE INDEX IF NOT EXISTS ix_campus_units_parent ON campus_academic_units(institution_id,parent_id,active);
+CREATE INDEX IF NOT EXISTS ix_campus_members_scope ON campus_memberships(institution_id,unit_id,role,state);
+CREATE INDEX IF NOT EXISTS ix_campus_cohort_program_period ON campus_cohorts(institution_id,program_unit_id,academic_period_id,active);

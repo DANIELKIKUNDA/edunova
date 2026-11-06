@@ -1,0 +1,17 @@
+{
+  "commit": "d4169e8b131d313de87b02d2713f5008f879fee3",
+  "command": [
+    "C:\\Users\\cs-ap\\dev\\edusync-web\\edunova\\.venv\\Scripts\\python.exe",
+    "-m",
+    "pytest",
+    "-q",
+    "services/api/tests/test_phase19_atomic_finance.py",
+    "services/api/tests/test_phase19_atomic_callback.py",
+    "services/api/tests/test_phase19_postgres_concurrency.py",
+    "services/api/tests/test_phase19_postgres_constraints.py",
+    "--junitxml=C:\\Users\\cs-ap\\dev\\edusync-web\\edunova\\evidence\\local-phase19\\postgres.xml"
+  ],
+  "cwd": "C:\\Users\\cs-ap\\dev\\edusync-web\\edunova",
+  "exit_code": 0,
+  "seconds": 36.35
+}

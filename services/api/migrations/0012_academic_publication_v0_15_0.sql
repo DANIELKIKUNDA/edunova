@@ -1,0 +1,6 @@
+-- LOT 14 Academic Publishing & Catalog Distribution
+CREATE TABLE IF NOT EXISTS publication_releases (id varchar(64) PRIMARY KEY, editorial_item_id varchar(64) NOT NULL, editorial_revision_id varchar(64) NOT NULL, state varchar(24) NOT NULL, version_label varchar(120) NOT NULL, placement_json text NOT NULL, audience_json text NOT NULL DEFAULT '{}', rollout_mode varchar(24) NOT NULL DEFAULT 'all', rollout_percentage integer NOT NULL DEFAULT 100 CHECK (rollout_percentage BETWEEN 1 AND 100), premium_required boolean NOT NULL DEFAULT true, offline_allowed boolean NOT NULL DEFAULT true, scheduled_at timestamptz NULL, published_at timestamptz NULL, withdrawn_at timestamptz NULL, created_by varchar(64) NOT NULL, created_at timestamptz NOT NULL, row_version integer NOT NULL DEFAULT 1);
+CREATE INDEX IF NOT EXISTS ix_publication_release_state_schedule ON publication_releases(state, scheduled_at);
+CREATE INDEX IF NOT EXISTS ix_publication_release_item ON publication_releases(editorial_item_id);
+CREATE TABLE IF NOT EXISTS publication_catalog_snapshots (id varchar(64) PRIMARY KEY, release_id varchar(64) NOT NULL UNIQUE, manifest_sha256 varchar(64) NOT NULL, manifest_json text NOT NULL, created_at timestamptz NOT NULL);
+CREATE INDEX IF NOT EXISTS ix_publication_snapshot_sha ON publication_catalog_snapshots(manifest_sha256);

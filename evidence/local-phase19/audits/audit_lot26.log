@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "C:\Users\cs-ap\dev\edusync-web\edunova\scripts\audit_lot26.py", line 16, in <module>
+    assert '0.27.0' in main and 'campus_operations_router' in main
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

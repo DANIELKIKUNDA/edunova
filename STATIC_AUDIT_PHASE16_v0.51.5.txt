@@ -1,0 +1,22 @@
+PASS: migration_lifecycle
+PASS: migration_partial_unique
+PASS: migration_booking_reason
+PASS: tenant_filter_tickets_sql
+PASS: ticket_filter_reporter_sql
+PASS: lock_resource_booking
+PASS: atomic_cancel_pending
+PASS: no_auto_un_cancel
+PASS: service_roles_for_transitions
+PASS: service_permission_on_report
+PASS: get_tickets_api
+PASS: post_tickets_api
+PASS: post_transition_api
+PASS: flutter_auth_headers
+PASS: flutter_no_cache
+PASS: flutter_tenant_gate
+PASS: flutter_ticket_version
+PASS: flutter_live_security
+PASS: flutter_admin_actions
+PASS: flutter_gateway_test
+PASS: migration_contract_updated
+Structural assertions: 21/21 PASS; not a Dart compiler or device certification

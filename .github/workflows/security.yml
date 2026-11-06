@@ -1,0 +1,22 @@
+name: EduNova Security
+on: [push, pull_request]
+permissions: {contents: read}
+concurrency:
+  group: edunova-security-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  dependency-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.13'}
+      - run: pip install pip-audit
+      - run: pip-audit -r services/api/requirements.txt
+  image-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t edunova-api:scan services/api
+      - uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        with: {image-ref: 'edunova-api:scan', format: 'table', exit-code: '1', severity: 'CRITICAL,HIGH', ignore-unfixed: true}

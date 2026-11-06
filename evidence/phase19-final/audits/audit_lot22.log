@@ -1,0 +1,14 @@
+PASS campus_domain services\api\app\modules\campus\domain\model.py
+PASS campus_service services\api\app\modules\campus\application\service.py
+PASS campus_repository services\api\app\modules\campus\infrastructure\sqlalchemy_repo.py
+PASS campus_api services\api\app\modules\campus\api\router.py
+PASS migration_0031 services\api\migrations\0031_campus_core_v0_23_0.sql
+PASS adr_031 docs\ADR-031-campus-multitenancy-boundary.md
+PASS lot22_doc docs\LOT22_CAMPUS_CORE_v0.23.0.md
+PASS campus_ui apps\mobile\lib\src\features\campus\presentation\campus_page.dart
+PASS tests services\api\tests\test_campus_lot22.py
+PASS version_0_23_0
+PASS campus_router
+PASS runtime_wiring
+PASS tenant_columns
+PASS brand_signature

@@ -1,0 +1,332 @@
+COMMAND: C:\Users\cs-ap\dev\flutter\bin\flutter.bat test --no-pub --reporter=expanded
+CWD: C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile
+00:00 +0: loading C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/adaptive_planning_test.dart
+00:00 +0: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/adaptive_planning_test.dart: high cognitive work is skipped in low energy window
+00:00 +1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/adaptive_planning_test.dart: planner respects study capacity and breaks
+00:00 +2: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/adaptive_planning_test.dart: deferred work gains explicit priority reason
+00:01 +3: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/analytics/analytics_engine_test.dart: momentum is explainable and improving
+00:01 +4: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/analytics/analytics_engine_test.dart: urgent low readiness course is prioritized
+00:01 +5: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/analytics/analytics_engine_test.dart: recommendations remain diversified
+00:01 +6: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/analytics/analytics_engine_test.dart: activity timeline is preserved for premium UI
+00:01 +7: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/analytics/analytics_engine_test.dart: course insight exposes drilldown dimensions
+00:01 +8: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/analytics/analytics_engine_test.dart: course recommendation links keep the human title
+00:04 +9: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_academic_alumni_gateway_test.dart: Affection d’un événement du calendrier, libération CAS, tenant
+00:05 +10: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_academic_alumni_gateway_test.dart: Réconciliation des séances et découverte Alumni vérifiée, sans cache
+00:05 +11: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_academic_alumni_gateway_test.dart: Alumni : consentement explicite, validation et opportunités gouvernées
+00:05 +12: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_academic_alumni_gateway_test.dart: Isolation du chemin d’université et absence de session
+00:06 +13: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_alerts_gateway_test.dart: Alertes personnelles : GET scellé au tenant, bearer, no-cache
+00:06 +14: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_alerts_gateway_test.dart: Réponses malformées et doublons ne doivent pas être affichés
+00:08 +15: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_events_gateway_test.dart: Événements : routes scellées au tenant et au bearer; versions conservées
+00:08 +16: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_events_gateway_test.dart: Identifiants de tenants dangereux rejetés sans requête réseau
+00:14 +17: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: membre étudiant : aucun accès aux analyses
+00:21 +18: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: membre étudiant : aucun accès aux analyses
+00:21 +19: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: membre étudiant : aucun accès aux analyses
+00:21 +20: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: membre étudiant : aucun accès aux analyses
+00:21 +21: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: membre étudiant : aucun accès aux analyses
+00:26 +22: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: membre étudiant : aucun accès aux analyses
+00:27 +23: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: membre étudiant : aucun accès aux analyses
+00:27 +24: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: membre étudiant : aucun accès aux analyses
+00:27 +24 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: membre étudiant : aucun accès aux analyses
+00:27 +24 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_governance_gateway_test.dart: ph15 archives: périmètre faculté, export volatil, historique gouverné [E]
+  Expected: 'fac1'
+    Actual: <null>
+     Which: not an <Instance of 'String'>
+  
+  package:matcher                                             expect
+  package:flutter_test/src/widget_tester.dart 473:18          expect
+  test\campus_intelligence_governance_gateway_test.dart 75:5  main.<fn>
+  
+00:27 +25 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: membre étudiant : aucun accès aux analyses
+00:27 +26 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: membre étudiant : aucun accès aux analyses
+00:28 +27 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: membre étudiant : aucun accès aux analyses
+00:28 +28 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: membre étudiant : aucun accès aux analyses
+00:28 +29 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: membre étudiant : aucun accès aux analyses
+00:34 +30 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: membre étudiant : aucun accès aux analyses
+00:34 +31 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: membre étudiant : aucun accès aux analyses
+00:34 +32 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: membre étudiant : aucun accès aux analyses
+00:34 +33 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: membre étudiant : aucun accès aux analyses
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following assertion was thrown running a test:
+pumpAndSettle timed out
+
+When the exception was thrown, this was the stack:
+#0      WidgetTester.pumpAndSettle.<anonymous closure> (package:flutter_test/src/widget_tester.dart:717:11)
+<asynchronous suspension>
+#1      TestAsyncUtils.guard.<anonymous closure> (package:flutter_test/src/test_async_utils.dart:130:27)
+<asynchronous suspension>
+#2      main.<anonymous closure> (file:///C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart:75:5)
+<asynchronous suspension>
+#3      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#4      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  membre étudiant : aucun accès aux analyses
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:34 +33 -2: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_tenant_transition_widget_test.dart: référence de cours ambiguë : aucune analyse exécutée
+00:34 +33 -2: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: membre étudiant : aucun accès aux analyses [E]
+  Test failed. See exception logs above.
+  The test description was: membre étudiant : aucun accès aux analyses
+  
+00:34 +34 -2: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_tenant_transition_widget_test.dart: référence de cours ambiguë : aucune analyse exécutée
+00:34 +35 -2: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_tenant_transition_widget_test.dart: référence de cours ambiguë : aucune analyse exécutée
+00:34 +36 -2: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_tenant_transition_widget_test.dart: référence de cours ambiguë : aucune analyse exécutée
+00:34 +37 -2: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_tenant_transition_widget_test.dart: référence de cours ambiguë : aucune analyse exécutée
+00:34 +38 -2: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_tenant_transition_widget_test.dart: référence de cours ambiguë : aucune analyse exécutée
+00:34 +39 -2: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_tenant_transition_widget_test.dart: référence de cours ambiguë : aucune analyse exécutée
+00:34 +40 -2: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_tenant_transition_widget_test.dart: référence de cours ambiguë : aucune analyse exécutée
+00:35 +41 -2: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: invitation non acceptée : accès interdit
+00:38 +42 -2: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: invitation non acceptée : accès interdit
+00:38 +43 -2: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: invitation non acceptée : accès interdit
+00:38 +44 -2: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: invitation non acceptée : accès interdit
+00:38 +45 -2: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: invitation non acceptée : accès interdit
+00:38 +46 -2: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: invitation non acceptée : accès interdit
+00:38 +47 -2: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: invitation non acceptée : accès interdit
+00:38 +48 -2: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: invitation non acceptée : accès interdit
+00:39 +49 -2: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: invitation non acceptée : accès interdit
+00:39 +50 -2: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: invitation non acceptée : accès interdit
+00:39 +51 -2: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: invitation non acceptée : accès interdit
+00:39 +52 -2: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: invitation non acceptée : accès interdit
+00:41 +53 -2: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: invitation non acceptée : accès interdit
+00:43 +54 -2: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: invitation non acceptée : accès interdit
+00:43 +55 -2: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: invitation non acceptée : accès interdit
+00:45 +56 -2: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: invitation non acceptée : accès interdit
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following assertion was thrown running a test:
+pumpAndSettle timed out
+
+When the exception was thrown, this was the stack:
+#0      WidgetTester.pumpAndSettle.<anonymous closure> (package:flutter_test/src/widget_tester.dart:717:11)
+<asynchronous suspension>
+#1      TestAsyncUtils.guard.<anonymous closure> (package:flutter_test/src/test_async_utils.dart:130:27)
+<asynchronous suspension>
+#2      main.<anonymous closure> (file:///C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart:84:5)
+<asynchronous suspension>
+#3      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#4      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  invitation non acceptée : accès interdit
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:45 +56 -3: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/engagement/engagement_domain_test.dart: notification model keeps priority and expiry
+00:45 +56 -3: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: invitation non acceptée : accès interdit [E]
+  Test failed. See exception logs above.
+  The test description was: invitation non acceptée : accès interdit
+  
+00:45 +57 -3: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: URL directe vers autre université : aucune requête analytique
+00:45 +58 -3: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: auditeur actif : accès aux indicateurs, pas à la gestion pédagogique
+00:46 +59 -3: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: direction : masque les pourcentages supprimés
+00:47 +60 -3: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: direction : masque les pourcentages supprimés
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "Masqué / non disponible": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart:117:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart line 117
+The test description was:
+  direction : masque les pourcentages supprimés
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:48 +60 -4: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: direction : masque les pourcentages supprimés [E]
+  Test failed. See exception logs above.
+  The test description was: direction : masque les pourcentages supprimés
+  
+00:49 +60 -4: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/library_catalog_refresh_test.dart: complete paginated catalog is reconciled atomically
+00:49 +61 -4: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/library_catalog_refresh_test.dart: etag change during pagination keeps previous cache untouched
+00:49 +62 -4: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/library_catalog_refresh_test.dart: 304 does not rewrite local catalog
+00:49 +63 -4: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/local_quiz_evaluator_test.dart: multiple choice partial scoring penalizes guessing
+00:49 +64 -4: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/local_quiz_evaluator_test.dart: numeric supports absolute tolerance
+00:49 +65 -4: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/local_quiz_evaluator_test.dart: free text supports accepted variants
+00:50 +66 -4: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/pedagogy_scheduler_test.dart: again resets repetition and records a lapse
+00:51 +67 -4: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/pedagogy_scheduler_test.dart: easy accelerates interval
+00:51 +67 -5: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/pedagogy_scheduler_test.dart: easy accelerates interval [E]
+  Expected: <32>
+    Actual: <33>
+  
+  package:matcher                                     expect
+  package:flutter_test/src/widget_tester.dart 473:18  expect
+  test\pedagogy_scheduler_test.dart 26:5              main.<fn>
+  
+00:51 +67 -5: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/planning_engine_test.dart: planning engine prioritizes imminent weak course and respects budget
+00:51 +68 -5: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/planning_engine_test.dart: emergency plan consumes requested budget
+00:52 +69 -5: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/schedule_text_parser_test.dart: parses French OCR timetable rows conservatively
+00:53 +70 -5: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/secure_session_account_ownership_test.dart: logout retains ownership and blocks another account
+00:53 +71 -5: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/secure_session_account_ownership_test.dart: concurrent saves cannot claim the same installation twice
+00:53 +72 -5: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/secure_session_account_ownership_test.dart: reading a legacy authenticated session immediately pins ownership
+00:53 +73 -5: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/secure_session_account_ownership_test.dart: legacy authenticated session is pinned on logout
+00:55 +74 -5: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/sync_push_integrity_test.dart: late unknown disposition never partially acknowledges outbox
+00:55 +75 -5: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/sync_push_integrity_test.dart: late conflict without canonical never partially acknowledges outbox
+00:55 +76 -5: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/sync_push_integrity_test.dart: mismatched successful canonical record cannot modify another entity
+00:55 +77 -5: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/sync_push_integrity_test.dart: mismatched conflict canonical record is rejected before writes
+00:55 +78 -5: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/sync_push_integrity_test.dart: invalid canonical version is rejected before writes
+00:55 +79 -5: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/sync_push_integrity_test.dart: regressing pull cursor is rejected before acknowledgement
+00:55 +80 -5: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/sync_push_integrity_test.dart: non-progressing paginated pull cursor is rejected
+00:55 +81 -5: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/sync_push_integrity_test.dart: missing push outcome blocks pull and keeps outbox
+00:55 +82 -5: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/sync_push_integrity_test.dart: duplicate push outcome blocks pull and keeps outbox
+00:55 +83 -5: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/sync_push_integrity_test.dart: unknown push outcome blocks pull and keeps outbox
+00:55 +84 -5: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/sync_push_integrity_test.dart: account switch during push cannot commit old account outcomes
+00:55 +85 -5: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/sync_push_integrity_test.dart: simultaneous triggers share a single push and release lock after failure
+00:56 +86 -5: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/ux/premium_surface_test.dart: PremiumPanel remains usable with large text
+00:57 +87 -5: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/ux/premium_surface_test.dart: EmptyStateCard exposes clear title and action
+01:03 +88 -5: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/widget_test.dart: home renders premium preparation card
+══╡ EXCEPTION CAUGHT BY WIDGETS LIBRARY ╞═══════════════════════════════════════════════════════════
+The following StateError was thrown building HomePage(dirty, state: _ConsumerState#ca53d):
+Bad state: No ProviderScope found
+
+The relevant error-causing widget was:
+  HomePage
+  HomePage:file:///C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/widget_test.dart:8:80
+
+When the exception was thrown, this was the stack:
+#0      ProviderScope.containerOf (package:flutter_riverpod/src/framework.dart:110:7)
+#1      ConsumerStatefulElement._container (package:flutter_riverpod/src/consumer.dart:508:53)
+#2      ConsumerStatefulElement._container (package:flutter_riverpod/src/consumer.dart)
+#3      ConsumerStatefulElement.watch.<anonymous closure> (package:flutter_riverpod/src/consumer.dart:564:14)
+#4      _LinkedHashMapMixin.putIfAbsent (dart:_compact_hash:674:23)
+#5      ConsumerStatefulElement.watch (package:flutter_riverpod/src/consumer.dart:557:26)
+#6      HomePage.build (package:edunova/src/features/home/presentation/home_page.dart:17:24)
+#7      _ConsumerState.build (package:flutter_riverpod/src/consumer.dart:476:19)
+#8      StatefulElement.build (package:flutter/src/widgets/framework.dart:5833:27)
+#9      ConsumerStatefulElement.build (package:flutter_riverpod/src/consumer.dart:539:20)
+#10     ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5723:15)
+#11     StatefulElement.performRebuild (package:flutter/src/widgets/framework.dart:5884:11)
+#12     Element.rebuild (package:flutter/src/widgets/framework.dart:5435:7)
+#13     ComponentElement._firstBuild (package:flutter/src/widgets/framework.dart:5705:5)
+#14     StatefulElement._firstBuild (package:flutter/src/widgets/framework.dart:5875:11)
+#15     ComponentElement.mount (package:flutter/src/widgets/framework.dart:5699:5)
+...     Normal element mounting (228 frames)
+#243    Element.inflateWidget (package:flutter/src/widgets/framework.dart:4548:16)
+#244    MultiChildRenderObjectElement.inflateWidget (package:flutter/src/widgets/framework.dart:7169:36)
+#245    MultiChildRenderObjectElement.mount (package:flutter/src/widgets/framework.dart:7185:32)
+...     Normal element mounting (465 frames)
+#710    Element.inflateWidget (package:flutter/src/widgets/framework.dart:4548:16)
+#711    Element.updateChild (package:flutter/src/widgets/framework.dart:3998:20)
+#712    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5747:16)
+#713    Element.rebuild (package:flutter/src/widgets/framework.dart:5435:7)
+#714    ProxyElement.update (package:flutter/src/widgets/framework.dart:6051:5)
+#715    _InheritedNotifierElement.update (package:flutter/src/widgets/inherited_notifier.dart:108:11)
+#716    Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+#717    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5747:16)
+#718    StatefulElement.performRebuild (package:flutter/src/widgets/framework.dart:5884:11)
+#719    Element.rebuild (package:flutter/src/widgets/framework.dart:5435:7)
+#720    StatefulElement.update (package:flutter/src/widgets/framework.dart:5909:5)
+#721    Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+#722    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5747:16)
+#723    Element.rebuild (package:flutter/src/widgets/framework.dart:5435:7)
+#724    ProxyElement.update (package:flutter/src/widgets/framework.dart:6051:5)
+#725    _InheritedNotifierElement.update (package:flutter/src/widgets/inherited_notifier.dart:108:11)
+#726    Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+#727    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5747:16)
+#728    StatefulElement.performRebuild (package:flutter/src/widgets/framework.dart:5884:11)
+#729    Element.rebuild (package:flutter/src/widgets/framework.dart:5435:7)
+#730    StatefulElement.update (package:flutter/src/widgets/framework.dart:5909:5)
+#731    Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+#732    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5747:16)
+#733    StatefulElement.performRebuild (package:flutter/src/widgets/framework.dart:5884:11)
+#734    Element.rebuild (package:flutter/src/widgets/framework.dart:5435:7)
+#735    StatefulElement.update (package:flutter/src/widgets/framework.dart:5909:5)
+#736    Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+#737    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5747:16)
+#738    Element.rebuild (package:flutter/src/widgets/framework.dart:5435:7)
+#739    ProxyElement.update (package:flutter/src/widgets/framework.dart:6051:5)
+#740    Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+#741    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5747:16)
+#742    StatefulElement.performRebuild (package:flutter/src/widgets/framework.dart:5884:11)
+#743    Element.rebuild (package:flutter/src/widgets/framework.dart:5435:7)
+#744    StatefulElement.update (package:flutter/src/widgets/framework.dart:5909:5)
+#745    Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+#746    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5747:16)
+#747    Element.rebuild (package:flutter/src/widgets/framework.dart:5435:7)
+#748    ProxyElement.update (package:flutter/src/widgets/framework.dart:6051:5)
+#749    Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+#750    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5747:16)
+#751    Element.rebuild (package:flutter/src/widgets/framework.dart:5435:7)
+#752    ProxyElement.update (package:flutter/src/widgets/framework.dart:6051:5)
+#753    Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+#754    _RawViewElement._updateChild (package:flutter/src/widgets/view.dart:481:16)
+#755    _RawViewElement.update (package:flutter/src/widgets/view.dart:568:5)
+#756    Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+#757    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5747:16)
+#758    Element.rebuild (package:flutter/src/widgets/framework.dart:5435:7)
+#759    StatelessElement.update (package:flutter/src/widgets/framework.dart:5797:5)
+#760    Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+#761    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5747:16)
+#762    StatefulElement.performRebuild (package:flutter/src/widgets/framework.dart:5884:11)
+#763    Element.rebuild (package:flutter/src/widgets/framework.dart:5435:7)
+#764    StatefulElement.update (package:flutter/src/widgets/framework.dart:5909:5)
+#765    Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+#766    RootElement._rebuild (package:flutter/src/widgets/binding.dart:1716:16)
+#767    RootElement.update (package:flutter/src/widgets/binding.dart:1694:5)
+#768    RootElement.performRebuild (package:flutter/src/widgets/binding.dart:1708:7)
+#769    Element.rebuild (package:flutter/src/widgets/framework.dart:5435:7)
+#770    BuildScope._tryRebuild (package:flutter/src/widgets/framework.dart:2695:15)
+#771    BuildScope._flushDirtyElements (package:flutter/src/widgets/framework.dart:2752:11)
+#772    BuildOwner.buildScope (package:flutter/src/widgets/framework.dart:3056:18)
+#773    AutomatedTestWidgetsFlutterBinding.drawFrame (package:flutter_test/src/binding.dart:1506:19)
+#774    RendererBinding._handlePersistentFrameCallback (package:flutter/src/rendering/binding.dart:495:5)
+#775    SchedulerBinding._invokeFrameCallback (package:flutter/src/scheduler/binding.dart:1434:15)
+#776    SchedulerBinding.handleDrawFrame (package:flutter/src/scheduler/binding.dart:1347:9)
+#777    AutomatedTestWidgetsFlutterBinding.pump.<anonymous closure> (package:flutter_test/src/binding.dart:1335:9)
+#780    TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#781    AutomatedTestWidgetsFlutterBinding.pump (package:flutter_test/src/binding.dart:1324:27)
+#782    WidgetTester.pumpWidget.<anonymous closure> (package:flutter_test/src/widget_tester.dart:598:22)
+#785    TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#786    WidgetTester.pumpWidget (package:flutter_test/src/widget_tester.dart:595:27)
+#787    main.<anonymous closure> (file:///C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/widget_test.dart:8:18)
+#788    testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:29)
+<asynchronous suspension>
+#789    TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided 5 frames from dart:async and package:stack_trace)
+
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: at least one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "Biochimie": []>
+   Which: means none were found but some were expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/widget_test.dart:9:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/widget_test.dart line 9
+The test description was:
+  home renders premium preparation card
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following message was thrown:
+Multiple exceptions (2) were detected during the running of the current test, and at least one was
+unexpected.
+════════════════════════════════════════════════════════════════════════════════════════════════════
+01:06 +88 -6: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/widget_test.dart: home renders premium preparation card [E]
+  Test failed. See exception logs above.
+  The test description was: home renders premium preparation card
+  
+01:06 +88 -6: Some tests failed.

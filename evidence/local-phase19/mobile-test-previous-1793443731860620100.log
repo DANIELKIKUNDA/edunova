@@ -1,0 +1,125 @@
+COMMAND: C:\Users\cs-ap\dev\flutter\bin\flutter.bat test --no-pub --reporter=expanded
+CWD: C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile
+00:00 +0: loading C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/adaptive_planning_test.dart
+00:00 +0: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/adaptive_planning_test.dart: high cognitive work is skipped in low energy window
+00:00 +1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/analytics/analytics_engine_test.dart: momentum is explainable and improving
+00:00 +2: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/adaptive_planning_test.dart: planner respects study capacity and breaks
+00:00 +3: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/analytics/analytics_engine_test.dart: urgent low readiness course is prioritized
+00:00 +4: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/adaptive_planning_test.dart: deferred work gains explicit priority reason
+00:00 +5: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/analytics/analytics_engine_test.dart: recommendations remain diversified
+00:00 +6: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/analytics/analytics_engine_test.dart: activity timeline is preserved for premium UI
+00:00 +7: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/analytics/analytics_engine_test.dart: course insight exposes drilldown dimensions
+00:00 +8: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/analytics/analytics_engine_test.dart: course recommendation links keep the human title
+00:00 +9: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_academic_alumni_gateway_test.dart: Affection d’un événement du calendrier, libération CAS, tenant
+00:01 +10: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_academic_alumni_gateway_test.dart: Réconciliation des séances et découverte Alumni vérifiée, sans cache
+00:01 +11: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_academic_alumni_gateway_test.dart: Alumni : consentement explicite, validation et opportunités gouvernées
+00:01 +12: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_academic_alumni_gateway_test.dart: Isolation du chemin d’université et absence de session
+00:02 +13: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_alerts_gateway_test.dart: Alertes personnelles : GET scellé au tenant, bearer, no-cache
+00:02 +14: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_alerts_gateway_test.dart: Réponses malformées et doublons ne doivent pas être affichés
+00:04 +15: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_events_gateway_test.dart: Événements : routes scellées au tenant et au bearer; versions conservées
+00:04 +16: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_events_gateway_test.dart: Identifiants de tenants dangereux rejetés sans requête réseau
+00:13 +17: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: membre étudiant : aucun accès aux analyses
+00:24 +18: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: membre étudiant : aucun accès aux analyses
+00:24 +19: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: membre étudiant : aucun accès aux analyses
+00:24 +20: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: membre étudiant : aucun accès aux analyses
+00:24 +21: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: membre étudiant : aucun accès aux analyses
+00:26 +22: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_archive_scope_widget_test.dart: une réponse CSV périmée ne réapparaît pas après changement de période
+00:27 +23: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_archive_scope_widget_test.dart: une réponse CSV périmée ne réapparaît pas après changement de période
+00:27 +24: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_archive_scope_widget_test.dart: une réponse CSV périmée ne réapparaît pas après changement de période
+00:29 +25: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_archive_scope_widget_test.dart: une réponse CSV périmée ne réapparaît pas après changement de période
+00:33 +25: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: direction : masque les pourcentages supprimés
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following StateError was thrown running a test:
+Bad state: Too many elements
+
+When the exception was thrown, this was the stack:
+#0      Iterable.single (dart:core/iterable.dart:696:24)
+#1      WidgetController.widget (package:flutter_test/src/controller.dart:804:30)
+#2      WidgetController.scrollUntilVisible.<anonymous closure> (package:flutter_test/src/controller.dart:2341:15)
+#5      TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#6      WidgetController.scrollUntilVisible (package:flutter_test/src/controller.dart:2339:27)
+#7      main.<anonymous closure> (file:///C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart:118:18)
+<asynchronous suspension>
+#8      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#9      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided 3 frames from dart:async and package:stack_trace)
+
+The test description was:
+  direction : masque les pourcentages supprimés
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:33 +25 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_archive_scope_widget_test.dart: une réponse CSV périmée ne réapparaît pas après changement de période
+00:33 +25 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart: direction : masque les pourcentages supprimés [E]
+  Test failed. See exception logs above.
+  The test description was: direction : masque les pourcentages supprimés
+  
+00:34 +26 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_completion_widget_test.dart: ph14: formulaire lié au vrai cours sans altération des notes
+00:35 +27 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_completion_widget_test.dart: ph14: formulaire lié au vrai cours sans altération des notes
+00:35 +28 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_completion_widget_test.dart: ph14: formulaire lié au vrai cours sans altération des notes
+00:35 +29 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_completion_widget_test.dart: ph14: formulaire lié au vrai cours sans altération des notes
+00:35 +30 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_completion_widget_test.dart: ph14: formulaire lié au vrai cours sans altération des notes
+00:36 +31 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_archive_scope_widget_test.dart: révocation de capture pendant la confirmation empêche le POST
+00:36 +32 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_archive_scope_widget_test.dart: révocation de capture pendant la confirmation empêche le POST
+00:37 +33 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_completion_widget_test.dart: ph15: archive bloquée ne divulgue jamais son payload
+00:45 +34 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_tenant_transition_widget_test.dart: référence de cours ambiguë : aucune analyse exécutée
+00:45 +35 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_tenant_transition_widget_test.dart: référence de cours ambiguë : aucune analyse exécutée
+00:45 +36 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_tenant_transition_widget_test.dart: référence de cours ambiguë : aucune analyse exécutée
+00:45 +37 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_tenant_transition_widget_test.dart: référence de cours ambiguë : aucune analyse exécutée
+00:45 +38 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_tenant_transition_widget_test.dart: référence de cours ambiguë : aucune analyse exécutée
+00:45 +39 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_tenant_transition_widget_test.dart: référence de cours ambiguë : aucune analyse exécutée
+00:45 +40 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_tenant_transition_widget_test.dart: référence de cours ambiguë : aucune analyse exécutée
+00:45 +41 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_tenant_transition_widget_test.dart: référence de cours ambiguë : aucune analyse exécutée
+00:45 +42 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_tenant_transition_widget_test.dart: référence de cours ambiguë : aucune analyse exécutée
+00:45 +43 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_tenant_transition_widget_test.dart: référence de cours ambiguë : aucune analyse exécutée
+00:46 +44 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_tenant_transition_widget_test.dart: référence de cours ambiguë : aucune analyse exécutée
+00:46 +45 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_tenant_transition_widget_test.dart: référence de cours ambiguë : aucune analyse exécutée
+00:50 +46 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_tenant_transition_widget_test.dart: référence de cours ambiguë : aucune analyse exécutée
+00:50 +47 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_tenant_transition_widget_test.dart: référence de cours ambiguë : aucune analyse exécutée
+00:51 +48 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_tenant_transition_widget_test.dart: 403 après publication : le tableau privé précédent est effacé
+00:51 +49 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_tenant_transition_widget_test.dart: 403 après publication : le tableau privé précédent est effacé
+00:51 +50 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_tenant_transition_widget_test.dart: 403 après publication : le tableau privé précédent est effacé
+00:51 +51 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_tenant_transition_widget_test.dart: 403 après publication : le tableau privé précédent est effacé
+00:51 +52 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_tenant_transition_widget_test.dart: 403 après publication : le tableau privé précédent est effacé
+00:51 +53 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_tenant_transition_widget_test.dart: 403 après publication : le tableau privé précédent est effacé
+00:51 +54 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_tenant_transition_widget_test.dart: 403 après publication : le tableau privé précédent est effacé
+00:51 +55 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_tenant_transition_widget_test.dart: 403 après publication : le tableau privé précédent est effacé
+00:51 +56 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_tenant_transition_widget_test.dart: 403 après publication : le tableau privé précédent est effacé
+00:51 +57 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_tenant_transition_widget_test.dart: 403 après publication : le tableau privé précédent est effacé
+00:54 +58 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_tenant_transition_widget_test.dart: changement de tenant : une réponse tardive de A ne divulgue rien dans B
+00:54 +59 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/engagement/engagement_domain_test.dart: preferences copyWith preserves untouched values
+00:54 +60 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_tenant_transition_widget_test.dart: A-B-A : une ancienne requête du même cours ne remplace pas la récente
+00:54 +61 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_tenant_transition_widget_test.dart: A-B-A : une ancienne requête du même cours ne remplace pas la récente
+00:58 +62 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/import_personal_document_test.dart: personal import persists metadata and queues outbox event
+00:58 +63 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/library_catalog_refresh_test.dart: complete paginated catalog is reconciled atomically
+00:58 +64 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/library_catalog_refresh_test.dart: etag change during pagination keeps previous cache untouched
+00:58 +65 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/library_catalog_refresh_test.dart: 304 does not rewrite local catalog
+01:01 +66 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/pedagogy_scheduler_test.dart: again resets repetition and records a lapse
+01:01 +67 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/pedagogy_scheduler_test.dart: easy accelerates interval
+01:03 +68 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/planning_engine_test.dart: planning engine prioritizes imminent weak course and respects budget
+01:03 +69 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/planning_engine_test.dart: emergency plan consumes requested budget
+01:06 +70 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/local_quiz_evaluator_test.dart: multiple choice partial scoring penalizes guessing
+01:07 +71 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/local_quiz_evaluator_test.dart: numeric supports absolute tolerance
+01:07 +72 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/local_quiz_evaluator_test.dart: free text supports accepted variants
+01:09 +73 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/schedule_text_parser_test.dart: parses French OCR timetable rows conservatively
+01:09 +74 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/secure_session_account_ownership_test.dart: logout retains ownership and blocks another account
+01:09 +75 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/secure_session_account_ownership_test.dart: concurrent saves cannot claim the same installation twice
+01:09 +76 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/secure_session_account_ownership_test.dart: reading a legacy authenticated session immediately pins ownership
+01:09 +77 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/secure_session_account_ownership_test.dart: legacy authenticated session is pinned on logout
+01:15 +78 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/sync_push_integrity_test.dart: late unknown disposition never partially acknowledges outbox
+01:16 +79 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/sync_push_integrity_test.dart: late conflict without canonical never partially acknowledges outbox
+01:16 +80 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/sync_push_integrity_test.dart: mismatched successful canonical record cannot modify another entity
+01:16 +81 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/sync_push_integrity_test.dart: mismatched conflict canonical record is rejected before writes
+01:16 +82 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/sync_push_integrity_test.dart: invalid canonical version is rejected before writes
+01:16 +83 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/sync_push_integrity_test.dart: regressing pull cursor is rejected before acknowledgement
+01:16 +84 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/sync_push_integrity_test.dart: non-progressing paginated pull cursor is rejected
+01:16 +85 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/sync_push_integrity_test.dart: missing push outcome blocks pull and keeps outbox
+01:16 +86 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/sync_push_integrity_test.dart: duplicate push outcome blocks pull and keeps outbox
+01:16 +87 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/sync_push_integrity_test.dart: unknown push outcome blocks pull and keeps outbox
+01:16 +88 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/sync_push_integrity_test.dart: account switch during push cannot commit old account outcomes
+01:16 +89 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/sync_push_integrity_test.dart: simultaneous triggers share a single push and release lock after failure
+01:19 +90 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/ux/premium_surface_test.dart: PremiumPanel remains usable with large text
+01:21 +91 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/widget_test.dart: home renders preparation for an empty local account
+01:22 +92 -1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/widget_test.dart: home renders preparation for an empty local account
+01:22 +93 -1: Some tests failed.

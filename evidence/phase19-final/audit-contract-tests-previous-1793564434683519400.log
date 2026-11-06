@@ -1,0 +1,7 @@
+COMMAND: C:\Users\cs-ap\dev\edusync-web\edunova\.venv\Scripts\python.exe C:\Users\cs-ap\dev\edusync-web\edunova\scripts\test_audit_contracts.py
+CWD: C:\Users\cs-ap\dev\edusync-web\edunova
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.081s
+
+OK

@@ -1,0 +1,68 @@
+name: edunova
+publish_to: "none"
+description: EduNova — compagnon universitaire premium, offline-first.
+version: 0.53.0+18000
+
+environment:
+  sdk: ">=3.5.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  flutter_riverpod: ^2.6.1
+  go_router: ^14.6.2
+  drift: ^2.22.1
+  sqlite3_flutter_libs: ^0.5.27
+  path_provider: ^2.1.5
+  path: ^1.9.1
+  dio: ^5.7.0
+  shared_preferences: ^2.3.3
+  file_picker: ^8.1.6
+  image_picker: ^1.1.2
+  uuid: ^4.5.1
+  mime: ^2.0.0
+  pdfrx: ">=2.11.0 <3.0.0"
+  flutter_secure_storage: ^9.2.4
+  url_launcher: ^6.3.1
+  crypto: ^3.0.6
+  connectivity_plus: ^6.1.1
+  flutter_local_notifications: ">=20.0.0 <21.0.0"
+  firebase_core: ^3.15.2
+  firebase_messaging: ^15.2.10
+  device_info_plus: ^11.5.0
+  timezone: ^0.10.0
+  flutter_tts: ">=4.2.0 <5.0.0"
+
+dev_dependencies:
+  flutter_launcher_icons: ^0.14.3
+  flutter_native_splash: ^2.4.4
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  drift_dev: ^2.22.1
+  build_runner: ^2.4.13
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/branding/
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: assets/branding/app_icon.png
+  web:
+    generate: true
+    image_path: assets/branding/app_icon.png
+  windows:
+    generate: true
+    image_path: assets/branding/app_icon.png
+
+flutter_native_splash:
+  color: "#FFFFFF"
+  image: assets/branding/edunova_logo_official.png
+  branding: assets/branding/edunova_logo_official.png
+  android_12:
+    color: "#FFFFFF"
+    image: assets/branding/app_icon.png
