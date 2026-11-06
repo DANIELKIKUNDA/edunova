@@ -21,7 +21,16 @@ test('desktop application boots without page errors', async ({ page }) => {
 });
 
 test.describe('modest Android viewport', () => {
-  test.use({ ...devices['Galaxy S9+'] });
+  // Device presets include defaultBrowserType, which Playwright forbids inside describe.
+  // Apply only the Chromium context options for this mobile viewport.
+  const phone = devices['Galaxy S9+'];
+  test.use({
+    viewport: phone.viewport,
+    userAgent: phone.userAgent,
+    deviceScaleFactor: phone.deviceScaleFactor,
+    isMobile: phone.isMobile,
+    hasTouch: phone.hasTouch,
+  });
 
   test('mobile surface renders and remains usable', async ({ page }) => {
     await assertFlutterStarted(page);
