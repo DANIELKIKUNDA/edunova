@@ -2,6 +2,21 @@ const { test, expect } = require('@playwright/test');
 
 const apiBase = process.env.EDUNOVA_API_URL || 'http://127.0.0.1:8000';
 
+async function openLogin(page) {
+  await page.goto('/#/login', { waitUntil: 'domcontentloaded', timeout: 120000 });
+  await page.locator('flutter-view').waitFor({ state: 'attached', timeout: 120000 });
+
+  // Flutter renders to a canvas until browser accessibility semantics are enabled.
+  // Activating the placeholder exposes the same labelled controls used by a
+  // keyboard or assistive technology, which makes this a real user-level test.
+  const semanticsPlaceholder = page.locator('flt-semantics-placeholder');
+  if (await semanticsPlaceholder.count()) {
+    await semanticsPlaceholder.click({ force: true });
+  }
+
+  await expect(page.getByText('Retrouve ton EduNova')).toBeVisible({ timeout: 120000 });
+}
+
 test('student login crosses Flutter Web, API and PostgreSQL', async ({ page, request }) => {
   const suffix = `${Date.now()}-${Math.random().toString(16).slice(2)}`;
   const email = `phase21-ui-${suffix}@example.test`;
@@ -18,8 +33,7 @@ test('student login crosses Flutter Web, API and PostgreSQL', async ({ page, req
   expect(registration.status()).toBe(201);
   const seedSession = await registration.json();
 
-  await page.goto('/#/login', { waitUntil: 'domcontentloaded', timeout: 120000 });
-  await expect(page.getByText('Retrouve ton EduNova')).toBeVisible({ timeout: 120000 });
+  await openLogin(page);
   await page.getByLabel('Téléphone ou e-mail').fill(email);
   await page.getByLabel('Mot de passe', { exact: true }).fill(password);
   await page.getByRole('button', { name: 'Se connecter' }).click();
@@ -40,8 +54,7 @@ test('student login crosses Flutter Web, API and PostgreSQL', async ({ page, req
 });
 
 test('invalid credentials remain visibly rejected by Flutter Web', async ({ page }) => {
-  await page.goto('/#/login', { waitUntil: 'domcontentloaded', timeout: 120000 });
-  await expect(page.getByText('Retrouve ton EduNova')).toBeVisible({ timeout: 120000 });
+  await openLogin(page);
   await page.getByLabel('Téléphone ou e-mail').fill('unknown-phase21@example.test');
   await page.getByLabel('Mot de passe', { exact: true }).fill('Wrong-Password!');
   await page.getByRole('button', { name: 'Se connecter' }).click();

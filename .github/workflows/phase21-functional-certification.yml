@@ -340,7 +340,8 @@ jobs:
       - name: Verify migrations on a blank PostgreSQL database
         run: |
           python -m pip install -r services/api/requirements.txt
-          bash scripts/migrate_production.sh
+          DATABASE_URL=postgresql://edunova:edunova_phase21_ci@127.0.0.1:5432/edunova_phase21 \
+            bash scripts/migrate_production.sh
           cd services/api
           python -m pytest -q tests/test_migration_contract.py \
             --junitxml=../../certification-results-phase21-migrations.xml
