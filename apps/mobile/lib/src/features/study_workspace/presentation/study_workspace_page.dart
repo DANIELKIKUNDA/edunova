@@ -53,7 +53,10 @@ class _StudyWorkspacePageState extends State<StudyWorkspacePage> {
       Row(children: [Icon(Icons.format_list_bulleted_rounded, color: Theme.of(c).colorScheme.primary), const SizedBox(width: 8), Expanded(child: Text('Plan du cours', style: Theme.of(c).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w900)))]),
       const SizedBox(height: 14),
       for (final x in const [('1. Introduction', true), ('2. Concepts fondamentaux', false), ('3. Applications', false), ('4. Synthèse', false)])
-        ListTile(dense: true, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)), leading: Icon(x.$1.startsWith('2') ? Icons.play_circle_fill_rounded : x.$2 ? Icons.check_circle_rounded : Icons.radio_button_unchecked_rounded), title: Text(x.$1), selected: x.$1.startsWith('2'), selectedTileColor: Theme.of(c).colorScheme.primaryContainer.withValues(alpha: .45)),
+        Material(
+          type: MaterialType.transparency,
+          child: ListTile(dense: true, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)), leading: Icon(x.$1.startsWith('2') ? Icons.play_circle_fill_rounded : x.$2 ? Icons.check_circle_rounded : Icons.radio_button_unchecked_rounded), title: Text(x.$1), selected: x.$1.startsWith('2'), selectedTileColor: Theme.of(c).colorScheme.primaryContainer.withValues(alpha: .45)),
+        ),
     ]),
   );
 
