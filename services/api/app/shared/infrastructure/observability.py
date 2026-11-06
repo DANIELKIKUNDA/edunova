@@ -3,7 +3,7 @@ import json, logging, re, time, uuid
 from starlette.middleware.base import BaseHTTPMiddleware
 from app.modules.operations.application.metrics import metrics
 
-_SECRET = re.compile(r"(?i)(authorization|cookie|password|token|secret|api[-_]?key)=([^\\s,;]+)")
+_SECRET = re.compile(r"(?i)(authorization|cookie|password|token|secret|api[-_]?key)=([^\s,;]+)")
 
 
 def _safe(value: object, *, limit: int = 2048) -> str:
@@ -21,7 +21,7 @@ class JsonFormatter(logging.Formatter):
             "ts": self.formatTime(record),
             "level": record.levelname,
             "logger": record.name,
-            "event": getattr(record, "event", record.msg if isinstance(record.msg, str) else "log"),
+            "event": _safe(getattr(record, "event", record.msg if isinstance(record.msg, str) else "log"), limit=512),
             "message": _safe(record.getMessage()),
         }
         for key, value in record.__dict__.items():
