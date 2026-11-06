@@ -11,7 +11,7 @@ async function openLogin(page) {
   // keyboard or assistive technology, which makes this a real user-level test.
   const semanticsPlaceholder = page.locator('flt-semantics-placeholder');
   if (await semanticsPlaceholder.count()) {
-    await semanticsPlaceholder.click({ force: true });
+    await semanticsPlaceholder.evaluate((element) => element.click());
   }
 
   await expect(page.getByText('Retrouve ton EduNova')).toBeVisible({ timeout: 120000 });
