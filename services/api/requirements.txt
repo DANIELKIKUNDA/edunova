@@ -24,3 +24,7 @@ firebase-admin>=6.5,<8
 
 cryptography==50.0.2
 reportlab>=4.2,<5
+
+# Runtime security floors enforced by the container vulnerability scan.
+msgpack>=1.2.3,<2
+urllib3>=2.8.0,<3

@@ -46,7 +46,7 @@ jobs:
           cache: pip
           cache-dependency-path: services/api/requirements.txt
       - name: Install OCR runtime
-        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends tesseract-ocr
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends tesseract-ocr tesseract-ocr-fra tesseract-ocr-eng
       - run: pip install -r services/api/requirements.txt
       - run: python -m compileall -q services/api/app
       - name: Security and synchronization regression

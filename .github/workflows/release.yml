@@ -1,22 +1,35 @@
 name: EduNova Release Gate
-on: {workflow_dispatch: {}, push: {tags: ['v*']}}
-permissions: {contents: read}
+
+# Public CI safety: certification only. Production deployment is deliberately
+# disabled while the repository may be public. No SSH or production secret is
+# referenced by this workflow.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: edunova-release-certification
+  cancel-in-progress: true
+
 jobs:
   gate:
+    name: Certification de publication — sans déploiement
     runs-on: ubuntu-latest
-    environment: production
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-        with: {python-version: '3.13'}
-      - run: pip install -r services/api/requirements.txt
-      - run: cd services/api && pytest -q
-      - run: python scripts/audit_lot30.py
-      - name: Deploy over approved SSH boundary
-        if: startsWith(github.ref, 'refs/tags/')
-        uses: appleboy/ssh-action@v1.2.0
         with:
-          host: ${{ secrets.PRODUCTION_HOST }}
-          username: ${{ secrets.PRODUCTION_USER }}
-          key: ${{ secrets.PRODUCTION_SSH_KEY }}
-          script: cd ${{ secrets.PRODUCTION_DEPLOY_DIR }} && RELEASE_TAG=${{ github.ref_name }} DEPLOY_DIR=$PWD ./scripts/deploy_production.sh
+          python-version: '3.13'
+          cache: pip
+          cache-dependency-path: services/api/requirements.txt
+      - run: pip install -r services/api/requirements.txt
+      - name: Régression backend complète
+        working-directory: services/api
+        run: pytest -q
+      - name: Audit technique
+        run: python scripts/audit_lot30.py
+      - name: Garde-fou publication publique
+        run: echo "Certification terminée sans accès au staging ni à la production."
