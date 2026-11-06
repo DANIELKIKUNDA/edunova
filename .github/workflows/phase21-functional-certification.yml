@@ -1,0 +1,73 @@
+name: EduNova Phase 21 Functional Certification
+
+on:
+  pull_request:
+    branches: [import/edunova-v0.57.12]
+    paths:
+      - "services/api/**"
+      - ".github/workflows/phase21-functional-certification.yml"
+      - "tests/e2e/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: phase21-functional-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  identity-postgresql:
+    name: Identity API journey on PostgreSQL 16
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    services:
+      postgres:
+        image: postgres:16.10-alpine
+        env:
+          POSTGRES_USER: edunova
+          POSTGRES_PASSWORD: edunova_phase21_ci
+          POSTGRES_DB: edunova_phase21
+          TZ: UTC
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U edunova -d edunova_phase21"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+    env:
+      PHASE21_POSTGRES_URL: postgresql+psycopg://edunova:edunova_phase21_ci@127.0.0.1:5432/edunova_phase21
+      EDUNOVA_ENV: test
+      JWT_SECRET: phase21-ci-only-not-a-production-secret-xxxxxxxxxxxxxxxxxxxxxxxx
+      TZ: UTC
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: services/api/requirements.txt
+      - name: Install backend and OCR runtime
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends postgresql-client tesseract-ocr tesseract-ocr-fra tesseract-ocr-eng
+          python -m pip install -r services/api/requirements.txt
+      - name: Prove PostgreSQL identity
+        run: |
+          pg_isready -h 127.0.0.1 -U edunova -d edunova_phase21
+          PGPASSWORD=edunova_phase21_ci psql -h 127.0.0.1 -U edunova -d edunova_phase21 -c "select version(), current_database(), current_setting('TimeZone');"
+      - name: Run Phase 21 identity journey
+        working-directory: services/api
+        run: |
+          mkdir -p ../../certification-results/phase21
+          python -m pytest -q tests/test_phase21_identity_postgres_e2e.py \
+            --junitxml=../../certification-results/phase21/identity-postgresql.xml
+      - name: Upload Phase 21 evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase21-identity-postgresql-evidence
+          path: certification-results/phase21/
+          if-no-files-found: error
+          retention-days: 30
