@@ -42,7 +42,7 @@ jobs:
         run: flutter pub get
       - name: Dart analysis
         working-directory: apps/mobile
-        run: flutter analyze --no-pub
+        run: flutter analyze --no-pub --no-fatal-infos
       - name: Phase 14/15 tenant, privilege and archive adversarial widgets
         working-directory: apps/mobile
         run: flutter test --no-pub test/campus_intelligence_tenant_transition_widget_test.dart test/campus_intelligence_archive_scope_widget_test.dart

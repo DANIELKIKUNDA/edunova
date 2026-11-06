@@ -17,6 +17,8 @@ pytesseract==0.3.13
 
 sympy>=1.13,<2
 boto3>=1.35,<2
+urllib3>=2.8.0,<3
+msgpack>=1.2.3,<2
 
 firebase-admin>=6.5,<8
 

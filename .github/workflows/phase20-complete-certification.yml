@@ -1,0 +1,223 @@
+name: EduNova Phase 20 Complete Certification
+
+# Full evidence: PostgreSQL 16, Playwright E2E evidence and native compilation.
+
+on:
+  pull_request:
+    branches: [import/edunova-v0.57.12]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  postgres-real:
+    name: PostgreSQL 16 real, degraded scenarios and performance
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    services:
+      postgres:
+        image: postgres:16.10-alpine
+        env:
+          POSTGRES_USER: edunova
+          POSTGRES_PASSWORD: edunova_ci
+          POSTGRES_DB: edunova_test
+          TZ: UTC
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U edunova -d edunova_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+    env:
+      PHASE20_POSTGRES_URL: postgresql+psycopg://edunova:edunova_ci@127.0.0.1:5432/edunova_test
+      DATABASE_URL: postgresql+psycopg://edunova:edunova_ci@127.0.0.1:5432/edunova_test
+      EDUNOVA_ENV: test
+      TZ: UTC
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: services/api/requirements.txt
+      - name: Install backend and OCR runtime
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends postgresql-client tesseract-ocr
+          python -m pip install -r services/api/requirements.txt
+      - name: Prove PostgreSQL server identity
+        run: |
+          pg_isready -h 127.0.0.1 -U edunova -d edunova_test
+          PGPASSWORD=edunova_ci psql -h 127.0.0.1 -U edunova -d edunova_test -c "select version(), current_database(), current_setting('TimeZone');"
+      - name: Run real PostgreSQL Phase 20 certification
+        working-directory: services/api
+        run: |
+          mkdir -p ../../certification-results
+          python -m pytest -q tests/test_phase20_postgres_real.py \
+            --junitxml=../../certification-results/phase20-postgres.xml
+      - name: Run Phase 20 contracts and degraded scenarios
+        working-directory: services/api
+        run: |
+          python -m pytest -q \
+            tests/test_phase20_observability.py \
+            tests/test_phase20_flutter_resilience_contract.py \
+            tests/test_sync_lot7.py tests/test_delivery_lot8.py \
+            --junitxml=../../certification-results/phase20-degraded.xml
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: phase20-postgresql-and-degraded-evidence
+          path: certification-results/
+          retention-days: 30
+
+  browser-e2e:
+    name: Flutter Web E2E, screenshots and offline recovery
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Build production web application
+        working-directory: apps/mobile
+        run: |
+          flutter pub get
+          flutter analyze --no-pub --no-fatal-infos
+          flutter build web --release --no-wasm-dry-run
+      - name: Install browser test runtime
+        run: |
+          npm init -y
+          npm install --save-dev @playwright/test@1.56.1 http-server@14.1.1
+          npx playwright install --with-deps chromium
+      - name: Run real browser journeys and capture evidence
+        run: |
+          mkdir -p certification-results/e2e
+          npx playwright test tests/e2e/phase20-web.spec.js \
+            --config=tests/e2e/playwright.config.js --reporter=line
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: phase20-browser-screenshots-and-report
+          path: |
+            certification-results/e2e/
+            test-results/
+            playwright-report/
+          if-no-files-found: warn
+          retention-days: 30
+
+  android-build:
+    name: Android APK release
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - name: Generate platform wrapper and build APK
+        working-directory: apps/mobile
+        run: |
+          flutter create --platforms=android --org tech.volcano.edunova .
+          # Build with the versioned Android toolchain; do not silently patch it in CI.
+          grep -Fq 'version "8.11.1"' android/settings.gradle.kts
+          grep -Fq 'version "2.2.20"' android/settings.gradle.kts
+          grep -Fq 'gradle-8.14-' android/gradle/wrapper/gradle-wrapper.properties
+          flutter pub get
+          flutter build apk --release
+      - uses: actions/upload-artifact@v4
+        with:
+          name: edunova-android-release-apk
+          path: apps/mobile/build/app/outputs/flutter-apk/app-release.apk
+          retention-days: 30
+
+  linux-build:
+    name: Linux desktop release
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Linux desktop toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev libsecret-1-dev
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - name: Generate wrapper and build Linux desktop
+        working-directory: apps/mobile
+        run: |
+          flutter config --enable-linux-desktop
+          flutter create --platforms=linux --org tech.volcano.edunova .
+          flutter pub get
+          flutter build linux --release
+      - uses: actions/upload-artifact@v4
+        with:
+          name: edunova-linux-release
+          path: apps/mobile/build/linux/x64/release/bundle/
+          retention-days: 30
+
+  windows-build:
+    name: Windows desktop release
+    runs-on: windows-2025
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - name: Verify native prerequisites
+        shell: pwsh
+        run: |
+          flutter doctor -v
+          nuget help | Select-Object -First 1
+      - name: Generate wrapper and build Windows desktop
+        working-directory: apps/mobile
+        shell: pwsh
+        run: |
+          flutter config --enable-windows-desktop
+          flutter create --platforms=windows --org tech.volcano.edunova .
+          $env:CMAKE_POLICY_VERSION_MINIMUM = "3.5"
+          $env:CL = "/D_SILENCE_EXPERIMENTAL_COROUTINE_DEPRECATION_WARNINGS"
+          flutter pub get
+          flutter build windows --release
+      - uses: actions/upload-artifact@v4
+        with:
+          name: edunova-windows-release
+          path: apps/mobile/build/windows/x64/runner/Release/
+          retention-days: 30
+
+  ios-simulator-build:
+    name: iOS simulator compilation
+    runs-on: macos-15
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - name: Generate wrapper and compile unsigned simulator app
+        working-directory: apps/mobile
+        run: |
+          flutter create --platforms=ios --org tech.volcano.edunova .
+          flutter pub get
+          flutter build ios --simulator --no-codesign
+      - uses: actions/upload-artifact@v4
+        with:
+          name: edunova-ios-simulator-app
+          path: apps/mobile/build/ios/iphonesimulator/Runner.app/
+          retention-days: 30
