@@ -1,6 +1,9 @@
 name: EduNova Security
 on: [push, pull_request]
-permissions: {contents: read, security-events: write}
+permissions: {contents: read}
+concurrency:
+  group: edunova-security-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   dependency-audit:
     runs-on: ubuntu-latest
