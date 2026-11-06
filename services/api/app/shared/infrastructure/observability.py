@@ -14,7 +14,8 @@ def _safe(value: object, *, limit: int = 2048) -> str:
 
 
 class JsonFormatter(logging.Formatter):
-    _standard = set(logging.makeLogRecord({}).__dict__) | {"message", "asctime"}
+    _standard = set(logging.makeLogRecord({}).__dict__) | {"message", "asctime", "event"}
+    _sensitive_key = re.compile(r"(?i)(authorization|cookie|password|token|secret|api[-_]?key)")
 
     def format(self, record):
         payload = {
@@ -27,7 +28,7 @@ class JsonFormatter(logging.Formatter):
         for key, value in record.__dict__.items():
             if key in self._standard or key.startswith("_") or value is None:
                 continue
-            payload[key] = value if isinstance(value, (bool, int, float)) else _safe(value, limit=512)
+            payload[key] = "[REDACTED]" if self._sensitive_key.search(key) else value if isinstance(value, (bool, int, float)) else _safe(value, limit=512)
         if record.exc_info:
             payload["exception"] = _safe(self.formatException(record.exc_info))
         return json.dumps(payload, separators=(",", ":"), ensure_ascii=False)
