@@ -1,9 +1,41 @@
 services:
+  config-gate:
+    image: python:3.13-alpine
+    env_file: .env.production
+    command: ["python", "/opt/edunova/validate_preproduction_env.py"]
+    volumes: ["./scripts/validate_preproduction_env.py:/opt/edunova/validate_preproduction_env.py:ro"]
+    network_mode: "none"
+    read_only: true
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: ["ALL"]
+    profiles: ["tools"]
+  migrate:
+    image: postgres:16-alpine
+    env_file: .env.production
+    depends_on:
+      postgres: {condition: service_healthy}
+    command:
+      - /bin/sh
+      - -ec
+      - |
+        for file in /migrations/*.sql; do
+          PGPASSWORD="$$POSTGRES_PASSWORD" psql \
+            --host=postgres --username="$$POSTGRES_USER" --dbname="$$POSTGRES_DB" \
+            --set=ON_ERROR_STOP=1 --file="$$file"
+        done
+    volumes: ["./services/api/migrations:/migrations:ro"]
+    read_only: true
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: ["ALL"]
+    profiles: ["tools"]
   api:
     build: ./services/api
     env_file: .env.production
     restart: unless-stopped
     expose: ["8000"]
+    # Loopback-only by default: the host readiness probe and a local reverse
+    # proxy can reach the API without publishing it on every interface.
+    ports: ["${EDUNOVA_API_BIND:-127.0.0.1}:8000:8000"]
     depends_on:
       postgres: {condition: service_healthy}
       redis: {condition: service_healthy}
@@ -19,6 +51,8 @@ services:
     depends_on:
       postgres: {condition: service_healthy}
       redis: {condition: service_healthy}
+    read_only: true
+    tmpfs: ["/tmp:size=512m,mode=1777"]
     security_opt: ["no-new-privileges:true"]
     cap_drop: ["ALL"]
   content-factory-worker:
