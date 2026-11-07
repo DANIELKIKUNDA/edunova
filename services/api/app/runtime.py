@@ -133,6 +133,7 @@ from app.modules.identity.infrastructure.memory import InMemoryVerificationSende
 from app.modules.identity.infrastructure.sqlalchemy_repo import SqlAlchemyAccountRepository, SqlAlchemySessionRepository, SqlAlchemyRecoveryChallengeRepository
 from app.shared.infrastructure.database import Base, build_engine, build_session_factory
 from app.shared.infrastructure.audit import SqlAuditSink
+from app.shared.config.environment import is_production_like_env, sandbox_payments_enabled
 from app.shared.security.rate_limit import InMemoryRateLimiter, RedisRateLimiter
 from app.modules.operations.application.health import OperationalHealthService
 from app.modules.operations.infrastructure.probes import database_probe, redis_probe
@@ -141,13 +142,6 @@ from app.version import __version__
 
 def _now():
     return datetime.now(UTC)
-
-
-PRODUCTION_LIKE_ENVS = frozenset({"production", "staging", "preproduction"})
-
-
-def is_production_like_env(value: str) -> bool:
-    return value.strip().lower() in PRODUCTION_LIKE_ENVS
 
 
 class Runtime:
@@ -264,7 +258,12 @@ class Runtime:
             products.append(Plan(code="ai-pack-25", name="Pack IA 25", price=Money(pack25_price), kind="ai_pack", duration_days=0, included_ai_credits=25, max_personal_documents=0, offline_enabled=False))
         self.catalog = StaticPlanCatalog(products)
         sandbox = FakeMobileMoneyProvider()
-        self.payment_providers = {sandbox.name: sandbox} if self.env in {"development", "test"} else {}
+        payment_mode = os.getenv("PAYMENT_PROVIDER", "disabled")
+        self.payment_providers = (
+            {sandbox.name: sandbox}
+            if sandbox_payments_enabled(self.env, payment_mode)
+            else {}
+        )
         self.campus_paid.providers = self.payment_providers
         self.commerce = CommerceService(
             payments=self.payments,
