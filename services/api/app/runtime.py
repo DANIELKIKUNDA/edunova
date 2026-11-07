@@ -143,20 +143,28 @@ def _now():
     return datetime.now(UTC)
 
 
+PRODUCTION_LIKE_ENVS = frozenset({"production", "staging", "preproduction"})
+
+
+def is_production_like_env(value: str) -> bool:
+    return value.strip().lower() in PRODUCTION_LIKE_ENVS
+
+
 class Runtime:
     def __init__(self) -> None:
         self.env = os.getenv("EDUNOVA_ENV", "development").lower()
+        self.production_like = is_production_like_env(self.env)
         self.engine = build_engine()
         self.sessions = build_session_factory(self.engine)
         self.redis = None
-        if self.env == "production":
+        if self.production_like:
             import redis
             self.redis = redis.from_url(os.environ["REDIS_URL"], decode_responses=True)
             self.rate_limiter = RedisRateLimiter(self.redis)
         else:
             self.rate_limiter = InMemoryRateLimiter()
         # Production schema must be migrated before API rollout; auto-create is dev/test only.
-        if self.env != "production":
+        if not self.production_like:
             Base.metadata.create_all(self.engine)
 
         self.audit = SqlAuditSink(self.sessions)
@@ -182,10 +190,10 @@ class Runtime:
         self.physical_library = PhysicalLibraryService(self.physical_library_repo, self.campus_repo, _now, audit=self.audit)
         self.campus_operations_repo = SqlAlchemyCampusOperationsRepository(self.sessions)
         attendance_secret = os.getenv('ATTENDANCE_QR_SECRET')
-        if self.env == 'production' and not attendance_secret:
+        if self.production_like and not attendance_secret:
             raise RuntimeError('ATTENDANCE_QR_SECRET is mandatory in production')
         proximity_secret = os.getenv('ATTENDANCE_PROXIMITY_SECRET')
-        if self.env == 'production' and not proximity_secret:
+        if self.production_like and not proximity_secret:
             raise RuntimeError('ATTENDANCE_PROXIMITY_SECRET is mandatory in production')
         self.campus_operations = CampusOperationsService(self.campus_operations_repo, self.campus_repo, self.teaching_repo, _now, audit=self.audit, secret=attendance_secret, proximity_secret=proximity_secret)
         self.campus_event_registration_repo = SqlCampusEventRegistrationRepository(self.sessions)
@@ -198,7 +206,7 @@ class Runtime:
         self.institutional_analytics = InstitutionalAnalyticsService(self.institutional_analytics_repo, self.campus_repo, self.teaching_repo, audit=self.audit)
         self.trust_governance_repo = SqlTrustGovernanceRepository(self.sessions)
         mfa_key = os.getenv('MFA_ENCRYPTION_KEY')
-        if self.env == 'production' and not mfa_key:
+        if self.production_like and not mfa_key:
             raise RuntimeError('MFA_ENCRYPTION_KEY is mandatory in production')
         self.mfa_vault = MfaVault(mfa_key or 'development-mfa-key-change-me-32-characters')
         self.trust_governance = TrustGovernanceService(self.trust_governance_repo, _now, self.mfa_vault)
@@ -217,7 +225,7 @@ class Runtime:
         self.recovery_challenges = SqlAlchemyRecoveryChallengeRepository(self.sessions)
         self.verification_sender = InMemoryVerificationSender() if self.env in {"development", "test"} else DisabledVerificationSender()
         secret = os.getenv("JWT_SECRET")
-        if not secret and self.env == "production":
+        if not secret and self.production_like:
             raise RuntimeError("JWT_SECRET is mandatory in production")
         secret = secret or "development-secret-change-me-32-characters-minimum"
         self.token_issuer = JwtTokenIssuer(secret=secret)
@@ -289,7 +297,7 @@ class Runtime:
             providers, loaded_profiles = load_external_ai_providers()
             profiles.extend(loaded_profiles)
         self.assistant_models = StaticModelCatalog(tuple(profiles))
-        if self.env == "production":
+        if self.production_like:
             daily_budget = int(os.getenv("AI_DAILY_CREDIT_BUDGET", "0"))
             self.assistant_global_budget = RedisDailyAiBudgetGate(self.redis, daily_limit_units=daily_budget) if daily_budget > 0 else RedisDailyAiBudgetGate(self.redis, daily_limit_units=0)
             allow_personal_remote = os.getenv("AI_ALLOW_PERSONAL_DOCUMENTS", "false").strip().lower() in {"1", "true", "yes"}
@@ -314,7 +322,7 @@ class Runtime:
         self.sync = SyncService(self.sync_repository, now=_now)
         self.library_repository = SqlAlchemyLibraryRepository(self.sessions)
         delivery_secret = os.getenv("RESOURCE_DELIVERY_SECRET")
-        if not delivery_secret and self.env == "production":
+        if not delivery_secret and self.production_like:
             raise RuntimeError("RESOURCE_DELIVERY_SECRET is mandatory in production")
         delivery_secret = delivery_secret or "development-resource-secret-change-me"
         self.library_access = CommerceLibraryAccess(self.commerce)
@@ -328,7 +336,7 @@ class Runtime:
         # LOT 8 — object delivery. Production prefers direct short-lived S3/R2 URLs
         # so the small VPS never becomes the bandwidth bottleneck. Development/test
         # use an app-owned local object root with real HTTP Range support.
-        if self.env == "production":
+        if self.production_like:
             storage_backend = os.getenv("CONTENT_STORAGE_BACKEND", "s3").strip().lower()
             if storage_backend != "s3":
                 raise RuntimeError("CONTENT_STORAGE_BACKEND must be s3 in production")
@@ -355,7 +363,7 @@ class Runtime:
         # and lightweight engagement aggregates only.
         self.engagement_repository = SqlAlchemyEngagementRepository(self.sessions)
         self.push_registry = SqlAlchemyPushRegistry(self.sessions)
-        push_sender = FirebaseAdminPushSender() if self.env == "production" and os.getenv("FCM_ENABLED", "false").lower() in {"1","true","yes"} else None
+        push_sender = FirebaseAdminPushSender() if self.production_like and os.getenv("FCM_ENABLED", "false").lower() in {"1","true","yes"} else None
 
         # LOT 10 — deterministic learning analytics and recommendations.
         # No LLM is required; the engine consumes aggregate learning signals only.
@@ -374,7 +382,7 @@ class Runtime:
         # LOT 12 — industrial content ingestion. API only stages and schedules work;
         # OCR/extraction runs in a dedicated worker with DB leases and heartbeats.
         self.ingestion_repository = SqlAlchemyIngestionRepository(self.sessions)
-        if self.env == "production":
+        if self.production_like:
             bucket = os.getenv("INGESTION_STORAGE_BUCKET") or os.getenv("CONTENT_STORAGE_BUCKET")
             if not bucket:
                 raise RuntimeError("INGESTION_STORAGE_BUCKET is mandatory in production")
