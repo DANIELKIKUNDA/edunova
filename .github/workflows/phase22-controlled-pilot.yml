@@ -1,0 +1,177 @@
+name: EduNova Phase 22 Controlled Pilot Readiness
+
+on:
+  pull_request:
+    branches: [import/edunova-v0.57.12]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: phase22-pilot-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  configuration-deployment:
+    name: Fail-closed configuration and deployment contract
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      EDUNOVA_ENV: preproduction
+      DATABASE_URL: postgresql+psycopg://pilot:strong-db-pass@postgres:5432/edunova
+      REDIS_URL: redis://redis:6379/0
+      POSTGRES_USER: pilot
+      POSTGRES_PASSWORD: strong-db-pass
+      POSTGRES_DB: edunova
+      JWT_SECRET: jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
+      RESOURCE_DELIVERY_SECRET: rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
+      MFA_ENCRYPTION_KEY: mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+      ATTENDANCE_QR_SECRET: qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+      ATTENDANCE_PROXIMITY_SECRET: pppppppppppppppppppppppppppppppp
+      CORS_ORIGINS: https://pilot.edunova.invalid
+      CONTENT_STORAGE_BACKEND: s3
+      CONTENT_STORAGE_BUCKET: edunova-phase22-private
+      PAYMENT_PROVIDER: sandbox
+      AI_ALLOW_PERSONAL_DOCUMENTS: "false"
+      AI_DAILY_CREDIT_BUDGET: "0"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.13"}
+      - name: Validate preproduction environment
+        run: python scripts/validate_preproduction_env.py
+      - name: Run Phase 22 configuration and deployment tests
+        run: |
+          python -m pip install pytest
+          python -m pytest -q \
+            services/api/tests/test_phase22_preproduction_env.py \
+            services/api/tests/test_phase22_deployment_contract.py
+      - name: Render production composition with synthetic secrets
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          names = [
+              "EDUNOVA_ENV", "DATABASE_URL", "REDIS_URL", "POSTGRES_USER",
+              "POSTGRES_PASSWORD", "POSTGRES_DB", "JWT_SECRET",
+              "RESOURCE_DELIVERY_SECRET", "MFA_ENCRYPTION_KEY",
+              "ATTENDANCE_QR_SECRET", "ATTENDANCE_PROXIMITY_SECRET",
+              "CORS_ORIGINS", "CONTENT_STORAGE_BACKEND",
+              "CONTENT_STORAGE_BUCKET", "PAYMENT_PROVIDER",
+              "AI_ALLOW_PERSONAL_DOCUMENTS", "AI_DAILY_CREDIT_BUDGET",
+          ]
+          Path(".env.production").write_text("".join(f"{name}={os.environ[name]}\n" for name in names))
+          PY
+          docker compose -f docker-compose.production.yml --profile tools config --quiet
+
+  postgresql-restore-drill:
+    name: PostgreSQL backup and isolated restore drill
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    services:
+      postgres:
+        image: postgres:16.10-alpine
+        env:
+          POSTGRES_USER: edunova
+          POSTGRES_PASSWORD: phase22-restore
+          POSTGRES_DB: edunova_source
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U edunova -d edunova_source"
+          --health-interval 5s --health-timeout 5s --health-retries 20
+    env:
+      PGPASSWORD: phase22-restore
+      SOURCE_URL: postgresql://edunova:phase22-restore@127.0.0.1:5432/edunova_source
+      TARGET_URL: postgresql://edunova:phase22-restore@127.0.0.1:5432/edunova_restore
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install PostgreSQL client
+        run: sudo apt-get update && sudo apt-get install -y postgresql-client
+      - name: Migrate source and seed an integrity probe
+        run: |
+          DATABASE_URL="$SOURCE_URL" bash scripts/migrate_production.sh
+          psql "$SOURCE_URL" -v ON_ERROR_STOP=1 <<'SQL'
+          CREATE TABLE phase22_restore_probe(id integer PRIMARY KEY, payload text NOT NULL);
+          INSERT INTO phase22_restore_probe VALUES (22, 'edunova-phase22-restore-ok');
+          SQL
+      - name: Backup, verify hash and restore into an isolated database
+        run: |
+          mkdir -p certification-results/phase22/backups
+          dump="$(DATABASE_URL="$SOURCE_URL" BACKUP_DIR=certification-results/phase22/backups bash scripts/backup_postgres.sh)"
+          createdb -h 127.0.0.1 -U edunova edunova_restore
+          DATABASE_URL="$TARGET_URL" CONFIRM_RESTORE=RESTORE_EDUNOVA bash scripts/restore_postgres.sh "$dump"
+          test "$(psql "$TARGET_URL" -Atc "select payload from phase22_restore_probe where id=22")" = "edunova-phase22-restore-ok"
+          pg_dump --schema-only --no-owner --no-acl "$TARGET_URL" > certification-results/phase22/restored-schema.sql
+          printf '%s\n' "source=$SOURCE_URL" "target=isolated-edunova_restore" > certification-results/phase22/restore-drill.txt
+          sed -i 's#postgresql://[^@]*@#postgresql://[REDACTED]@#g' certification-results/phase22/restore-drill.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: phase22-postgresql-restore-evidence
+          path: |
+            certification-results/phase22/restored-schema.sql
+            certification-results/phase22/restore-drill.txt
+            certification-results/phase22/backups/*.sha256
+          if-no-files-found: error
+          retention-days: 30
+
+  backend-security-regression:
+    name: Production-like runtime, observability and security
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: services/api/requirements.txt
+      - run: python -m pip install -r services/api/requirements.txt
+      - name: Run targeted pilot security contracts
+        working-directory: services/api
+        run: |
+          python -m pytest -q \
+            tests/test_phase22_preproduction_env.py \
+            tests/test_phase22_deployment_contract.py \
+            tests/test_phase20_observability.py \
+            tests/test_release_version_contract.py \
+            tests/test_migration_contract.py
+
+  android-pilot-artifact:
+    name: Traceable Android pilot APK
+    runs-on: ubuntu-24.04
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with: {distribution: temurin, java-version: "17"}
+      - uses: subosito/flutter-action@v2
+        with: {channel: stable, cache: true}
+      - name: Build pilot APK against an HTTPS placeholder endpoint
+        working-directory: apps/mobile
+        run: |
+          flutter create --platforms=android --org tech.volcano.edunova .
+          sed -i -E 's#gradle-[0-9.]+-#gradle-8.14-#' android/gradle/wrapper/gradle-wrapper.properties
+          sed -i 's/8.9.1/8.11.1/g' android/settings.gradle.kts
+          sed -i 's/2.1.0/2.2.20/g' android/settings.gradle.kts
+          flutter pub get
+          flutter build apk --release \
+            --dart-define=EDUNOVA_API_BASE_URL=https://pilot.edunova.invalid
+      - name: Record traceability and signing boundary
+        run: |
+          mkdir -p certification-results/phase22
+          sha256sum apps/mobile/build/app/outputs/flutter-apk/app-release.apk > certification-results/phase22/android-pilot-sha256.txt
+          git rev-parse HEAD > certification-results/phase22/tested-commit.txt
+          printf '%s\n' 'Technical pilot APK only. Owner-managed store signing and physical-device acceptance are NOT VERIFIED.' > certification-results/phase22/signing-boundary.txt
+          if git ls-files | grep -E '(^|/)(key\.properties|.*\.jks|.*\.keystore|AuthKey_.*\.p8)$'; then
+            echo 'Signing secret material is tracked in Git' >&2
+            exit 1
+          fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: phase22-android-pilot
+          path: |
+            apps/mobile/build/app/outputs/flutter-apk/app-release.apk
+            certification-results/phase22/
+          if-no-files-found: error
+          retention-days: 30
