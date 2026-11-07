@@ -2,11 +2,13 @@ from __future__ import annotations
 
 import importlib.util
 import os
-import ast
+import sys
 from pathlib import Path
 
 
 SCRIPT = Path(__file__).parents[3] / "scripts" / "validate_preproduction_env.py"
+API_ROOT = Path(__file__).parents[1]
+sys.path.insert(0, str(API_ROOT))
 SPEC = importlib.util.spec_from_file_location("validate_preproduction_env", SCRIPT)
 assert SPEC and SPEC.loader
 MODULE = importlib.util.module_from_spec(SPEC)
@@ -62,16 +64,19 @@ def test_real_payments_and_personal_ai_are_blocked_during_pilot(monkeypatch):
     assert any("AI_ALLOW_PERSONAL_DOCUMENTS" in item for item in errors)
 
 
-def test_runtime_declares_staging_and_preproduction_as_production_like():
-    runtime_source = (Path(__file__).parents[1] / "app" / "runtime.py").read_text()
-    tree = ast.parse(runtime_source)
-    assignments = [
-        node for node in ast.walk(tree)
-        if isinstance(node, ast.Assign)
-        and any(isinstance(target, ast.Name) and target.id == "PRODUCTION_LIKE_ENVS" for target in node.targets)
-    ]
-    assert len(assignments) == 1
-    rendered = ast.unparse(assignments[0].value)
-    assert "production" in rendered
-    assert "staging" in rendered
-    assert "preproduction" in rendered
+def test_staging_and_preproduction_are_production_like():
+    from app.shared.config.environment import is_production_like_env
+
+    assert is_production_like_env("production")
+    assert is_production_like_env("staging")
+    assert is_production_like_env("preproduction")
+    assert not is_production_like_env("test")
+
+
+def test_sandbox_payments_are_limited_to_non_production_pilot_environments():
+    from app.shared.config.environment import sandbox_payments_enabled
+
+    assert sandbox_payments_enabled("preproduction", "sandbox")
+    assert sandbox_payments_enabled("staging", "sandbox")
+    assert not sandbox_payments_enabled("production", "sandbox")
+    assert not sandbox_payments_enabled("preproduction", "production")
