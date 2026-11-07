@@ -17,6 +17,18 @@ async function openLogin(page) {
   await expect(page.getByText('Retrouve ton EduNova')).toBeVisible({ timeout: 120000 });
 }
 
+async function enterCredentials(page, login, password) {
+  await page.getByLabel('Téléphone ou e-mail').fill(login);
+
+  // Flutter Web's password semantics node does not reliably propagate
+  // Playwright's synthetic `fill()` value to the Dart TextEditingController.
+  // Keyboard input follows the same path as a real user and prevents the
+  // request from silently carrying an empty password.
+  const passwordField = page.getByLabel('Mot de passe', { exact: true });
+  await passwordField.click();
+  await passwordField.pressSequentially(password);
+}
+
 test('student login crosses Flutter Web, API and PostgreSQL', async ({ page, request }) => {
   const suffix = `${Date.now()}-${Math.random().toString(16).slice(2)}`;
   const email = `phase21-ui-${suffix}@example.test`;
@@ -34,8 +46,7 @@ test('student login crosses Flutter Web, API and PostgreSQL', async ({ page, req
   const seedSession = await registration.json();
 
   await openLogin(page);
-  await page.getByLabel('Téléphone ou e-mail').fill(email);
-  await page.getByLabel('Mot de passe', { exact: true }).fill(password);
+  await enterCredentials(page, email, password);
   await page.getByRole('button', { name: 'Se connecter' }).click();
 
   await expect(page).toHaveURL(/#\/bootstrap/, { timeout: 120000 });
@@ -55,8 +66,7 @@ test('student login crosses Flutter Web, API and PostgreSQL', async ({ page, req
 
 test('invalid credentials remain visibly rejected by Flutter Web', async ({ page }) => {
   await openLogin(page);
-  await page.getByLabel('Téléphone ou e-mail').fill('unknown-phase21@example.test');
-  await page.getByLabel('Mot de passe', { exact: true }).fill('Wrong-Password!');
+  await enterCredentials(page, 'unknown-phase21@example.test', 'Wrong-Password!');
   await page.getByRole('button', { name: 'Se connecter' }).click();
   await expect(page.getByText('Connexion impossible. Vérifie tes identifiants et la connexion.')).toBeVisible();
   await page.screenshot({
