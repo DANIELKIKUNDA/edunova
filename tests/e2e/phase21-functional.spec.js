@@ -49,7 +49,9 @@ test('student login crosses Flutter Web, API and PostgreSQL', async ({ page, req
   await enterCredentials(page, email, password);
   await page.getByRole('button', { name: 'Se connecter' }).click();
 
-  await expect(page).toHaveURL(/#\/bootstrap/, { timeout: 120000 });
+  // Bootstrap is intentionally transient on a fresh installation: after it
+  // validates local ownership, the authenticated user continues to onboarding.
+  await expect(page).toHaveURL(/#\/onboarding/, { timeout: 120000 });
   await page.screenshot({
     path: 'certification-results/phase21/flutter-web-authenticated.png',
     fullPage: true,
