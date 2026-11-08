@@ -19,6 +19,9 @@ pubspec.lock
 
 # Secrets
 .env
+.env.production
+.env.staging
+.env.preproduction
 *.pem
 *.key
 
