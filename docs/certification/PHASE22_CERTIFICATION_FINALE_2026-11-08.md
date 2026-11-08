@@ -2,8 +2,8 @@
 
 **Date de clôture :** 8 novembre 2026  
 **Branche :** `codex/phase22-controlled-pilot-readiness`  
-**Révision technique testée :** `cdff9891f546c5a9a100616bfeba4c929fa4b073`  
-**Workflow Phase 22 :** [run 42381382777](https://github.com/DANIELKIKUNDA/edunova/actions/runs/42381382777)  
+**Révision technique testée :** `ac8ec5f9c3fa9d5deb086f8cb6817231c4f6c75b`  
+**Workflow Phase 22 :** [run 42459040740](https://github.com/DANIELKIKUNDA/edunova/actions/runs/42459040740)  
 **Verdict :** **CERTIFIÉE TECHNIQUEMENT — GO POUR RECETTE PHYSIQUE SUPERVISÉE**
 
 ## 1. Résultats certifiés
@@ -25,13 +25,14 @@ Les workflows **EduNova CI**, **Security**, **Phase 16**, **Phase 17**, **Phase 
 - les migrations utilisent un conteneur PostgreSQL client dédié et les fichiers SQL montés en lecture seule ;
 - `staging` et `preproduction` utilisent Redis, migrations explicites, stockage S3 privé, secrets obligatoires, budget IA et scanner d'ingestion comme la production ;
 - le fournisseur de paiement sandbox est autorisé uniquement en staging/préproduction, jamais en production réelle ;
+- l'image API installe explicitement la version corrigée de `zlib1g` ; le scan Trivy HIGH/CRITICAL est vert ;
 - les fichiers `.env.production`, `.env.staging` et `.env.preproduction` sont exclus de Git ;
 - un runbook documente déploiement, sauvegarde, restauration, incidents, arrêt du pilote et recette physique.
 
 ## 3. Traçabilité
 
-- Révision testée : `cdff9891f546c5a9a100616bfeba4c929fa4b073`.
-- Phase 22 : run `42381382777`, quatre jobs sur quatre en succès.
+- Révision testée : `ac8ec5f9c3fa9d5deb086f8cb6817231c4f6c75b`.
+- Phase 22 : run `42459040740`, quatre jobs sur quatre en succès.
 - Les artefacts conservés incluent l'APK pilote, son SHA-256, le commit testé, la limite de signature, le schéma restauré et les preuves de sauvegarde/restauration.
 - Aucun secret réel, paiement réel ou accès production n'a été utilisé.
 
