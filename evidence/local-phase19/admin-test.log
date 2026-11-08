@@ -1,0 +1,5 @@
+COMMAND: C:\Users\cs-ap\dev\flutter\bin\flutter.bat test --no-pub --concurrency=1 --reporter=expanded
+CWD: C:\Users\cs-ap\dev\edusync-web\edunova\apps\admin
+00:00 +0: loading C:/Users/cs-ap/dev/edusync-web/edunova/apps/admin/test/smoke_test.dart
+00:00 +0: EduNova Administration affiche la connexion sans session
+00:03 +1: All tests passed!

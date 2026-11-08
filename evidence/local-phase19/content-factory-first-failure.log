@@ -1,0 +1,67 @@
+F
+================================== FAILURES ===================================
+___________ test_factory_end_to_end_ready_for_review_with_evidence ____________
+
+    def test_factory_end_to_end_ready_for_review_with_evidence():
+>    _,h=account(); did=processed(h); cr=client.post('/v1/content-factory/runs',headers=h,json={'document_id':did}); assert cr.status_code==200,cr.text; rid=cr.json()['id']; pr=client.post(f'/v1/content-factory/runs/{rid}/process',headers=h); assert pr.status_code==200,pr.text; assert pr.json()['state']=='ready_for_review'; detail=client.get(f'/v1/content-factory/runs/{rid}',headers=h).json(); assert detail['assets']; assert len(detail['assets'])==len(detail['evidence']); assert all(e['page_start']>=1 for e in detail['evidence']); assert any(g['code']=='provenance_complete' and g['passed'] for g in detail['quality_gates'])
+                        ^^^^^^^^^^^^
+
+services\api\tests\content_factory\test_content_factory.py:16: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+services\api\tests\content_factory\test_content_factory.py:14: in processed
+    b=client.post('/v1/ingestion/batches',headers=h,json={'name':'Factory source','defaults':{'content_kind':'course','faculty_domain':'Medecine','program':'Medecine humaine','level':'BAC1','semester':'S1','risk':'medical','rights_status':'authorized','rights_note':'test'}}).json(); d=client.post(f"/v1/ingestion/batches/{b['id']}/files",headers={**h,'Idempotency-Key':'factory-source'},files={'file':('cours.pdf',pdf_bytes('Introduction a la cellule et physiologie.'),'application/pdf')}).json(); client.post(f"/v1/ingestion/batches/{b['id']}/start",headers=h,json={}); j=runtime.ingestion.claim_job(worker_id='factory-ingestion'); runtime.ingestion.process_job(worker_id='factory-ingestion',job_id=j.id); return d['id']
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+services\api\app\modules\ingestion\application\service.py:251: in process_job
+    processed=(pipeline or PremiumDocumentPipeline()).process(Path(tmp.name),title=Path(doc.filename).stem)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^
+services\api\app\modules\document_engine\application\pipeline.py:29: in __init__
+    self.ocr = TesseractOcr(ocr_languages) if enable_ocr else None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <app.modules.document_engine.infrastructure.ocr.TesseractOcr object at 0x00000251EC11A660>
+languages = 'fra+eng'
+
+    def __init__(self, languages: str = "fra+eng") -> None:
+        self.languages = languages
+        if shutil.which("tesseract") is None:
+>           raise RuntimeError("tesseract binary not found")
+E           RuntimeError: tesseract binary not found
+
+services\api\app\modules\document_engine\infrastructure\ocr.py:26: RuntimeError
+---------------------------- Captured stderr call -----------------------------
+{"ts":"2026-10-30 22:41:11,122","level":"INFO","logger":"edunova.http","message":"request request_id=dada82cc070046baadcd5a22316463f4 method=POST path=/v1/ingestion/batches status=200 duration_ms=93"}
+{"ts":"2026-10-30 22:41:11,133","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-30 22:41:11,475","level":"INFO","logger":"edunova.http","message":"request request_id=de5af96610204c63a57fa37e71514b56 method=POST path=/v1/ingestion/batches/583c3d5f-e242-42b8-abe3-a9ff91711c50/files status=200 duration_ms=289"}
+{"ts":"2026-10-30 22:41:11,482","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/583c3d5f-e242-42b8-abe3-a9ff91711c50/files \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-30 22:41:11,712","level":"INFO","logger":"edunova.http","message":"request request_id=6d08af9d336a4ad282644dfb55609746 method=POST path=/v1/ingestion/batches/583c3d5f-e242-42b8-abe3-a9ff91711c50/start status=200 duration_ms=163"}
+{"ts":"2026-10-30 22:41:11,718","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/583c3d5f-e242-42b8-abe3-a9ff91711c50/start \"HTTP/1.1 200 OK\""}
+------------------------------ Captured log call ------------------------------
+INFO     edunova.http:observability.py:23 request request_id=dada82cc070046baadcd5a22316463f4 method=POST path=/v1/ingestion/batches status=200 duration_ms=93
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=de5af96610204c63a57fa37e71514b56 method=POST path=/v1/ingestion/batches/583c3d5f-e242-42b8-abe3-a9ff91711c50/files status=200 duration_ms=289
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/583c3d5f-e242-42b8-abe3-a9ff91711c50/files "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=6d08af9d336a4ad282644dfb55609746 method=POST path=/v1/ingestion/batches/583c3d5f-e242-42b8-abe3-a9ff91711c50/start status=200 duration_ms=163
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/583c3d5f-e242-42b8-abe3-a9ff91711c50/start "HTTP/1.1 200 OK"
+============================== warnings summary ===============================
+.venv\Lib\site-packages\starlette\testclient.py:45
+  C:\Users\cs-ap\dev\edusync-web\edunova\.venv\Lib\site-packages\starlette\testclient.py:45: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: DeprecationWarning: builtin type SwigPyPacked has no __module__ attribute
+
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: DeprecationWarning: builtin type SwigPyObject has no __module__ attribute
+
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: DeprecationWarning: builtin type swigvarlink has no __module__ attribute
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED services/api/tests/content_factory/test_content_factory.py::test_factory_end_to_end_ready_for_review_with_evidence
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!
+1 failed, 6 warnings in 69.20s (0:01:09)
+<sys>:0: DeprecationWarning: builtin type swigvarlink has no __module__ attribute

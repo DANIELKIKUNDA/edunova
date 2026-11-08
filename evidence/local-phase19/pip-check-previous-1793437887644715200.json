@@ -1,0 +1,11 @@
+{
+  "command": [
+    "C:\\Users\\cs-ap\\dev\\edusync-web\\edunova\\.venv\\Scripts\\python.exe",
+    "-m",
+    "pip",
+    "check"
+  ],
+  "cwd": "C:\\Users\\cs-ap\\dev\\edusync-web\\edunova",
+  "exit_code": 0,
+  "seconds": 36.41
+}

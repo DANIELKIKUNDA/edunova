@@ -1,0 +1,17 @@
+PASS FastAPI library router included
+PASS Runtime library service
+PASS Physical book endpoint
+PASS Physical copy endpoint
+PASS Physical loan endpoint
+PASS Loan return endpoint
+PASS Tenant FK copy
+PASS Tenant FK loan
+PASS Open loan unique index
+PASS Flutter physical library page
+PASS Flutter book operations
+PASS Flutter borrow operations
+PASS Flutter return operations
+PASS Flutter navigation route
+PASS Campus route entry
+PASS Flutter gateway tests written
+WIRING STATIC 16/16 PASS

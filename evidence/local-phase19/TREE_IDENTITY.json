@@ -1,0 +1,164 @@
+[
+  {
+    "suite": "backend-final",
+    "tested_commit": "dd17f3d5a4096fbcedbf755c3896096556aeac12",
+    "delivery_commit": "79ffe15a4eef6165f8395c0921abc498552c35ee",
+    "path": "services/api/app",
+    "tested_tree": "43169d8f24de797a0274658bf8462ff05b3c9837",
+    "delivery_tree": "43169d8f24de797a0274658bf8462ff05b3c9837",
+    "identical": true
+  },
+  {
+    "suite": "backend-final",
+    "tested_commit": "dd17f3d5a4096fbcedbf755c3896096556aeac12",
+    "delivery_commit": "79ffe15a4eef6165f8395c0921abc498552c35ee",
+    "path": "services/api/tests",
+    "tested_tree": "0effbf38b9a54c4851d1a879382b21554152a415",
+    "delivery_tree": "0effbf38b9a54c4851d1a879382b21554152a415",
+    "identical": true
+  },
+  {
+    "suite": "mobile-test",
+    "tested_commit": "d5375a28c0c8ce706e102ccb64e128460bb36595",
+    "delivery_commit": "79ffe15a4eef6165f8395c0921abc498552c35ee",
+    "path": "apps/mobile/lib",
+    "tested_tree": "4d4b0ed754f9166ef3273cfa2e573d4644515dd0",
+    "delivery_tree": "4d4b0ed754f9166ef3273cfa2e573d4644515dd0",
+    "identical": true
+  },
+  {
+    "suite": "mobile-test",
+    "tested_commit": "d5375a28c0c8ce706e102ccb64e128460bb36595",
+    "delivery_commit": "79ffe15a4eef6165f8395c0921abc498552c35ee",
+    "path": "apps/mobile/test",
+    "tested_tree": "a089c899ee21cf3efc40a4763aded5130d48d0b9",
+    "delivery_tree": "a089c899ee21cf3efc40a4763aded5130d48d0b9",
+    "identical": true
+  },
+  {
+    "suite": "admin-test",
+    "tested_commit": "d5375a28c0c8ce706e102ccb64e128460bb36595",
+    "delivery_commit": "79ffe15a4eef6165f8395c0921abc498552c35ee",
+    "path": "apps/admin/lib",
+    "tested_tree": "0b2459c919132648e644c040a07c196e6a580fc9",
+    "delivery_tree": "0b2459c919132648e644c040a07c196e6a580fc9",
+    "identical": true
+  },
+  {
+    "suite": "admin-test",
+    "tested_commit": "d5375a28c0c8ce706e102ccb64e128460bb36595",
+    "delivery_commit": "79ffe15a4eef6165f8395c0921abc498552c35ee",
+    "path": "apps/admin/test",
+    "tested_tree": "6833c374cdb568db0960aaf6980c31a838e77a7b",
+    "delivery_tree": "6833c374cdb568db0960aaf6980c31a838e77a7b",
+    "identical": true
+  },
+  {
+    "suite": "mobile-web",
+    "tested_commit": "05fdeac0e03c3a5a7190470fa18874bd57942269",
+    "delivery_commit": "79ffe15a4eef6165f8395c0921abc498552c35ee",
+    "path": "apps/mobile/lib",
+    "tested_tree": "4d4b0ed754f9166ef3273cfa2e573d4644515dd0",
+    "delivery_tree": "4d4b0ed754f9166ef3273cfa2e573d4644515dd0",
+    "identical": true
+  },
+  {
+    "suite": "mobile-web",
+    "tested_commit": "05fdeac0e03c3a5a7190470fa18874bd57942269",
+    "delivery_commit": "79ffe15a4eef6165f8395c0921abc498552c35ee",
+    "path": "apps/mobile/web",
+    "tested_tree": "e8dfe32a03644fc95039d183880588e86ebbeabd",
+    "delivery_tree": "e8dfe32a03644fc95039d183880588e86ebbeabd",
+    "identical": true
+  },
+  {
+    "suite": "admin-web",
+    "tested_commit": "05fdeac0e03c3a5a7190470fa18874bd57942269",
+    "delivery_commit": "79ffe15a4eef6165f8395c0921abc498552c35ee",
+    "path": "apps/admin/lib",
+    "tested_tree": "0b2459c919132648e644c040a07c196e6a580fc9",
+    "delivery_tree": "0b2459c919132648e644c040a07c196e6a580fc9",
+    "identical": true
+  },
+  {
+    "suite": "admin-web",
+    "tested_commit": "05fdeac0e03c3a5a7190470fa18874bd57942269",
+    "delivery_commit": "79ffe15a4eef6165f8395c0921abc498552c35ee",
+    "path": "apps/admin/web",
+    "tested_tree": "be748cb90b6f509e8fcc15f3567fa34a34ec59d9",
+    "delivery_tree": "be748cb90b6f509e8fcc15f3567fa34a34ec59d9",
+    "identical": true
+  },
+  {
+    "suite": "mobile-windows",
+    "tested_commit": "d5375a28c0c8ce706e102ccb64e128460bb36595",
+    "delivery_commit": "79ffe15a4eef6165f8395c0921abc498552c35ee",
+    "path": "apps/mobile/lib",
+    "tested_tree": "4d4b0ed754f9166ef3273cfa2e573d4644515dd0",
+    "delivery_tree": "4d4b0ed754f9166ef3273cfa2e573d4644515dd0",
+    "identical": true
+  },
+  {
+    "suite": "mobile-windows",
+    "tested_commit": "d5375a28c0c8ce706e102ccb64e128460bb36595",
+    "delivery_commit": "79ffe15a4eef6165f8395c0921abc498552c35ee",
+    "path": "apps/mobile/windows",
+    "tested_tree": "e402800c68241383a94db44885e65e61b54c21a0",
+    "delivery_tree": "e402800c68241383a94db44885e65e61b54c21a0",
+    "identical": true
+  },
+  {
+    "suite": "admin-windows",
+    "tested_commit": "6f85e8cd07b2143d3b8d6419158717651530cf06",
+    "delivery_commit": "79ffe15a4eef6165f8395c0921abc498552c35ee",
+    "path": "apps/admin/lib",
+    "tested_tree": "0b2459c919132648e644c040a07c196e6a580fc9",
+    "delivery_tree": "0b2459c919132648e644c040a07c196e6a580fc9",
+    "identical": true
+  },
+  {
+    "suite": "admin-windows",
+    "tested_commit": "6f85e8cd07b2143d3b8d6419158717651530cf06",
+    "delivery_commit": "79ffe15a4eef6165f8395c0921abc498552c35ee",
+    "path": "apps/admin/windows",
+    "tested_tree": "5859c8a60e5e5f807d763620e1ac90571a15f473",
+    "delivery_tree": "5859c8a60e5e5f807d763620e1ac90571a15f473",
+    "identical": true
+  },
+  {
+    "suite": "mobile-android",
+    "tested_commit": "6f85e8cd07b2143d3b8d6419158717651530cf06",
+    "delivery_commit": "79ffe15a4eef6165f8395c0921abc498552c35ee",
+    "path": "apps/mobile/lib",
+    "tested_tree": "4d4b0ed754f9166ef3273cfa2e573d4644515dd0",
+    "delivery_tree": "4d4b0ed754f9166ef3273cfa2e573d4644515dd0",
+    "identical": true
+  },
+  {
+    "suite": "mobile-android",
+    "tested_commit": "6f85e8cd07b2143d3b8d6419158717651530cf06",
+    "delivery_commit": "79ffe15a4eef6165f8395c0921abc498552c35ee",
+    "path": "apps/mobile/android",
+    "tested_tree": "d5be78d05dd15688e5fdcc49f5dc9cb8776c34a6",
+    "delivery_tree": "d5be78d05dd15688e5fdcc49f5dc9cb8776c34a6",
+    "identical": true
+  },
+  {
+    "suite": "admin-android",
+    "tested_commit": "bee07026f77c0d9ac3a11efa280739db8b005a4d",
+    "delivery_commit": "79ffe15a4eef6165f8395c0921abc498552c35ee",
+    "path": "apps/admin/lib",
+    "tested_tree": "0b2459c919132648e644c040a07c196e6a580fc9",
+    "delivery_tree": "0b2459c919132648e644c040a07c196e6a580fc9",
+    "identical": true
+  },
+  {
+    "suite": "admin-android",
+    "tested_commit": "bee07026f77c0d9ac3a11efa280739db8b005a4d",
+    "delivery_commit": "79ffe15a4eef6165f8395c0921abc498552c35ee",
+    "path": "apps/admin/android",
+    "tested_tree": "fa076179ce0255e9b943d578d6aad8bb2965bab5",
+    "delivery_tree": "fa076179ce0255e9b943d578d6aad8bb2965bab5",
+    "identical": true
+  }
+]

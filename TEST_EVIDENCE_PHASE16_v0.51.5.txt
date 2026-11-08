@@ -1,0 +1,8 @@
+Parent zip SHA256: 6b068d4bbeefb8afcd2a46086b8706d902948c96109ebe716da25f0e56f206ea
+Complete backend regression: 1011 passed; exit=0.
+Targeted: 37 passed.
+Structural: 21/21 PASS (not Dart compilation).
+Existing Flutter static: 33/33 PASS (not Flutter compilation).
+Python compileall: PASS.
+Flutter analyze/test/build: NOT EXECUTED (SDK absent).
+Postgres/Redis/device: NOT EXECUTED.

@@ -1,0 +1,8 @@
+COMMAND: C:\Users\cs-ap\dev\flutter\bin\flutter.bat test --no-pub --reporter=expanded
+CWD: C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile
+Error: cannot run without a dependency on either "package:flutter_test" or "package:test". Ensure the following lines are present in your pubspec.yaml:
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+

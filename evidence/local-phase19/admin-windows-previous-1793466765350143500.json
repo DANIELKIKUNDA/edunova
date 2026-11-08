@@ -1,0 +1,13 @@
+{
+  "commit": "05fdeac0e03c3a5a7190470fa18874bd57942269",
+  "command": [
+    "C:\\Users\\cs-ap\\dev\\flutter\\bin\\flutter.bat",
+    "build",
+    "windows",
+    "--release",
+    "--no-pub"
+  ],
+  "cwd": "C:\\Users\\cs-ap\\dev\\edusync-web\\edunova\\apps\\admin",
+  "exit_code": 1,
+  "seconds": 156.8
+}

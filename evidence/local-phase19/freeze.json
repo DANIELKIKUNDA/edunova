@@ -1,0 +1,12 @@
+{
+  "commit": "d4169e8b131d313de87b02d2713f5008f879fee3",
+  "command": [
+    "C:\\Users\\cs-ap\\dev\\edusync-web\\edunova\\.venv\\Scripts\\python.exe",
+    "-m",
+    "pip",
+    "freeze"
+  ],
+  "cwd": "C:\\Users\\cs-ap\\dev\\edusync-web\\edunova",
+  "exit_code": 0,
+  "seconds": 2.96
+}

@@ -1,0 +1,36 @@
+EDUNOVA v0.50.2 — PREUVES D'EXECUTION (14 octobre 2026)
+
+Base canonique : EduNova_v0.50.1_RC_PHASE15_PERIOD_COMPARABILITY_INTEGRITY.zip
+SHA-256 de la base recalculée : d9a2d885978720c87038596376c880c4bc79caae27ea1bb3206a0a77c62c2eb2
+
+Régression initiale sur v0.50.1 :
+  PYTHONPATH=services/api python -m pytest -q services/api/tests
+  Exit code: 0
+  796 passed in 57.22s
+
+Nouveaux tests v0.50.2 : 20 tests SQLAlchemy/SQLite.
+
+Tests ciblés après dernière modification (nouveau fichier Phase 15 + v0.50.0/v0.50.1) :
+  PYTHONPATH=services/api python -m pytest -q services/api/tests/test_phase15_source_lineage_completeness.py services/api/tests/test_phase15_institutional_intelligence.py services/api/tests/test_phase15_period_comparison.py
+  Exit code: 0
+  46 passed in 8.56s
+
+REGRESSION FINALE APRES DERNIERE MODIFICATION :
+  PYTHONPATH=services/api python -m pytest -q services/api/tests
+  Commande lancée en arrière-plan, redirection dans v0502_verified.log,
+  code de sortie conservé dans v0502_verified.exit, fin réellement attendue.
+  Exit code: 0
+  816 passed in 63.22s
+
+Audit structurel après modification :
+  python scripts/audit_lot32_global.py
+  Exit code: 0
+  LOT32 GLOBAL AUDIT: 17/17 PASS
+
+Compilation Python après modification :
+  python -m compileall -q services/api/app services/api/tests
+  Exit code: 0
+
+N'ont PAS été exécutés : compilation Flutter, appareil réel, PostgreSQL réel,
+Redis réel, stockage objet réel, fournisseurs externes, assurance juridique,
+validation de confidentialité différentielle.

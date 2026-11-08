@@ -1,0 +1,918 @@
+COMMAND: C:\Users\cs-ap\dev\edusync-web\edunova\.venv\Scripts\python.exe -m pytest -q services/api/tests --junitxml=C:\Users\cs-ap\dev\edusync-web\edunova\evidence\local-phase19\backend.xml
+CWD: C:\Users\cs-ap\dev\edusync-web\edunova
+..................................................FFFFFFF.........FF.... [  5%]
+.................................F....FF..FF.F.......................... [ 11%]
+........................................................................ [ 17%]
+........................................................................ [ 23%]
+........................................................................ [ 29%]
+........................................................................ [ 35%]
+........................................................................ [ 41%]
+........................................................................ [ 47%]
+........................................................................ [ 53%]
+........................................................................ [ 59%]
+........................................................................ [ 65%]
+........................................................................ [ 71%]
+........................................................................ [ 77%]
+........................................................................ [ 83%]
+.......................................................ssssss........... [ 89%]
+.......................................................F................ [ 95%]
+.....................F................................                   [100%]
+================================== FAILURES ===================================
+___________ test_factory_end_to_end_ready_for_review_with_evidence ____________
+
+    def test_factory_end_to_end_ready_for_review_with_evidence():
+>    _,h=account(); did=processed(h); cr=client.post('/v1/content-factory/runs',headers=h,json={'document_id':did}); assert cr.status_code==200,cr.text; rid=cr.json()['id']; pr=client.post(f'/v1/content-factory/runs/{rid}/process',headers=h); assert pr.status_code==200,pr.text; assert pr.json()['state']=='ready_for_review'; detail=client.get(f'/v1/content-factory/runs/{rid}',headers=h).json(); assert detail['assets']; assert len(detail['assets'])==len(detail['evidence']); assert all(e['page_start']>=1 for e in detail['evidence']); assert any(g['code']=='provenance_complete' and g['passed'] for g in detail['quality_gates'])
+                        ^^^^^^^^^^^^
+
+services\api\tests\content_factory\test_content_factory.py:16: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+services\api\tests\content_factory\test_content_factory.py:14: in processed
+    b=client.post('/v1/ingestion/batches',headers=h,json={'name':'Factory source','defaults':{'content_kind':'course','faculty_domain':'Medecine','program':'Medecine humaine','level':'BAC1','semester':'S1','risk':'medical','rights_status':'authorized','rights_note':'test'}}).json(); d=client.post(f"/v1/ingestion/batches/{b['id']}/files",headers={**h,'Idempotency-Key':'factory-source'},files={'file':('cours.pdf',pdf_bytes('Introduction a la cellule et physiologie.'),'application/pdf')}).json(); client.post(f"/v1/ingestion/batches/{b['id']}/start",headers=h,json={}); j=runtime.ingestion.claim_job(worker_id='factory-ingestion'); runtime.ingestion.process_job(worker_id='factory-ingestion',job_id=j.id); return d['id']
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+services\api\app\modules\ingestion\application\service.py:251: in process_job
+    processed=(pipeline or PremiumDocumentPipeline()).process(Path(tmp.name),title=Path(doc.filename).stem)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^
+services\api\app\modules\document_engine\application\pipeline.py:29: in __init__
+    self.ocr = TesseractOcr(ocr_languages) if enable_ocr else None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <app.modules.document_engine.infrastructure.ocr.TesseractOcr object at 0x00000157F34B2900>
+languages = 'fra+eng'
+
+    def __init__(self, languages: str = "fra+eng") -> None:
+        self.languages = languages
+        if shutil.which("tesseract") is None:
+>           raise RuntimeError("tesseract binary not found")
+E           RuntimeError: tesseract binary not found
+
+services\api\app\modules\document_engine\infrastructure\ocr.py:26: RuntimeError
+---------------------------- Captured stderr call -----------------------------
+{"ts":"2026-10-30 22:14:44,566","level":"INFO","logger":"edunova.http","message":"request request_id=dbdbf783a5b1452494ed19ca20651db1 method=POST path=/v1/ingestion/batches status=200 duration_ms=141"}
+{"ts":"2026-10-30 22:14:44,573","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-30 22:14:44,962","level":"INFO","logger":"edunova.http","message":"request request_id=1d01c3b8572f4bb6844f352d1d222298 method=POST path=/v1/ingestion/batches/f343366e-ea7c-42c3-839d-6de81428e6f3/files status=200 duration_ms=262"}
+{"ts":"2026-10-30 22:14:44,969","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/f343366e-ea7c-42c3-839d-6de81428e6f3/files \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-30 22:14:45,190","level":"INFO","logger":"edunova.http","message":"request request_id=8413996a65574ff9889808e9c2542678 method=POST path=/v1/ingestion/batches/f343366e-ea7c-42c3-839d-6de81428e6f3/start status=200 duration_ms=188"}
+{"ts":"2026-10-30 22:14:45,203","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/f343366e-ea7c-42c3-839d-6de81428e6f3/start \"HTTP/1.1 200 OK\""}
+------------------------------ Captured log call ------------------------------
+INFO     edunova.http:observability.py:23 request request_id=dbdbf783a5b1452494ed19ca20651db1 method=POST path=/v1/ingestion/batches status=200 duration_ms=141
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=1d01c3b8572f4bb6844f352d1d222298 method=POST path=/v1/ingestion/batches/f343366e-ea7c-42c3-839d-6de81428e6f3/files status=200 duration_ms=262
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/f343366e-ea7c-42c3-839d-6de81428e6f3/files "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=8413996a65574ff9889808e9c2542678 method=POST path=/v1/ingestion/batches/f343366e-ea7c-42c3-839d-6de81428e6f3/start status=200 duration_ms=188
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/f343366e-ea7c-42c3-839d-6de81428e6f3/start "HTTP/1.1 200 OK"
+____ test_factory_create_is_idempotent_for_same_source_and_asset_contract _____
+
+    def test_factory_create_is_idempotent_for_same_source_and_asset_contract():
+>    _,h=account(); did=processed(h); body={'document_id':did,'requested_assets':['summary_express','rag_chunk']}; a=client.post('/v1/content-factory/runs',headers=h,json=body).json(); b=client.post('/v1/content-factory/runs',headers=h,json=body).json(); assert a['id']==b['id']
+                        ^^^^^^^^^^^^
+
+services\api\tests\content_factory\test_content_factory.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+services\api\tests\content_factory\test_content_factory.py:14: in processed
+    b=client.post('/v1/ingestion/batches',headers=h,json={'name':'Factory source','defaults':{'content_kind':'course','faculty_domain':'Medecine','program':'Medecine humaine','level':'BAC1','semester':'S1','risk':'medical','rights_status':'authorized','rights_note':'test'}}).json(); d=client.post(f"/v1/ingestion/batches/{b['id']}/files",headers={**h,'Idempotency-Key':'factory-source'},files={'file':('cours.pdf',pdf_bytes('Introduction a la cellule et physiologie.'),'application/pdf')}).json(); client.post(f"/v1/ingestion/batches/{b['id']}/start",headers=h,json={}); j=runtime.ingestion.claim_job(worker_id='factory-ingestion'); runtime.ingestion.process_job(worker_id='factory-ingestion',job_id=j.id); return d['id']
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+services\api\app\modules\ingestion\application\service.py:251: in process_job
+    processed=(pipeline or PremiumDocumentPipeline()).process(Path(tmp.name),title=Path(doc.filename).stem)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^
+services\api\app\modules\document_engine\application\pipeline.py:29: in __init__
+    self.ocr = TesseractOcr(ocr_languages) if enable_ocr else None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <app.modules.document_engine.infrastructure.ocr.TesseractOcr object at 0x00000157F38C42D0>
+languages = 'fra+eng'
+
+    def __init__(self, languages: str = "fra+eng") -> None:
+        self.languages = languages
+        if shutil.which("tesseract") is None:
+>           raise RuntimeError("tesseract binary not found")
+E           RuntimeError: tesseract binary not found
+
+services\api\app\modules\document_engine\infrastructure\ocr.py:26: RuntimeError
+---------------------------- Captured stderr call -----------------------------
+{"ts":"2026-10-30 22:14:52,223","level":"INFO","logger":"edunova.http","message":"request request_id=9e2548173c42470298984b7c86bed662 method=POST path=/v1/ingestion/batches status=200 duration_ms=57"}
+{"ts":"2026-10-30 22:14:52,229","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-30 22:14:52,332","level":"INFO","logger":"edunova.http","message":"request request_id=9310ed1a04874055b9edd535556c0a94 method=POST path=/v1/ingestion/batches/db257f1b-0b91-432e-a60c-c62853a3673a/files status=200 duration_ms=91"}
+{"ts":"2026-10-30 22:14:52,339","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/db257f1b-0b91-432e-a60c-c62853a3673a/files \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-30 22:14:52,439","level":"INFO","logger":"edunova.http","message":"request request_id=6c6abbb1b5584e8f8113919014dd3b26 method=POST path=/v1/ingestion/batches/db257f1b-0b91-432e-a60c-c62853a3673a/start status=200 duration_ms=92"}
+{"ts":"2026-10-30 22:14:52,448","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/db257f1b-0b91-432e-a60c-c62853a3673a/start \"HTTP/1.1 200 OK\""}
+------------------------------ Captured log call ------------------------------
+INFO     edunova.http:observability.py:23 request request_id=9e2548173c42470298984b7c86bed662 method=POST path=/v1/ingestion/batches status=200 duration_ms=57
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=9310ed1a04874055b9edd535556c0a94 method=POST path=/v1/ingestion/batches/db257f1b-0b91-432e-a60c-c62853a3673a/files status=200 duration_ms=91
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/db257f1b-0b91-432e-a60c-c62853a3673a/files "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=6c6abbb1b5584e8f8113919014dd3b26 method=POST path=/v1/ingestion/batches/db257f1b-0b91-432e-a60c-c62853a3673a/start status=200 duration_ms=92
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/db257f1b-0b91-432e-a60c-c62853a3673a/start "HTTP/1.1 200 OK"
+__________________ test_factory_rejects_unknown_asset_family __________________
+
+    def test_factory_rejects_unknown_asset_family():
+>    _,h=account(); did=processed(h); r=client.post('/v1/content-factory/runs',headers=h,json={'document_id':did,'requested_assets':['telepathy']}); assert r.status_code==422
+                        ^^^^^^^^^^^^
+
+services\api\tests\content_factory\test_content_factory.py:20: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+services\api\tests\content_factory\test_content_factory.py:14: in processed
+    b=client.post('/v1/ingestion/batches',headers=h,json={'name':'Factory source','defaults':{'content_kind':'course','faculty_domain':'Medecine','program':'Medecine humaine','level':'BAC1','semester':'S1','risk':'medical','rights_status':'authorized','rights_note':'test'}}).json(); d=client.post(f"/v1/ingestion/batches/{b['id']}/files",headers={**h,'Idempotency-Key':'factory-source'},files={'file':('cours.pdf',pdf_bytes('Introduction a la cellule et physiologie.'),'application/pdf')}).json(); client.post(f"/v1/ingestion/batches/{b['id']}/start",headers=h,json={}); j=runtime.ingestion.claim_job(worker_id='factory-ingestion'); runtime.ingestion.process_job(worker_id='factory-ingestion',job_id=j.id); return d['id']
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+services\api\app\modules\ingestion\application\service.py:251: in process_job
+    processed=(pipeline or PremiumDocumentPipeline()).process(Path(tmp.name),title=Path(doc.filename).stem)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^
+services\api\app\modules\document_engine\application\pipeline.py:29: in __init__
+    self.ocr = TesseractOcr(ocr_languages) if enable_ocr else None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <app.modules.document_engine.infrastructure.ocr.TesseractOcr object at 0x00000157F38C4F50>
+languages = 'fra+eng'
+
+    def __init__(self, languages: str = "fra+eng") -> None:
+        self.languages = languages
+        if shutil.which("tesseract") is None:
+>           raise RuntimeError("tesseract binary not found")
+E           RuntimeError: tesseract binary not found
+
+services\api\app\modules\document_engine\infrastructure\ocr.py:26: RuntimeError
+---------------------------- Captured stderr call -----------------------------
+{"ts":"2026-10-30 22:14:53,527","level":"INFO","logger":"edunova.http","message":"request request_id=5ec2e63d961645cbabfdecdb23fd4db1 method=POST path=/v1/ingestion/batches status=200 duration_ms=86"}
+{"ts":"2026-10-30 22:14:53,535","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-30 22:14:53,657","level":"INFO","logger":"edunova.http","message":"request request_id=5b8f8c392c2d46359c7d22c4e25c141a method=POST path=/v1/ingestion/batches/51a10c0b-21f6-4d85-b328-02fcb137432c/files status=200 duration_ms=93"}
+{"ts":"2026-10-30 22:14:53,662","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/51a10c0b-21f6-4d85-b328-02fcb137432c/files \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-30 22:14:53,834","level":"INFO","logger":"edunova.http","message":"request request_id=bfab6d0326e346d7a72c98625ec14ed0 method=POST path=/v1/ingestion/batches/51a10c0b-21f6-4d85-b328-02fcb137432c/start status=200 duration_ms=146"}
+{"ts":"2026-10-30 22:14:53,839","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/51a10c0b-21f6-4d85-b328-02fcb137432c/start \"HTTP/1.1 200 OK\""}
+------------------------------ Captured log call ------------------------------
+INFO     edunova.http:observability.py:23 request request_id=5ec2e63d961645cbabfdecdb23fd4db1 method=POST path=/v1/ingestion/batches status=200 duration_ms=86
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=5b8f8c392c2d46359c7d22c4e25c141a method=POST path=/v1/ingestion/batches/51a10c0b-21f6-4d85-b328-02fcb137432c/files status=200 duration_ms=93
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/51a10c0b-21f6-4d85-b328-02fcb137432c/files "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=bfab6d0326e346d7a72c98625ec14ed0 method=POST path=/v1/ingestion/batches/51a10c0b-21f6-4d85-b328-02fcb137432c/start status=200 duration_ms=146
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/51a10c0b-21f6-4d85-b328-02fcb137432c/start "HTTP/1.1 200 OK"
+___________ test_factory_never_publishes_and_exposes_quality_score ____________
+
+    def test_factory_never_publishes_and_exposes_quality_score():
+>    _,h=account(); did=processed(h); run=client.post('/v1/content-factory/runs',headers=h,json={'document_id':did,'requested_assets':['summary_express','quiz']}).json(); out=client.post(f"/v1/content-factory/runs/{run['id']}/process",headers=h).json(); assert out['state']=='ready_for_review'; assert 0<=out['quality_score']<=100; assert 'published' not in out['state']
+                        ^^^^^^^^^^^^
+
+services\api\tests\content_factory\test_content_factory.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+services\api\tests\content_factory\test_content_factory.py:14: in processed
+    b=client.post('/v1/ingestion/batches',headers=h,json={'name':'Factory source','defaults':{'content_kind':'course','faculty_domain':'Medecine','program':'Medecine humaine','level':'BAC1','semester':'S1','risk':'medical','rights_status':'authorized','rights_note':'test'}}).json(); d=client.post(f"/v1/ingestion/batches/{b['id']}/files",headers={**h,'Idempotency-Key':'factory-source'},files={'file':('cours.pdf',pdf_bytes('Introduction a la cellule et physiologie.'),'application/pdf')}).json(); client.post(f"/v1/ingestion/batches/{b['id']}/start",headers=h,json={}); j=runtime.ingestion.claim_job(worker_id='factory-ingestion'); runtime.ingestion.process_job(worker_id='factory-ingestion',job_id=j.id); return d['id']
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+services\api\app\modules\ingestion\application\service.py:251: in process_job
+    processed=(pipeline or PremiumDocumentPipeline()).process(Path(tmp.name),title=Path(doc.filename).stem)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^
+services\api\app\modules\document_engine\application\pipeline.py:29: in __init__
+    self.ocr = TesseractOcr(ocr_languages) if enable_ocr else None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <app.modules.document_engine.infrastructure.ocr.TesseractOcr object at 0x00000157F2F608A0>
+languages = 'fra+eng'
+
+    def __init__(self, languages: str = "fra+eng") -> None:
+        self.languages = languages
+        if shutil.which("tesseract") is None:
+>           raise RuntimeError("tesseract binary not found")
+E           RuntimeError: tesseract binary not found
+
+services\api\app\modules\document_engine\infrastructure\ocr.py:26: RuntimeError
+---------------------------- Captured stderr call -----------------------------
+{"ts":"2026-10-30 22:14:54,980","level":"INFO","logger":"edunova.http","message":"request request_id=6b8bec40161e4f079b226712c334e1fd method=POST path=/v1/ingestion/batches status=200 duration_ms=95"}
+{"ts":"2026-10-30 22:14:54,986","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-30 22:14:55,149","level":"INFO","logger":"edunova.http","message":"request request_id=4ea7d45da9b2490586cbc2628ae3b310 method=POST path=/v1/ingestion/batches/0ee17746-7282-4345-8822-c7e941c7be80/files status=200 duration_ms=113"}
+{"ts":"2026-10-30 22:14:55,154","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/0ee17746-7282-4345-8822-c7e941c7be80/files \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-30 22:14:55,277","level":"INFO","logger":"edunova.http","message":"request request_id=8fef5da5789a4617886faabee739c0a2 method=POST path=/v1/ingestion/batches/0ee17746-7282-4345-8822-c7e941c7be80/start status=200 duration_ms=113"}
+{"ts":"2026-10-30 22:14:55,296","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/0ee17746-7282-4345-8822-c7e941c7be80/start \"HTTP/1.1 200 OK\""}
+------------------------------ Captured log call ------------------------------
+INFO     edunova.http:observability.py:23 request request_id=6b8bec40161e4f079b226712c334e1fd method=POST path=/v1/ingestion/batches status=200 duration_ms=95
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=4ea7d45da9b2490586cbc2628ae3b310 method=POST path=/v1/ingestion/batches/0ee17746-7282-4345-8822-c7e941c7be80/files status=200 duration_ms=113
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/0ee17746-7282-4345-8822-c7e941c7be80/files "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=8fef5da5789a4617886faabee739c0a2 method=POST path=/v1/ingestion/batches/0ee17746-7282-4345-8822-c7e941c7be80/start status=200 duration_ms=113
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/0ee17746-7282-4345-8822-c7e941c7be80/start "HTTP/1.1 200 OK"
+________ test_factory_final_quality_gates_include_grounding_integrity _________
+
+    def test_factory_final_quality_gates_include_grounding_integrity():
+>    _,h=account(); did=processed(h); run=client.post('/v1/content-factory/runs',headers=h,json={'document_id':did,'requested_assets':['summary_express','quiz']}).json(); client.post(f"/v1/content-factory/runs/{run['id']}/process",headers=h); detail=client.get(f"/v1/content-factory/runs/{run['id']}",headers=h).json(); gates={g['code']:g for g in detail['quality_gates']}; assert gates['evidence_quote_grounded']['passed']; assert gates['evidence_hash_integrity']['passed']; assert gates['numeric_claim_grounding']['passed']
+                        ^^^^^^^^^^^^
+
+services\api\tests\content_factory\test_content_factory.py:24: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+services\api\tests\content_factory\test_content_factory.py:14: in processed
+    b=client.post('/v1/ingestion/batches',headers=h,json={'name':'Factory source','defaults':{'content_kind':'course','faculty_domain':'Medecine','program':'Medecine humaine','level':'BAC1','semester':'S1','risk':'medical','rights_status':'authorized','rights_note':'test'}}).json(); d=client.post(f"/v1/ingestion/batches/{b['id']}/files",headers={**h,'Idempotency-Key':'factory-source'},files={'file':('cours.pdf',pdf_bytes('Introduction a la cellule et physiologie.'),'application/pdf')}).json(); client.post(f"/v1/ingestion/batches/{b['id']}/start",headers=h,json={}); j=runtime.ingestion.claim_job(worker_id='factory-ingestion'); runtime.ingestion.process_job(worker_id='factory-ingestion',job_id=j.id); return d['id']
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+services\api\app\modules\ingestion\application\service.py:251: in process_job
+    processed=(pipeline or PremiumDocumentPipeline()).process(Path(tmp.name),title=Path(doc.filename).stem)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^
+services\api\app\modules\document_engine\application\pipeline.py:29: in __init__
+    self.ocr = TesseractOcr(ocr_languages) if enable_ocr else None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <app.modules.document_engine.infrastructure.ocr.TesseractOcr object at 0x00000157F36A8770>
+languages = 'fra+eng'
+
+    def __init__(self, languages: str = "fra+eng") -> None:
+        self.languages = languages
+        if shutil.which("tesseract") is None:
+>           raise RuntimeError("tesseract binary not found")
+E           RuntimeError: tesseract binary not found
+
+services\api\app\modules\document_engine\infrastructure\ocr.py:26: RuntimeError
+---------------------------- Captured stderr call -----------------------------
+{"ts":"2026-10-30 22:14:56,420","level":"INFO","logger":"edunova.http","message":"request request_id=49bfbaa833c14c04b59dba3d541b5c4f method=POST path=/v1/ingestion/batches status=200 duration_ms=111"}
+{"ts":"2026-10-30 22:14:56,429","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-30 22:14:56,540","level":"INFO","logger":"edunova.http","message":"request request_id=04b1aed5e0ed4035bda7bf859e559974 method=POST path=/v1/ingestion/batches/5e665fbe-17c4-4f34-84a0-e188e4179b6e/files status=200 duration_ms=92"}
+{"ts":"2026-10-30 22:14:56,550","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/5e665fbe-17c4-4f34-84a0-e188e4179b6e/files \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-30 22:14:56,762","level":"INFO","logger":"edunova.http","message":"request request_id=9ea97fe55a8a4abf9be092ed83224e81 method=POST path=/v1/ingestion/batches/5e665fbe-17c4-4f34-84a0-e188e4179b6e/start status=200 duration_ms=198"}
+{"ts":"2026-10-30 22:14:56,772","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/5e665fbe-17c4-4f34-84a0-e188e4179b6e/start \"HTTP/1.1 200 OK\""}
+------------------------------ Captured log call ------------------------------
+INFO     edunova.http:observability.py:23 request request_id=49bfbaa833c14c04b59dba3d541b5c4f method=POST path=/v1/ingestion/batches status=200 duration_ms=111
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=04b1aed5e0ed4035bda7bf859e559974 method=POST path=/v1/ingestion/batches/5e665fbe-17c4-4f34-84a0-e188e4179b6e/files status=200 duration_ms=92
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/5e665fbe-17c4-4f34-84a0-e188e4179b6e/files "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=9ea97fe55a8a4abf9be092ed83224e81 method=POST path=/v1/ingestion/batches/5e665fbe-17c4-4f34-84a0-e188e4179b6e/start status=200 duration_ms=198
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/5e665fbe-17c4-4f34-84a0-e188e4179b6e/start "HTTP/1.1 200 OK"
+_________ test_factory_queued_run_can_be_cancelled_and_not_processed __________
+
+    def test_factory_queued_run_can_be_cancelled_and_not_processed():
+>    _,h=account(); did=processed(h); run=client.post('/v1/content-factory/runs',headers=h,json={'document_id':did,'requested_assets':['rag_chunk']}).json(); out=client.post(f"/v1/content-factory/runs/{run['id']}/cancel",headers=h); assert out.status_code==200; assert out.json()['state']=='cancelled'; pr=client.post(f"/v1/content-factory/runs/{run['id']}/process",headers=h); assert pr.status_code==422
+                        ^^^^^^^^^^^^
+
+services\api\tests\content_factory\test_content_factory.py:26: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+services\api\tests\content_factory\test_content_factory.py:14: in processed
+    b=client.post('/v1/ingestion/batches',headers=h,json={'name':'Factory source','defaults':{'content_kind':'course','faculty_domain':'Medecine','program':'Medecine humaine','level':'BAC1','semester':'S1','risk':'medical','rights_status':'authorized','rights_note':'test'}}).json(); d=client.post(f"/v1/ingestion/batches/{b['id']}/files",headers={**h,'Idempotency-Key':'factory-source'},files={'file':('cours.pdf',pdf_bytes('Introduction a la cellule et physiologie.'),'application/pdf')}).json(); client.post(f"/v1/ingestion/batches/{b['id']}/start",headers=h,json={}); j=runtime.ingestion.claim_job(worker_id='factory-ingestion'); runtime.ingestion.process_job(worker_id='factory-ingestion',job_id=j.id); return d['id']
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+services\api\app\modules\ingestion\application\service.py:251: in process_job
+    processed=(pipeline or PremiumDocumentPipeline()).process(Path(tmp.name),title=Path(doc.filename).stem)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^
+services\api\app\modules\document_engine\application\pipeline.py:29: in __init__
+    self.ocr = TesseractOcr(ocr_languages) if enable_ocr else None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <app.modules.document_engine.infrastructure.ocr.TesseractOcr object at 0x00000157F36A6450>
+languages = 'fra+eng'
+
+    def __init__(self, languages: str = "fra+eng") -> None:
+        self.languages = languages
+        if shutil.which("tesseract") is None:
+>           raise RuntimeError("tesseract binary not found")
+E           RuntimeError: tesseract binary not found
+
+services\api\app\modules\document_engine\infrastructure\ocr.py:26: RuntimeError
+---------------------------- Captured stderr call -----------------------------
+{"ts":"2026-10-30 22:14:58,310","level":"INFO","logger":"edunova.http","message":"request request_id=283fbb0d1b5744429a88dcdae52ad473 method=POST path=/v1/ingestion/batches status=200 duration_ms=83"}
+{"ts":"2026-10-30 22:14:58,316","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-30 22:14:58,469","level":"INFO","logger":"edunova.http","message":"request request_id=85eaa3432e6d443a9964b97d3722477e method=POST path=/v1/ingestion/batches/a670bc72-13f5-456e-aca2-1de311a3b41a/files status=200 duration_ms=136"}
+{"ts":"2026-10-30 22:14:58,476","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/a670bc72-13f5-456e-aca2-1de311a3b41a/files \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-30 22:14:58,603","level":"INFO","logger":"edunova.http","message":"request request_id=f59478d5b1f849dbb1d2b3cac68f07e7 method=POST path=/v1/ingestion/batches/a670bc72-13f5-456e-aca2-1de311a3b41a/start status=200 duration_ms=105"}
+{"ts":"2026-10-30 22:14:58,608","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/a670bc72-13f5-456e-aca2-1de311a3b41a/start \"HTTP/1.1 200 OK\""}
+------------------------------ Captured log call ------------------------------
+INFO     edunova.http:observability.py:23 request request_id=283fbb0d1b5744429a88dcdae52ad473 method=POST path=/v1/ingestion/batches status=200 duration_ms=83
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=85eaa3432e6d443a9964b97d3722477e method=POST path=/v1/ingestion/batches/a670bc72-13f5-456e-aca2-1de311a3b41a/files status=200 duration_ms=136
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/a670bc72-13f5-456e-aca2-1de311a3b41a/files "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=f59478d5b1f849dbb1d2b3cac68f07e7 method=POST path=/v1/ingestion/batches/a670bc72-13f5-456e-aca2-1de311a3b41a/start status=200 duration_ms=105
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/a670bc72-13f5-456e-aca2-1de311a3b41a/start "HTTP/1.1 200 OK"
+_ test_factory_review_package_pairs_every_asset_with_source_evidence_and_blocks_publication _
+
+    def test_factory_review_package_pairs_every_asset_with_source_evidence_and_blocks_publication():
+>    _,h=account(); did=processed(h); run=client.post('/v1/content-factory/runs',headers=h,json={'document_id':did,'requested_assets':['summary_express','quiz']}).json(); client.post(f"/v1/content-factory/runs/{run['id']}/process",headers=h); r=client.get(f"/v1/content-factory/runs/{run['id']}/review-package",headers=h); assert r.status_code==200; body=r.json(); assert body['publication_allowed'] is False; assert body['required_next_state']=='human_review'; assert body['items'] and all(x['evidence'] for x in body['items'])
+                        ^^^^^^^^^^^^
+
+services\api\tests\content_factory\test_content_factory.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+services\api\tests\content_factory\test_content_factory.py:14: in processed
+    b=client.post('/v1/ingestion/batches',headers=h,json={'name':'Factory source','defaults':{'content_kind':'course','faculty_domain':'Medecine','program':'Medecine humaine','level':'BAC1','semester':'S1','risk':'medical','rights_status':'authorized','rights_note':'test'}}).json(); d=client.post(f"/v1/ingestion/batches/{b['id']}/files",headers={**h,'Idempotency-Key':'factory-source'},files={'file':('cours.pdf',pdf_bytes('Introduction a la cellule et physiologie.'),'application/pdf')}).json(); client.post(f"/v1/ingestion/batches/{b['id']}/start",headers=h,json={}); j=runtime.ingestion.claim_job(worker_id='factory-ingestion'); runtime.ingestion.process_job(worker_id='factory-ingestion',job_id=j.id); return d['id']
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+services\api\app\modules\ingestion\application\service.py:251: in process_job
+    processed=(pipeline or PremiumDocumentPipeline()).process(Path(tmp.name),title=Path(doc.filename).stem)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^
+services\api\app\modules\document_engine\application\pipeline.py:29: in __init__
+    self.ocr = TesseractOcr(ocr_languages) if enable_ocr else None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <app.modules.document_engine.infrastructure.ocr.TesseractOcr object at 0x00000157F35086B0>
+languages = 'fra+eng'
+
+    def __init__(self, languages: str = "fra+eng") -> None:
+        self.languages = languages
+        if shutil.which("tesseract") is None:
+>           raise RuntimeError("tesseract binary not found")
+E           RuntimeError: tesseract binary not found
+
+services\api\app\modules\document_engine\infrastructure\ocr.py:26: RuntimeError
+---------------------------- Captured stderr call -----------------------------
+{"ts":"2026-10-30 22:14:59,864","level":"INFO","logger":"edunova.http","message":"request request_id=cf9cec5989c44a11a642d469780aa52f method=POST path=/v1/ingestion/batches status=200 duration_ms=62"}
+{"ts":"2026-10-30 22:14:59,870","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-30 22:14:59,970","level":"INFO","logger":"edunova.http","message":"request request_id=b9cda8c2c6c34028b12aca7afb941556 method=POST path=/v1/ingestion/batches/6c0d4b68-e280-483e-babe-bcd51c41ead5/files status=200 duration_ms=80"}
+{"ts":"2026-10-30 22:14:59,980","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/6c0d4b68-e280-483e-babe-bcd51c41ead5/files \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-30 22:15:00,170","level":"INFO","logger":"edunova.http","message":"request request_id=d38f8eebefa54e7a9da49b8858062ed9 method=POST path=/v1/ingestion/batches/6c0d4b68-e280-483e-babe-bcd51c41ead5/start status=200 duration_ms=181"}
+{"ts":"2026-10-30 22:15:00,176","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/6c0d4b68-e280-483e-babe-bcd51c41ead5/start \"HTTP/1.1 200 OK\""}
+------------------------------ Captured log call ------------------------------
+INFO     edunova.http:observability.py:23 request request_id=cf9cec5989c44a11a642d469780aa52f method=POST path=/v1/ingestion/batches status=200 duration_ms=62
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=b9cda8c2c6c34028b12aca7afb941556 method=POST path=/v1/ingestion/batches/6c0d4b68-e280-483e-babe-bcd51c41ead5/files status=200 duration_ms=80
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/6c0d4b68-e280-483e-babe-bcd51c41ead5/files "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=d38f8eebefa54e7a9da49b8858062ed9 method=POST path=/v1/ingestion/batches/6c0d4b68-e280-483e-babe-bcd51c41ead5/start status=200 duration_ms=181
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/6c0d4b68-e280-483e-babe-bcd51c41ead5/start "HTTP/1.1 200 OK"
+___________________________ test_ocr_photo_pipeline ___________________________
+
+tmp_path = WindowsPath('C:/Users/cs-ap/AppData/Local/Temp/pytest-of-cs-ap/pytest-101/test_ocr_photo_pipeline0')
+
+    def test_ocr_photo_pipeline(tmp_path: Path) -> None:
+        from PIL import Image, ImageDraw, ImageFont
+    
+        image = Image.new('RGB', (1800, 700), 'white')
+        draw = ImageDraw.Draw(image)
+        try:
+            font = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', 58)
+        except OSError:
+            font = ImageFont.load_default()
+        draw.text((80, 120), 'INTERROGATION DE CHIMIE', fill='black', font=font)
+        draw.text((80, 250), '1. Calculer la quantite de matiere.', fill='black', font=font)
+        draw.text((80, 360), '2. Donner la formule de concentration molaire.', fill='black', font=font)
+        path = tmp_path / 'interro.jpg'
+        image.save(path, quality=95)
+    
+>       document = PremiumDocumentPipeline(enable_ocr=True, ocr_languages='fra+eng').process(path)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+services\api\tests\document_engine\test_pipeline.py:77: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+services\api\app\modules\document_engine\application\pipeline.py:29: in __init__
+    self.ocr = TesseractOcr(ocr_languages) if enable_ocr else None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <app.modules.document_engine.infrastructure.ocr.TesseractOcr object at 0x00000157F350B460>
+languages = 'fra+eng'
+
+    def __init__(self, languages: str = "fra+eng") -> None:
+        self.languages = languages
+        if shutil.which("tesseract") is None:
+>           raise RuntimeError("tesseract binary not found")
+E           RuntimeError: tesseract binary not found
+
+services\api\app\modules\document_engine\infrastructure\ocr.py:26: RuntimeError
+______________ test_question_candidates_from_interrogation_photo ______________
+
+tmp_path = WindowsPath('C:/Users/cs-ap/AppData/Local/Temp/pytest-of-cs-ap/pytest-101/test_question_candidates_from_0')
+
+    def test_question_candidates_from_interrogation_photo(tmp_path: Path) -> None:
+        from PIL import Image, ImageDraw, ImageFont
+    
+        image = Image.new('RGB', (1800, 760), 'white')
+        draw = ImageDraw.Draw(image)
+>       font = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', 52)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+services\api\tests\document_engine\test_pipeline.py:88: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+.venv\Lib\site-packages\PIL\ImageFont.py:880: in truetype
+    return freetype(font)
+           ^^^^^^^^^^^^^^
+.venv\Lib\site-packages\PIL\ImageFont.py:877: in freetype
+    return FreeTypeFont(font, size, index, encoding, layout_engine)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <PIL.ImageFont.FreeTypeFont object at 0x00000157F38C6990>
+font = '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', size = 52, index = 0
+encoding = '', layout_engine = <Layout.BASIC: 0>
+
+    def __init__(
+        self,
+        font: StrOrBytesPath | BinaryIO,
+        size: float = 10,
+        index: int = 0,
+        encoding: str = "",
+        layout_engine: Layout | None = None,
+    ) -> None:
+        # FIXME: use service provider instead
+    
+        if isinstance(core, DeferredError):
+            raise core.ex
+    
+        if size <= 0:
+            msg = f"font size must be greater than 0, not {size}"
+            raise ValueError(msg)
+    
+        self.path = font
+        self.size = size
+        self.index = index
+        self.encoding = encoding
+    
+        try:
+            from packaging.version import parse as parse_version
+        except ImportError:
+            pass
+        else:
+            if freetype_version := features.version_module("freetype2"):
+                if parse_version(freetype_version) < parse_version("2.9.1"):
+                    warnings.warn(
+                        "Support for FreeType 2.9.0 is deprecated and will be removed "
+                        "in Pillow 12 (2025-10-15). Please upgrade to FreeType 2.9.1 "
+                        "or newer, preferably FreeType 2.10.4 which fixes "
+                        "CVE-2020-15999.",
+                        DeprecationWarning,
+                    )
+    
+        if layout_engine not in (Layout.BASIC, Layout.RAQM):
+            layout_engine = Layout.BASIC
+            if core.HAVE_RAQM:
+                layout_engine = Layout.RAQM
+        elif layout_engine == Layout.RAQM and not core.HAVE_RAQM:
+            warnings.warn(
+                "Raqm layout was requested, but Raqm is not available. "
+                "Falling back to basic layout."
+            )
+            layout_engine = Layout.BASIC
+    
+        self.layout_engine = layout_engine
+    
+        def load_from_bytes(f: IO[bytes]) -> None:
+            self.font_bytes = f.read()
+            self.font = core.getfont(
+                "", size, index, encoding, self.font_bytes, layout_engine
+            )
+    
+        if is_path(font):
+            font = os.fspath(font)
+            if sys.platform == "win32":
+                font_bytes_path = font if isinstance(font, bytes) else font.encode()
+                try:
+                    font_bytes_path.decode("ascii")
+                except UnicodeDecodeError:
+                    # FreeType cannot load fonts with non-ASCII characters on Windows
+                    # So load it into memory first
+                    with open(font, "rb") as f:
+                        load_from_bytes(f)
+                    return
+>           self.font = core.getfont(
+                font, size, index, encoding, layout_engine=layout_engine
+            )
+E           OSError: cannot open resource
+
+.venv\Lib\site-packages\PIL\ImageFont.py:285: OSError
+____ test_batch_upload_idempotency_freeze_worker_and_editorial_projection _____
+
+    def test_batch_upload_idempotency_freeze_worker_and_editorial_projection():
+        _,h=account(); batch=create_batch(h); bid=batch['id']; payload=pdf_bytes()
+        files={'file':('physio.pdf',payload,'application/pdf')}
+        r=client.post(f'/v1/ingestion/batches/{bid}/files',headers={**h,'Idempotency-Key':'u-1'},files=files)
+        assert r.status_code==200,r.text; doc=r.json(); assert doc['preflight_status']=='passed'
+        r2=client.post(f'/v1/ingestion/batches/{bid}/files',headers={**h,'Idempotency-Key':'u-1'},files=files)
+        assert r2.status_code==200 and r2.json()['id']==doc['id']
+        start=client.post(f'/v1/ingestion/batches/{bid}/start',headers=h,json={'priority':80}); assert start.status_code==200 and start.json()['manifest_sha256']
+        blocked=client.post(f'/v1/ingestion/batches/{bid}/files',headers={**h,'Idempotency-Key':'u-2'},files={'file':('x.pdf',pdf_bytes('autre'),'application/pdf')})
+        assert blocked.status_code==409
+        job=runtime.ingestion.claim_job(worker_id='pytest-worker'); assert job is not None
+>       result=runtime.ingestion.process_job(worker_id='pytest-worker',job_id=job.id)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+services\api\tests\ingestion\test_ingestion_api.py:43: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+services\api\app\modules\ingestion\application\service.py:251: in process_job
+    processed=(pipeline or PremiumDocumentPipeline()).process(Path(tmp.name),title=Path(doc.filename).stem)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^
+services\api\app\modules\document_engine\application\pipeline.py:29: in __init__
+    self.ocr = TesseractOcr(ocr_languages) if enable_ocr else None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <app.modules.document_engine.infrastructure.ocr.TesseractOcr object at 0x00000157F3AE8850>
+languages = 'fra+eng'
+
+    def __init__(self, languages: str = "fra+eng") -> None:
+        self.languages = languages
+        if shutil.which("tesseract") is None:
+>           raise RuntimeError("tesseract binary not found")
+E           RuntimeError: tesseract binary not found
+
+services\api\app\modules\document_engine\infrastructure\ocr.py:26: RuntimeError
+---------------------------- Captured stderr call -----------------------------
+{"ts":"2026-10-30 22:24:00,949","level":"INFO","logger":"edunova.http","message":"request request_id=8b89b7714de54c759b46aafad323b7e4 method=POST path=/v1/ingestion/batches status=200 duration_ms=985"}
+{"ts":"2026-10-30 22:24:00,978","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-30 22:24:06,598","level":"INFO","logger":"edunova.http","message":"request request_id=7c247513f7a94f0e8baec350c1f16e33 method=POST path=/v1/ingestion/batches/05f16024-9b65-4bd6-9028-9b0af85a5f06/files status=200 duration_ms=1061"}
+{"ts":"2026-10-30 22:24:06,629","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/05f16024-9b65-4bd6-9028-9b0af85a5f06/files \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-30 22:24:06,939","level":"INFO","logger":"edunova.http","message":"request request_id=32467ce92d65424ea8d3b5a7e4a86bb9 method=POST path=/v1/ingestion/batches/05f16024-9b65-4bd6-9028-9b0af85a5f06/files status=200 duration_ms=156"}
+{"ts":"2026-10-30 22:24:06,961","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/05f16024-9b65-4bd6-9028-9b0af85a5f06/files \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-30 22:24:07,746","level":"INFO","logger":"edunova.http","message":"request request_id=c264e580240841d9a3bf719b5cc41bc9 method=POST path=/v1/ingestion/batches/05f16024-9b65-4bd6-9028-9b0af85a5f06/start status=200 duration_ms=743"}
+{"ts":"2026-10-30 22:24:07,762","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/05f16024-9b65-4bd6-9028-9b0af85a5f06/start \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-30 22:24:08,348","level":"INFO","logger":"edunova.http","message":"request request_id=7c6d85b0fbd84d858f2763f3bdeab753 method=POST path=/v1/ingestion/batches/05f16024-9b65-4bd6-9028-9b0af85a5f06/files status=409 duration_ms=105"}
+{"ts":"2026-10-30 22:24:08,392","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/05f16024-9b65-4bd6-9028-9b0af85a5f06/files \"HTTP/1.1 409 Conflict\""}
+------------------------------ Captured log call ------------------------------
+INFO     edunova.http:observability.py:23 request request_id=8b89b7714de54c759b46aafad323b7e4 method=POST path=/v1/ingestion/batches status=200 duration_ms=985
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=7c247513f7a94f0e8baec350c1f16e33 method=POST path=/v1/ingestion/batches/05f16024-9b65-4bd6-9028-9b0af85a5f06/files status=200 duration_ms=1061
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/05f16024-9b65-4bd6-9028-9b0af85a5f06/files "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=32467ce92d65424ea8d3b5a7e4a86bb9 method=POST path=/v1/ingestion/batches/05f16024-9b65-4bd6-9028-9b0af85a5f06/files status=200 duration_ms=156
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/05f16024-9b65-4bd6-9028-9b0af85a5f06/files "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=c264e580240841d9a3bf719b5cc41bc9 method=POST path=/v1/ingestion/batches/05f16024-9b65-4bd6-9028-9b0af85a5f06/start status=200 duration_ms=743
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/05f16024-9b65-4bd6-9028-9b0af85a5f06/start "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=7c6d85b0fbd84d858f2763f3bdeab753 method=POST path=/v1/ingestion/batches/05f16024-9b65-4bd6-9028-9b0af85a5f06/files status=409 duration_ms=105
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/05f16024-9b65-4bd6-9028-9b0af85a5f06/files "HTTP/1.1 409 Conflict"
+___ test_global_dedup_reuses_already_processed_document_without_second_ocr ____
+
+    def test_global_dedup_reuses_already_processed_document_without_second_ocr():
+        _,h=account(); payload=pdf_bytes('Document global unique ' + uuid4().hex)
+        b1=create_batch(h,'Premier lot'); d1=client.post(f"/v1/ingestion/batches/{b1['id']}/files",headers={**h,'Idempotency-Key':'g1'},files={'file':('g.pdf',payload,'application/pdf')}).json()
+        client.post(f"/v1/ingestion/batches/{b1['id']}/start",headers=h,json={})
+>       j=runtime.ingestion.claim_job(worker_id='dedup-worker'); r1=runtime.ingestion.process_job(worker_id='dedup-worker',job_id=j.id)
+                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+services\api\tests\ingestion\test_ingestion_api.py:80: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+services\api\app\modules\ingestion\application\service.py:251: in process_job
+    processed=(pipeline or PremiumDocumentPipeline()).process(Path(tmp.name),title=Path(doc.filename).stem)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^
+services\api\app\modules\document_engine\application\pipeline.py:29: in __init__
+    self.ocr = TesseractOcr(ocr_languages) if enable_ocr else None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <app.modules.document_engine.infrastructure.ocr.TesseractOcr object at 0x00000157F3B2C650>
+languages = 'fra+eng'
+
+    def __init__(self, languages: str = "fra+eng") -> None:
+        self.languages = languages
+        if shutil.which("tesseract") is None:
+>           raise RuntimeError("tesseract binary not found")
+E           RuntimeError: tesseract binary not found
+
+services\api\app\modules\document_engine\infrastructure\ocr.py:26: RuntimeError
+---------------------------- Captured stderr call -----------------------------
+{"ts":"2026-10-30 22:24:32,634","level":"INFO","logger":"edunova.http","message":"request request_id=135f97e7f5274689884f92d902e391a3 method=POST path=/v1/ingestion/batches status=200 duration_ms=276"}
+{"ts":"2026-10-30 22:24:32,661","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-30 22:24:33,133","level":"INFO","logger":"edunova.http","message":"request request_id=e76583c5330e4a879c93750237db0a9d method=POST path=/v1/ingestion/batches/db1e5d60-e8e7-4526-a532-2aba20c75879/files status=200 duration_ms=410"}
+{"ts":"2026-10-30 22:24:33,174","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/db1e5d60-e8e7-4526-a532-2aba20c75879/files \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-30 22:24:34,052","level":"INFO","logger":"edunova.http","message":"request request_id=c9b4c306139543cfb9d457ddcd57e06e method=POST path=/v1/ingestion/batches/db1e5d60-e8e7-4526-a532-2aba20c75879/start status=200 duration_ms=815"}
+{"ts":"2026-10-30 22:24:34,068","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/db1e5d60-e8e7-4526-a532-2aba20c75879/start \"HTTP/1.1 200 OK\""}
+------------------------------ Captured log call ------------------------------
+INFO     edunova.http:observability.py:23 request request_id=135f97e7f5274689884f92d902e391a3 method=POST path=/v1/ingestion/batches status=200 duration_ms=276
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=e76583c5330e4a879c93750237db0a9d method=POST path=/v1/ingestion/batches/db1e5d60-e8e7-4526-a532-2aba20c75879/files status=200 duration_ms=410
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/db1e5d60-e8e7-4526-a532-2aba20c75879/files "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=c9b4c306139543cfb9d457ddcd57e06e method=POST path=/v1/ingestion/batches/db1e5d60-e8e7-4526-a532-2aba20c75879/start status=200 duration_ms=815
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/db1e5d60-e8e7-4526-a532-2aba20c75879/start "HTTP/1.1 200 OK"
+_____________ test_preview_and_global_dashboard_after_processing ______________
+
+    def test_preview_and_global_dashboard_after_processing():
+        _,h=account(); payload=pdf_bytes('Question 1. Définir la membrane cellulaire. ' + uuid4().hex)
+        b=create_batch(h,'Preview lot'); d=client.post(f"/v1/ingestion/batches/{b['id']}/files",headers={**h,'Idempotency-Key':'p1'},files={'file':('preview.pdf',payload,'application/pdf')}).json()
+>       client.post(f"/v1/ingestion/batches/{b['id']}/start",headers=h,json={}); j=runtime.ingestion.claim_job(worker_id='preview-worker'); runtime.ingestion.process_job(worker_id='preview-worker',job_id=j.id)
+                                                                                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+services\api\tests\ingestion\test_ingestion_api.py:91: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+services\api\app\modules\ingestion\application\service.py:251: in process_job
+    processed=(pipeline or PremiumDocumentPipeline()).process(Path(tmp.name),title=Path(doc.filename).stem)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^
+services\api\app\modules\document_engine\application\pipeline.py:29: in __init__
+    self.ocr = TesseractOcr(ocr_languages) if enable_ocr else None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <app.modules.document_engine.infrastructure.ocr.TesseractOcr object at 0x00000157F3A65310>
+languages = 'fra+eng'
+
+    def __init__(self, languages: str = "fra+eng") -> None:
+        self.languages = languages
+        if shutil.which("tesseract") is None:
+>           raise RuntimeError("tesseract binary not found")
+E           RuntimeError: tesseract binary not found
+
+services\api\app\modules\document_engine\infrastructure\ocr.py:26: RuntimeError
+---------------------------- Captured stderr call -----------------------------
+{"ts":"2026-10-30 22:24:40,508","level":"INFO","logger":"edunova.http","message":"request request_id=5acba4b0ad4141b2a7db902153cfa56a method=POST path=/v1/ingestion/batches status=200 duration_ms=176"}
+{"ts":"2026-10-30 22:24:40,532","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-30 22:24:40,960","level":"INFO","logger":"edunova.http","message":"request request_id=79da8c8cfa244c9aa54622f3449b9458 method=POST path=/v1/ingestion/batches/ae3bac62-7572-4ed3-b21a-f65f818d5db6/files status=200 duration_ms=358"}
+{"ts":"2026-10-30 22:24:40,983","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/ae3bac62-7572-4ed3-b21a-f65f818d5db6/files \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-30 22:24:41,514","level":"INFO","logger":"edunova.http","message":"request request_id=b107e3d29ff64f16850041354dffe6b7 method=POST path=/v1/ingestion/batches/ae3bac62-7572-4ed3-b21a-f65f818d5db6/start status=200 duration_ms=435"}
+{"ts":"2026-10-30 22:24:41,549","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/ae3bac62-7572-4ed3-b21a-f65f818d5db6/start \"HTTP/1.1 200 OK\""}
+------------------------------ Captured log call ------------------------------
+INFO     edunova.http:observability.py:23 request request_id=5acba4b0ad4141b2a7db902153cfa56a method=POST path=/v1/ingestion/batches status=200 duration_ms=176
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=79da8c8cfa244c9aa54622f3449b9458 method=POST path=/v1/ingestion/batches/ae3bac62-7572-4ed3-b21a-f65f818d5db6/files status=200 duration_ms=358
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/ae3bac62-7572-4ed3-b21a-f65f818d5db6/files "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=b107e3d29ff64f16850041354dffe6b7 method=POST path=/v1/ingestion/batches/ae3bac62-7572-4ed3-b21a-f65f818d5db6/start status=200 duration_ms=435
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/ae3bac62-7572-4ed3-b21a-f65f818d5db6/start "HTTP/1.1 200 OK"
+_____ test_global_dedup_never_reuses_rights_or_academic_context_silently ______
+
+    def test_global_dedup_never_reuses_rights_or_academic_context_silently():
+        _,h=account(); payload=pdf_bytes('Same bytes different rights ' + uuid4().hex)
+>       b1=create_batch(h,'Contexte A'); client.post(f"/v1/ingestion/batches/{b1['id']}/files",headers={**h,'Idempotency-Key':'cx1'},files={'file':('same.pdf',payload,'application/pdf')}); client.post(f"/v1/ingestion/batches/{b1['id']}/start",headers=h,json={}); j=runtime.ingestion.claim_job(worker_id='ctx-worker'); runtime.ingestion.process_job(worker_id='ctx-worker',job_id=j.id)
+                                                                                                                                                                                                                                                                                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+services\api\tests\ingestion\test_ingestion_api.py:115: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+services\api\app\modules\ingestion\application\service.py:251: in process_job
+    processed=(pipeline or PremiumDocumentPipeline()).process(Path(tmp.name),title=Path(doc.filename).stem)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^
+services\api\app\modules\document_engine\application\pipeline.py:29: in __init__
+    self.ocr = TesseractOcr(ocr_languages) if enable_ocr else None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <app.modules.document_engine.infrastructure.ocr.TesseractOcr object at 0x00000157F3ACAD50>
+languages = 'fra+eng'
+
+    def __init__(self, languages: str = "fra+eng") -> None:
+        self.languages = languages
+        if shutil.which("tesseract") is None:
+>           raise RuntimeError("tesseract binary not found")
+E           RuntimeError: tesseract binary not found
+
+services\api\app\modules\document_engine\infrastructure\ocr.py:26: RuntimeError
+---------------------------- Captured stderr call -----------------------------
+{"ts":"2026-10-30 22:25:34,981","level":"INFO","logger":"edunova.http","message":"request request_id=6bb7307d264548fd8519489aa0ab017c method=POST path=/v1/ingestion/batches status=200 duration_ms=201"}
+{"ts":"2026-10-30 22:25:34,998","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-30 22:25:35,272","level":"INFO","logger":"edunova.http","message":"request request_id=139745aa838e430ab68373b3591cc2ef method=POST path=/v1/ingestion/batches/2fdad9c8-1b4b-4c15-ab37-396fbf090c0b/files status=200 duration_ms=243"}
+{"ts":"2026-10-30 22:25:35,286","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/2fdad9c8-1b4b-4c15-ab37-396fbf090c0b/files \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-30 22:25:35,690","level":"INFO","logger":"edunova.http","message":"request request_id=930a7e6a0a57401bb9fbb917541a01c2 method=POST path=/v1/ingestion/batches/2fdad9c8-1b4b-4c15-ab37-396fbf090c0b/start status=200 duration_ms=290"}
+{"ts":"2026-10-30 22:25:35,702","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/2fdad9c8-1b4b-4c15-ab37-396fbf090c0b/start \"HTTP/1.1 200 OK\""}
+------------------------------ Captured log call ------------------------------
+INFO     edunova.http:observability.py:23 request request_id=6bb7307d264548fd8519489aa0ab017c method=POST path=/v1/ingestion/batches status=200 duration_ms=201
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=139745aa838e430ab68373b3591cc2ef method=POST path=/v1/ingestion/batches/2fdad9c8-1b4b-4c15-ab37-396fbf090c0b/files status=200 duration_ms=243
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/2fdad9c8-1b4b-4c15-ab37-396fbf090c0b/files "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=930a7e6a0a57401bb9fbb917541a01c2 method=POST path=/v1/ingestion/batches/2fdad9c8-1b4b-4c15-ab37-396fbf090c0b/start status=200 duration_ms=290
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/2fdad9c8-1b4b-4c15-ab37-396fbf090c0b/start "HTTP/1.1 200 OK"
+__________ test_frozen_manifest_snapshot_is_persisted_and_verifiable __________
+
+    def test_frozen_manifest_snapshot_is_persisted_and_verifiable():
+        _,h=account(); bid=create_batch(h,'Manifest integrity')['id']
+        payload=pdf_bytes('Manifest immutable ' + uuid4().hex)
+        client.post(f'/v1/ingestion/batches/{bid}/files',headers={**h,'Idempotency-Key':'manifest-1'},files={'file':('manifest.pdf',payload,'application/pdf')})
+        started=client.post(f'/v1/ingestion/batches/{bid}/start',headers=h,json={'priority':70})
+        assert started.status_code==200 and started.json()['manifest_snapshot_available'] is True
+        verify=client.get(f'/v1/ingestion/batches/{bid}/manifest/verify',headers=h)
+        assert verify.status_code==200,verify.text
+        body=verify.json(); assert body['valid'] is True and body['hash_valid'] is True and body['documents_valid'] is True and body['document_count']==1
+        report=client.get(f'/v1/ingestion/batches/{bid}/report',headers=h).json()
+        assert report['manifest_integrity']['valid'] is True
+        job=runtime.ingestion.claim_job(worker_id='manifest-worker'); assert job
+>       runtime.ingestion.process_job(worker_id='manifest-worker',job_id=job.id)
+
+services\api\tests\ingestion\test_ingestion_api.py:133: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+services\api\app\modules\ingestion\application\service.py:251: in process_job
+    processed=(pipeline or PremiumDocumentPipeline()).process(Path(tmp.name),title=Path(doc.filename).stem)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^
+services\api\app\modules\document_engine\application\pipeline.py:29: in __init__
+    self.ocr = TesseractOcr(ocr_languages) if enable_ocr else None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <app.modules.document_engine.infrastructure.ocr.TesseractOcr object at 0x00000157F3BA49F0>
+languages = 'fra+eng'
+
+    def __init__(self, languages: str = "fra+eng") -> None:
+        self.languages = languages
+        if shutil.which("tesseract") is None:
+>           raise RuntimeError("tesseract binary not found")
+E           RuntimeError: tesseract binary not found
+
+services\api\app\modules\document_engine\infrastructure\ocr.py:26: RuntimeError
+---------------------------- Captured stderr call -----------------------------
+{"ts":"2026-10-30 22:25:39,300","level":"INFO","logger":"edunova.http","message":"request request_id=17cb5e0e276546fd8c4e6aebeef6423a method=POST path=/v1/ingestion/batches status=200 duration_ms=136"}
+{"ts":"2026-10-30 22:25:39,318","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-30 22:25:39,651","level":"INFO","logger":"edunova.http","message":"request request_id=f1fe1b8602a7452a9568f8185ae263b7 method=POST path=/v1/ingestion/batches/e85c0665-8a2d-4c18-b92e-b3b59c5ebbb2/files status=200 duration_ms=246"}
+{"ts":"2026-10-30 22:25:39,660","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/e85c0665-8a2d-4c18-b92e-b3b59c5ebbb2/files \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-30 22:25:40,088","level":"INFO","logger":"edunova.http","message":"request request_id=db5aa5812b424f2bb8064ea93ffa7ab5 method=POST path=/v1/ingestion/batches/e85c0665-8a2d-4c18-b92e-b3b59c5ebbb2/start status=200 duration_ms=381"}
+{"ts":"2026-10-30 22:25:40,100","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/e85c0665-8a2d-4c18-b92e-b3b59c5ebbb2/start \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-30 22:25:40,255","level":"INFO","logger":"edunova.http","message":"request request_id=b241e0dcaa9b4f75b1e85bc90a3ced14 method=GET path=/v1/ingestion/batches/e85c0665-8a2d-4c18-b92e-b3b59c5ebbb2/manifest/verify status=200 duration_ms=86"}
+{"ts":"2026-10-30 22:25:40,270","level":"INFO","logger":"httpx","message":"HTTP Request: GET http://testserver/v1/ingestion/batches/e85c0665-8a2d-4c18-b92e-b3b59c5ebbb2/manifest/verify \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-30 22:25:40,487","level":"INFO","logger":"edunova.http","message":"request request_id=4eabaea189664b5ebae6a9e7dffeccc4 method=GET path=/v1/ingestion/batches/e85c0665-8a2d-4c18-b92e-b3b59c5ebbb2/report status=200 duration_ms=192"}
+{"ts":"2026-10-30 22:25:40,496","level":"INFO","logger":"httpx","message":"HTTP Request: GET http://testserver/v1/ingestion/batches/e85c0665-8a2d-4c18-b92e-b3b59c5ebbb2/report \"HTTP/1.1 200 OK\""}
+------------------------------ Captured log call ------------------------------
+INFO     edunova.http:observability.py:23 request request_id=17cb5e0e276546fd8c4e6aebeef6423a method=POST path=/v1/ingestion/batches status=200 duration_ms=136
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=f1fe1b8602a7452a9568f8185ae263b7 method=POST path=/v1/ingestion/batches/e85c0665-8a2d-4c18-b92e-b3b59c5ebbb2/files status=200 duration_ms=246
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/e85c0665-8a2d-4c18-b92e-b3b59c5ebbb2/files "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=db5aa5812b424f2bb8064ea93ffa7ab5 method=POST path=/v1/ingestion/batches/e85c0665-8a2d-4c18-b92e-b3b59c5ebbb2/start status=200 duration_ms=381
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/e85c0665-8a2d-4c18-b92e-b3b59c5ebbb2/start "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=b241e0dcaa9b4f75b1e85bc90a3ced14 method=GET path=/v1/ingestion/batches/e85c0665-8a2d-4c18-b92e-b3b59c5ebbb2/manifest/verify status=200 duration_ms=86
+INFO     httpx:_client.py:1025 HTTP Request: GET http://testserver/v1/ingestion/batches/e85c0665-8a2d-4c18-b92e-b3b59c5ebbb2/manifest/verify "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=4eabaea189664b5ebae6a9e7dffeccc4 method=GET path=/v1/ingestion/batches/e85c0665-8a2d-4c18-b92e-b3b59c5ebbb2/report status=200 duration_ms=192
+INFO     httpx:_client.py:1025 HTTP Request: GET http://testserver/v1/ingestion/batches/e85c0665-8a2d-4c18-b92e-b3b59c5ebbb2/report "HTTP/1.1 200 OK"
+________________ test_repository_lease_heartbeat_and_recovery _________________
+
+    def test_repository_lease_heartbeat_and_recovery():
+        now=datetime.now(UTC); bid=f'b-{uuid4()}'; did=f'd-{uuid4()}'; jid=f'j-{uuid4()}'
+        # Repository-level contract does not need the parent rows for SQLite because there are no FKs.
+        runtime.ingestion_repository.save_job(IngestionJob(jid,bid,did,JobState.PENDING,50,0,3,now,None,None,None,None,None,None,now,now))
+        claimed=runtime.ingestion_repository.claim_next_job(worker_id='w1',now=now,lease_seconds=10)
+>       assert claimed and claimed.id==jid and claimed.state==JobState.LEASED and claimed.attempt==1
+E       AssertionError: assert (IngestionJob(id='c5db5c74-2ba2-4872-8959-c8fd17739b97', batch_id='05f16024-9b65-4bd6-9028-9b0af85a5f06', document_id='...o=datetime.timezone.utc), updated_at=datetime.datetime(2026, 10, 30, 20, 25, 44, 715735, tzinfo=datetime.timezone.utc)) and 'c5db5c74-2ba...-c8fd17739b97' == 'j-1e42aa6e-4...-fb3f29630351'
+E         
+E         - j-1e42aa6e-4da2-4cf2-9122-fb3f29630351
+E         + c5db5c74-2ba2-4872-8959-c8fd17739b97)
+
+services\api\tests\ingestion\test_jobs.py:15: AssertionError
+_____ test_cash_payment_allocates_oldest_charge_and_receipt_is_idempotent _____
+
+    def test_cash_payment_allocates_oldest_charge_and_receipt_is_idempotent():
+     a,i,app,s,r,sch,c=finance_student('pay');runtime.student_finance.open_cash(a,i.id,'CDF',0);receipt=runtime.student_finance.payment(a,i.id,s.id,150000,'CDF','cash','CASH-001','Guichet central')
+     same=runtime.student_finance.payment(a,i.id,s.id,150000,'CDF','cash','CASH-001','retry');assert same.id==receipt.id
+     st=runtime.student_finance.statement(a,i.id,s.id);assert st['balance_minor']==150000
+>    cc=runtime.student_finance_repo.charges(s.id);assert cc[0].state.value=='paid' and cc[1].paid_minor==50000
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E    AssertionError: assert ('open' == 'paid'
+E      
+E      - paid
+E      + open)
+
+services\api\tests\test_student_finance_phase6.py:23: AssertionError
+_____ test_compaction_waits_for_all_active_devices_before_advancing_floor _____
+
+    def test_compaction_waits_for_all_active_devices_before_advancing_floor():
+        _, headers = _account("sync-compaction-two-devices")
+        a = _device(headers, f"dev-a-{uuid4().hex}")
+        b = _device(headers, f"dev-b-{uuid4().hex}")
+        base = None
+        latest = 0
+        for i in range(65):
+>           out = client.post(
+                "/v1/sync/push",
+                headers=headers,
+                json={"device_id": a, "mutations": [_mutation("planning_preferences", "default", base_version=base, payload=_prefs(30 + (i % 30)))]},
+            ).json()["outcomes"][0]
+E           KeyError: 'outcomes'
+
+services\api\tests\test_sync_lot7.py:273: KeyError
+---------------------------- Captured stderr call -----------------------------
+{"ts":"2026-10-31 06:38:49,102","level":"INFO","logger":"edunova.http","message":"request request_id=c96f55cee90140ca87fecf2dd24a4a0f method=POST path=/v1/sync/devices status=201 duration_ms=2143"}
+{"ts":"2026-10-31 06:38:49,246","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/sync/devices \"HTTP/1.1 201 Created\""}
+{"ts":"2026-10-31 06:38:49,343","level":"INFO","logger":"edunova.http","message":"request request_id=125130f378154f18817bc560a04343ac method=POST path=/v1/sync/devices status=201 duration_ms=71"}
+{"ts":"2026-10-31 06:38:49,347","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/sync/devices \"HTTP/1.1 201 Created\""}
+{"ts":"2026-10-31 06:38:49,736","level":"INFO","logger":"edunova.http","message":"request request_id=dd71a5d7304540fb9a3b42824972f09d method=POST path=/v1/sync/push status=200 duration_ms=354"}
+{"ts":"2026-10-31 06:38:49,741","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/sync/push \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:38:49,840","level":"INFO","logger":"edunova.http","message":"request request_id=5b3d3ea3832d482289e093e96d11b1dc method=POST path=/v1/sync/push status=200 duration_ms=89"}
+{"ts":"2026-10-31 06:38:49,843","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/sync/push \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:38:49,911","level":"INFO","logger":"edunova.http","message":"request request_id=4334516a580946d18b141c48dbcc45d4 method=POST path=/v1/sync/push status=200 duration_ms=55"}
+{"ts":"2026-10-31 06:38:49,923","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/sync/push \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:38:50,032","level":"INFO","logger":"edunova.http","message":"request request_id=abc8cb2ce59449df891bceddf721b4c7 method=POST path=/v1/sync/push status=200 duration_ms=99"}
+{"ts":"2026-10-31 06:38:50,040","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/sync/push \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:38:50,197","level":"INFO","logger":"edunova.http","message":"request request_id=b800ba1ba73145089b70bccd5218ccf0 method=POST path=/v1/sync/push status=200 duration_ms=85"}
+{"ts":"2026-10-31 06:38:50,202","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/sync/push \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:38:50,311","level":"INFO","logger":"edunova.http","message":"request request_id=3dd3ab77f20f45f3b1d937502e2ff134 method=POST path=/v1/sync/push status=200 duration_ms=90"}
+{"ts":"2026-10-31 06:38:50,319","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/sync/push \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:38:50,445","level":"INFO","logger":"edunova.http","message":"request request_id=b446f53136584a1c9005f9906d9a8761 method=POST path=/v1/sync/push status=200 duration_ms=110"}
+{"ts":"2026-10-31 06:38:50,450","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/sync/push \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:38:50,627","level":"INFO","logger":"edunova.http","message":"request request_id=de57f30013b24ef7af88445f7cbb1cb2 method=POST path=/v1/sync/push status=200 duration_ms=140"}
+{"ts":"2026-10-31 06:38:50,632","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/sync/push \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:38:50,735","level":"INFO","logger":"edunova.http","message":"request request_id=c89d6be7425d454bad6a77138d1a5457 method=POST path=/v1/sync/push status=200 duration_ms=88"}
+{"ts":"2026-10-31 06:38:50,745","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/sync/push \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:38:51,124","level":"INFO","logger":"edunova.http","message":"request request_id=3b5c4e465eeb490e98765d245f162c75 method=POST path=/v1/sync/push status=200 duration_ms=178"}
+{"ts":"2026-10-31 06:38:51,131","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/sync/push \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:38:51,334","level":"INFO","logger":"edunova.http","message":"request request_id=ab68a6e2fb904eb08371e6743aeb77da method=POST path=/v1/sync/push status=200 duration_ms=167"}
+{"ts":"2026-10-31 06:38:51,340","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/sync/push \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:38:51,537","level":"INFO","logger":"edunova.http","message":"request request_id=6c949d3b5ea446b99fe53e82054c0f65 method=POST path=/v1/sync/push status=200 duration_ms=125"}
+{"ts":"2026-10-31 06:38:51,542","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/sync/push \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:38:51,672","level":"INFO","logger":"edunova.http","message":"request request_id=9657ddc62dd94e0ba189624e5c1bec15 method=POST path=/v1/sync/push status=200 duration_ms=111"}
+{"ts":"2026-10-31 06:38:51,679","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/sync/push \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:38:51,844","level":"INFO","logger":"edunova.http","message":"request request_id=2dca718b9b8744c3b73b27d1ae70a977 method=POST path=/v1/sync/push status=200 duration_ms=114"}
+{"ts":"2026-10-31 06:38:51,850","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/sync/push \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:38:51,946","level":"INFO","logger":"edunova.http","message":"request request_id=79f1d595a02f40c6a89b91a097507a05 method=POST path=/v1/sync/push status=200 duration_ms=58"}
+{"ts":"2026-10-31 06:38:51,952","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/sync/push \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:38:52,165","level":"INFO","logger":"edunova.http","message":"request request_id=d14d9f8312bc475bbaac783dfa90b8c7 method=POST path=/v1/sync/push status=200 duration_ms=144"}
+{"ts":"2026-10-31 06:38:52,176","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/sync/push \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:38:52,328","level":"INFO","logger":"edunova.http","message":"request request_id=4972c586e9684a2fa198a425cedff534 method=POST path=/v1/sync/push status=200 duration_ms=90"}
+{"ts":"2026-10-31 06:38:52,332","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/sync/push \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:38:52,433","level":"INFO","logger":"edunova.http","message":"request request_id=4f19ecba81b54e33845a55f4264316b0 method=POST path=/v1/sync/push status=200 duration_ms=67"}
+{"ts":"2026-10-31 06:38:52,437","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/sync/push \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:38:52,495","level":"INFO","logger":"edunova.http","message":"request request_id=3de1172256424f7da2e696330d0970d5 method=POST path=/v1/sync/push status=200 duration_ms=50"}
+{"ts":"2026-10-31 06:38:52,500","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/sync/push \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:38:52,568","level":"INFO","logger":"edunova.http","message":"request request_id=7597eebe41f14191ae01d9263788c4e1 method=POST path=/v1/sync/push status=200 duration_ms=61"}
+{"ts":"2026-10-31 06:38:52,572","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/sync/push \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:38:52,631","level":"INFO","logger":"edunova.http","message":"request request_id=42dddccba0d5417186baae53713d6b10 method=POST path=/v1/sync/push status=200 duration_ms=51"}
+{"ts":"2026-10-31 06:38:52,635","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/sync/push \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:38:52,692","level":"INFO","logger":"edunova.http","message":"request request_id=c4c28eab51914f43aaa0de72d7f5c53b method=POST path=/v1/sync/push status=200 duration_ms=49"}
+{"ts":"2026-10-31 06:38:52,700","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/sync/push \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:38:53,729","level":"INFO","logger":"edunova.http","message":"request request_id=e120458779d64a64b3c8b0730954b04b method=POST path=/v1/sync/push status=200 duration_ms=1012"}
+{"ts":"2026-10-31 06:38:53,745","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/sync/push \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:38:53,968","level":"INFO","logger":"edunova.http","message":"request request_id=70afb5754c5546a0baac757b59cd532c method=POST path=/v1/sync/push status=200 duration_ms=180"}
+{"ts":"2026-10-31 06:38:53,986","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/sync/push \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:38:54,112","level":"INFO","logger":"edunova.http","message":"request request_id=baca434e8a4e4086bceb2097e7240baa method=POST path=/v1/sync/push status=200 duration_ms=113"}
+{"ts":"2026-10-31 06:38:54,116","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/sync/push \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:38:54,238","level":"INFO","logger":"edunova.http","message":"request request_id=e50c7dacf6df4d1baf308954fa43203b method=POST path=/v1/sync/push status=200 duration_ms=115"}
+{"ts":"2026-10-31 06:38:54,243","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/sync/push \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:38:54,342","level":"INFO","logger":"edunova.http","message":"request request_id=780f21c7879347baa5c60053630687e7 method=POST path=/v1/sync/push status=200 duration_ms=91"}
+{"ts":"2026-10-31 06:38:54,347","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/sync/push \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:38:54,471","level":"INFO","logger":"edunova.http","message":"request request_id=e6c473ef66814afb8cdc55fe260d508d method=POST path=/v1/sync/push status=200 duration_ms=118"}
+{"ts":"2026-10-31 06:38:54,475","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/sync/push \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:38:54,546","level":"INFO","logger":"edunova.http","message":"request request_id=b0a448bbf1ac44259259e9e9b8cc1673 method=POST path=/v1/sync/push status=200 duration_ms=66"}
+{"ts":"2026-10-31 06:38:54,549","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/sync/push \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:38:54,628","level":"INFO","logger":"edunova.http","message":"request request_id=c3aa579abc504ad394e3a9ce5089c981 method=POST path=/v1/sync/push status=200 duration_ms=72"}
+{"ts":"2026-10-31 06:38:54,633","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/sync/push \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:38:54,740","level":"INFO","logger":"edunova.http","message":"request request_id=a5bd87cbd14948f88f4e19caa7a263ff method=POST path=/v1/sync/push status=200 duration_ms=96"}
+{"ts":"2026-10-31 06:38:54,744","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/sync/push \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:38:54,832","level":"INFO","logger":"edunova.http","message":"request request_id=8ca8710033f5445fbfd334a4578e8fd6 method=POST path=/v1/sync/push status=200 duration_ms=82"}
+{"ts":"2026-10-31 06:38:54,838","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/sync/push \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:38:54,926","level":"INFO","logger":"edunova.http","message":"request request_id=fd3d5902759845ecad32a9541236bcd8 method=POST path=/v1/sync/push status=200 duration_ms=82"}
+{"ts":"2026-10-31 06:38:54,931","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/sync/push \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:38:55,023","level":"INFO","logger":"edunova.http","message":"request request_id=9b052729afa749bebcbf9bfc7a3fe606 method=POST path=/v1/sync/push status=200 duration_ms=76"}
+{"ts":"2026-10-31 06:38:55,041","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/sync/push \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:38:55,117","level":"INFO","logger":"edunova.http","message":"request request_id=a284fa6afc6d4ca0a0075681c9330c06 method=POST path=/v1/sync/push status=200 duration_ms=70"}
+{"ts":"2026-10-31 06:38:55,120","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/sync/push \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:38:55,210","level":"INFO","logger":"edunova.http","message":"request request_id=143d7b218fb3487e949edcc585072b2e method=POST path=/v1/sync/push status=200 duration_ms=83"}
+{"ts":"2026-10-31 06:38:55,213","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/sync/push \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:38:55,300","level":"INFO","logger":"edunova.http","message":"request request_id=ed295e46a3564265a1d7a3cb7f796611 method=POST path=/v1/sync/push status=200 duration_ms=79"}
+{"ts":"2026-10-31 06:38:55,306","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/sync/push \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:38:55,352","level":"INFO","logger":"edunova.http","message":"request request_id=894ed65aebac4b2a9fbe06af72a68e58 method=POST path=/v1/sync/push status=200 duration_ms=42"}
+{"ts":"2026-10-31 06:38:55,356","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/sync/push \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:38:55,428","level":"INFO","logger":"edunova.http","message":"request request_id=ec06317e04384ded86cd7e430b97fee3 method=POST path=/v1/sync/push status=200 duration_ms=63"}
+{"ts":"2026-10-31 06:38:55,432","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/sync/push \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 07:10:33,324","level":"INFO","logger":"edunova.http","message":"request request_id=a4ddac5a5d7f429981846e0dd8710a96 method=POST path=/v1/sync/push status=401 duration_ms=1067"}
+{"ts":"2026-10-31 07:10:33,411","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/sync/push \"HTTP/1.1 401 Unauthorized\""}
+------------------------------ Captured log call ------------------------------
+INFO     edunova.http:observability.py:23 request request_id=c96f55cee90140ca87fecf2dd24a4a0f method=POST path=/v1/sync/devices status=201 duration_ms=2143
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/sync/devices "HTTP/1.1 201 Created"
+INFO     edunova.http:observability.py:23 request request_id=125130f378154f18817bc560a04343ac method=POST path=/v1/sync/devices status=201 duration_ms=71
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/sync/devices "HTTP/1.1 201 Created"
+INFO     edunova.http:observability.py:23 request request_id=dd71a5d7304540fb9a3b42824972f09d method=POST path=/v1/sync/push status=200 duration_ms=354
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/sync/push "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=5b3d3ea3832d482289e093e96d11b1dc method=POST path=/v1/sync/push status=200 duration_ms=89
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/sync/push "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=4334516a580946d18b141c48dbcc45d4 method=POST path=/v1/sync/push status=200 duration_ms=55
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/sync/push "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=abc8cb2ce59449df891bceddf721b4c7 method=POST path=/v1/sync/push status=200 duration_ms=99
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/sync/push "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=b800ba1ba73145089b70bccd5218ccf0 method=POST path=/v1/sync/push status=200 duration_ms=85
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/sync/push "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=3dd3ab77f20f45f3b1d937502e2ff134 method=POST path=/v1/sync/push status=200 duration_ms=90
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/sync/push "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=b446f53136584a1c9005f9906d9a8761 method=POST path=/v1/sync/push status=200 duration_ms=110
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/sync/push "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=de57f30013b24ef7af88445f7cbb1cb2 method=POST path=/v1/sync/push status=200 duration_ms=140
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/sync/push "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=c89d6be7425d454bad6a77138d1a5457 method=POST path=/v1/sync/push status=200 duration_ms=88
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/sync/push "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=3b5c4e465eeb490e98765d245f162c75 method=POST path=/v1/sync/push status=200 duration_ms=178
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/sync/push "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=ab68a6e2fb904eb08371e6743aeb77da method=POST path=/v1/sync/push status=200 duration_ms=167
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/sync/push "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=6c949d3b5ea446b99fe53e82054c0f65 method=POST path=/v1/sync/push status=200 duration_ms=125
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/sync/push "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=9657ddc62dd94e0ba189624e5c1bec15 method=POST path=/v1/sync/push status=200 duration_ms=111
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/sync/push "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=2dca718b9b8744c3b73b27d1ae70a977 method=POST path=/v1/sync/push status=200 duration_ms=114
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/sync/push "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=79f1d595a02f40c6a89b91a097507a05 method=POST path=/v1/sync/push status=200 duration_ms=58
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/sync/push "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=d14d9f8312bc475bbaac783dfa90b8c7 method=POST path=/v1/sync/push status=200 duration_ms=144
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/sync/push "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=4972c586e9684a2fa198a425cedff534 method=POST path=/v1/sync/push status=200 duration_ms=90
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/sync/push "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=4f19ecba81b54e33845a55f4264316b0 method=POST path=/v1/sync/push status=200 duration_ms=67
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/sync/push "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=3de1172256424f7da2e696330d0970d5 method=POST path=/v1/sync/push status=200 duration_ms=50
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/sync/push "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=7597eebe41f14191ae01d9263788c4e1 method=POST path=/v1/sync/push status=200 duration_ms=61
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/sync/push "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=42dddccba0d5417186baae53713d6b10 method=POST path=/v1/sync/push status=200 duration_ms=51
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/sync/push "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=c4c28eab51914f43aaa0de72d7f5c53b method=POST path=/v1/sync/push status=200 duration_ms=49
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/sync/push "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=e120458779d64a64b3c8b0730954b04b method=POST path=/v1/sync/push status=200 duration_ms=1012
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/sync/push "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=70afb5754c5546a0baac757b59cd532c method=POST path=/v1/sync/push status=200 duration_ms=180
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/sync/push "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=baca434e8a4e4086bceb2097e7240baa method=POST path=/v1/sync/push status=200 duration_ms=113
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/sync/push "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=e50c7dacf6df4d1baf308954fa43203b method=POST path=/v1/sync/push status=200 duration_ms=115
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/sync/push "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=780f21c7879347baa5c60053630687e7 method=POST path=/v1/sync/push status=200 duration_ms=91
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/sync/push "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=e6c473ef66814afb8cdc55fe260d508d method=POST path=/v1/sync/push status=200 duration_ms=118
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/sync/push "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=b0a448bbf1ac44259259e9e9b8cc1673 method=POST path=/v1/sync/push status=200 duration_ms=66
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/sync/push "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=c3aa579abc504ad394e3a9ce5089c981 method=POST path=/v1/sync/push status=200 duration_ms=72
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/sync/push "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=a5bd87cbd14948f88f4e19caa7a263ff method=POST path=/v1/sync/push status=200 duration_ms=96
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/sync/push "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=8ca8710033f5445fbfd334a4578e8fd6 method=POST path=/v1/sync/push status=200 duration_ms=82
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/sync/push "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=fd3d5902759845ecad32a9541236bcd8 method=POST path=/v1/sync/push status=200 duration_ms=82
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/sync/push "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=9b052729afa749bebcbf9bfc7a3fe606 method=POST path=/v1/sync/push status=200 duration_ms=76
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/sync/push "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=a284fa6afc6d4ca0a0075681c9330c06 method=POST path=/v1/sync/push status=200 duration_ms=70
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/sync/push "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=143d7b218fb3487e949edcc585072b2e method=POST path=/v1/sync/push status=200 duration_ms=83
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/sync/push "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=ed295e46a3564265a1d7a3cb7f796611 method=POST path=/v1/sync/push status=200 duration_ms=79
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/sync/push "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=894ed65aebac4b2a9fbe06af72a68e58 method=POST path=/v1/sync/push status=200 duration_ms=42
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/sync/push "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=ec06317e04384ded86cd7e430b97fee3 method=POST path=/v1/sync/push status=200 duration_ms=63
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/sync/push "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=a4ddac5a5d7f429981846e0dd8710a96 method=POST path=/v1/sync/push status=401 duration_ms=1067
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/sync/push "HTTP/1.1 401 Unauthorized"
+TIMEOUT after 4500 seconds

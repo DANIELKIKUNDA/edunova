@@ -1,0 +1,137 @@
+COMMAND: C:\Users\cs-ap\dev\edusync-web\edunova\.local-certification\security-venv\Scripts\python.exe -m pytest -q -n 2 --dist loadfile --durations=20 services/api/tests --junitxml=C:\Users\cs-ap\dev\edusync-web\edunova\evidence\phase19-final\backend-final.xml
+CWD: C:\Users\cs-ap\dev\edusync-web\edunova
+bringing up nodes...
+bringing up nodes...
+
+........................................................................ [  5%]
+........................................................................ [ 11%]
+........................................................................ [ 17%]
+........................................................................ [ 23%]
+........................................................................ [ 29%]
+........................................................................ [ 35%]
+........................................................................ [ 41%]
+........................................................................ [ 47%]
+........................................................................ [ 53%]
+........................................................................ [ 59%]
+........................................................................ [ 65%]
+...................................................................sssss [ 70%]
+ssss..........................ssssssss.................................. [ 76%]
+........................................................................ [ 82%]
+........................................................................ [ 88%]
+..............................FF........................................ [ 94%]
+.................................F................................       [100%]
+================================== FAILURES ===================================
+________ test_pedagogical_frontend_management_routes_are_authenticated ________
+[gw1] win32 -- Python 3.13.14 C:\Users\cs-ap\dev\edusync-web\edunova\.local-certification\security-venv\Scripts\python.exe
+
+    def test_pedagogical_frontend_management_routes_are_authenticated():
+>       _assert_routes(TEACHING_GETS, 'GET')
+
+services\api\tests\test_phase14_15_flutter_completion_contract.py:40: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+paths = ('/v1/pedagogical-intelligence/institutions/{iid}/offerings/{offering_id}/objectives/report', '/v1/pedagogical-intelli...ing_id}/dashboard', '/v1/pedagogical-intelligence/institutions/{iid}/offerings/{offering_id}/gradebook-reconciliation')
+method = 'GET'
+
+    def _assert_routes(paths, method):
+        for path in paths:
+            matches = [r for r in app.routes if getattr(r, 'path', None) == path
+                       and method in getattr(r, 'methods', set())]
+>           assert len(matches) == 1, (method, path)
+E           AssertionError: ('GET', '/v1/pedagogical-intelligence/institutions/{iid}/offerings/{offering_id}/objectives/report')
+E           assert 0 == 1
+E            +  where 0 = len([])
+
+services\api\tests\test_phase14_15_flutter_completion_contract.py:32: AssertionError
+_ test_institutional_governed_archive_csv_comparison_routes_are_authenticated _
+[gw1] win32 -- Python 3.13.14 C:\Users\cs-ap\dev\edusync-web\edunova\.local-certification\security-venv\Scripts\python.exe
+
+    def test_institutional_governed_archive_csv_comparison_routes_are_authenticated():
+>       _assert_routes(INSTITUTIONAL_GETS, 'GET')
+
+services\api\tests\test_phase14_15_flutter_completion_contract.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+paths = ('/v1/institutional-analytics/institutions/{iid}/snapshots', '/v1/institutional-analytics/institutions/{iid}/compariso...{iid}/intelligence/executive-readout', '/v1/institutional-analytics/institutions/{iid}/intelligence/period-comparison')
+method = 'GET'
+
+    def _assert_routes(paths, method):
+        for path in paths:
+            matches = [r for r in app.routes if getattr(r, 'path', None) == path
+                       and method in getattr(r, 'methods', set())]
+>           assert len(matches) == 1, (method, path)
+E           AssertionError: ('GET', '/v1/institutional-analytics/institutions/{iid}/snapshots')
+E           assert 0 == 1
+E            +  where 0 = len([])
+
+services\api\tests\test_phase14_15_flutter_completion_contract.py:32: AssertionError
+____________ test_phase14_15_frontend_paths_are_real_get_endpoints ____________
+[gw0] win32 -- Python 3.13.14 C:\Users\cs-ap\dev\edusync-web\edunova\.local-certification\security-venv\Scripts\python.exe
+
+    def test_phase14_15_frontend_paths_are_real_get_endpoints():
+        paths = {
+            '/v1/campus/me/institutions',
+            '/v1/teaching/institutions/{iid}/me/offerings',
+            '/v1/campus/institutions/{iid}/periods',
+            '/v1/pedagogical-intelligence/institutions/{iid}/offerings/{offering_id}/dashboard',
+            '/v1/pedagogical-intelligence/institutions/{iid}/offerings/{offering_id}/gradebook-reconciliation',
+            '/v1/institutional-analytics/institutions/{iid}/intelligence/executive-readout',
+            '/v1/institutional-analytics/institutions/{iid}/intelligence/period-comparison',
+        }
+        for path in paths:
+            routes = [r for r in app.routes if getattr(r, 'path', None) == path and 'GET' in getattr(r, 'methods', set())]
+>           assert len(routes) == 1, path
+E           AssertionError: /v1/pedagogical-intelligence/institutions/{iid}/offerings/{offering_id}/gradebook-reconciliation
+E           assert 0 == 1
+E            +  where 0 = len([])
+
+services\api\tests\test_phase14_15_frontend_route_contract.py:17: AssertionError
+============================== warnings summary ===============================
+.local-certification\security-venv\Lib\site-packages\fastapi\testclient.py:1
+.local-certification\security-venv\Lib\site-packages\fastapi\testclient.py:1
+  C:\Users\cs-ap\dev\edusync-web\edunova\.local-certification\security-venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: DeprecationWarning: builtin type SwigPyPacked has no __module__ attribute
+
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: DeprecationWarning: builtin type SwigPyObject has no __module__ attribute
+
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: DeprecationWarning: builtin type swigvarlink has no __module__ attribute
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+============================ slowest 20 durations =============================
+41.18s setup    services/api/tests/test_phase14_score_reconciliation.py::test_legacy_quality_prevents_false_high_confidence_even_for_large_cohort
+38.20s setup    services/api/tests/test_phase14_pedagogical_intelligence.py::test_invalid_question_point_value_fails_closed_even_when_result_json_is_valid
+34.29s setup    services/api/tests/test_phase14_pedagogical_intelligence.py::test_canonical_blueprint_course_mismatch_excludes_attempts
+30.97s setup    services/api/tests/test_phase14_score_reconciliation.py::test_direct_sql_writer_disallows_unverified_or_second_official_result
+28.14s setup    services/api/tests/test_phase14_pedagogical_intelligence.py::test_grades_remain_read_only_after_teacher_analytics
+27.31s setup    services/api/tests/test_phase14_score_reconciliation.py::test_v2_keeps_original_blueprint_pass_threshold_without_mutating_grade
+26.93s setup    services/api/tests/test_phase14_score_reconciliation.py::test_source_scoring_rejects_cross_course_question_before_finalization
+26.88s setup    services/api/tests/test_phase14_pedagogical_intelligence.py::test_published_results_with_distinct_accounts_same_student_are_not_double_counted
+26.66s setup    services/api/tests/test_phase14_score_reconciliation.py::test_v2_historical_evidence_survives_question_point_edits_and_deletion
+25.64s setup    services/api/tests/test_phase14_score_reconciliation.py::test_historical_partial_scores_kept_but_never_claimed_verified
+25.60s setup    services/api/tests/test_phase14_score_reconciliation.py::test_scoped_roster_and_suppression_hide_small_learner_results
+25.41s setup    services/api/tests/test_phase14_score_reconciliation.py::test_failed_grade_integrity_is_atomic_no_orphan_or_graded_attempt
+25.38s setup    services/api/tests/test_phase14_pedagogical_intelligence.py::test_course_sql_rejects_duplicate_and_invalid_grade_rows
+25.26s setup    services/api/tests/test_phase14_pedagogical_intelligence.py::test_course_report_roster_is_forwarded_and_empty_roster_is_safe
+24.69s setup    services/api/tests/test_phase14_score_reconciliation.py::test_v2_and_v1_in_same_cohort_are_identified_as_mixed_verified
+24.41s setup    services/api/tests/test_phase14_score_reconciliation.py::test_snapshot_verifier_accepts_domain_attempt_tuple_as_well_as_sql_list
+24.07s setup    services/api/tests/test_phase14_pedagogical_intelligence.py::test_corrupt_graded_result_totals_never_count_as_objective_evidence[20-100-101-1]
+23.94s setup    services/api/tests/test_phase14_pedagogical_intelligence.py::test_canonical_question_course_change_blocks_stale_foreign_mapping
+23.90s setup    services/api/tests/test_phase14_pedagogical_intelligence.py::test_gradebook_reconciliation_suppresses_small_rosters[allowed2]
+23.14s setup    services/api/tests/test_phase14_pedagogical_intelligence.py::test_invalid_missing_submission_newest_grade_never_revives_older_attempt
+=========================== short test summary info ===========================
+FAILED services/api/tests/test_phase14_15_flutter_completion_contract.py::test_pedagogical_frontend_management_routes_are_authenticated
+FAILED services/api/tests/test_phase14_15_flutter_completion_contract.py::test_institutional_governed_archive_csv_comparison_routes_are_authenticated
+FAILED services/api/tests/test_phase14_15_frontend_route_contract.py::test_phase14_15_frontend_paths_are_real_get_endpoints
+3 failed, 1198 passed, 17 skipped, 12 warnings in 1366.52s (0:22:46)

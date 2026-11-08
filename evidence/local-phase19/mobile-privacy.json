@@ -1,0 +1,13 @@
+{
+  "commit": "a8d1ce603bb9c89ce5a34b4983ac9d0f8155024e",
+  "command": [
+    "C:\\Users\\cs-ap\\dev\\flutter\\bin\\flutter.bat",
+    "test",
+    "--no-pub",
+    "test/campus_intelligence_access_widget_test.dart",
+    "--reporter=expanded"
+  ],
+  "cwd": "C:\\Users\\cs-ap\\dev\\edusync-web\\edunova\\apps\\mobile",
+  "exit_code": 0,
+  "seconds": 21.69
+}

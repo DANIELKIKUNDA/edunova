@@ -1,0 +1,13 @@
+{
+  "commit": "9246f18aa93f177a190122a4643fab65b6a778fa",
+  "command": [
+    "C:\\Users\\cs-ap\\dev\\flutter\\bin\\dart.bat",
+    "run",
+    "build_runner",
+    "build",
+    "--delete-conflicting-outputs"
+  ],
+  "cwd": "C:\\Users\\cs-ap\\dev\\edusync-web\\edunova\\apps\\mobile",
+  "exit_code": 0,
+  "seconds": 264.38
+}

@@ -1,0 +1,14 @@
+{
+  "commit": "716a11fcb8c98073e218290bdc020ed98ade5886",
+  "command": [
+    "C:\\Users\\cs-ap\\dev\\edusync-web\\edunova\\.venv\\Scripts\\python.exe",
+    "-m",
+    "pytest",
+    "-q",
+    "services/api/tests",
+    "--junitxml=C:\\Users\\cs-ap\\dev\\edusync-web\\edunova\\evidence\\phase19-final\\backend.xml"
+  ],
+  "cwd": "C:\\Users\\cs-ap\\dev\\edusync-web\\edunova",
+  "exit_code": 0,
+  "seconds": 2091.2
+}

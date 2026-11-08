@@ -1,0 +1,66 @@
+[
+  {
+    "job": "mobile-web",
+    "path": "apps/mobile/build/web/main.dart.js",
+    "exists": true,
+    "commit": "f92878e7196711cbdbb30eb004f6252a3541eb44",
+    "exit_code": 0,
+    "size_bytes": 4510008,
+    "sha256": "2128736be2a9efa44ceb97e489acd16714a517049c477c50748ccdbe2d313325"
+  },
+  {
+    "job": "admin-web",
+    "path": "apps/admin/build/web/main.dart.js",
+    "exists": true,
+    "commit": "b4a8eabafa7d6a1f50f4cc4cc43fc610a1040fbb",
+    "exit_code": 0,
+    "size_bytes": 3148883,
+    "sha256": "b4a2ca514e2be2af31b679a34e110b322fd8478d30a350ffeed6d5cc9769b60a"
+  },
+  {
+    "job": "mobile-windows",
+    "path": "apps/mobile/build/windows/x64/runner/Release/edunova.exe",
+    "exists": true,
+    "commit": "9424aa1ce5e928aa0e3c5f30daba6ec773c1a509",
+    "exit_code": 0,
+    "size_bytes": 785920,
+    "sha256": "c835cb2382a2bf3b18708c87a72d78b6f38fdb42244206705e43f1705d0afa01"
+  },
+  {
+    "job": "admin-windows",
+    "path": "apps/admin/build/windows/x64/runner/Release/edunova_admin.exe",
+    "exists": true,
+    "commit": "b4a8eabafa7d6a1f50f4cc4cc43fc610a1040fbb",
+    "exit_code": 0,
+    "size_bytes": 91136,
+    "sha256": "6bd81e51799c41c1bc2198187fc852fcae81d29a61d2e5d0dd72e0f719660d76"
+  },
+  {
+    "job": "mobile-android",
+    "path": "apps/mobile/build/app/outputs/flutter-apk/app-debug.apk",
+    "exists": true,
+    "commit": "9424aa1ce5e928aa0e3c5f30daba6ec773c1a509",
+    "exit_code": 0,
+    "size_bytes": 180579690,
+    "sha256": "e7029554f745f3981dbbb13bcdca682984f35ccd032a6aabb859326b6189a625",
+    "abis": [
+      "arm64-v8a",
+      "armeabi-v7a",
+      "x86_64"
+    ]
+  },
+  {
+    "job": "admin-android",
+    "path": "apps/admin/build/app/outputs/flutter-apk/app-debug.apk",
+    "exists": true,
+    "commit": "edb7876cb26c131ec13c15e33f40b98022801e33",
+    "exit_code": 0,
+    "size_bytes": 166384868,
+    "sha256": "cdf6309b3248c2bd6e6c4a6ab97af3507e304f9f73149b0eb2dbc8f6af6f176a",
+    "abis": [
+      "arm64-v8a",
+      "armeabi-v7a",
+      "x86_64"
+    ]
+  }
+]

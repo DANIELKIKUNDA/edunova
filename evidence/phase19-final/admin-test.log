@@ -1,0 +1,7 @@
+COMMAND: C:\Users\cs-ap\dev\flutter\bin\flutter.bat test --no-pub --concurrency=1 --reporter=expanded
+CWD: C:\Users\cs-ap\dev\edusync-web\edunova\apps\admin
+00:00 +0: loading C:/Users/cs-ap/dev/edusync-web/edunova/apps/admin/test/content_factory_evidence_test.dart
+00:00 +0: C:/Users/cs-ap/dev/edusync-web/edunova/apps/admin/test/content_factory_evidence_test.dart: review opens the selected run and exposes selectable source pages and quote
+00:02 +1: loading C:/Users/cs-ap/dev/edusync-web/edunova/apps/admin/test/smoke_test.dart
+00:03 +1: C:/Users/cs-ap/dev/edusync-web/edunova/apps/admin/test/smoke_test.dart: EduNova Administration affiche la connexion sans session
+00:05 +2: All tests passed!

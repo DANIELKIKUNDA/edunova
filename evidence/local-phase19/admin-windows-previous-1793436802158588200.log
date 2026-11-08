@@ -1,0 +1,21 @@
+COMMAND: C:\Users\cs-ap\dev\flutter\bin\flutter.bat build windows --release --no-pub
+CWD: C:\Users\cs-ap\dev\edusync-web\edunova\apps\admin
+Building Windows application...                                 
+lib/src/features/editorial/content_detail_page.dart(34,505): error G297C951C: Can't find ')' to match '('. [C:\Users\cs-ap\dev\edusync-web\edunova\apps\admin\build\windows\x64\flutter\flutter_assemble.vcxproj]
+lib/src/features/editorial/content_detail_page.dart(34,308): error G297C951C: Can't find ']' to match '['. [C:\Users\cs-ap\dev\edusync-web\edunova\apps\admin\build\windows\x64\flutter\flutter_assemble.vcxproj]
+lib/src/features/editorial/publication_center_page.dart(28,312): error G44692867: A value of type 'Map<String, dynamic>?' can't be assigned to a variable of type 'bool'. [C:\Users\cs-ap\dev\edusync-web\edunova\apps\admin\build\windows\x64\flutter\flutter_assemble.vcxproj]
+lib/src/features/editorial/content_detail_page.dart(34,726): error G67247B7E: Expected ';' after this. [C:\Users\cs-ap\dev\edusync-web\edunova\apps\admin\build\windows\x64\flutter\flutter_assemble.vcxproj]
+lib/src/features/editorial/content_detail_page.dart(34,727): error G25387D61: Expected an identifier, but got ','. [C:\Users\cs-ap\dev\edusync-web\edunova\apps\admin\build\windows\x64\flutter\flutter_assemble.vcxproj]
+lib/src/features/editorial/content_detail_page.dart(34,727): error G5BADBE1C: Unexpected token ';'. [C:\Users\cs-ap\dev\edusync-web\edunova\apps\admin\build\windows\x64\flutter\flutter_assemble.vcxproj]
+lib/src/features/editorial/content_detail_page.dart(34,752): error G67247B7E: Expected ';' after this. [C:\Users\cs-ap\dev\edusync-web\edunova\apps\admin\build\windows\x64\flutter\flutter_assemble.vcxproj]
+lib/src/features/editorial/content_detail_page.dart(34,753): error G25387D61: Expected an identifier, but got ','. [C:\Users\cs-ap\dev\edusync-web\edunova\apps\admin\build\windows\x64\flutter\flutter_assemble.vcxproj]
+lib/src/features/editorial/content_detail_page.dart(34,753): error G5BADBE1C: Unexpected token ';'. [C:\Users\cs-ap\dev\edusync-web\edunova\apps\admin\build\windows\x64\flutter\flutter_assemble.vcxproj]
+lib/src/features/editorial/content_detail_page.dart(34,1391): error G67247B7E: Expected ';' after this. [C:\Users\cs-ap\dev\edusync-web\edunova\apps\admin\build\windows\x64\flutter\flutter_assemble.vcxproj]
+lib/src/features/editorial/content_detail_page.dart(34,1392): error G25387D61: Expected an identifier, but got ']'. [C:\Users\cs-ap\dev\edusync-web\edunova\apps\admin\build\windows\x64\flutter\flutter_assemble.vcxproj]
+lib/src/features/editorial/content_detail_page.dart(34,1392): error G5BADBE1C: Unexpected token ';'. [C:\Users\cs-ap\dev\edusync-web\edunova\apps\admin\build\windows\x64\flutter\flutter_assemble.vcxproj]
+lib/src/features/editorial/content_detail_page.dart(34,1393): error G25387D61: Expected an identifier, but got ')'. [C:\Users\cs-ap\dev\edusync-web\edunova\apps\admin\build\windows\x64\flutter\flutter_assemble.vcxproj]
+lib/src/features/editorial/content_detail_page.dart(34,1392): error G67247B7E: Expected ';' after this. [C:\Users\cs-ap\dev\edusync-web\edunova\apps\admin\build\windows\x64\flutter\flutter_assemble.vcxproj]
+lib/src/features/editorial/content_detail_page.dart(34,1393): error G5BADBE1C: Unexpected token ';'. [C:\Users\cs-ap\dev\edusync-web\edunova\apps\admin\build\windows\x64\flutter\flutter_assemble.vcxproj]
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(254,5): error MSB8066: Custom build for 'C:\Users\cs-ap\dev\edusync-web\edunova\apps\admin\build\windows\x64\CMakeFiles\9fe8ec03a781cf54e6037c6fc3669e86\flutter_windows.dll.rule;C:\Users\cs-ap\dev\edusync-web\edunova\apps\admin\build\windows\x64\CMakeFiles\359d7a32ba6bbe985d6e015ba9bb7325\flutter_assemble.rule;C:\Users\cs-ap\dev\edusync-web\edunova\apps\admin\windows\flutter\CMakeLists.txt' exited with code 1. [C:\Users\cs-ap\dev\edusync-web\edunova\apps\admin\build\windows\x64\flutter\flutter_assemble.vcxproj]
+Building Windows application...                                    39.2s
+Build process failed.

@@ -1,0 +1,8 @@
+{
+  "report_links": "valid",
+  "utf8": "valid",
+  "identical_source_trees": 18,
+  "verified_artifacts": 6,
+  "functional_failures": 0,
+  "verdict": "PARTIELLEMENT CERTIFIÉ"
+}

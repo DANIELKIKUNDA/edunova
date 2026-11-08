@@ -1,0 +1,24 @@
+COMMAND: C:\Users\cs-ap\dev\flutter\bin\flutter.bat build windows --release --no-pub
+CWD: C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile
+Building Windows application...                                 
+CMake Deprecation Warning at C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/build/windows/x64/extracted/firebase_cpp_sdk_windows/CMakeLists.txt:17 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(166,5): error MSB3073: The command "setlocal [C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\build\windows\x64\INSTALL.vcxproj]
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(166,5): error MSB3073: "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DBUILD_TYPE=Release -P cmake_install.cmake [C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\build\windows\x64\INSTALL.vcxproj]
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(166,5): error MSB3073: if %errorlevel% neq 0 goto :cmEnd [C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\build\windows\x64\INSTALL.vcxproj]
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(166,5): error MSB3073: :cmEnd [C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\build\windows\x64\INSTALL.vcxproj]
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(166,5): error MSB3073: endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone [C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\build\windows\x64\INSTALL.vcxproj]
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(166,5): error MSB3073: :cmErrorLevel [C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\build\windows\x64\INSTALL.vcxproj]
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(166,5): error MSB3073: exit /b %1 [C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\build\windows\x64\INSTALL.vcxproj]
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(166,5): error MSB3073: :cmDone [C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\build\windows\x64\INSTALL.vcxproj]
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(166,5): error MSB3073: if %errorlevel% neq 0 goto :VCEnd [C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\build\windows\x64\INSTALL.vcxproj]
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(166,5): error MSB3073: :VCEnd" exited with code 1. [C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\build\windows\x64\INSTALL.vcxproj]
+Building Windows application...                                   130.4s
+Build process failed.

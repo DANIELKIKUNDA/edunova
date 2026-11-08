@@ -1,0 +1,23 @@
+FAIL api 0.15.1
+FAIL admin 0.15.1+24
+FAIL mobile 0.15.1+24
+PASS migration 0013
+PASS rollout DB check
+PASS due scheduler index
+PASS publish re-preflight
+PASS placement contract
+PASS audience contract
+PASS schedule contract
+PASS snapshot verify service
+PASS snapshot verify route
+PASS ui search
+PASS ui master detail
+PASS ui mobile sheet
+PASS ui integrity
+PASS ui empty state
+PASS ui error state
+PASS branding
+PASS ADR 016
+PASS final doc
+PASS publication tests
+19/22 PASS

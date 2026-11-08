@@ -1,0 +1,9 @@
+COMMAND: C:\Users\cs-ap\dev\flutter\bin\flutter.bat test --no-pub test/campus_intelligence_access_widget_test.dart --reporter=expanded
+CWD: C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile
+00:00 +0: loading C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/test/campus_intelligence_access_widget_test.dart
+00:00 +0: membre étudiant : aucun accès aux analyses
+00:02 +1: invitation non acceptée : accès interdit
+00:02 +2: URL directe vers autre université : aucune requête analytique
+00:02 +3: auditeur actif : accès aux indicateurs, pas à la gestion pédagogique
+00:03 +4: direction : masque les pourcentages supprimés
+00:04 +5: All tests passed!

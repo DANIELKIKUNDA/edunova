@@ -1,0 +1,3 @@
+-r requirements.txt
+# Optional local runner; each pytest worker uses its own SQLite test database.
+pytest-xdist==3.8.0

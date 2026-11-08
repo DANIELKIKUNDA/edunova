@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="22" time="157.143" timestamp="2026-10-30T22:17:28.310483+02:00" hostname="AMKA"><testcase classname="services.api.tests.test_phase19_atomic_finance" name="test_atomic_payment_posts_receipt_charge_and_ledger_together" time="28.284" /><testcase classname="services.api.tests.test_phase19_atomic_finance" name="test_atomic_payment_rolls_back_when_ledger_insert_fails" time="2.583" /><testcase classname="services.api.tests.test_phase19_atomic_finance" name="test_atomic_payment_replay_does_not_allocate_twice" time="3.078" /><testcase classname="services.api.tests.test_phase19_atomic_finance" name="test_atomic_payment_spreads_amount_over_multiple_charges" time="2.357" /><testcase classname="services.api.tests.test_phase19_atomic_finance" name="test_atomic_payment_rejects_overpayment_without_partial_writes" time="3.395" /><testcase classname="services.api.tests.test_phase19_atomic_finance" name="test_atomic_payment_conflicting_reference_preserves_first_settlement" time="3.506" /><testcase classname="services.api.tests.test_phase19_atomic_finance" name="test_atomic_payment_rejects_reversed_reference" time="2.774" /><testcase classname="services.api.tests.test_phase19_atomic_finance" name="test_atomic_payment_rolls_back_when_charge_update_fails" time="2.903" /><testcase classname="services.api.tests.test_phase19_atomic_finance" name="test_atomic_payment_cannot_allocate_to_another_institution" time="3.321" /><testcase classname="services.api.tests.test_phase19_atomic_finance" name="test_atomic_payment_does_not_allocate_to_voided_charge" time="2.342" /><testcase classname="services.api.tests.test_phase19_atomic_callback" name="test_callback_settlement_commits_finance_and_provider_state" time="4.247" /><testcase classname="services.api.tests.test_phase19_atomic_callback" name="test_callback_settlement_rollback_on_ledger_failure" time="3.363" /><testcase classname="services.api.tests.test_phase19_atomic_callback" name="test_callback_exact_replay_does_not_duplicate_settlement" time="2.356" /><testcase classname="services.api.tests.test_phase19_atomic_callback" name="test_failed_callback_commits_no_finance_receipt" time="2.178" /><testcase classname="services.api.tests.test_phase19_atomic_callback" name="test_atomic_callback_rejects_different_session_factory" time="2.361" /><testcase classname="services.api.tests.test_phase19_atomic_callback" name="test_atomic_callback_conflicting_event_digest_is_rejected" time="2.807" /><testcase classname="services.api.tests.test_phase19_postgres_concurrency" name="test_concurrent_identical_callbacks_settle_once" time="4.360" /><testcase classname="services.api.tests.test_phase19_postgres_concurrency" name="test_concurrent_modified_callback_rejected" time="2.752" /><testcase classname="services.api.tests.test_phase19_postgres_concurrency" name="test_concurrent_distinct_payments_do_not_lose_allocation" time="3.123" /><testcase classname="services.api.tests.test_phase19_postgres_concurrency" name="test_concurrent_conflicting_reference_preserves_one_payment" time="4.554" /><testcase classname="services.api.tests.test_phase19_postgres_concurrency" name="test_callback_racing_stale_terminal_save_cannot_erase_settlement[expired]" time="9.378"><failure message="AssertionError: ('expired', 'expired', [PaymentIntent(id='intent-1', institution_id='institution-a', student_id='student-a', amount_mi...me(2026, 10, 30, 2, 0, tzinfo=zoneinfo.ZoneInfo(key='Africa/Johannesburg')), failure_code='expired', receipt_id=None)])&#10;assert ('expired' == 'succeeded'&#10;  &#10;  - succeeded&#10;  + expired)">repositories = (sessionmaker(class_='Session', bind=Engine(postgresql+psycopg://edunova_cert@127.0.0.1:55439/edunova_phase19_test), a...ntFinanceRepository object at 0x000002B316669BD0&gt;, datetime.datetime(2026, 10, 30, 0, 0, tzinfo=datetime.timezone.utc))
+terminal = 'expired'
+
+    @pytest.mark.parametrize('terminal', ['expired', 'cancelled'])
+    def test_callback_racing_stale_terminal_save_cannot_erase_settlement(repositories, terminal):
+        sf, gateway, finance, now = repositories
+        from app.modules.payment_gateway.application.service import PaymentGatewayService
+        read, committed = Event(), Event()
+        original_get = gateway.get
+        def delayed_get(intent_id):
+            stale = original_get(intent_id)
+            read.set()
+            assert committed.wait(timeout=15)
+            return stale
+        gateway.get = delayed_get
+        service = PaymentGatewayService(gateway, Mock(), Mock(), Mock(), lambda: now)
+        def callback():
+            assert read.wait(timeout=15)
+            try:
+                return settle(gateway, finance, now)
+            finally:
+                committed.set()
+        operation = (lambda: service.expire('intent-1')) if terminal == 'expired' else (lambda: service.cancel('student-a', 'institution-a', 'intent-1', 'test cancellation'))
+        results = simultaneous(callback, operation)
+        with sf() as s:
+            intent = s.get(PaymentIntentRow, 'intent-1')
+            receipts, ledger = counts(sf)
+            if receipts:
+&gt;               assert intent.status == 'succeeded' and intent.receipt_id is not None, (terminal, intent.status, results)
+E               AssertionError: ('expired', 'expired', [PaymentIntent(id='intent-1', institution_id='institution-a', student_id='student-a', amount_mi...me(2026, 10, 30, 2, 0, tzinfo=zoneinfo.ZoneInfo(key='Africa/Johannesburg')), failure_code='expired', receipt_id=None)])
+E               assert ('expired' == 'succeeded'
+E                 
+E                 - succeeded
+E                 + expired)
+
+services\api\tests\test_phase19_postgres_concurrency.py:101: AssertionError</failure></testcase><testcase classname="services.api.tests.test_phase19_postgres_concurrency" name="test_callback_racing_stale_terminal_save_cannot_erase_settlement[cancelled]" time="29.407"><failure message="AssertionError: ('cancelled', 'cancelled', [PaymentIntent(id='intent-1', institution_id='institution-a', student_id='student-a', amoun...0, tzinfo=zoneinfo.ZoneInfo(key='Africa/Johannesburg')), failure_code='cancelled:test cancellation', receipt_id=None)])&#10;assert ('cancelled' == 'succeeded'&#10;  &#10;  - succeeded&#10;  + cancelled)">repositories = (sessionmaker(class_='Session', bind=Engine(postgresql+psycopg://edunova_cert@127.0.0.1:55439/edunova_phase19_test), a...ntFinanceRepository object at 0x000002B3168CBF50&gt;, datetime.datetime(2026, 10, 30, 0, 0, tzinfo=datetime.timezone.utc))
+terminal = 'cancelled'
+
+    @pytest.mark.parametrize('terminal', ['expired', 'cancelled'])
+    def test_callback_racing_stale_terminal_save_cannot_erase_settlement(repositories, terminal):
+        sf, gateway, finance, now = repositories
+        from app.modules.payment_gateway.application.service import PaymentGatewayService
+        read, committed = Event(), Event()
+        original_get = gateway.get
+        def delayed_get(intent_id):
+            stale = original_get(intent_id)
+            read.set()
+            assert committed.wait(timeout=15)
+            return stale
+        gateway.get = delayed_get
+        service = PaymentGatewayService(gateway, Mock(), Mock(), Mock(), lambda: now)
+        def callback():
+            assert read.wait(timeout=15)
+            try:
+                return settle(gateway, finance, now)
+            finally:
+                committed.set()
+        operation = (lambda: service.expire('intent-1')) if terminal == 'expired' else (lambda: service.cancel('student-a', 'institution-a', 'intent-1', 'test cancellation'))
+        results = simultaneous(callback, operation)
+        with sf() as s:
+            intent = s.get(PaymentIntentRow, 'intent-1')
+            receipts, ledger = counts(sf)
+            if receipts:
+&gt;               assert intent.status == 'succeeded' and intent.receipt_id is not None, (terminal, intent.status, results)
+E               AssertionError: ('cancelled', 'cancelled', [PaymentIntent(id='intent-1', institution_id='institution-a', student_id='student-a', amoun...0, tzinfo=zoneinfo.ZoneInfo(key='Africa/Johannesburg')), failure_code='cancelled:test cancellation', receipt_id=None)])
+E               assert ('cancelled' == 'succeeded'
+E                 
+E                 - succeeded
+E                 + cancelled)
+
+services\api\tests\test_phase19_postgres_concurrency.py:101: AssertionError</failure></testcase></testsuite></testsuites>

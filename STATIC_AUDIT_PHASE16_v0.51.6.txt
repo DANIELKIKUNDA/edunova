@@ -1,0 +1,12 @@
+PASS event_sql_migration
+PASS event_backend_api
+PASS event_permission_check
+PASS event_persistence
+PASS event_ui
+PASS event_flutter_route
+PASS event_frontend_gateway
+PASS event_flutter_test
+PASS event_backend_test
+PASS migration_contract_updated
+PASS version_updated
+PASS router_no_tenant_cache

@@ -1,0 +1,84 @@
+COMMAND: C:\Users\cs-ap\dev\edusync-web\edunova\.venv\Scripts\python.exe -m pytest -q services/api/tests/test_phase19_atomic_finance.py services/api/tests/test_phase19_atomic_callback.py services/api/tests/test_phase19_postgres_concurrency.py --junitxml=C:\Users\cs-ap\dev\edusync-web\edunova\evidence\local-phase19\postgres.xml
+CWD: C:\Users\cs-ap\dev\edusync-web\edunova
+....................FF                                                   [100%]
+================================== FAILURES ===================================
+__ test_callback_racing_stale_terminal_save_cannot_erase_settlement[expired] __
+
+repositories = (sessionmaker(class_='Session', bind=Engine(postgresql+psycopg://edunova_cert@127.0.0.1:55439/edunova_phase19_test), a...ntFinanceRepository object at 0x000002B316669BD0>, datetime.datetime(2026, 10, 30, 0, 0, tzinfo=datetime.timezone.utc))
+terminal = 'expired'
+
+    @pytest.mark.parametrize('terminal', ['expired', 'cancelled'])
+    def test_callback_racing_stale_terminal_save_cannot_erase_settlement(repositories, terminal):
+        sf, gateway, finance, now = repositories
+        from app.modules.payment_gateway.application.service import PaymentGatewayService
+        read, committed = Event(), Event()
+        original_get = gateway.get
+        def delayed_get(intent_id):
+            stale = original_get(intent_id)
+            read.set()
+            assert committed.wait(timeout=15)
+            return stale
+        gateway.get = delayed_get
+        service = PaymentGatewayService(gateway, Mock(), Mock(), Mock(), lambda: now)
+        def callback():
+            assert read.wait(timeout=15)
+            try:
+                return settle(gateway, finance, now)
+            finally:
+                committed.set()
+        operation = (lambda: service.expire('intent-1')) if terminal == 'expired' else (lambda: service.cancel('student-a', 'institution-a', 'intent-1', 'test cancellation'))
+        results = simultaneous(callback, operation)
+        with sf() as s:
+            intent = s.get(PaymentIntentRow, 'intent-1')
+            receipts, ledger = counts(sf)
+            if receipts:
+>               assert intent.status == 'succeeded' and intent.receipt_id is not None, (terminal, intent.status, results)
+E               AssertionError: ('expired', 'expired', [PaymentIntent(id='intent-1', institution_id='institution-a', student_id='student-a', amount_mi...me(2026, 10, 30, 2, 0, tzinfo=zoneinfo.ZoneInfo(key='Africa/Johannesburg')), failure_code='expired', receipt_id=None)])
+E               assert ('expired' == 'succeeded'
+E                 
+E                 - succeeded
+E                 + expired)
+
+services\api\tests\test_phase19_postgres_concurrency.py:101: AssertionError
+_ test_callback_racing_stale_terminal_save_cannot_erase_settlement[cancelled] _
+
+repositories = (sessionmaker(class_='Session', bind=Engine(postgresql+psycopg://edunova_cert@127.0.0.1:55439/edunova_phase19_test), a...ntFinanceRepository object at 0x000002B3168CBF50>, datetime.datetime(2026, 10, 30, 0, 0, tzinfo=datetime.timezone.utc))
+terminal = 'cancelled'
+
+    @pytest.mark.parametrize('terminal', ['expired', 'cancelled'])
+    def test_callback_racing_stale_terminal_save_cannot_erase_settlement(repositories, terminal):
+        sf, gateway, finance, now = repositories
+        from app.modules.payment_gateway.application.service import PaymentGatewayService
+        read, committed = Event(), Event()
+        original_get = gateway.get
+        def delayed_get(intent_id):
+            stale = original_get(intent_id)
+            read.set()
+            assert committed.wait(timeout=15)
+            return stale
+        gateway.get = delayed_get
+        service = PaymentGatewayService(gateway, Mock(), Mock(), Mock(), lambda: now)
+        def callback():
+            assert read.wait(timeout=15)
+            try:
+                return settle(gateway, finance, now)
+            finally:
+                committed.set()
+        operation = (lambda: service.expire('intent-1')) if terminal == 'expired' else (lambda: service.cancel('student-a', 'institution-a', 'intent-1', 'test cancellation'))
+        results = simultaneous(callback, operation)
+        with sf() as s:
+            intent = s.get(PaymentIntentRow, 'intent-1')
+            receipts, ledger = counts(sf)
+            if receipts:
+>               assert intent.status == 'succeeded' and intent.receipt_id is not None, (terminal, intent.status, results)
+E               AssertionError: ('cancelled', 'cancelled', [PaymentIntent(id='intent-1', institution_id='institution-a', student_id='student-a', amoun...0, tzinfo=zoneinfo.ZoneInfo(key='Africa/Johannesburg')), failure_code='cancelled:test cancellation', receipt_id=None)])
+E               assert ('cancelled' == 'succeeded'
+E                 
+E                 - succeeded
+E                 + cancelled)
+
+services\api\tests\test_phase19_postgres_concurrency.py:101: AssertionError
+=========================== short test summary info ===========================
+FAILED services/api/tests/test_phase19_postgres_concurrency.py::test_callback_racing_stale_terminal_save_cannot_erase_settlement[expired]
+FAILED services/api/tests/test_phase19_postgres_concurrency.py::test_callback_racing_stale_terminal_save_cannot_erase_settlement[cancelled]
+2 failed, 20 passed in 157.27s (0:02:37)

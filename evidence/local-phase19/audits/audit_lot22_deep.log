@@ -1,0 +1,16 @@
+PASS service scope guard
+PASS role escalation guard
+PASS institution write gate
+PASS period hierarchy
+PASS role endpoint
+PASS scoped listing
+PASS hardening migration
+PASS fk defense
+PASS check defense
+PASS hardening tests
+PASS adr 032
+PASS lot22 hardening doc
+FAIL api version
+FAIL mobile version
+FAIL admin version
+12/15 PASS

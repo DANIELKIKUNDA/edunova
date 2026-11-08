@@ -1,0 +1,15 @@
+BASELINE: EduNova v0.50.7
+FINAL BACKEND REGRESSION: PYTHONPATH=services/api python -m pytest -q services/api/tests
+RESULT: 891 passed in 248.13s, exit 0
+TARGETED CONTRACT: 2 passed in 6.15s, exit 0
+PYTHON COMPILEALL: PASS
+STATIC FRONTEND SOURCE CONTRACT: PASS (NOT Dart compilation)
+FLUTTER SDK FOUND: NO
+DART SDK FOUND: NO
+FLUTTER ANALYZE: NOT RUN
+FLUTTER TEST: NOT RUN (2 test sources added)
+FLUTTER BUILD: NOT RUN
+REAL DEVICE: NOT RUN
+POSTGRESQL/REDIS/OBJECT STORAGE: NOT RUN
+CONCURRENT TEST COLLISION: earlier run failed (54 failed/835 passed) due to shared test SQLite; final run isolated succeeded. See final log.
+LAST MIGRATION: 0085 (no new migrations)

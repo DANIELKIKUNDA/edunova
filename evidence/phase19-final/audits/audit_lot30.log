@@ -1,0 +1,24 @@
+PASS live/ready/metrics
+PASS database probe
+PASS prometheus metrics
+PASS correlation/json logging
+PASS bounded db pool
+PASS non-root image
+PASS prod hardening
+PASS ingestion worker
+PASS content factory worker
+PASS postgres backup checksum
+PASS object backup checksum
+PASS object restore guarded
+PASS migration fail-fast
+PASS ci full tests
+PASS ci image build
+PASS dependency SCA
+PASS image scan
+PASS release approval
+PASS real deploy step
+PASS rollback readiness
+PASS redis distributed test
+PASS runbook
+PASS ADR
+LOT30 HARDENED AUDIT: 23/23 PASS

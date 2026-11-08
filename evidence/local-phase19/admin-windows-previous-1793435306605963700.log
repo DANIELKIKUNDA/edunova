@@ -1,0 +1,11 @@
+COMMAND: C:\Users\cs-ap\dev\flutter\bin\flutter.bat build windows --release --no-pub
+CWD: C:\Users\cs-ap\dev\edusync-web\edunova\apps\admin
+Building Windows application...                                 
+CMake Error at CMakeLists.txt:58 (include):
+  include could not find requested file:
+
+    flutter/generated_plugins.cmake
+
+
+Building Windows application...                                   109.0s
+Unable to generate build files

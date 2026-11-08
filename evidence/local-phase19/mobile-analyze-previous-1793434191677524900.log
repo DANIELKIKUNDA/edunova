@@ -1,0 +1,56 @@
+COMMAND: C:\Users\cs-ap\dev\flutter\bin\flutter.bat analyze --no-pub
+CWD: C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile
+Analyzing mobile...                                             
+
+warning - Unused import: 'package:flutter/material.dart' - lib\src\app\router.dart:7:8 - unused_import
+   info - 'package:drift/web.dart' is deprecated and shouldn't be used. This variant of web support has downsides compared to `package:drift/wasm.dart` and is in a deprecated bugfix-only mode. Please consider migrating to the new web APIS: https://drift.simonbinder.eu/web - lib\src\core\database\connection\connection_web.dart:2:1 - deprecated_member_use
+warning - The declaration 'firstOrNull' isn't referenced - lib\src\features\analytics\infrastructure\drift_analytics_repository.dart:112:49 - unused_element
+   info - 'groupValue' is deprecated and shouldn't be used. Use a RadioGroup ancestor to manage group value instead. This feature was deprecated after v3.32.0-0.0.pre - lib\src\features\assessment\presentation\exam_simulator_page.dart:4:1318 - deprecated_member_use
+   info - 'onChanged' is deprecated and shouldn't be used. Use RadioGroup to handle value change instead. This feature was deprecated after v3.32.0-0.0.pre - lib\src\features\assessment\presentation\exam_simulator_page.dart:4:1334 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\src\features\calendar\presentation\calendar_page.dart:38:56 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\src\features\calendar\presentation\calendar_page.dart:86:42 - deprecated_member_use
+   info - Statements in an if should be enclosed in a block - lib\src\features\campus_intelligence\infrastructure\campus_intelligence_gateway.dart:171:33 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\src\features\campus_intelligence\infrastructure\campus_intelligence_gateway.dart:177:36 - curly_braces_in_flow_control_structures
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\src\features\campus_intelligence\presentation\institution_intelligence_page.dart:305:49 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\src\features\campus_intelligence\presentation\institution_intelligence_page.dart:327:47 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\src\features\campus_intelligence\presentation\institution_intelligence_page.dart:452:9 - deprecated_member_use
+   info - Statements in an if should be enclosed in a block - lib\src\features\campus_intelligence\presentation\institutional_archive_panel.dart:122:31 - curly_braces_in_flow_control_structures
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\src\features\campus_intelligence\presentation\pedagogical_governance_panel.dart:162:43 - deprecated_member_use
+   info - Statements in an if should be enclosed in a block - lib\src\features\campus_services\presentation\campus_academic_resources_page.dart:136:22 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\src\features\campus_services\presentation\campus_alumni_page.dart:38:18 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\src\features\campus_services\presentation\campus_alumni_page.dart:87:20 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\src\features\campus_services\presentation\campus_alumni_page.dart:117:82 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\src\features\campus_services\presentation\campus_alumni_page.dart:163:90 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\src\features\campus_services\presentation\campus_events_page.dart:54:20 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\src\features\campus_services\presentation\campus_events_page.dart:86:47 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\src\features\campus_services\presentation\campus_events_page.dart:123:20 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\src\features\campus_services\presentation\campus_services_page.dart:119:20 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\src\features\campus_services\presentation\campus_services_page.dart:154:66 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\src\features\campus_services\presentation\physical_library_page.dart:130:20 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\src\features\campus_services\presentation\physical_library_page.dart:153:38 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\src\features\campus_services\presentation\physical_library_page.dart:174:38 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\src\features\campus_services\presentation\physical_library_page.dart:263:41 - curly_braces_in_flow_control_structures
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\src\features\commerce\presentation\campus_paid_checkout_dialog.dart:85:39 - deprecated_member_use
+   info - Local variables should be final - lib\src\features\commerce\presentation\premium_page.dart:42:7 - prefer_final_locals
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\src\features\commerce\presentation\premium_page.dart:106:15 - deprecated_member_use
+   info - The import of 'dart:typed_data' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/foundation.dart' - lib\src\features\courses\presentation\import_document_sheet.dart:1:8 - unnecessary_import
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\src\features\courses\presentation\import_document_sheet.dart:80:15 - deprecated_member_use
+   info - The import of 'dart:typed_data' is unnecessary because all of the used elements are also provided by the import of 'package:drift/drift.dart' - lib\src\features\delivery\infrastructure\offline_resource_store_web.dart:1:8 - unnecessary_import
+   info - Statements in an if should be enclosed in a block - lib\src\features\delivery\presentation\offline_resource_tile.dart:30:20 - curly_braces_in_flow_control_structures
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\src\features\engagement\presentation\engagement_page.dart:470:42 - deprecated_member_use
+warning - Unnecessary cast - lib\src\features\identity\infrastructure\api_identity_repository.dart:29:18 - unnecessary_cast
+warning - The value of the field '_reviewed' isn't used - lib\src\features\pedagogy\presentation\flashcard_session_page.dart:19:7 - unused_field
+   info - 'groupValue' is deprecated and shouldn't be used. Use a RadioGroup ancestor to manage group value instead. This feature was deprecated after v3.32.0-0.0.pre - lib\src\features\pedagogy\presentation\quiz_session_page.dart:198:11 - deprecated_member_use
+   info - 'onChanged' is deprecated and shouldn't be used. Use RadioGroup to handle value change instead. This feature was deprecated after v3.32.0-0.0.pre - lib\src\features\pedagogy\presentation\quiz_session_page.dart:199:11 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\src\features\revision\presentation\planning_preferences_page.dart:56:33 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\src\features\revision\presentation\planning_preferences_page.dart:60:33 - deprecated_member_use
+warning - The value of the local variable 'scheme' isn't used - lib\src\features\study_workspace\presentation\study_workspace_page.dart:25:11 - unused_local_variable
+   info - Statements in an if should be enclosed in a block - lib\src\features\sync\infrastructure\drift_cloud_sync_repository.dart:338:54 - curly_braces_in_flow_control_structures
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\src\features\sync\presentation\sync_status_page.dart:83:47 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\src\features\sync\presentation\sync_status_page.dart:85:47 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\src\features\sync\presentation\sync_status_page.dart:105:45 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\src\features\sync\presentation\sync_status_page.dart:107:45 - use_build_context_synchronously
+   info - The member 'markMutationApplied' overrides an inherited member but isn't annotated with '@override' - test\cloud_sync_use_case_test.dart:55:16 - annotate_overrides
+   info - The member 'markMutationApplied' overrides an inherited member but isn't annotated with '@override' - test\sync_push_integrity_test.dart:53:16 - annotate_overrides
+
+50 issues found. (ran in 53.7s)

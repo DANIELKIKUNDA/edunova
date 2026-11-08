@@ -1,0 +1,12 @@
+PASS gradebook domain
+PASS gradebook service
+PASS gradebook api
+PASS gradebook persistence
+PASS migration 0039
+PASS ADR-039
+PASS tests
+PASS weights 100
+PASS private until publish
+PASS retraction audit
+PASS assignment import
+PASS enrollment guard

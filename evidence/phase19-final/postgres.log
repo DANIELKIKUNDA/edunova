@@ -1,0 +1,4 @@
+COMMAND: C:\Users\cs-ap\dev\edusync-web\edunova\.local-certification\security-venv\Scripts\python.exe -m pytest -q services/api/tests/test_phase19_atomic_finance.py services/api/tests/test_phase19_atomic_callback.py services/api/tests/test_phase19_postgres_concurrency.py services/api/tests/test_phase19_postgres_constraints.py --junitxml=C:\Users\cs-ap\dev\edusync-web\edunova\evidence\phase19-final\postgres.xml
+CWD: C:\Users\cs-ap\dev\edusync-web\edunova
+..................................                                       [100%]
+34 passed in 37.32s

@@ -1,0 +1,26 @@
+EduNova v0.49.13 — Phase 14 / clôture backend-statique locale
+Source : v0.49.12, sha256 651dd03633b61bfe5718c8ad0a7bba6d1aa4109a4e434605384ef0f0e97e8b19 (vérifié par sha256sum).
+
+EXÉCUTÉ DANS CET ENVIRONNEMENT
+- Régression baseline avant modifications : PYTHONPATH=services/api python -m pytest -q services/api/tests => 752 passed, code 0.
+- Régression finale après modifications : PYTHONPATH=services/api python -m pytest -q services/api/tests => 770 passed, 49.83 s, code 0.
+- Suite ciblée : PYTHONPATH=services/api python -m pytest -q services/api/tests/test_phase14_pedagogical_intelligence.py services/api/tests/test_migration_contract.py => 96 passed, 14.03 s, code 0.
+- Re-test ciblé suite à une correction de régression de libellé : services/api/tests/test_phase14_score_reconciliation.py services/api/tests/test_phase14_pedagogical_intelligence.py => 149 passed, code 0.
+- Analyse statique: python -m compileall -q services/api/app services/api/tests => code 0.
+- Audit historique : python scripts/audit_lot32_global.py => 17/17 PASS, code 0.
+- Nouveaux tests : 18 ajoutés dans test_phase14_pedagogical_intelligence.py (77 => 95) ; régression complète 752 => 770.
+- Aucun changement DDL / migration SQL dans v0.49.13 ; dernière migration héritée : 0084.
+- Les tests SQLite de la phase exécutent de véritables inserts et lectures de la base de test.
+
+DÉFAILLANCE TRANSITOIRE ET RÉSOLUTION
+Une première régression globale est passée 769/770 : le test existant exigeait l'expression "historiques" dans un avertissement. Le libellé de garde-fou a été corrigé ; rerun ciblé 149 PASS et rerun global finale 770 PASS. Les deux résultats ne sont pas confondus.
+
+NON EXÉCUTÉ
+- flutter / dart : exécutables absents.
+- PostgreSQL réel / psql : absent ; les migrations restent des contrats statiques ici.
+- Redis réel : absent.
+- Stockage objet et fournisseurs externes : non exécutés.
+- Appareils physiques, signature qualifiée, preuve officielle gradebook/jury : non exécutés/non certifiés.
+
+SCOPE DE CLÔTURE
+Implémentation fonctionnelle locale d'intelligence pédagogique (groupes, provenance, tendances, cartographie historique, comparateur candidate-only). Limites historiques et d'autorité clairement documentées dans docs/PHASE14_CLOTURE_BACKEND_v0.49.13.md.

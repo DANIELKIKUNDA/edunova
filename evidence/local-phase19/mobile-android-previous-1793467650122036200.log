@@ -1,0 +1,367 @@
+COMMAND: C:\Users\cs-ap\dev\flutter\bin\flutter.bat build apk --debug --no-pub
+CWD: C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile
+Running Gradle task 'assembleDebug'...                          
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>if "Windows_NT" == "Windows_NT" setlocal
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>set DEFAULT_JVM_OPTS= 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>set DIRNAME=C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android\ 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>if "C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android\" == "" set DIRNAME=. 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>set APP_BASE_NAME=gradlew 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>set APP_HOME=C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android\ 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>if defined JAVA_HOME goto findJavaFromJavaHome 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>set JAVA_HOME=C:\Program Files\Android\Android Studio\jbr 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>set JAVA_EXE=C:\Program Files\Android\Android Studio\jbr/bin/java.exe 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>if exist "C:\Program Files\Android\Android Studio\jbr/bin/java.exe" goto init 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>if not "Windows_NT" == "Windows_NT" goto win9xME_args 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>if "@eval[2+2]" == "4" goto 4NT_args 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>set CMD_LINE_ARGS= 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>set _SKIP=2 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>if "x-q" == "x" goto execute 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>set CMD_LINE_ARGS=-q -Ptarget-platform=android-arm,android-arm64,android-x64 -Ptarget=lib\main.dart -Pbase-application-name=android.app.Application -Pdart-defines=RkxVVFRFUl9WRVJTSU9OPTMuMzUuNA==,RkxVVFRFUl9DSEFOTkVMPXN0YWJsZQ==,RkxVVFRFUl9HSVRfVVJMPWh0dHBzOi8vZ2l0aHViLmNvbS9mbHV0dGVyL2ZsdXR0ZXIuZ2l0,RkxVVFRFUl9GUkFNRVdPUktfUkVWSVNJT049ZDY5M2I0YjlkYg==,RkxVVFRFUl9FTkdJTkVfUkVWSVNJT049YzI5ODA5MTM1MQ==,RkxVVFRFUl9EQVJUX1ZFUlNJT049My45LjI= -Pdart-obfuscation=false -Ptrack-widget-creation=true -Ptree-shake-icons=false assembleDebug 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>goto execute 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>set CLASSPATH=C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android\\gradle\wrapper\gradle-wrapper.jar 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>"C:\Program Files\Android\Android Studio\jbr/bin/java.exe"    "-Dorg.gradle.appname=gradlew" -classpath "C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android\\gradle\wrapper\gradle-wrapper.jar" org.gradle.wrapper.GradleWrapperMain -q -Ptarget-platform=android-arm,android-arm64,android-x64 -Ptarget=lib\main.dart -Pbase-application-name=android.app.Application -Pdart-defines=RkxVVFRFUl9WRVJTSU9OPTMuMzUuNA==,RkxVVFRFUl9DSEFOTkVMPXN0YWJsZQ==,RkxVVFRFUl9HSVRfVVJMPWh0dHBzOi8vZ2l0aHViLmNvbS9mbHV0dGVyL2ZsdXR0ZXIuZ2l0,RkxVVFRFUl9GUkFNRVdPUktfUkVWSVNJT049ZDY5M2I0YjlkYg==,RkxVVFRFUl9FTkdJTkVfUkVWSVNJT049YzI5ODA5MTM1MQ==,RkxVVFRFUl9EQVJUX1ZFUlNJT049My45LjI= -Pdart-obfuscation=false -Ptrack-widget-creation=true -Ptree-shake-icons=false assembleDebug 
+e: Daemon compilation failed: null
+java.lang.Exception
+	at org.jetbrains.kotlin.daemon.common.CompileService$CallResult$Error.get(CompileService.kt:69)
+	at org.jetbrains.kotlin.daemon.common.CompileService$CallResult$Error.get(CompileService.kt:65)
+	at org.jetbrains.kotlin.compilerRunner.GradleKotlinCompilerWork.compileWithDaemon(GradleKotlinCompilerWork.kt:240)
+	at org.jetbrains.kotlin.compilerRunner.GradleKotlinCompilerWork.compileWithDaemonOrFallbackImpl(GradleKotlinCompilerWork.kt:159)
+	at org.jetbrains.kotlin.compilerRunner.GradleKotlinCompilerWork.run(GradleKotlinCompilerWork.kt:111)
+	at org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction.execute(GradleCompilerRunnerWithWorkers.kt:76)
+	at org.gradle.workers.internal.DefaultWorkerServer.execute(DefaultWorkerServer.java:63)
+	at org.gradle.workers.internal.NoIsolationWorkerFactory$1$1.create(NoIsolationWorkerFactory.java:66)
+	at org.gradle.workers.internal.NoIsolationWorkerFactory$1$1.create(NoIsolationWorkerFactory.java:62)
+	at org.gradle.internal.classloader.ClassLoaderUtils.executeInClassloader(ClassLoaderUtils.java:100)
+	at org.gradle.workers.internal.NoIsolationWorkerFactory$1.lambda$execute$0(NoIsolationWorkerFactory.java:62)
+	at org.gradle.workers.internal.AbstractWorker$1.call(AbstractWorker.java:44)
+	at org.gradle.workers.internal.AbstractWorker$1.call(AbstractWorker.java:41)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:209)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:204)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:66)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:166)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:53)
+	at org.gradle.workers.internal.AbstractWorker.executeWrappedInBuildOperation(AbstractWorker.java:41)
+	at org.gradle.workers.internal.NoIsolationWorkerFactory$1.execute(NoIsolationWorkerFactory.java:59)
+	at org.gradle.workers.internal.DefaultWorkerExecutor.lambda$submitWork$0(DefaultWorkerExecutor.java:174)
+	at java.base/java.util.concurrent.FutureTask.run(Unknown Source)
+	at org.gradle.internal.work.DefaultConditionalExecutionQueue$ExecutionRunner.runExecution(DefaultConditionalExecutionQueue.java:194)
+	at org.gradle.internal.work.DefaultConditionalExecutionQueue$ExecutionRunner.access$700(DefaultConditionalExecutionQueue.java:127)
+	at org.gradle.internal.work.DefaultConditionalExecutionQueue$ExecutionRunner$1.run(DefaultConditionalExecutionQueue.java:169)
+	at org.gradle.internal.Factories$1.create(Factories.java:31)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.withLocks(DefaultWorkerLeaseService.java:263)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.runAsWorkerThread(DefaultWorkerLeaseService.java:127)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.runAsWorkerThread(DefaultWorkerLeaseService.java:132)
+	at org.gradle.internal.work.DefaultConditionalExecutionQueue$ExecutionRunner.runBatch(DefaultConditionalExecutionQueue.java:164)
+	at org.gradle.internal.work.DefaultConditionalExecutionQueue$ExecutionRunner.run(DefaultConditionalExecutionQueue.java:133)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.base/java.util.concurrent.FutureTask.run(Unknown Source)
+	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
+	at org.gradle.internal.concurrent.AbstractManagedExecutor$1.run(AbstractManagedExecutor.java:48)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.AssertionError: java.lang.Exception: Could not close incremental caches in C:\Users\cs-ap\dev\flutter\packages\flutter_tools\gradle\build\kotlin\compileKotlin\cacheable\caches-jvm\jvm\kotlin: supertypes.tab, source-to-classes.tab, constants.tab, internal-name-to-source.tab
+	at org.jetbrains.kotlin.com.google.common.io.Closer.close(Closer.java:236)
+	at org.jetbrains.kotlin.incremental.IncrementalCachesManager.close(IncrementalCachesManager.kt:55)
+	at kotlin.io.CloseableKt.closeFinally(Closeable.kt:56)
+	at org.jetbrains.kotlin.incremental.IncrementalCompilerRunner.compileNonIncrementally(IncrementalCompilerRunner.kt:293)
+	at org.jetbrains.kotlin.incremental.IncrementalCompilerRunner.compile(IncrementalCompilerRunner.kt:129)
+	at org.jetbrains.kotlin.daemon.CompileServiceImplBase.execIncrementalCompiler(CompileServiceImpl.kt:675)
+	at org.jetbrains.kotlin.daemon.CompileServiceImplBase.access$execIncrementalCompiler(CompileServiceImpl.kt:92)
+	at org.jetbrains.kotlin.daemon.CompileServiceImpl.compile(CompileServiceImpl.kt:1660)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(Unknown Source)
+	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
+	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(Unknown Source)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Unknown Source)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Unknown Source)
+	at java.base/java.security.AccessController.doPrivileged(Unknown Source)
+	at java.rmi/sun.rmi.transport.Transport.serviceCall(Unknown Source)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(Unknown Source)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(Unknown Source)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(Unknown Source)
+	at java.base/java.security.AccessController.doPrivileged(Unknown Source)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(Unknown Source)
+	... 3 more
+Caused by: java.lang.Exception: Could not close incremental caches in C:\Users\cs-ap\dev\flutter\packages\flutter_tools\gradle\build\kotlin\compileKotlin\cacheable\caches-jvm\jvm\kotlin: supertypes.tab, source-to-classes.tab, constants.tab, internal-name-to-source.tab
+	at org.jetbrains.kotlin.incremental.storage.BasicMapsOwner.forEachMapSafe(BasicMapsOwner.kt:95)
+	at org.jetbrains.kotlin.incremental.storage.BasicMapsOwner.close(BasicMapsOwner.kt:53)
+	at org.jetbrains.kotlin.com.google.common.io.Closer.close(Closer.java:223)
+	... 22 more
+	Suppressed: java.lang.IllegalStateException: Storage for [C:\Users\cs-ap\dev\flutter\packages\flutter_tools\gradle\build\kotlin\compileKotlin\cacheable\caches-jvm\jvm\kotlin\supertypes.tab] is already registered
+		at org.jetbrains.kotlin.com.intellij.util.io.FilePageCache.registerPagedFileStorage(FilePageCache.java:410)
+		at org.jetbrains.kotlin.com.intellij.util.io.PagedFileStorage.<init>(PagedFileStorage.java:72)
+		at org.jetbrains.kotlin.com.intellij.util.io.ResizeableMappedFile.<init>(ResizeableMappedFile.java:55)
+		at org.jetbrains.kotlin.com.intellij.util.io.PersistentBTreeEnumerator.<init>(PersistentBTreeEnumerator.java:128)
+		at org.jetbrains.kotlin.com.intellij.util.io.PersistentEnumerator.createDefaultEnumerator(PersistentEnumerator.java:52)
+		at org.jetbrains.kotlin.com.intellij.util.io.PersistentMapImpl.<init>(PersistentMapImpl.java:165)
+		at org.jetbrains.kotlin.com.intellij.util.io.PersistentMapImpl.<init>(PersistentMapImpl.java:140)
+		at org.jetbrains.kotlin.com.intellij.util.io.PersistentMapBuilder.buildImplementation(PersistentMapBuilder.java:88)
+		at org.jetbrains.kotlin.com.intellij.util.io.PersistentMapBuilder.build(PersistentMapBuilder.java:71)
+		at org.jetbrains.kotlin.com.intellij.util.io.PersistentHashMap.<init>(PersistentHashMap.java:45)
+		at org.jetbrains.kotlin.com.intellij.util.io.PersistentHashMap.<init>(PersistentHashMap.java:71)
+		at org.jetbrains.kotlin.incremental.storage.LazyStorage.createMap(LazyStorage.kt:62)
+		at org.jetbrains.kotlin.incremental.storage.LazyStorage.getStorageOrCreateNew(LazyStorage.kt:59)
+		at org.jetbrains.kotlin.incremental.storage.LazyStorage.set(LazyStorage.kt:80)
+		at org.jetbrains.kotlin.incremental.storage.InMemoryStorage.applyChanges(InMemoryStorage.kt:108)
+		at org.jetbrains.kotlin.incremental.storage.AppendableInMemoryStorage.applyChanges(InMemoryStorage.kt:179)
+		at org.jetbrains.kotlin.incremental.storage.InMemoryStorage.close(InMemoryStorage.kt:136)
+		at org.jetbrains.kotlin.incremental.storage.AppendableSetBasicMap.close(BasicMap.kt:157)
+		at org.jetbrains.kotlin.incremental.storage.BasicMapsOwner$close$1.invoke(BasicMapsOwner.kt:53)
+		at org.jetbrains.kotlin.incremental.storage.BasicMapsOwner$close$1.invoke(BasicMapsOwner.kt:53)
+		at org.jetbrains.kotlin.incremental.storage.BasicMapsOwner.forEachMapSafe(BasicMapsOwner.kt:87)
+		... 24 more
+		Suppressed: java.lang.Exception: Storage[C:\Users\cs-ap\dev\flutter\packages\flutter_tools\gradle\build\kotlin\compileKotlin\cacheable\caches-jvm\jvm\kotlin\supertypes.tab] registration stack trace
+			at org.jetbrains.kotlin.com.intellij.util.io.FilePageCache.registerPagedFileStorage(FilePageCache.java:437)
+			... 44 more
+	Suppressed: java.lang.IllegalStateException: Storage for [C:\Users\cs-ap\dev\flutter\packages\flutter_tools\gradle\build\kotlin\compileKotlin\cacheable\caches-jvm\jvm\kotlin\source-to-classes.tab] is already registered
+		at org.jetbrains.kotlin.com.intellij.util.io.FilePageCache.registerPagedFileStorage(FilePageCache.java:410)
+		at org.jetbrains.kotlin.com.intellij.util.io.PagedFileStorage.<init>(PagedFileStorage.java:72)
+		at org.jetbrains.kotlin.com.intellij.util.io.ResizeableMappedFile.<init>(ResizeableMappedFile.java:55)
+		at org.jetbrains.kotlin.com.intellij.util.io.PersistentBTreeEnumerator.<init>(PersistentBTreeEnumerator.java:128)
+		at org.jetbrains.kotlin.com.intellij.util.io.PersistentEnumerator.createDefaultEnumerator(PersistentEnumerator.java:52)
+		at org.jetbrains.kotlin.com.intellij.util.io.PersistentMapImpl.<init>(PersistentMapImpl.java:165)
+		at org.jetbrains.kotlin.com.intellij.util.io.PersistentMapImpl.<init>(PersistentMapImpl.java:140)
+		at org.jetbrains.kotlin.com.intellij.util.io.PersistentMapBuilder.buildImplementation(PersistentMapBuilder.java:88)
+		at org.jetbrains.kotlin.com.intellij.util.io.PersistentMapBuilder.build(PersistentMapBuilder.java:71)
+		at org.jetbrains.kotlin.com.intellij.util.io.PersistentHashMap.<init>(PersistentHashMap.java:45)
+		at org.jetbrains.kotlin.com.intellij.util.io.PersistentHashMap.<init>(PersistentHashMap.java:71)
+		at org.jetbrains.kotlin.incremental.storage.LazyStorage.createMap(LazyStorage.kt:62)
+		at org.jetbrains.kotlin.incremental.storage.LazyStorage.getStorageOrCreateNew(LazyStorage.kt:59)
+		at org.jetbrains.kotlin.incremental.storage.LazyStorage.set(LazyStorage.kt:80)
+		at org.jetbrains.kotlin.incremental.storage.InMemoryStorage.applyChanges(InMemoryStorage.kt:108)
+		at org.jetbrains.kotlin.incremental.storage.AppendableInMemoryStorage.applyChanges(InMemoryStorage.kt:179)
+		at org.jetbrains.kotlin.incremental.storage.InMemoryStorage.close(InMemoryStorage.kt:136)
+		at org.jetbrains.kotlin.incremental.storage.AppendableSetBasicMap.close(BasicMap.kt:157)
+		at org.jetbrains.kotlin.incremental.storage.BasicMapsOwner$close$1.invoke(BasicMapsOwner.kt:53)
+		at org.jetbrains.kotlin.incremental.storage.BasicMapsOwner$close$1.invoke(BasicMapsOwner.kt:53)
+		at org.jetbrains.kotlin.incremental.storage.BasicMapsOwner.forEachMapSafe(BasicMapsOwner.kt:87)
+		... 24 more
+		Suppressed: java.lang.Exception: Storage[C:\Users\cs-ap\dev\flutter\packages\flutter_tools\gradle\build\kotlin\compileKotlin\cacheable\caches-jvm\jvm\kotlin\source-to-classes.tab] registration stack trace
+			at org.jetbrains.kotlin.com.intellij.util.io.FilePageCache.registerPagedFileStorage(FilePageCache.java:437)
+			... 44 more
+	Suppressed: java.lang.IllegalStateException: Storage for [C:\Users\cs-ap\dev\flutter\packages\flutter_tools\gradle\build\kotlin\compileKotlin\cacheable\caches-jvm\jvm\kotlin\constants.tab] is already registered
+		at org.jetbrains.kotlin.com.intellij.util.io.FilePageCache.registerPagedFileStorage(FilePageCache.java:410)
+		at org.jetbrains.kotlin.com.intellij.util.io.PagedFileStorage.<init>(PagedFileStorage.java:72)
+		at org.jetbrains.kotlin.com.intellij.util.io.ResizeableMappedFile.<init>(ResizeableMappedFile.java:55)
+		at org.jetbrains.kotlin.com.intellij.util.io.PersistentBTreeEnumerator.<init>(PersistentBTreeEnumerator.java:128)
+		at org.jetbrains.kotlin.com.intellij.util.io.PersistentEnumerator.createDefaultEnumerator(PersistentEnumerator.java:52)
+		at org.jetbrains.kotlin.com.intellij.util.io.PersistentMapImpl.<init>(PersistentMapImpl.java:165)
+		at org.jetbrains.kotlin.com.intellij.util.io.PersistentMapImpl.<init>(PersistentMapImpl.java:140)
+		at org.jetbrains.kotlin.com.intellij.util.io.PersistentMapBuilder.buildImplementation(PersistentMapBuilder.java:88)
+		at org.jetbrains.kotlin.com.intellij.util.io.PersistentMapBuilder.build(PersistentMapBuilder.java:71)
+		at org.jetbrains.kotlin.com.intellij.util.io.PersistentHashMap.<init>(PersistentHashMap.java:45)
+		at org.jetbrains.kotlin.com.intellij.util.io.PersistentHashMap.<init>(PersistentHashMap.java:71)
+		at org.jetbrains.kotlin.incremental.storage.LazyStorage.createMap(LazyStorage.kt:62)
+		at org.jetbrains.kotlin.incremental.storage.LazyStorage.getStorageOrCreateNew(LazyStorage.kt:59)
+		at org.jetbrains.kotlin.incremental.storage.LazyStorage.set(LazyStorage.kt:80)
+		at org.jetbrains.kotlin.incremental.storage.InMemoryStorage.applyChanges(InMemoryStorage.kt:108)
+		at org.jetbrains.kotlin.incremental.storage.InMemoryStorage.close(InMemoryStorage.kt:136)
+		at org.jetbrains.kotlin.incremental.storage.PersistentStorageWrapper.close(PersistentStorage.kt:111)
+		at org.jetbrains.kotlin.incremental.storage.BasicMapsOwner$close$1.invoke(BasicMapsOwner.kt:53)
+		at org.jetbrains.kotlin.incremental.storage.BasicMapsOwner$close$1.invoke(BasicMapsOwner.kt:53)
+		at org.jetbrains.kotlin.incremental.storage.BasicMapsOwner.forEachMapSafe(BasicMapsOwner.kt:87)
+		... 24 more
+		Suppressed: java.lang.Exception: Storage[C:\Users\cs-ap\dev\flutter\packages\flutter_tools\gradle\build\kotlin\compileKotlin\cacheable\caches-jvm\jvm\kotlin\constants.tab] registration stack trace
+			at org.jetbrains.kotlin.com.intellij.util.io.FilePageCache.registerPagedFileStorage(FilePageCache.java:437)
+			... 43 more
+	Suppressed: java.lang.IllegalStateException: Storage for [C:\Users\cs-ap\dev\flutter\packages\flutter_tools\gradle\build\kotlin\compileKotlin\cacheable\caches-jvm\jvm\kotlin\internal-name-to-source.tab] is already registered
+		at org.jetbrains.kotlin.com.intellij.util.io.FilePageCache.registerPagedFileStorage(FilePageCache.java:410)
+		at org.jetbrains.kotlin.com.intellij.util.io.PagedFileStorage.<init>(PagedFileStorage.java:72)
+		at org.jetbrains.kotlin.com.intellij.util.io.ResizeableMappedFile.<init>(ResizeableMappedFile.java:55)
+		at org.jetbrains.kotlin.com.intellij.util.io.PersistentBTreeEnumerator.<init>(PersistentBTreeEnumerator.java:128)
+		at org.jetbrains.kotlin.com.intellij.util.io.PersistentEnumerator.createDefaultEnumerator(PersistentEnumerator.java:52)
+		at org.jetbrains.kotlin.com.intellij.util.io.PersistentMapImpl.<init>(PersistentMapImpl.java:165)
+		at org.jetbrains.kotlin.com.intellij.util.io.PersistentMapImpl.<init>(PersistentMapImpl.java:140)
+		at org.jetbrains.kotlin.com.intellij.util.io.PersistentMapBuilder.buildImplementation(PersistentMapBuilder.java:88)
+		at org.jetbrains.kotlin.com.intellij.util.io.PersistentMapBuilder.build(PersistentMapBuilder.java:71)
+		at org.jetbrains.kotlin.com.intellij.util.io.PersistentHashMap.<init>(PersistentHashMap.java:45)
+		at org.jetbrains.kotlin.com.intellij.util.io.PersistentHashMap.<init>(PersistentHashMap.java:71)
+		at org.jetbrains.kotlin.incremental.storage.LazyStorage.createMap(LazyStorage.kt:62)
+		at org.jetbrains.kotlin.incremental.storage.LazyStorage.getStorageOrCreateNew(LazyStorage.kt:59)
+		at org.jetbrains.kotlin.incremental.storage.LazyStorage.set(LazyStorage.kt:80)
+		at org.jetbrains.kotlin.incremental.storage.InMemoryStorage.applyChanges(InMemoryStorage.kt:108)
+		at org.jetbrains.kotlin.incremental.storage.AppendableInMemoryStorage.applyChanges(InMemoryStorage.kt:179)
+		at org.jetbrains.kotlin.incremental.storage.InMemoryStorage.close(InMemoryStorage.kt:136)
+		at org.jetbrains.kotlin.incremental.storage.PersistentStorageWrapper.close(PersistentStorage.kt:111)
+		at org.jetbrains.kotlin.incremental.storage.BasicMapsOwner$close$1.invoke(BasicMapsOwner.kt:53)
+		at org.jetbrains.kotlin.incremental.storage.BasicMapsOwner$close$1.invoke(BasicMapsOwner.kt:53)
+		at org.jetbrains.kotlin.incremental.storage.BasicMapsOwner.forEachMapSafe(BasicMapsOwner.kt:87)
+		... 24 more
+		Suppressed: java.lang.Exception: Storage[C:\Users\cs-ap\dev\flutter\packages\flutter_tools\gradle\build\kotlin\compileKotlin\cacheable\caches-jvm\jvm\kotlin\internal-name-to-source.tab] registration stack trace
+			at org.jetbrains.kotlin.com.intellij.util.io.FilePageCache.registerPagedFileStorage(FilePageCache.java:437)
+			... 44 more
+
+exception: warning: ATTENTION!
+exception: this build uses unsafe internal compiler arguments:
+exception: 
+exception: 
+exception: this mode is not recommended for production use,
+exception: as no stability/compatibility guarantees are given on
+exception: compiler or generated code. Use it at your own risk!
+exception: 
+exception: c:\Users\cs-ap\dev\flutter\packages\flutter_tools\gradle\src\main\kotlin\DependencyVersionChecker.kt:194:39: warning: 'getter for minSdkVersion: AndroidVersion' is deprecated. Will be removed in v9.0
+exception:             MinSdkVersion(it.name, it.minSdkVersion.apiLevel)
+exception:                                       ^^^^^^^^^^^^^
+exception: c:\Users\cs-ap\dev\flutter\packages\flutter_tools\gradle\src\main\kotlin\FlutterPlugin.kt:11:37: warning: 'ApkVariant' is deprecated. Deprecated in Java
+exception: import com.android.build.gradle.api.ApkVariant
+exception:                                     ^^^^^^^^^^
+exception: c:\Users\cs-ap\dev\flutter\packages\flutter_tools\gradle\src\main\kotlin\FlutterPlugin.kt:628:69: warning: 'ApkVariant' is deprecated. Deprecated in Java
+exception:                     val versionCodeIfPresent: Int? = if (variant is ApkVariant) variant.versionCode else null
+exception:                                                                     ^^^^^^^^^^
+Checking the license for package NDK (Side by side) 27.0.12077973 in C:\Users\cs-ap\dev\Android\Sdk\licenses
+License for package NDK (Side by side) 27.0.12077973 accepted.
+Preparing "Install NDK (Side by side) 27.0.12077973 v.27.0.12077973".
+
+TIMEOUT after 4500 seconds
+"Install NDK (Side by side) 27.0.12077973 v.27.0.12077973" ready.
+Installing NDK (Side by side) 27.0.12077973 in C:\Users\cs-ap\dev\Android\Sdk\ndk\27.0.12077973
+"Install NDK (Side by side) 27.0.12077973 v.27.0.12077973" complete.
+"Install NDK (Side by side) 27.0.12077973 v.27.0.12077973" finished.
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+A problem occurred configuring project ':connectivity_plus'.
+> Could not resolve all artifacts for configuration 'classpath'.
+   > Could not resolve com.android.tools.build:gradle:8.3.1.
+     Required by:
+         project :connectivity_plus
+      > Could not resolve com.android.tools.build:gradle:8.3.1.
+         > Could not get resource 'https://dl.google.com/dl/android/maven2/com/android/tools/build/gradle/8.3.1/gradle-8.3.1.module'.
+            > Could not GET 'https://dl.google.com/dl/android/maven2/com/android/tools/build/gradle/8.3.1/gradle-8.3.1.module'.
+               > Connect to dl.google.com:443 [dl.google.com/142.251.29.190] failed: Read timed out
+> Failed to notify project evaluation listener.
+   > java.lang.NullPointerException (no error message)
+   > java.lang.NullPointerException (no error message)
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 1h 38m 40s
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>if "1" == "0" goto mainEnd 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>rem Set variable GRADLE_EXIT_CONSOLE if you need the _script_ return code instead of 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>rem the _cmd.exe /c_ return code! 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>if not "" == "" exit 1 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>exit /b 1 
+Running Gradle task 'assembleDebug'...                           5928.4s
+[!] Gradle threw an error while downloading artifacts from the network.
+Retrying Gradle Build: #1, wait time: 100ms
+Running Gradle task 'assembleDebug'...                          
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>if "Windows_NT" == "Windows_NT" setlocal
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>set DEFAULT_JVM_OPTS= 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>set DIRNAME=C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android\ 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>if "C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android\" == "" set DIRNAME=. 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>set APP_BASE_NAME=gradlew 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>set APP_HOME=C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android\ 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>if defined JAVA_HOME goto findJavaFromJavaHome 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>set JAVA_HOME=C:\Program Files\Android\Android Studio\jbr 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>set JAVA_EXE=C:\Program Files\Android\Android Studio\jbr/bin/java.exe 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>if exist "C:\Program Files\Android\Android Studio\jbr/bin/java.exe" goto init 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>if not "Windows_NT" == "Windows_NT" goto win9xME_args 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>if "@eval[2+2]" == "4" goto 4NT_args 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>set CMD_LINE_ARGS= 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>set _SKIP=2 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>if "x-q" == "x" goto execute 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>set CMD_LINE_ARGS=-q -Ptarget-platform=android-arm,android-arm64,android-x64 -Ptarget=lib\main.dart -Pbase-application-name=android.app.Application -Pdart-defines=RkxVVFRFUl9WRVJTSU9OPTMuMzUuNA==,RkxVVFRFUl9DSEFOTkVMPXN0YWJsZQ==,RkxVVFRFUl9HSVRfVVJMPWh0dHBzOi8vZ2l0aHViLmNvbS9mbHV0dGVyL2ZsdXR0ZXIuZ2l0,RkxVVFRFUl9GUkFNRVdPUktfUkVWSVNJT049ZDY5M2I0YjlkYg==,RkxVVFRFUl9FTkdJTkVfUkVWSVNJT049YzI5ODA5MTM1MQ==,RkxVVFRFUl9EQVJUX1ZFUlNJT049My45LjI= -Pdart-obfuscation=false -Ptrack-widget-creation=true -Ptree-shake-icons=false assembleDebug 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>goto execute 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>set CLASSPATH=C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android\\gradle\wrapper\gradle-wrapper.jar 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>"C:\Program Files\Android\Android Studio\jbr/bin/java.exe"    "-Dorg.gradle.appname=gradlew" -classpath "C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android\\gradle\wrapper\gradle-wrapper.jar" org.gradle.wrapper.GradleWrapperMain -q -Ptarget-platform=android-arm,android-arm64,android-x64 -Ptarget=lib\main.dart -Pbase-application-name=android.app.Application -Pdart-defines=RkxVVFRFUl9WRVJTSU9OPTMuMzUuNA==,RkxVVFRFUl9DSEFOTkVMPXN0YWJsZQ==,RkxVVFRFUl9HSVRfVVJMPWh0dHBzOi8vZ2l0aHViLmNvbS9mbHV0dGVyL2ZsdXR0ZXIuZ2l0,RkxVVFRFUl9GUkFNRVdPUktfUkVWSVNJT049ZDY5M2I0YjlkYg==,RkxVVFRFUl9FTkdJTkVfUkVWSVNJT049YzI5ODA5MTM1MQ==,RkxVVFRFUl9EQVJUX1ZFUlNJT049My45LjI= -Pdart-obfuscation=false -Ptrack-widget-creation=true -Ptree-shake-icons=false assembleDebug 
+The message received from the daemon indicates that the daemon has disappeared.
+Build request sent: Build{id=31970159-47d0-45c6-beda-3c1da57bfddd, currentDir=C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android}
+Attempting to read last messages from the daemon log...
+Daemon pid: 25332
+  log file: C:\Users\cs-ap\.gradle\daemon\8.12\daemon-25332.out.log
+----- Last 20 lines from daemon log file - daemon-25332.out.log -----
+2026-10-31T12:49:05.429+0200 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 220: received class org.gradle.launcher.daemon.protocol.Build
+2026-10-31T12:49:05.429+0200 [DEBUG] [org.gradle.launcher.daemon.server.DefaultDaemonConnection] thread 220: Received non-IO message from client: Build{id=31970159-47d0-45c6-beda-3c1da57bfddd, currentDir=C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android}
+2026-10-31T12:49:05.430+0200 [INFO] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Received command: Build{id=31970159-47d0-45c6-beda-3c1da57bfddd, currentDir=C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android}.
+2026-10-31T12:49:05.431+0200 [DEBUG] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Starting executing command: Build{id=31970159-47d0-45c6-beda-3c1da57bfddd, currentDir=C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android} with connection: socket connection from /127.0.0.1:65135 to /127.0.0.1:55144.
+2026-10-31T12:49:05.433+0200 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Command execution: started DaemonCommandExecution[command = Build{id=31970159-47d0-45c6-beda-3c1da57bfddd, currentDir=C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android}, connection = DefaultDaemonConnection: socket connection from /127.0.0.1:65135 to /127.0.0.1:55144] after 0.1398 minutes of idle
+2026-10-31T12:49:05.433+0200 [INFO] [org.gradle.launcher.daemon.server.DaemonRegistryUpdater] Marking the daemon as busy, address: [8ef1c9e4-07f6-47cb-bdef-7c4cc9d19e0b port:65135, addresses:[localhost/127.0.0.1]]
+2026-10-31T12:49:05.434+0200 [DEBUG] [org.gradle.launcher.daemon.registry.PersistentDaemonRegistry] Marking busy by address: [8ef1c9e4-07f6-47cb-bdef-7c4cc9d19e0b port:65135, addresses:[localhost/127.0.0.1]]
+2026-10-31T12:49:05.443+0200 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire exclusive lock on daemon addresses registry.
+2026-10-31T12:49:05.445+0200 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2026-10-31T12:49:05.451+0200 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2026-10-31T12:49:05.454+0200 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] resetting idle timer
+2026-10-31T12:49:05.455+0200 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] daemon is running. Sleeping until state changes.
+2026-10-31T12:49:05.456+0200 [INFO] [org.gradle.launcher.daemon.server.exec.StartBuildOrRespondWithBusy] Daemon is about to start building Build{id=31970159-47d0-45c6-beda-3c1da57bfddd, currentDir=C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android}. Dispatching build started information...
+2026-10-31T12:49:05.457+0200 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 35: dispatching org.gradle.launcher.daemon.protocol.BuildStarted@269b18b3
+2026-10-31T12:49:05.471+0200 [DEBUG] [org.gradle.launcher.daemon.server.exec.EstablishBuildEnvironment] Configuring env variables: [PATH, POWERSHELL_EXECUTABLE, SESSIONNAME, ALLUSERSPROFILE, ANDROID_HOME, VSCODE_PID, GH_PAGER, PROGRAMFILES, COLORTERM, PSMODULEPATH, DIRNAME, AI_PROVIDER, USERNAME, CMD_LINE_ARGS, VSCODE_NLS_CONFIG, EXIT_WITH_ERRORLEVEL, FPS_BROWSER_USER_PROFILE_STRING, PATHEXT, PAGER, SNAPSHOT_PATH, HOMEPATH, LC_ALL, PROCESSOR_IDENTIFIER, EFC_11032_1592913036, PUBLIC, LC_CTYPE, CACHE_DIR, CODEX_SESSION_ID, _SKIP, FPS_BROWSER_APP_PROFILE_STRING, JAVA_HOME, FLUTTER_TOOLS_DIR, PROMPT, RUST_LOG, PROGRAMFILES(X86), TERM, EFC_11032_2283032206, =C:, APPDATA, CODEX_APPLY_PATCH_PRESERVE_LINE_ENDINGS, JAVA_EXE, CODEX_THREAD_ID, DART, VSCODE_CWD, COMPUTERNAME, VSCODE_ESM_ENTRYPOINT, VSCODE_NODE_COMPILE_CACHE_KIND, EFC_11032_4126798990, APP_BASE_NAME, FLUTTER_ALREADY_LOCKED, HOMEDRIVE, NUMBER_OF_PROCESSORS, VSCODE_IPC_HOOK, USERDOMAIN_ROAMINGPROFILE, EFC_11032_3789132940, PROCESSOR_LEVEL, SYSTEMDRIVE, GIT_PAGER, PROCESSOR_ARCHITECTURE, PAYMENT_PROVIDER, DRIVERDATA, PROGRAMDATA, CHROME_CRASHPAD_PIPE_NAME, CODEX_INTERNAL_ORIGINATOR_OVERRIDE, ONEDRIVE, APP_HOME, MINGIT_PATH, CODEX_SANDBOX_NETWORK_DISABLED, EFC_11032_1262719628, VSCODE_CRASH_REPORTER_PROCESS_TYPE, GOPATH, CODEX_PERMISSION_PROFILE, SHARED_BIN, VSCODE_CODE_CACHE_PATH, WINDIR, VSCODE_NODE_COMPILE_CACHE_ROOT, LOCALAPPDATA, COMMONPROGRAMFILES(X86), USERDOMAIN, VSCODE_HANDLES_UNCAUGHT_ERRORS, DART_SDK_PATH, LOGONSERVER, FLUTTER_ROOT, LANG, PYTHONUTF8, ELECTRON_RUN_AS_NODE, FCM_ENABLED, PROGRAMW6432, EDUNOVA_ENV, SYSTEMROOT, NO_COLOR, CODEX_CI, APPLICATION_INSIGHTS_NO_STATSBEAT, OS, COMMONPROGRAMW6432, PYTHONIOENCODING, COMMONPROGRAMFILES, COMSPEC, CODEX_TOOL_CALL_ID, PROCESSOR_REVISION, CLASSPATH, DEBUG, TEMP, USERPROFILE, TMP, CODEX_VERSION]
+2026-10-31T12:49:05.485+0200 [DEBUG] [org.gradle.launcher.daemon.server.exec.LogToClient] About to start relaying all logs to the client via the connection.
+2026-10-31T12:49:05.486+0200 [INFO] [org.gradle.launcher.daemon.server.exec.LogToClient] The client will now receive all logging from the daemon (pid: 25332). The daemon log file: C:\Users\cs-ap\.gradle\daemon\8.12\daemon-25332.out.log
+2026-10-31T12:49:05.578+0200 [INFO] [org.gradle.launcher.daemon.server.exec.LogAndCheckHealth] Starting 2nd build in daemon [uptime: 1 hrs 31 mins 59.139 secs, performance: 100%, GC rate: 0.00/s, heap usage: 0% of 8 GiB, non-heap usage: 5% of 4 GiB]
+2026-10-31T12:49:05.581+0200 [DEBUG] [org.gradle.launcher.daemon.server.exec.ExecuteBuild] The daemon has started executing the build.
+2026-10-31T12:49:05.582+0200 [DEBUG] [org.gradle.launcher.daemon.server.exec.ExecuteBuild] Executing build with daemon context: DefaultDaemonContext[uid=5b3d13b3-0354-4f6a-8e9c-c536680f99c6,javaHome=C:\Program Files\Android\Android Studio\jbr,javaVersion=21,javaVendor=JetBrains s.r.o.,daemonRegistryDir=C:\Users\cs-ap\.gradle\daemon,pid=25332,idleTimeout=10800000,priority=NORMAL,applyInstrumentationAgent=true,nativeServicesMode=ENABLED,daemonOpts=-XX:MaxMetaspaceSize=4G,-XX:ReservedCodeCacheSize=512m,-XX:+HeapDumpOnOutOfMemoryError,-Xmx8G,-Dfile.encoding=UTF-8,-Duser.country=US,-Duser.language=en,-Duser.variant]----- End of the daemon log -----
+
+JVM crash log found: file:///C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/android/hs_err_pid25332.log
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Gradle build daemon disappeared unexpectedly (it may have been killed or may have crashed)
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>if "1" == "0" goto mainEnd 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>rem Set variable GRADLE_EXIT_CONSOLE if you need the _script_ return code instead of 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>rem the _cmd.exe /c_ return code! 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>if not "" == "" exit 1 
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\android>exit /b 1 
+Running Gradle task 'assembleDebug'...                             45.7s
+Gradle task assembleDebug failed with exit code 1

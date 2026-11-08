@@ -1,0 +1,6 @@
+from typing import Protocol
+
+
+class SharedDocumentStorage(Protocol):
+    async def put(self, *, key: str, content: bytes, content_type: str) -> str: ...
+    async def signed_read_url(self, *, key: str, ttl_seconds: int = 300) -> str: ...

@@ -1,0 +1,874 @@
+COMMAND: C:\Users\cs-ap\dev\edusync-web\edunova\.venv\Scripts\python.exe -m pytest -q -n 4 --dist loadfile --durations=20 services/api/tests --junitxml=C:\Users\cs-ap\dev\edusync-web\edunova\evidence\local-phase19\backend-final.xml
+CWD: C:\Users\cs-ap\dev\edusync-web\edunova
+bringing up nodes...
+bringing up nodes...
+
+........................................................................ [  5%]
+........................................................................ [ 11%]
+........................................................................ [ 17%]
+........................................................................ [ 23%]
+........................................................................ [ 29%]
+........................................................................ [ 35%]
+........................................................................ [ 41%]
+........................................................................ [ 47%]
+....................F...............F...F........F.F.................... [ 53%]
+........................................................................ [ 59%]
+........................................................................ [ 65%]
+....................sssssssss.................................ssssssss.. [ 70%]
+.........................F.FFF.FF.F..................................... [ 76%]
+.....F.................................F................................ [ 82%]
+........................................................................ [ 88%]
+........................................................................ [ 94%]
+.................................................................        [100%]
+================================== FAILURES ===================================
+____ test_batch_upload_idempotency_freeze_worker_and_editorial_projection _____
+[gw3] win32 -- Python 3.13.14 C:\Users\cs-ap\dev\edusync-web\edunova\.venv\Scripts\python.exe
+
+    def test_batch_upload_idempotency_freeze_worker_and_editorial_projection():
+        _,h=account(); batch=create_batch(h); bid=batch['id']; payload=pdf_bytes()
+        files={'file':('physio.pdf',payload,'application/pdf')}
+        r=client.post(f'/v1/ingestion/batches/{bid}/files',headers={**h,'Idempotency-Key':'u-1'},files=files)
+        assert r.status_code==200,r.text; doc=r.json(); assert doc['preflight_status']=='passed'
+        r2=client.post(f'/v1/ingestion/batches/{bid}/files',headers={**h,'Idempotency-Key':'u-1'},files=files)
+        assert r2.status_code==200 and r2.json()['id']==doc['id']
+        start=client.post(f'/v1/ingestion/batches/{bid}/start',headers=h,json={'priority':80}); assert start.status_code==200 and start.json()['manifest_sha256']
+        blocked=client.post(f'/v1/ingestion/batches/{bid}/files',headers={**h,'Idempotency-Key':'u-2'},files={'file':('x.pdf',pdf_bytes('autre'),'application/pdf')})
+        assert blocked.status_code==409
+        job=runtime.ingestion.claim_job(worker_id='pytest-worker'); assert job is not None
+>       result=runtime.ingestion.process_job(worker_id='pytest-worker',job_id=job.id)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+services\api\tests\ingestion\test_ingestion_api.py:43: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+services\api\app\modules\ingestion\application\service.py:251: in process_job
+    processed=(pipeline or PremiumDocumentPipeline()).process(Path(tmp.name),title=Path(doc.filename).stem)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+services\api\app\modules\document_engine\application\pipeline.py:35: in process
+    fingerprint = _sha256(path)
+                  ^^^^^^^^^^^^^
+services\api\app\modules\document_engine\application\pipeline.py:71: in _sha256
+    with path.open("rb") as handle:
+         ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/cs-ap/AppData/Local/Temp/tmpgzvny26d.pdf')
+mode = 'rb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       PermissionError: [Errno 13] Permission denied: 'C:\\Users\\cs-ap\\AppData\\Local\\Temp\\tmpgzvny26d.pdf'
+
+..\..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:537: PermissionError
+---------------------------- Captured stderr call -----------------------------
+{"ts":"2026-10-31 06:35:39,124","level":"INFO","logger":"edunova.http","message":"request request_id=fbee4409292d4bd3906a812f4922f5f7 method=POST path=/v1/ingestion/batches status=200 duration_ms=172"}
+{"ts":"2026-10-31 06:35:39,136","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:35:39,680","level":"INFO","logger":"edunova.http","message":"request request_id=1670214c1d284a9b958172703c51446d method=POST path=/v1/ingestion/batches/f8865ab7-9060-48c7-a4f9-72c073666c31/files status=200 duration_ms=205"}
+{"ts":"2026-10-31 06:35:39,684","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/f8865ab7-9060-48c7-a4f9-72c073666c31/files \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:35:39,706","level":"INFO","logger":"edunova.http","message":"request request_id=60d47b8c553c41e4baa00809afe26ff9 method=POST path=/v1/ingestion/batches/f8865ab7-9060-48c7-a4f9-72c073666c31/files status=200 duration_ms=16"}
+{"ts":"2026-10-31 06:35:39,709","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/f8865ab7-9060-48c7-a4f9-72c073666c31/files \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:35:39,934","level":"INFO","logger":"edunova.http","message":"request request_id=1326830954a14b39a10782781925d69e method=POST path=/v1/ingestion/batches/f8865ab7-9060-48c7-a4f9-72c073666c31/start status=200 duration_ms=219"}
+{"ts":"2026-10-31 06:35:39,937","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/f8865ab7-9060-48c7-a4f9-72c073666c31/start \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:35:39,965","level":"INFO","logger":"edunova.http","message":"request request_id=805497ac315247d3911c8cbc507eba08 method=POST path=/v1/ingestion/batches/f8865ab7-9060-48c7-a4f9-72c073666c31/files status=409 duration_ms=17"}
+{"ts":"2026-10-31 06:35:39,969","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/f8865ab7-9060-48c7-a4f9-72c073666c31/files \"HTTP/1.1 409 Conflict\""}
+------------------------------ Captured log call ------------------------------
+INFO     edunova.http:observability.py:23 request request_id=fbee4409292d4bd3906a812f4922f5f7 method=POST path=/v1/ingestion/batches status=200 duration_ms=172
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=1670214c1d284a9b958172703c51446d method=POST path=/v1/ingestion/batches/f8865ab7-9060-48c7-a4f9-72c073666c31/files status=200 duration_ms=205
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/f8865ab7-9060-48c7-a4f9-72c073666c31/files "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=60d47b8c553c41e4baa00809afe26ff9 method=POST path=/v1/ingestion/batches/f8865ab7-9060-48c7-a4f9-72c073666c31/files status=200 duration_ms=16
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/f8865ab7-9060-48c7-a4f9-72c073666c31/files "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=1326830954a14b39a10782781925d69e method=POST path=/v1/ingestion/batches/f8865ab7-9060-48c7-a4f9-72c073666c31/start status=200 duration_ms=219
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/f8865ab7-9060-48c7-a4f9-72c073666c31/start "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=805497ac315247d3911c8cbc507eba08 method=POST path=/v1/ingestion/batches/f8865ab7-9060-48c7-a4f9-72c073666c31/files status=409 duration_ms=17
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/f8865ab7-9060-48c7-a4f9-72c073666c31/files "HTTP/1.1 409 Conflict"
+___ test_global_dedup_reuses_already_processed_document_without_second_ocr ____
+[gw3] win32 -- Python 3.13.14 C:\Users\cs-ap\dev\edusync-web\edunova\.venv\Scripts\python.exe
+
+    def test_global_dedup_reuses_already_processed_document_without_second_ocr():
+        _,h=account(); payload=pdf_bytes('Document global unique ' + uuid4().hex)
+        b1=create_batch(h,'Premier lot'); d1=client.post(f"/v1/ingestion/batches/{b1['id']}/files",headers={**h,'Idempotency-Key':'g1'},files={'file':('g.pdf',payload,'application/pdf')}).json()
+        client.post(f"/v1/ingestion/batches/{b1['id']}/start",headers=h,json={})
+>       j=runtime.ingestion.claim_job(worker_id='dedup-worker'); r1=runtime.ingestion.process_job(worker_id='dedup-worker',job_id=j.id)
+                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+services\api\tests\ingestion\test_ingestion_api.py:80: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+services\api\app\modules\ingestion\application\service.py:251: in process_job
+    processed=(pipeline or PremiumDocumentPipeline()).process(Path(tmp.name),title=Path(doc.filename).stem)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+services\api\app\modules\document_engine\application\pipeline.py:35: in process
+    fingerprint = _sha256(path)
+                  ^^^^^^^^^^^^^
+services\api\app\modules\document_engine\application\pipeline.py:71: in _sha256
+    with path.open("rb") as handle:
+         ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/cs-ap/AppData/Local/Temp/tmphm25sdt_.pdf')
+mode = 'rb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       PermissionError: [Errno 13] Permission denied: 'C:\\Users\\cs-ap\\AppData\\Local\\Temp\\tmphm25sdt_.pdf'
+
+..\..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:537: PermissionError
+---------------------------- Captured stderr call -----------------------------
+{"ts":"2026-10-31 06:36:45,847","level":"INFO","logger":"edunova.http","message":"request request_id=74ed8071da104c7ea9528b85afbd54e3 method=POST path=/v1/ingestion/batches status=200 duration_ms=76"}
+{"ts":"2026-10-31 06:36:45,852","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:36:46,721","level":"INFO","logger":"edunova.http","message":"request request_id=cafdcd07f12e4237b3f7e4d9f3c2bd88 method=POST path=/v1/ingestion/batches/b687769b-3117-428a-9645-54fb8faab0b6/files status=200 duration_ms=796"}
+{"ts":"2026-10-31 06:36:46,731","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/b687769b-3117-428a-9645-54fb8faab0b6/files \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:36:46,905","level":"INFO","logger":"edunova.http","message":"request request_id=9bf69c97d074404c86511369e820c73b method=POST path=/v1/ingestion/batches/b687769b-3117-428a-9645-54fb8faab0b6/start status=200 duration_ms=158"}
+{"ts":"2026-10-31 06:36:46,911","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/b687769b-3117-428a-9645-54fb8faab0b6/start \"HTTP/1.1 200 OK\""}
+------------------------------ Captured log call ------------------------------
+INFO     edunova.http:observability.py:23 request request_id=74ed8071da104c7ea9528b85afbd54e3 method=POST path=/v1/ingestion/batches status=200 duration_ms=76
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=cafdcd07f12e4237b3f7e4d9f3c2bd88 method=POST path=/v1/ingestion/batches/b687769b-3117-428a-9645-54fb8faab0b6/files status=200 duration_ms=796
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/b687769b-3117-428a-9645-54fb8faab0b6/files "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=9bf69c97d074404c86511369e820c73b method=POST path=/v1/ingestion/batches/b687769b-3117-428a-9645-54fb8faab0b6/start status=200 duration_ms=158
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/b687769b-3117-428a-9645-54fb8faab0b6/start "HTTP/1.1 200 OK"
+_____________ test_preview_and_global_dashboard_after_processing ______________
+[gw3] win32 -- Python 3.13.14 C:\Users\cs-ap\dev\edusync-web\edunova\.venv\Scripts\python.exe
+
+    def test_preview_and_global_dashboard_after_processing():
+        _,h=account(); payload=pdf_bytes('Question 1. Définir la membrane cellulaire. ' + uuid4().hex)
+        b=create_batch(h,'Preview lot'); d=client.post(f"/v1/ingestion/batches/{b['id']}/files",headers={**h,'Idempotency-Key':'p1'},files={'file':('preview.pdf',payload,'application/pdf')}).json()
+>       client.post(f"/v1/ingestion/batches/{b['id']}/start",headers=h,json={}); j=runtime.ingestion.claim_job(worker_id='preview-worker'); runtime.ingestion.process_job(worker_id='preview-worker',job_id=j.id)
+                                                                                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+services\api\tests\ingestion\test_ingestion_api.py:91: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+services\api\app\modules\ingestion\application\service.py:251: in process_job
+    processed=(pipeline or PremiumDocumentPipeline()).process(Path(tmp.name),title=Path(doc.filename).stem)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+services\api\app\modules\document_engine\application\pipeline.py:35: in process
+    fingerprint = _sha256(path)
+                  ^^^^^^^^^^^^^
+services\api\app\modules\document_engine\application\pipeline.py:71: in _sha256
+    with path.open("rb") as handle:
+         ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/cs-ap/AppData/Local/Temp/tmpcq8lvkn1.pdf')
+mode = 'rb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       PermissionError: [Errno 13] Permission denied: 'C:\\Users\\cs-ap\\AppData\\Local\\Temp\\tmpcq8lvkn1.pdf'
+
+..\..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:537: PermissionError
+---------------------------- Captured stderr call -----------------------------
+{"ts":"2026-10-31 06:36:51,778","level":"INFO","logger":"edunova.http","message":"request request_id=90b50d0835494100978d3b9b53cfd621 method=POST path=/v1/ingestion/batches status=200 duration_ms=79"}
+{"ts":"2026-10-31 06:36:51,809","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:36:52,184","level":"INFO","logger":"edunova.http","message":"request request_id=8005345e31bc4998b932a2dd5b14f9d7 method=POST path=/v1/ingestion/batches/7f4849e8-9ed1-410b-9694-391d79862186/files status=200 duration_ms=371"}
+{"ts":"2026-10-31 06:36:52,199","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/7f4849e8-9ed1-410b-9694-391d79862186/files \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:36:52,571","level":"INFO","logger":"edunova.http","message":"request request_id=9f240ee8c87d419ca01a5da8f2fa026c method=POST path=/v1/ingestion/batches/7f4849e8-9ed1-410b-9694-391d79862186/start status=200 duration_ms=223"}
+{"ts":"2026-10-31 06:36:52,579","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/7f4849e8-9ed1-410b-9694-391d79862186/start \"HTTP/1.1 200 OK\""}
+------------------------------ Captured log call ------------------------------
+INFO     edunova.http:observability.py:23 request request_id=90b50d0835494100978d3b9b53cfd621 method=POST path=/v1/ingestion/batches status=200 duration_ms=79
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=8005345e31bc4998b932a2dd5b14f9d7 method=POST path=/v1/ingestion/batches/7f4849e8-9ed1-410b-9694-391d79862186/files status=200 duration_ms=371
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/7f4849e8-9ed1-410b-9694-391d79862186/files "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=9f240ee8c87d419ca01a5da8f2fa026c method=POST path=/v1/ingestion/batches/7f4849e8-9ed1-410b-9694-391d79862186/start status=200 duration_ms=223
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/7f4849e8-9ed1-410b-9694-391d79862186/start "HTTP/1.1 200 OK"
+_____ test_global_dedup_never_reuses_rights_or_academic_context_silently ______
+[gw3] win32 -- Python 3.13.14 C:\Users\cs-ap\dev\edusync-web\edunova\.venv\Scripts\python.exe
+
+    def test_global_dedup_never_reuses_rights_or_academic_context_silently():
+        _,h=account(); payload=pdf_bytes('Same bytes different rights ' + uuid4().hex)
+>       b1=create_batch(h,'Contexte A'); client.post(f"/v1/ingestion/batches/{b1['id']}/files",headers={**h,'Idempotency-Key':'cx1'},files={'file':('same.pdf',payload,'application/pdf')}); client.post(f"/v1/ingestion/batches/{b1['id']}/start",headers=h,json={}); j=runtime.ingestion.claim_job(worker_id='ctx-worker'); runtime.ingestion.process_job(worker_id='ctx-worker',job_id=j.id)
+                                                                                                                                                                                                                                                                                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+services\api\tests\ingestion\test_ingestion_api.py:115: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+services\api\app\modules\ingestion\application\service.py:251: in process_job
+    processed=(pipeline or PremiumDocumentPipeline()).process(Path(tmp.name),title=Path(doc.filename).stem)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+services\api\app\modules\document_engine\application\pipeline.py:35: in process
+    fingerprint = _sha256(path)
+                  ^^^^^^^^^^^^^
+services\api\app\modules\document_engine\application\pipeline.py:71: in _sha256
+    with path.open("rb") as handle:
+         ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/cs-ap/AppData/Local/Temp/tmphwun1rr3.pdf')
+mode = 'rb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       PermissionError: [Errno 13] Permission denied: 'C:\\Users\\cs-ap\\AppData\\Local\\Temp\\tmphwun1rr3.pdf'
+
+..\..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:537: PermissionError
+---------------------------- Captured stderr call -----------------------------
+{"ts":"2026-10-31 06:37:07,102","level":"INFO","logger":"edunova.http","message":"request request_id=42e4b2b2c0be4d668a06d354ada51a47 method=POST path=/v1/ingestion/batches status=200 duration_ms=72"}
+{"ts":"2026-10-31 06:37:07,110","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:37:07,313","level":"INFO","logger":"edunova.http","message":"request request_id=a15009f9ee474c3db403c301fc984140 method=POST path=/v1/ingestion/batches/c5c8ef8d-a628-41d0-af44-b55d6deb5329/files status=200 duration_ms=193"}
+{"ts":"2026-10-31 06:37:07,358","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/c5c8ef8d-a628-41d0-af44-b55d6deb5329/files \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:37:08,251","level":"INFO","logger":"edunova.http","message":"request request_id=7521f366f0e34df0bf55e183bc27abb0 method=POST path=/v1/ingestion/batches/c5c8ef8d-a628-41d0-af44-b55d6deb5329/start status=200 duration_ms=824"}
+{"ts":"2026-10-31 06:37:08,254","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/c5c8ef8d-a628-41d0-af44-b55d6deb5329/start \"HTTP/1.1 200 OK\""}
+------------------------------ Captured log call ------------------------------
+INFO     edunova.http:observability.py:23 request request_id=42e4b2b2c0be4d668a06d354ada51a47 method=POST path=/v1/ingestion/batches status=200 duration_ms=72
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=a15009f9ee474c3db403c301fc984140 method=POST path=/v1/ingestion/batches/c5c8ef8d-a628-41d0-af44-b55d6deb5329/files status=200 duration_ms=193
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/c5c8ef8d-a628-41d0-af44-b55d6deb5329/files "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=7521f366f0e34df0bf55e183bc27abb0 method=POST path=/v1/ingestion/batches/c5c8ef8d-a628-41d0-af44-b55d6deb5329/start status=200 duration_ms=824
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/c5c8ef8d-a628-41d0-af44-b55d6deb5329/start "HTTP/1.1 200 OK"
+__________ test_frozen_manifest_snapshot_is_persisted_and_verifiable __________
+[gw3] win32 -- Python 3.13.14 C:\Users\cs-ap\dev\edusync-web\edunova\.venv\Scripts\python.exe
+
+    def test_frozen_manifest_snapshot_is_persisted_and_verifiable():
+        _,h=account(); bid=create_batch(h,'Manifest integrity')['id']
+        payload=pdf_bytes('Manifest immutable ' + uuid4().hex)
+        client.post(f'/v1/ingestion/batches/{bid}/files',headers={**h,'Idempotency-Key':'manifest-1'},files={'file':('manifest.pdf',payload,'application/pdf')})
+        started=client.post(f'/v1/ingestion/batches/{bid}/start',headers=h,json={'priority':70})
+        assert started.status_code==200 and started.json()['manifest_snapshot_available'] is True
+        verify=client.get(f'/v1/ingestion/batches/{bid}/manifest/verify',headers=h)
+        assert verify.status_code==200,verify.text
+        body=verify.json(); assert body['valid'] is True and body['hash_valid'] is True and body['documents_valid'] is True and body['document_count']==1
+        report=client.get(f'/v1/ingestion/batches/{bid}/report',headers=h).json()
+        assert report['manifest_integrity']['valid'] is True
+        job=runtime.ingestion.claim_job(worker_id='manifest-worker'); assert job
+>       runtime.ingestion.process_job(worker_id='manifest-worker',job_id=job.id)
+
+services\api\tests\ingestion\test_ingestion_api.py:133: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+services\api\app\modules\ingestion\application\service.py:251: in process_job
+    processed=(pipeline or PremiumDocumentPipeline()).process(Path(tmp.name),title=Path(doc.filename).stem)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+services\api\app\modules\document_engine\application\pipeline.py:35: in process
+    fingerprint = _sha256(path)
+                  ^^^^^^^^^^^^^
+services\api\app\modules\document_engine\application\pipeline.py:71: in _sha256
+    with path.open("rb") as handle:
+         ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/cs-ap/AppData/Local/Temp/tmpfd6i72j2.pdf')
+mode = 'rb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       PermissionError: [Errno 13] Permission denied: 'C:\\Users\\cs-ap\\AppData\\Local\\Temp\\tmpfd6i72j2.pdf'
+
+..\..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:537: PermissionError
+---------------------------- Captured stderr call -----------------------------
+{"ts":"2026-10-31 06:37:10,014","level":"INFO","logger":"edunova.http","message":"request request_id=bbae843bbc7a40fe8c5380c5246006a5 method=POST path=/v1/ingestion/batches status=200 duration_ms=148"}
+{"ts":"2026-10-31 06:37:10,018","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:38:02,350","level":"INFO","logger":"edunova.http","message":"request request_id=5ac42676d4544e37887c9625df45d7bc method=POST path=/v1/ingestion/batches/e0b33b26-091c-4ac1-ba33-76db59ebb2fc/files status=200 duration_ms=225"}
+{"ts":"2026-10-31 06:38:02,354","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/e0b33b26-091c-4ac1-ba33-76db59ebb2fc/files \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:38:02,599","level":"INFO","logger":"edunova.http","message":"request request_id=1c75da1a3fd844adbdae98a807cb8549 method=POST path=/v1/ingestion/batches/e0b33b26-091c-4ac1-ba33-76db59ebb2fc/start status=200 duration_ms=185"}
+{"ts":"2026-10-31 06:38:02,607","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/e0b33b26-091c-4ac1-ba33-76db59ebb2fc/start \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:38:02,947","level":"INFO","logger":"edunova.http","message":"request request_id=10460ce7832141659842c3fbe79eb45c method=GET path=/v1/ingestion/batches/e0b33b26-091c-4ac1-ba33-76db59ebb2fc/manifest/verify status=200 duration_ms=265"}
+{"ts":"2026-10-31 06:38:02,963","level":"INFO","logger":"httpx","message":"HTTP Request: GET http://testserver/v1/ingestion/batches/e0b33b26-091c-4ac1-ba33-76db59ebb2fc/manifest/verify \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 06:38:03,087","level":"INFO","logger":"edunova.http","message":"request request_id=1d0d3b3c85ca45e38dcfee1b9a1ffd1f method=GET path=/v1/ingestion/batches/e0b33b26-091c-4ac1-ba33-76db59ebb2fc/report status=200 duration_ms=85"}
+{"ts":"2026-10-31 06:38:03,091","level":"INFO","logger":"httpx","message":"HTTP Request: GET http://testserver/v1/ingestion/batches/e0b33b26-091c-4ac1-ba33-76db59ebb2fc/report \"HTTP/1.1 200 OK\""}
+------------------------------ Captured log call ------------------------------
+INFO     edunova.http:observability.py:23 request request_id=bbae843bbc7a40fe8c5380c5246006a5 method=POST path=/v1/ingestion/batches status=200 duration_ms=148
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=5ac42676d4544e37887c9625df45d7bc method=POST path=/v1/ingestion/batches/e0b33b26-091c-4ac1-ba33-76db59ebb2fc/files status=200 duration_ms=225
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/e0b33b26-091c-4ac1-ba33-76db59ebb2fc/files "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=1c75da1a3fd844adbdae98a807cb8549 method=POST path=/v1/ingestion/batches/e0b33b26-091c-4ac1-ba33-76db59ebb2fc/start status=200 duration_ms=185
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/e0b33b26-091c-4ac1-ba33-76db59ebb2fc/start "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=10460ce7832141659842c3fbe79eb45c method=GET path=/v1/ingestion/batches/e0b33b26-091c-4ac1-ba33-76db59ebb2fc/manifest/verify status=200 duration_ms=265
+INFO     httpx:_client.py:1025 HTTP Request: GET http://testserver/v1/ingestion/batches/e0b33b26-091c-4ac1-ba33-76db59ebb2fc/manifest/verify "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=1d0d3b3c85ca45e38dcfee1b9a1ffd1f method=GET path=/v1/ingestion/batches/e0b33b26-091c-4ac1-ba33-76db59ebb2fc/report status=200 duration_ms=85
+INFO     httpx:_client.py:1025 HTTP Request: GET http://testserver/v1/ingestion/batches/e0b33b26-091c-4ac1-ba33-76db59ebb2fc/report "HTTP/1.1 200 OK"
+___________ test_factory_end_to_end_ready_for_review_with_evidence ____________
+[gw3] win32 -- Python 3.13.14 C:\Users\cs-ap\dev\edusync-web\edunova\.venv\Scripts\python.exe
+
+    def test_factory_end_to_end_ready_for_review_with_evidence():
+>    _,h=account(); did=processed(h); cr=client.post('/v1/content-factory/runs',headers=h,json={'document_id':did}); assert cr.status_code==200,cr.text; rid=cr.json()['id']; pr=client.post(f'/v1/content-factory/runs/{rid}/process',headers=h); assert pr.status_code==200,pr.text; assert pr.json()['state']=='ready_for_review'; detail=client.get(f'/v1/content-factory/runs/{rid}',headers=h).json(); assert detail['assets']; assert len(detail['assets'])==len(detail['evidence']); assert all(e['page_start']>=1 for e in detail['evidence']); assert any(g['code']=='provenance_complete' and g['passed'] for g in detail['quality_gates'])
+                        ^^^^^^^^^^^^
+
+services\api\tests\content_factory\test_content_factory.py:16: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+services\api\tests\content_factory\test_content_factory.py:14: in processed
+    b=client.post('/v1/ingestion/batches',headers=h,json={'name':'Factory source','defaults':{'content_kind':'course','faculty_domain':'Medecine','program':'Medecine humaine','level':'BAC1','semester':'S1','risk':'medical','rights_status':'authorized','rights_note':'test'}}).json(); d=client.post(f"/v1/ingestion/batches/{b['id']}/files",headers={**h,'Idempotency-Key':'factory-source'},files={'file':('cours.pdf',pdf_bytes('Introduction a la cellule et physiologie.'),'application/pdf')}).json(); client.post(f"/v1/ingestion/batches/{b['id']}/start",headers=h,json={}); j=runtime.ingestion.claim_job(worker_id='factory-ingestion'); runtime.ingestion.process_job(worker_id='factory-ingestion',job_id=j.id); return d['id']
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+services\api\app\modules\ingestion\application\service.py:251: in process_job
+    processed=(pipeline or PremiumDocumentPipeline()).process(Path(tmp.name),title=Path(doc.filename).stem)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+services\api\app\modules\document_engine\application\pipeline.py:35: in process
+    fingerprint = _sha256(path)
+                  ^^^^^^^^^^^^^
+services\api\app\modules\document_engine\application\pipeline.py:71: in _sha256
+    with path.open("rb") as handle:
+         ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/cs-ap/AppData/Local/Temp/tmphkufy4ye.pdf')
+mode = 'rb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       PermissionError: [Errno 13] Permission denied: 'C:\\Users\\cs-ap\\AppData\\Local\\Temp\\tmphkufy4ye.pdf'
+
+..\..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:537: PermissionError
+---------------------------- Captured stderr call -----------------------------
+{"ts":"2026-10-31 09:37:18,211","level":"INFO","logger":"edunova.http","message":"request request_id=675d4b892bfe48d7b39f9a078aff8aad method=POST path=/v1/ingestion/batches status=200 duration_ms=740"}
+{"ts":"2026-10-31 09:37:18,217","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 09:37:19,468","level":"INFO","logger":"edunova.http","message":"request request_id=766aeee17c384474b5141ae05cb683e0 method=POST path=/v1/ingestion/batches/e18f182d-5c2f-45f7-8723-4bf4f286d5b9/files status=200 duration_ms=297"}
+{"ts":"2026-10-31 09:37:19,473","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/e18f182d-5c2f-45f7-8723-4bf4f286d5b9/files \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 09:37:19,613","level":"INFO","logger":"edunova.http","message":"request request_id=a6746a46826944799d8eb04f0e76f0fa method=POST path=/v1/ingestion/batches/e18f182d-5c2f-45f7-8723-4bf4f286d5b9/start status=200 duration_ms=126"}
+{"ts":"2026-10-31 09:37:19,621","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/e18f182d-5c2f-45f7-8723-4bf4f286d5b9/start \"HTTP/1.1 200 OK\""}
+------------------------------ Captured log call ------------------------------
+INFO     edunova.http:observability.py:23 request request_id=675d4b892bfe48d7b39f9a078aff8aad method=POST path=/v1/ingestion/batches status=200 duration_ms=740
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=766aeee17c384474b5141ae05cb683e0 method=POST path=/v1/ingestion/batches/e18f182d-5c2f-45f7-8723-4bf4f286d5b9/files status=200 duration_ms=297
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/e18f182d-5c2f-45f7-8723-4bf4f286d5b9/files "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=a6746a46826944799d8eb04f0e76f0fa method=POST path=/v1/ingestion/batches/e18f182d-5c2f-45f7-8723-4bf4f286d5b9/start status=200 duration_ms=126
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/e18f182d-5c2f-45f7-8723-4bf4f286d5b9/start "HTTP/1.1 200 OK"
+____ test_factory_create_is_idempotent_for_same_source_and_asset_contract _____
+[gw3] win32 -- Python 3.13.14 C:\Users\cs-ap\dev\edusync-web\edunova\.venv\Scripts\python.exe
+
+    def test_factory_create_is_idempotent_for_same_source_and_asset_contract():
+>    _,h=account(); did=processed(h); body={'document_id':did,'requested_assets':['summary_express','rag_chunk']}; a=client.post('/v1/content-factory/runs',headers=h,json=body).json(); b=client.post('/v1/content-factory/runs',headers=h,json=body).json(); assert a['id']==b['id']
+                        ^^^^^^^^^^^^
+
+services\api\tests\content_factory\test_content_factory.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+services\api\tests\content_factory\test_content_factory.py:14: in processed
+    b=client.post('/v1/ingestion/batches',headers=h,json={'name':'Factory source','defaults':{'content_kind':'course','faculty_domain':'Medecine','program':'Medecine humaine','level':'BAC1','semester':'S1','risk':'medical','rights_status':'authorized','rights_note':'test'}}).json(); d=client.post(f"/v1/ingestion/batches/{b['id']}/files",headers={**h,'Idempotency-Key':'factory-source'},files={'file':('cours.pdf',pdf_bytes('Introduction a la cellule et physiologie.'),'application/pdf')}).json(); client.post(f"/v1/ingestion/batches/{b['id']}/start",headers=h,json={}); j=runtime.ingestion.claim_job(worker_id='factory-ingestion'); runtime.ingestion.process_job(worker_id='factory-ingestion',job_id=j.id); return d['id']
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+services\api\app\modules\ingestion\application\service.py:251: in process_job
+    processed=(pipeline or PremiumDocumentPipeline()).process(Path(tmp.name),title=Path(doc.filename).stem)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+services\api\app\modules\document_engine\application\pipeline.py:35: in process
+    fingerprint = _sha256(path)
+                  ^^^^^^^^^^^^^
+services\api\app\modules\document_engine\application\pipeline.py:71: in _sha256
+    with path.open("rb") as handle:
+         ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/cs-ap/AppData/Local/Temp/tmpd5rhwytg.pdf')
+mode = 'rb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       PermissionError: [Errno 13] Permission denied: 'C:\\Users\\cs-ap\\AppData\\Local\\Temp\\tmpd5rhwytg.pdf'
+
+..\..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:537: PermissionError
+---------------------------- Captured stderr call -----------------------------
+{"ts":"2026-10-31 09:37:20,592","level":"INFO","logger":"edunova.http","message":"request request_id=4342ea0f46b84d3abb0bb15a8247bb15 method=POST path=/v1/ingestion/batches status=200 duration_ms=118"}
+{"ts":"2026-10-31 09:37:20,601","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 09:37:20,831","level":"INFO","logger":"edunova.http","message":"request request_id=835817f292664afa87b0e1b9013b9b4c method=POST path=/v1/ingestion/batches/92f2b071-dd4b-45ef-a883-4b63fd5c01fd/files status=200 duration_ms=223"}
+{"ts":"2026-10-31 09:37:20,835","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/92f2b071-dd4b-45ef-a883-4b63fd5c01fd/files \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 09:37:21,144","level":"INFO","logger":"edunova.http","message":"request request_id=ec52a761ea204005a4ca06711ebfc50e method=POST path=/v1/ingestion/batches/92f2b071-dd4b-45ef-a883-4b63fd5c01fd/start status=200 duration_ms=305"}
+{"ts":"2026-10-31 09:37:21,151","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/92f2b071-dd4b-45ef-a883-4b63fd5c01fd/start \"HTTP/1.1 200 OK\""}
+------------------------------ Captured log call ------------------------------
+INFO     edunova.http:observability.py:23 request request_id=4342ea0f46b84d3abb0bb15a8247bb15 method=POST path=/v1/ingestion/batches status=200 duration_ms=118
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=835817f292664afa87b0e1b9013b9b4c method=POST path=/v1/ingestion/batches/92f2b071-dd4b-45ef-a883-4b63fd5c01fd/files status=200 duration_ms=223
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/92f2b071-dd4b-45ef-a883-4b63fd5c01fd/files "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=ec52a761ea204005a4ca06711ebfc50e method=POST path=/v1/ingestion/batches/92f2b071-dd4b-45ef-a883-4b63fd5c01fd/start status=200 duration_ms=305
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/92f2b071-dd4b-45ef-a883-4b63fd5c01fd/start "HTTP/1.1 200 OK"
+__________________ test_factory_rejects_unknown_asset_family __________________
+[gw3] win32 -- Python 3.13.14 C:\Users\cs-ap\dev\edusync-web\edunova\.venv\Scripts\python.exe
+
+    def test_factory_rejects_unknown_asset_family():
+>    _,h=account(); did=processed(h); r=client.post('/v1/content-factory/runs',headers=h,json={'document_id':did,'requested_assets':['telepathy']}); assert r.status_code==422
+                        ^^^^^^^^^^^^
+
+services\api\tests\content_factory\test_content_factory.py:20: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+services\api\tests\content_factory\test_content_factory.py:14: in processed
+    b=client.post('/v1/ingestion/batches',headers=h,json={'name':'Factory source','defaults':{'content_kind':'course','faculty_domain':'Medecine','program':'Medecine humaine','level':'BAC1','semester':'S1','risk':'medical','rights_status':'authorized','rights_note':'test'}}).json(); d=client.post(f"/v1/ingestion/batches/{b['id']}/files",headers={**h,'Idempotency-Key':'factory-source'},files={'file':('cours.pdf',pdf_bytes('Introduction a la cellule et physiologie.'),'application/pdf')}).json(); client.post(f"/v1/ingestion/batches/{b['id']}/start",headers=h,json={}); j=runtime.ingestion.claim_job(worker_id='factory-ingestion'); runtime.ingestion.process_job(worker_id='factory-ingestion',job_id=j.id); return d['id']
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+services\api\app\modules\ingestion\application\service.py:251: in process_job
+    processed=(pipeline or PremiumDocumentPipeline()).process(Path(tmp.name),title=Path(doc.filename).stem)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+services\api\app\modules\document_engine\application\pipeline.py:35: in process
+    fingerprint = _sha256(path)
+                  ^^^^^^^^^^^^^
+services\api\app\modules\document_engine\application\pipeline.py:71: in _sha256
+    with path.open("rb") as handle:
+         ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/cs-ap/AppData/Local/Temp/tmpobc9k5pt.pdf')
+mode = 'rb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       PermissionError: [Errno 13] Permission denied: 'C:\\Users\\cs-ap\\AppData\\Local\\Temp\\tmpobc9k5pt.pdf'
+
+..\..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:537: PermissionError
+---------------------------- Captured stderr call -----------------------------
+{"ts":"2026-10-31 09:37:22,418","level":"INFO","logger":"edunova.http","message":"request request_id=9ac3961a21c54c42a3e999dad391bafe method=POST path=/v1/ingestion/batches status=200 duration_ms=177"}
+{"ts":"2026-10-31 09:37:22,425","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 09:37:22,612","level":"INFO","logger":"edunova.http","message":"request request_id=7ed5622458514a6a8083fea5a83e6118 method=POST path=/v1/ingestion/batches/e94a4586-f8c3-4656-933e-003a294399a6/files status=200 duration_ms=179"}
+{"ts":"2026-10-31 09:37:22,617","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/e94a4586-f8c3-4656-933e-003a294399a6/files \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 09:37:23,036","level":"INFO","logger":"edunova.http","message":"request request_id=7edc9969b91444f1891ee00eb4844ac2 method=POST path=/v1/ingestion/batches/e94a4586-f8c3-4656-933e-003a294399a6/start status=200 duration_ms=407"}
+{"ts":"2026-10-31 09:37:23,038","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/e94a4586-f8c3-4656-933e-003a294399a6/start \"HTTP/1.1 200 OK\""}
+------------------------------ Captured log call ------------------------------
+INFO     edunova.http:observability.py:23 request request_id=9ac3961a21c54c42a3e999dad391bafe method=POST path=/v1/ingestion/batches status=200 duration_ms=177
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=7ed5622458514a6a8083fea5a83e6118 method=POST path=/v1/ingestion/batches/e94a4586-f8c3-4656-933e-003a294399a6/files status=200 duration_ms=179
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/e94a4586-f8c3-4656-933e-003a294399a6/files "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=7edc9969b91444f1891ee00eb4844ac2 method=POST path=/v1/ingestion/batches/e94a4586-f8c3-4656-933e-003a294399a6/start status=200 duration_ms=407
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/e94a4586-f8c3-4656-933e-003a294399a6/start "HTTP/1.1 200 OK"
+___________ test_factory_never_publishes_and_exposes_quality_score ____________
+[gw3] win32 -- Python 3.13.14 C:\Users\cs-ap\dev\edusync-web\edunova\.venv\Scripts\python.exe
+
+    def test_factory_never_publishes_and_exposes_quality_score():
+>    _,h=account(); did=processed(h); run=client.post('/v1/content-factory/runs',headers=h,json={'document_id':did,'requested_assets':['summary_express','quiz']}).json(); out=client.post(f"/v1/content-factory/runs/{run['id']}/process",headers=h).json(); assert out['state']=='ready_for_review'; assert 0<=out['quality_score']<=100; assert 'published' not in out['state']
+                        ^^^^^^^^^^^^
+
+services\api\tests\content_factory\test_content_factory.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+services\api\tests\content_factory\test_content_factory.py:14: in processed
+    b=client.post('/v1/ingestion/batches',headers=h,json={'name':'Factory source','defaults':{'content_kind':'course','faculty_domain':'Medecine','program':'Medecine humaine','level':'BAC1','semester':'S1','risk':'medical','rights_status':'authorized','rights_note':'test'}}).json(); d=client.post(f"/v1/ingestion/batches/{b['id']}/files",headers={**h,'Idempotency-Key':'factory-source'},files={'file':('cours.pdf',pdf_bytes('Introduction a la cellule et physiologie.'),'application/pdf')}).json(); client.post(f"/v1/ingestion/batches/{b['id']}/start",headers=h,json={}); j=runtime.ingestion.claim_job(worker_id='factory-ingestion'); runtime.ingestion.process_job(worker_id='factory-ingestion',job_id=j.id); return d['id']
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+services\api\app\modules\ingestion\application\service.py:251: in process_job
+    processed=(pipeline or PremiumDocumentPipeline()).process(Path(tmp.name),title=Path(doc.filename).stem)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+services\api\app\modules\document_engine\application\pipeline.py:35: in process
+    fingerprint = _sha256(path)
+                  ^^^^^^^^^^^^^
+services\api\app\modules\document_engine\application\pipeline.py:71: in _sha256
+    with path.open("rb") as handle:
+         ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/cs-ap/AppData/Local/Temp/tmp5ojoz65a.pdf')
+mode = 'rb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       PermissionError: [Errno 13] Permission denied: 'C:\\Users\\cs-ap\\AppData\\Local\\Temp\\tmp5ojoz65a.pdf'
+
+..\..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:537: PermissionError
+---------------------------- Captured stderr call -----------------------------
+{"ts":"2026-10-31 09:37:25,486","level":"INFO","logger":"edunova.http","message":"request request_id=e4d0cdf2689e4ba98dfc4e058d1b6389 method=POST path=/v1/ingestion/batches status=200 duration_ms=87"}
+{"ts":"2026-10-31 09:37:25,496","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 09:37:25,679","level":"INFO","logger":"edunova.http","message":"request request_id=5d058cee9aae4545b27a9fc96fdb3e30 method=POST path=/v1/ingestion/batches/3905bcb5-6292-4640-9119-9ef5d00cfd11/files status=200 duration_ms=176"}
+{"ts":"2026-10-31 09:37:25,682","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/3905bcb5-6292-4640-9119-9ef5d00cfd11/files \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 09:37:25,877","level":"INFO","logger":"edunova.http","message":"request request_id=8117a38f15b84389a1f10399a1f4a897 method=POST path=/v1/ingestion/batches/3905bcb5-6292-4640-9119-9ef5d00cfd11/start status=200 duration_ms=191"}
+{"ts":"2026-10-31 09:37:25,880","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/3905bcb5-6292-4640-9119-9ef5d00cfd11/start \"HTTP/1.1 200 OK\""}
+------------------------------ Captured log call ------------------------------
+INFO     edunova.http:observability.py:23 request request_id=e4d0cdf2689e4ba98dfc4e058d1b6389 method=POST path=/v1/ingestion/batches status=200 duration_ms=87
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=5d058cee9aae4545b27a9fc96fdb3e30 method=POST path=/v1/ingestion/batches/3905bcb5-6292-4640-9119-9ef5d00cfd11/files status=200 duration_ms=176
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/3905bcb5-6292-4640-9119-9ef5d00cfd11/files "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=8117a38f15b84389a1f10399a1f4a897 method=POST path=/v1/ingestion/batches/3905bcb5-6292-4640-9119-9ef5d00cfd11/start status=200 duration_ms=191
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/3905bcb5-6292-4640-9119-9ef5d00cfd11/start "HTTP/1.1 200 OK"
+________ test_factory_final_quality_gates_include_grounding_integrity _________
+[gw3] win32 -- Python 3.13.14 C:\Users\cs-ap\dev\edusync-web\edunova\.venv\Scripts\python.exe
+
+    def test_factory_final_quality_gates_include_grounding_integrity():
+>    _,h=account(); did=processed(h); run=client.post('/v1/content-factory/runs',headers=h,json={'document_id':did,'requested_assets':['summary_express','quiz']}).json(); client.post(f"/v1/content-factory/runs/{run['id']}/process",headers=h); detail=client.get(f"/v1/content-factory/runs/{run['id']}",headers=h).json(); gates={g['code']:g for g in detail['quality_gates']}; assert gates['evidence_quote_grounded']['passed']; assert gates['evidence_hash_integrity']['passed']; assert gates['numeric_claim_grounding']['passed']
+                        ^^^^^^^^^^^^
+
+services\api\tests\content_factory\test_content_factory.py:24: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+services\api\tests\content_factory\test_content_factory.py:14: in processed
+    b=client.post('/v1/ingestion/batches',headers=h,json={'name':'Factory source','defaults':{'content_kind':'course','faculty_domain':'Medecine','program':'Medecine humaine','level':'BAC1','semester':'S1','risk':'medical','rights_status':'authorized','rights_note':'test'}}).json(); d=client.post(f"/v1/ingestion/batches/{b['id']}/files",headers={**h,'Idempotency-Key':'factory-source'},files={'file':('cours.pdf',pdf_bytes('Introduction a la cellule et physiologie.'),'application/pdf')}).json(); client.post(f"/v1/ingestion/batches/{b['id']}/start",headers=h,json={}); j=runtime.ingestion.claim_job(worker_id='factory-ingestion'); runtime.ingestion.process_job(worker_id='factory-ingestion',job_id=j.id); return d['id']
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+services\api\app\modules\ingestion\application\service.py:251: in process_job
+    processed=(pipeline or PremiumDocumentPipeline()).process(Path(tmp.name),title=Path(doc.filename).stem)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+services\api\app\modules\document_engine\application\pipeline.py:35: in process
+    fingerprint = _sha256(path)
+                  ^^^^^^^^^^^^^
+services\api\app\modules\document_engine\application\pipeline.py:71: in _sha256
+    with path.open("rb") as handle:
+         ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/cs-ap/AppData/Local/Temp/tmphqojmsvb.pdf')
+mode = 'rb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       PermissionError: [Errno 13] Permission denied: 'C:\\Users\\cs-ap\\AppData\\Local\\Temp\\tmphqojmsvb.pdf'
+
+..\..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:537: PermissionError
+---------------------------- Captured stderr call -----------------------------
+{"ts":"2026-10-31 09:37:26,941","level":"INFO","logger":"edunova.http","message":"request request_id=07b719683a564b0abf9462ebc565afc6 method=POST path=/v1/ingestion/batches status=200 duration_ms=205"}
+{"ts":"2026-10-31 09:37:26,949","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 09:37:27,146","level":"INFO","logger":"edunova.http","message":"request request_id=39752aa8c18741c593d194d08cb4fd9d method=POST path=/v1/ingestion/batches/a39994d0-2fcb-4c1c-a169-5586955b8b3e/files status=200 duration_ms=185"}
+{"ts":"2026-10-31 09:37:27,149","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/a39994d0-2fcb-4c1c-a169-5586955b8b3e/files \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 09:37:27,964","level":"INFO","logger":"edunova.http","message":"request request_id=801fedd351bd4151a9f941205ab4b5e3 method=POST path=/v1/ingestion/batches/a39994d0-2fcb-4c1c-a169-5586955b8b3e/start status=200 duration_ms=807"}
+{"ts":"2026-10-31 09:37:27,966","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/a39994d0-2fcb-4c1c-a169-5586955b8b3e/start \"HTTP/1.1 200 OK\""}
+------------------------------ Captured log call ------------------------------
+INFO     edunova.http:observability.py:23 request request_id=07b719683a564b0abf9462ebc565afc6 method=POST path=/v1/ingestion/batches status=200 duration_ms=205
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=39752aa8c18741c593d194d08cb4fd9d method=POST path=/v1/ingestion/batches/a39994d0-2fcb-4c1c-a169-5586955b8b3e/files status=200 duration_ms=185
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/a39994d0-2fcb-4c1c-a169-5586955b8b3e/files "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=801fedd351bd4151a9f941205ab4b5e3 method=POST path=/v1/ingestion/batches/a39994d0-2fcb-4c1c-a169-5586955b8b3e/start status=200 duration_ms=807
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/a39994d0-2fcb-4c1c-a169-5586955b8b3e/start "HTTP/1.1 200 OK"
+_________ test_factory_queued_run_can_be_cancelled_and_not_processed __________
+[gw3] win32 -- Python 3.13.14 C:\Users\cs-ap\dev\edusync-web\edunova\.venv\Scripts\python.exe
+
+    def test_factory_queued_run_can_be_cancelled_and_not_processed():
+>    _,h=account(); did=processed(h); run=client.post('/v1/content-factory/runs',headers=h,json={'document_id':did,'requested_assets':['rag_chunk']}).json(); out=client.post(f"/v1/content-factory/runs/{run['id']}/cancel",headers=h); assert out.status_code==200; assert out.json()['state']=='cancelled'; pr=client.post(f"/v1/content-factory/runs/{run['id']}/process",headers=h); assert pr.status_code==422
+                        ^^^^^^^^^^^^
+
+services\api\tests\content_factory\test_content_factory.py:26: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+services\api\tests\content_factory\test_content_factory.py:14: in processed
+    b=client.post('/v1/ingestion/batches',headers=h,json={'name':'Factory source','defaults':{'content_kind':'course','faculty_domain':'Medecine','program':'Medecine humaine','level':'BAC1','semester':'S1','risk':'medical','rights_status':'authorized','rights_note':'test'}}).json(); d=client.post(f"/v1/ingestion/batches/{b['id']}/files",headers={**h,'Idempotency-Key':'factory-source'},files={'file':('cours.pdf',pdf_bytes('Introduction a la cellule et physiologie.'),'application/pdf')}).json(); client.post(f"/v1/ingestion/batches/{b['id']}/start",headers=h,json={}); j=runtime.ingestion.claim_job(worker_id='factory-ingestion'); runtime.ingestion.process_job(worker_id='factory-ingestion',job_id=j.id); return d['id']
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+services\api\app\modules\ingestion\application\service.py:251: in process_job
+    processed=(pipeline or PremiumDocumentPipeline()).process(Path(tmp.name),title=Path(doc.filename).stem)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+services\api\app\modules\document_engine\application\pipeline.py:35: in process
+    fingerprint = _sha256(path)
+                  ^^^^^^^^^^^^^
+services\api\app\modules\document_engine\application\pipeline.py:71: in _sha256
+    with path.open("rb") as handle:
+         ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/cs-ap/AppData/Local/Temp/tmpbkmsfoao.pdf')
+mode = 'rb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       PermissionError: [Errno 13] Permission denied: 'C:\\Users\\cs-ap\\AppData\\Local\\Temp\\tmpbkmsfoao.pdf'
+
+..\..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:537: PermissionError
+---------------------------- Captured stderr call -----------------------------
+{"ts":"2026-10-31 09:37:30,581","level":"INFO","logger":"edunova.http","message":"request request_id=aba06cd24ac94297aab3735b5d65b3dd method=POST path=/v1/ingestion/batches status=200 duration_ms=256"}
+{"ts":"2026-10-31 09:37:30,599","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 09:37:30,913","level":"INFO","logger":"edunova.http","message":"request request_id=357daa9b64794f08b8a5ad011e03f2b3 method=POST path=/v1/ingestion/batches/82d76130-fc25-42dc-848a-041138d354a3/files status=200 duration_ms=299"}
+{"ts":"2026-10-31 09:37:30,917","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/82d76130-fc25-42dc-848a-041138d354a3/files \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 09:37:31,214","level":"INFO","logger":"edunova.http","message":"request request_id=59a9d30b5044480b9caf18ea2240c661 method=POST path=/v1/ingestion/batches/82d76130-fc25-42dc-848a-041138d354a3/start status=200 duration_ms=289"}
+{"ts":"2026-10-31 09:37:31,221","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/82d76130-fc25-42dc-848a-041138d354a3/start \"HTTP/1.1 200 OK\""}
+------------------------------ Captured log call ------------------------------
+INFO     edunova.http:observability.py:23 request request_id=aba06cd24ac94297aab3735b5d65b3dd method=POST path=/v1/ingestion/batches status=200 duration_ms=256
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=357daa9b64794f08b8a5ad011e03f2b3 method=POST path=/v1/ingestion/batches/82d76130-fc25-42dc-848a-041138d354a3/files status=200 duration_ms=299
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/82d76130-fc25-42dc-848a-041138d354a3/files "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=59a9d30b5044480b9caf18ea2240c661 method=POST path=/v1/ingestion/batches/82d76130-fc25-42dc-848a-041138d354a3/start status=200 duration_ms=289
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/82d76130-fc25-42dc-848a-041138d354a3/start "HTTP/1.1 200 OK"
+_ test_factory_review_package_pairs_every_asset_with_source_evidence_and_blocks_publication _
+[gw3] win32 -- Python 3.13.14 C:\Users\cs-ap\dev\edusync-web\edunova\.venv\Scripts\python.exe
+
+    def test_factory_review_package_pairs_every_asset_with_source_evidence_and_blocks_publication():
+>    _,h=account(); did=processed(h); run=client.post('/v1/content-factory/runs',headers=h,json={'document_id':did,'requested_assets':['summary_express','quiz']}).json(); client.post(f"/v1/content-factory/runs/{run['id']}/process",headers=h); r=client.get(f"/v1/content-factory/runs/{run['id']}/review-package",headers=h); assert r.status_code==200; body=r.json(); assert body['publication_allowed'] is False; assert body['required_next_state']=='human_review'; assert body['items'] and all(x['evidence'] for x in body['items'])
+                        ^^^^^^^^^^^^
+
+services\api\tests\content_factory\test_content_factory.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+services\api\tests\content_factory\test_content_factory.py:14: in processed
+    b=client.post('/v1/ingestion/batches',headers=h,json={'name':'Factory source','defaults':{'content_kind':'course','faculty_domain':'Medecine','program':'Medecine humaine','level':'BAC1','semester':'S1','risk':'medical','rights_status':'authorized','rights_note':'test'}}).json(); d=client.post(f"/v1/ingestion/batches/{b['id']}/files",headers={**h,'Idempotency-Key':'factory-source'},files={'file':('cours.pdf',pdf_bytes('Introduction a la cellule et physiologie.'),'application/pdf')}).json(); client.post(f"/v1/ingestion/batches/{b['id']}/start",headers=h,json={}); j=runtime.ingestion.claim_job(worker_id='factory-ingestion'); runtime.ingestion.process_job(worker_id='factory-ingestion',job_id=j.id); return d['id']
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+services\api\app\modules\ingestion\application\service.py:251: in process_job
+    processed=(pipeline or PremiumDocumentPipeline()).process(Path(tmp.name),title=Path(doc.filename).stem)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+services\api\app\modules\document_engine\application\pipeline.py:35: in process
+    fingerprint = _sha256(path)
+                  ^^^^^^^^^^^^^
+services\api\app\modules\document_engine\application\pipeline.py:71: in _sha256
+    with path.open("rb") as handle:
+         ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/cs-ap/AppData/Local/Temp/tmpto9hrxz2.pdf')
+mode = 'rb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       PermissionError: [Errno 13] Permission denied: 'C:\\Users\\cs-ap\\AppData\\Local\\Temp\\tmpto9hrxz2.pdf'
+
+..\..\..\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py:537: PermissionError
+---------------------------- Captured stderr call -----------------------------
+{"ts":"2026-10-31 09:37:33,191","level":"INFO","logger":"edunova.http","message":"request request_id=cbf6f21d17a0465dbaaec7f6f0c5f1b4 method=POST path=/v1/ingestion/batches status=200 duration_ms=140"}
+{"ts":"2026-10-31 09:37:33,198","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 09:37:33,378","level":"INFO","logger":"edunova.http","message":"request request_id=92950c7bfa0c4280aba47be275630cd5 method=POST path=/v1/ingestion/batches/98b1890d-1027-4778-8e23-420a98b5b94c/files status=200 duration_ms=167"}
+{"ts":"2026-10-31 09:37:33,385","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/98b1890d-1027-4778-8e23-420a98b5b94c/files \"HTTP/1.1 200 OK\""}
+{"ts":"2026-10-31 09:37:33,565","level":"INFO","logger":"edunova.http","message":"request request_id=3ea28ae7fc504590a9a140dfdadd2c1e method=POST path=/v1/ingestion/batches/98b1890d-1027-4778-8e23-420a98b5b94c/start status=200 duration_ms=167"}
+{"ts":"2026-10-31 09:37:33,573","level":"INFO","logger":"httpx","message":"HTTP Request: POST http://testserver/v1/ingestion/batches/98b1890d-1027-4778-8e23-420a98b5b94c/start \"HTTP/1.1 200 OK\""}
+------------------------------ Captured log call ------------------------------
+INFO     edunova.http:observability.py:23 request request_id=cbf6f21d17a0465dbaaec7f6f0c5f1b4 method=POST path=/v1/ingestion/batches status=200 duration_ms=140
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=92950c7bfa0c4280aba47be275630cd5 method=POST path=/v1/ingestion/batches/98b1890d-1027-4778-8e23-420a98b5b94c/files status=200 duration_ms=167
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/98b1890d-1027-4778-8e23-420a98b5b94c/files "HTTP/1.1 200 OK"
+INFO     edunova.http:observability.py:23 request request_id=3ea28ae7fc504590a9a140dfdadd2c1e method=POST path=/v1/ingestion/batches/98b1890d-1027-4778-8e23-420a98b5b94c/start status=200 duration_ms=167
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/v1/ingestion/batches/98b1890d-1027-4778-8e23-420a98b5b94c/start "HTTP/1.1 200 OK"
+______________ test_question_candidates_from_interrogation_photo ______________
+[gw2] win32 -- Python 3.13.14 C:\Users\cs-ap\dev\edusync-web\edunova\.venv\Scripts\python.exe
+
+tmp_path = WindowsPath('C:/Users/cs-ap/AppData/Local/Temp/pytest-of-cs-ap/pytest-102/popen-gw2/test_question_candidates_from_0')
+
+    def test_question_candidates_from_interrogation_photo(tmp_path: Path) -> None:
+        from PIL import Image, ImageDraw, ImageFont
+    
+        image = Image.new('RGB', (1800, 760), 'white')
+        draw = ImageDraw.Draw(image)
+>       font = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', 52)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+services\api\tests\document_engine\test_pipeline.py:88: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+.venv\Lib\site-packages\PIL\ImageFont.py:880: in truetype
+    return freetype(font)
+           ^^^^^^^^^^^^^^
+.venv\Lib\site-packages\PIL\ImageFont.py:877: in freetype
+    return FreeTypeFont(font, size, index, encoding, layout_engine)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <PIL.ImageFont.FreeTypeFont object at 0x0000021BF436C190>
+font = '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', size = 52, index = 0
+encoding = '', layout_engine = <Layout.RAQM: 1>
+
+    def __init__(
+        self,
+        font: StrOrBytesPath | BinaryIO,
+        size: float = 10,
+        index: int = 0,
+        encoding: str = "",
+        layout_engine: Layout | None = None,
+    ) -> None:
+        # FIXME: use service provider instead
+    
+        if isinstance(core, DeferredError):
+            raise core.ex
+    
+        if size <= 0:
+            msg = f"font size must be greater than 0, not {size}"
+            raise ValueError(msg)
+    
+        self.path = font
+        self.size = size
+        self.index = index
+        self.encoding = encoding
+    
+        try:
+            from packaging.version import parse as parse_version
+        except ImportError:
+            pass
+        else:
+            if freetype_version := features.version_module("freetype2"):
+                if parse_version(freetype_version) < parse_version("2.9.1"):
+                    warnings.warn(
+                        "Support for FreeType 2.9.0 is deprecated and will be removed "
+                        "in Pillow 12 (2025-10-15). Please upgrade to FreeType 2.9.1 "
+                        "or newer, preferably FreeType 2.10.4 which fixes "
+                        "CVE-2020-15999.",
+                        DeprecationWarning,
+                    )
+    
+        if layout_engine not in (Layout.BASIC, Layout.RAQM):
+            layout_engine = Layout.BASIC
+            if core.HAVE_RAQM:
+                layout_engine = Layout.RAQM
+        elif layout_engine == Layout.RAQM and not core.HAVE_RAQM:
+            warnings.warn(
+                "Raqm layout was requested, but Raqm is not available. "
+                "Falling back to basic layout."
+            )
+            layout_engine = Layout.BASIC
+    
+        self.layout_engine = layout_engine
+    
+        def load_from_bytes(f: IO[bytes]) -> None:
+            self.font_bytes = f.read()
+            self.font = core.getfont(
+                "", size, index, encoding, self.font_bytes, layout_engine
+            )
+    
+        if is_path(font):
+            font = os.fspath(font)
+            if sys.platform == "win32":
+                font_bytes_path = font if isinstance(font, bytes) else font.encode()
+                try:
+                    font_bytes_path.decode("ascii")
+                except UnicodeDecodeError:
+                    # FreeType cannot load fonts with non-ASCII characters on Windows
+                    # So load it into memory first
+                    with open(font, "rb") as f:
+                        load_from_bytes(f)
+                    return
+>           self.font = core.getfont(
+                font, size, index, encoding, layout_engine=layout_engine
+            )
+E           OSError: cannot open resource
+
+.venv\Lib\site-packages\PIL\ImageFont.py:285: OSError
+_____ test_cash_payment_allocates_oldest_charge_and_receipt_is_idempotent _____
+[gw2] win32 -- Python 3.13.14 C:\Users\cs-ap\dev\edusync-web\edunova\.venv\Scripts\python.exe
+
+    def test_cash_payment_allocates_oldest_charge_and_receipt_is_idempotent():
+     a,i,app,s,r,sch,c=finance_student('pay');runtime.student_finance.open_cash(a,i.id,'CDF',0);receipt=runtime.student_finance.payment(a,i.id,s.id,150000,'CDF','cash','CASH-001','Guichet central')
+     same=runtime.student_finance.payment(a,i.id,s.id,150000,'CDF','cash','CASH-001','retry');assert same.id==receipt.id
+     st=runtime.student_finance.statement(a,i.id,s.id);assert st['balance_minor']==150000
+>    cc=runtime.student_finance_repo.charges(s.id);assert cc[0].state.value=='paid' and cc[1].paid_minor==50000
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E    AssertionError: assert ('open' == 'paid'
+E      
+E      - paid
+E      + open)
+
+services\api\tests\test_student_finance_phase6.py:23: AssertionError
+============================== warnings summary ===============================
+.venv\Lib\site-packages\starlette\testclient.py:45
+.venv\Lib\site-packages\starlette\testclient.py:45
+.venv\Lib\site-packages\starlette\testclient.py:45
+.venv\Lib\site-packages\starlette\testclient.py:45
+  C:\Users\cs-ap\dev\edusync-web\edunova\.venv\Lib\site-packages\starlette\testclient.py:45: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: DeprecationWarning: builtin type SwigPyPacked has no __module__ attribute
+
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: DeprecationWarning: builtin type SwigPyObject has no __module__ attribute
+
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: DeprecationWarning: builtin type swigvarlink has no __module__ attribute
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+============================ slowest 20 durations =============================
+12977.87s setup    services/api/tests/editorial/test_editorial_service.py::test_high_risk_ai_requires_prompt_version
+12976.99s setup    services/api/tests/test_phase14_score_reconciliation.py::test_scoped_roster_and_suppression_hide_small_learner_results
+12976.24s setup    services/api/tests/test_phase14_pedagogical_intelligence.py::test_course_report_roster_is_forwarded_and_empty_roster_is_safe
+12973.55s setup    services/api/tests/test_phase13_student_success.py::test_deterministic_early_warning_deduplicates
+10631.05s setup    services/api/tests/test_phase14_pedagogical_intelligence.py::test_newer_started_retake_wins_even_if_older_is_submitted_later
+10588.34s call     services/api/tests/test_phase15_live_release_closure.py::test_scoped_archive_oldest_only_even_when_limit_one
+10585.88s call     services/api/tests/test_phase15_period_comparison.py::test_comparison_suppresses_when_a_period_has_only_four_people
+9626.68s setup    services/api/tests/test_phase13_student_success.py::test_early_warning_requires_staff_and_does_not_infer_without_evidence
+9624.27s setup    services/api/tests/editorial/test_editorial_service.py::test_owner_manages_internal_roles
+9622.14s setup    services/api/tests/test_phase14_pedagogical_intelligence.py::test_course_report_filters_active_enrollment_even_with_foreign_records
+9620.30s setup    services/api/tests/test_phase14_score_reconciliation.py::test_teacher_api_quality_labels_follow_rbac_and_tenant
+8708.34s setup    services/api/tests/test_phase14_score_reconciliation.py::test_v2_tampering_fails_closed_without_old_grade_fallback[<lambda>4]
+3084.63s setup    services/api/tests/test_phase14_pedagogical_intelligence.py::test_course_sql_rejects_duplicate_and_invalid_grade_rows
+3084.40s setup    services/api/tests/test_phase14_score_reconciliation.py::test_historical_partial_scores_kept_but_never_claimed_verified
+3078.68s setup    services/api/tests/test_phase13_student_success.py::test_tenant_student_privacy_and_permissions
+1925.93s setup    services/api/tests/test_phase14_score_reconciliation.py::test_v2_tampering_fails_closed_without_old_grade_fallback[<lambda>3]
+1900.26s setup    services/api/tests/editorial/test_editorial_service.py::test_internal_only_cannot_be_published
+1243.84s setup    services/api/tests/editorial/test_editorial_service.py::test_dashboard_counts_workflow
+144.23s setup    services/api/tests/test_phase13_student_success.py::test_action_plan_guards_duplicates_dates_and_closed_cases
+143.36s setup    services/api/tests/test_phase14_score_reconciliation.py::test_failed_grade_integrity_is_atomic_no_orphan_or_graded_attempt
+=========================== short test summary info ===========================
+FAILED services/api/tests/ingestion/test_ingestion_api.py::test_batch_upload_idempotency_freeze_worker_and_editorial_projection
+FAILED services/api/tests/ingestion/test_ingestion_api.py::test_global_dedup_reuses_already_processed_document_without_second_ocr
+FAILED services/api/tests/ingestion/test_ingestion_api.py::test_preview_and_global_dashboard_after_processing
+FAILED services/api/tests/ingestion/test_ingestion_api.py::test_global_dedup_never_reuses_rights_or_academic_context_silently
+FAILED services/api/tests/ingestion/test_ingestion_api.py::test_frozen_manifest_snapshot_is_persisted_and_verifiable
+FAILED services/api/tests/content_factory/test_content_factory.py::test_factory_end_to_end_ready_for_review_with_evidence
+FAILED services/api/tests/content_factory/test_content_factory.py::test_factory_create_is_idempotent_for_same_source_and_asset_contract
+FAILED services/api/tests/content_factory/test_content_factory.py::test_factory_rejects_unknown_asset_family
+FAILED services/api/tests/content_factory/test_content_factory.py::test_factory_never_publishes_and_exposes_quality_score
+FAILED services/api/tests/content_factory/test_content_factory.py::test_factory_final_quality_gates_include_grounding_integrity
+FAILED services/api/tests/content_factory/test_content_factory.py::test_factory_queued_run_can_be_cancelled_and_not_processed
+FAILED services/api/tests/content_factory/test_content_factory.py::test_factory_review_package_pairs_every_asset_with_source_evidence_and_blocks_publication
+FAILED services/api/tests/document_engine/test_pipeline.py::test_question_candidates_from_interrogation_photo
+FAILED services/api/tests/test_student_finance_phase6.py::test_cash_payment_allocates_oldest_charge_and_receipt_is_idempotent
+14 failed, 1186 passed, 17 skipped, 24 warnings in 38214.65s (10:36:54)

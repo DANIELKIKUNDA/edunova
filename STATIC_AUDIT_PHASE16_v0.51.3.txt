@@ -1,0 +1,64 @@
+===== audit_phase16_physical_library.py =====
+PASS FastAPI library router included
+PASS Runtime library service
+PASS Physical book endpoint
+PASS Physical copy endpoint
+PASS Physical loan endpoint
+PASS Loan return endpoint
+PASS Tenant FK copy
+PASS Tenant FK loan
+PASS Open loan unique index
+PASS Flutter physical library page
+PASS Flutter book operations
+PASS Flutter borrow operations
+PASS Flutter return operations
+PASS Flutter navigation route
+PASS Campus route entry
+PASS Flutter gateway tests written
+WIRING STATIC 16/16 PASS
+
+===== audit_phase16_library_governance_v0_51_2.py =====
+PASS Migration 0088 renewal field
+PASS Migration 0088 data constraint
+PASS Migration 0088 due index
+PASS DB field renewal count
+PASS DB check constraint
+PASS Borrower transactional advisory lock
+PASS Borrower quota
+PASS Borrower overdue block
+PASS Renew limit
+PASS Renew CAS
+PASS Renew borrower scoped
+PASS API renew endpoint
+PASS API overdue flag
+PASS API server-controlled renewal visibility
+PASS Service audit on renewal
+PASS Flutter authenticated gateway
+PASS Flutter renewal interface
+PASS Flutter deadline warning
+PASS Flutter contract test authored
+PASS Backend adversarial tests authored
+STATIC WIRING: 20/20
+
+===== audit_phase16_tenant_policy_v0_51_3.py =====
+PASS SQL policy table
+PASS SQL policy CAS
+PASS SQL policy bounds
+PASS Mapped row
+PASS Borrow in-transaction policy
+PASS Policy tenant lock
+PASS Policy compare and swap
+PASS Renew dynamic period
+PASS RBAC update
+PASS API GET
+PASS API PUT
+PASS Flutter policy auth gateway
+PASS Flutter tenant guard
+PASS Flutter no stale policy
+PASS Flutter policy editable
+PASS Flutter policy dynamic display
+PASS Flutter authored contract test
+PASS Backend adversarial tests
+STATIC WIRING: 18/18
+
+IMPORTANT : ces vérifications textuelles ne remplacent PAS flutter analyze ou flutter test.

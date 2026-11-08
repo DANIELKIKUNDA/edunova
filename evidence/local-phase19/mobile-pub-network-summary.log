@@ -1,0 +1,426 @@
+MSG : Resolving dependencies...
+IO  : HTTP GET https://pub.dev/api/packages/cupertino_icons
+IO  : HTTP GET https://pub.dev/api/packages/flutter_riverpod
+IO  : HTTP GET https://pub.dev/api/packages/go_router
+IO  : HTTP GET https://pub.dev/api/packages/drift
+IO  : HTTP GET https://pub.dev/api/packages/sqlite3_flutter_libs
+IO  : HTTP GET https://pub.dev/api/packages/path_provider
+IO  : HTTP GET https://pub.dev/api/packages/path
+IO  : HTTP GET https://pub.dev/api/packages/dio
+IO  : HTTP GET https://pub.dev/api/packages/shared_preferences
+IO  : HTTP GET https://pub.dev/api/packages/file_picker
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/file_picker
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/cupertino_icons
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/shared_preferences
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/dio
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/flutter_riverpod
+IO  : HTTP GET https://pub.dev/api/packages/image_picker
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/path
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/drift
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/path_provider
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/go_router
+IO  : HTTP GET https://pub.dev/api/packages/uuid
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/sqlite3_flutter_libs
+IO  : HTTP GET https://pub.dev/api/packages/mime
+IO  : HTTP GET https://pub.dev/api/packages/pdfrx
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/image_picker
+IO  : HTTP GET https://pub.dev/api/packages/flutter_secure_storage
+IO  : HTTP GET https://pub.dev/api/packages/url_launcher
+IO  : HTTP GET https://pub.dev/api/packages/crypto
+IO  : HTTP GET https://pub.dev/api/packages/connectivity_plus
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/uuid
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/mime
+IO  : HTTP GET https://pub.dev/api/packages/flutter_local_notifications
+IO  : HTTP GET https://pub.dev/api/packages/firebase_core
+IO  : HTTP GET https://pub.dev/api/packages/firebase_messaging
+IO  : HTTP GET https://pub.dev/api/packages/device_info_plus
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/pdfrx
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/url_launcher
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/crypto
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/connectivity_plus
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/flutter_secure_storage
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/flutter_local_notifications
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/firebase_core
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/firebase_messaging
+IO  : HTTP GET https://pub.dev/api/packages/timezone
+IO  : HTTP GET https://pub.dev/api/packages/flutter_tts
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/device_info_plus
+IO  : HTTP GET https://pub.dev/api/packages/flutter_launcher_icons
+IO  : HTTP GET https://pub.dev/api/packages/flutter_native_splash
+IO  : HTTP GET https://pub.dev/api/packages/flutter_lints
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/timezone
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/flutter_tts
+IO  : HTTP GET https://pub.dev/api/packages/drift_dev
+IO  : HTTP GET https://pub.dev/api/packages/build_runner
+IO  : HTTP GET https://pub.dev/api/packages/collection
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/flutter_native_splash
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/flutter_launcher_icons
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/flutter_lints
+IO  : HTTP GET https://pub.dev/api/packages/meta
+IO  : HTTP GET https://pub.dev/api/packages/riverpod
+IO  : HTTP GET https://pub.dev/api/packages/state_notifier
+IO  : HTTP GET https://pub.dev/api/packages/cupertino_ui
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/drift_dev
+IO  : HTTP GET https://pub.dev/api/packages/logging
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/build_runner
+IO  : HTTP GET https://pub.dev/api/packages/material_ui
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/collection
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/meta
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/cupertino_ui
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/logging
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/state_notifier
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/riverpod
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/material_ui
+IO  : HTTP GET https://pub.dev/api/packages/async
+IO  : HTTP GET https://pub.dev/api/packages/convert
+IO  : HTTP GET https://pub.dev/api/packages/stream_channel
+IO  : HTTP GET https://pub.dev/api/packages/sqlite3
+IO  : HTTP GET https://pub.dev/api/packages/stack_trace
+IO  : HTTP GET https://pub.dev/api/packages/web
+IO  : HTTP GET https://pub.dev/api/packages/path_provider_android
+IO  : HTTP GET https://pub.dev/api/packages/lints
+IO  : HTTP GET https://pub.dev/api/packages/path_provider_foundation
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/convert
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/async
+IO  : HTTP GET https://pub.dev/api/packages/path_provider_linux
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/sqlite3
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/stack_trace
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/stream_channel
+IO  : HTTP GET https://pub.dev/api/packages/path_provider_platform_interface
+IO  : HTTP GET https://pub.dev/api/packages/path_provider_windows
+IO  : HTTP GET https://pub.dev/api/packages/http_parser
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/web
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/lints
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/path_provider_android
+IO  : HTTP GET https://pub.dev/api/packages/dio_web_adapter
+IO  : HTTP GET https://pub.dev/api/packages/shared_preferences_android
+IO  : HTTP GET https://pub.dev/api/packages/shared_preferences_foundation
+IO  : HTTP GET https://pub.dev/api/packages/clock
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/path_provider_linux
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/path_provider_platform_interface
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/http_parser
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/path_provider_windows
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/path_provider_foundation
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/dio_web_adapter
+IO  : HTTP GET https://pub.dev/api/packages/fake_async
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/shared_preferences_android
+IO  : HTTP GET https://pub.dev/api/packages/leak_tracker_flutter_testing
+IO  : HTTP GET https://pub.dev/api/packages/matcher
+IO  : HTTP GET https://pub.dev/api/packages/test_api
+IO  : HTTP GET https://pub.dev/api/packages/vector_math
+IO  : HTTP GET https://pub.dev/api/packages/shared_preferences_linux
+IO  : HTTP GET https://pub.dev/api/packages/shared_preferences_platform_interface
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/shared_preferences_foundation
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/clock
+IO  : HTTP GET https://pub.dev/api/packages/shared_preferences_web
+IO  : HTTP GET https://pub.dev/api/packages/shared_preferences_windows
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/fake_async
+IO  : HTTP GET https://pub.dev/api/packages/file_picker_platform_interface
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/vector_math
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/shared_preferences_platform_interface
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/matcher
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/shared_preferences_web
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/leak_tracker_flutter_testing
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/test_api
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/shared_preferences_linux
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/shared_preferences_windows
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/file_picker_platform_interface
+IO  : HTTP GET https://pub.dev/api/packages/android_file_picker
+IO  : HTTP GET https://pub.dev/api/packages/file_picker_darwin
+IO  : HTTP GET https://pub.dev/api/packages/file_picker_linux
+IO  : HTTP GET https://pub.dev/api/packages/windows_file_picker
+IO  : HTTP GET https://pub.dev/api/packages/file_picker_web
+IO  : HTTP GET https://pub.dev/api/packages/cross_file
+IO  : HTTP GET https://pub.dev/api/packages/image_picker_android
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/file_picker_web
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/android_file_picker
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/file_picker_linux
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/windows_file_picker
+IO  : HTTP GET https://pub.dev/api/packages/image_picker_for_web
+IO  : HTTP GET https://pub.dev/api/packages/image_picker_ios
+IO  : HTTP GET https://pub.dev/api/packages/device_info_plus_platform_interface
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/file_picker_darwin
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/image_picker_android
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/cross_file
+IO  : HTTP GET https://pub.dev/api/packages/ffi
+IO  : HTTP GET https://pub.dev/api/packages/file
+IO  : HTTP GET https://pub.dev/api/packages/win32
+IO  : HTTP GET https://pub.dev/api/packages/win32_registry
+IO  : HTTP GET https://pub.dev/api/packages/image_picker_linux
+IO  : HTTP GET https://pub.dev/api/packages/image_picker_macos
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/image_picker_for_web
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/image_picker_ios
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/device_info_plus_platform_interface
+IO  : HTTP GET https://pub.dev/api/packages/image_picker_platform_interface
+IO  : HTTP GET https://pub.dev/api/packages/image_picker_windows
+IO  : HTTP GET https://pub.dev/api/packages/fixnum
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/ffi
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/win32
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/win32_registry
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/file
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/image_picker_linux
+IO  : HTTP GET https://pub.dev/api/packages/pdfrx_engine
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/image_picker_macos
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/image_picker_platform_interface
+IO  : HTTP GET https://pub.dev/api/packages/pdfium_flutter
+IO  : HTTP GET https://pub.dev/api/packages/rxdart
+IO  : HTTP GET https://pub.dev/api/packages/synchronized
+IO  : HTTP GET https://pub.dev/api/packages/yaml
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/image_picker_windows
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/fixnum
+IO  : HTTP GET https://pub.dev/api/packages/flutter_secure_storage_darwin
+IO  : HTTP GET https://pub.dev/api/packages/flutter_secure_storage_linux
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/pdfrx_engine
+IO  : HTTP GET https://pub.dev/api/packages/flutter_secure_storage_platform_interface
+IO  : HTTP GET https://pub.dev/api/packages/flutter_secure_storage_web
+IO  : HTTP GET https://pub.dev/api/packages/firebase_core_platform_interface
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/pdfium_flutter
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/synchronized
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/rxdart
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/yaml
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/flutter_secure_storage_darwin
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/flutter_secure_storage_linux
+IO  : HTTP GET https://pub.dev/api/packages/firebase_messaging_platform_interface
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/flutter_secure_storage_web
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/flutter_secure_storage_platform_interface
+IO  : HTTP GET https://pub.dev/api/packages/firebase_messaging_web
+IO  : HTTP GET https://pub.dev/api/packages/flutter_secure_storage_windows
+IO  : HTTP GET https://pub.dev/api/packages/url_launcher_android
+IO  : HTTP GET https://pub.dev/api/packages/url_launcher_ios
+IO  : HTTP GET https://pub.dev/api/packages/url_launcher_linux
+IO  : HTTP GET https://pub.dev/api/packages/url_launcher_macos
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/firebase_core_platform_interface
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/firebase_messaging_platform_interface
+IO  : HTTP GET https://pub.dev/api/packages/url_launcher_platform_interface
+IO  : HTTP GET https://pub.dev/api/packages/url_launcher_web
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/url_launcher_android
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/flutter_secure_storage_windows
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/firebase_messaging_web
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/url_launcher_ios
+IO  : HTTP GET https://pub.dev/api/packages/url_launcher_windows
+IO  : HTTP GET https://pub.dev/api/packages/connectivity_plus_platform_interface
+IO  : HTTP GET https://pub.dev/api/packages/nm
+IO  : HTTP GET https://pub.dev/api/packages/flutter_local_notifications_linux
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/url_launcher_linux
+IO  : HTTP GET https://pub.dev/api/packages/flutter_local_notifications_windows
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/url_launcher_platform_interface
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/url_launcher_macos
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/url_launcher_web
+IO  : HTTP GET https://pub.dev/api/packages/flutter_local_notifications_web
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/url_launcher_windows
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/connectivity_plus_platform_interface
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/nm
+IO  : HTTP GET https://pub.dev/api/packages/firebase_core_web
+IO  : HTTP GET https://pub.dev/api/packages/flutter_local_notifications_platform_interface
+IO  : HTTP GET https://pub.dev/api/packages/http
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/flutter_local_notifications_linux
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/flutter_local_notifications_windows
+IO  : HTTP GET https://pub.dev/api/packages/args
+IO  : HTTP GET https://pub.dev/api/packages/checked_yaml
+IO  : HTTP GET https://pub.dev/api/packages/cli_util
+IO  : HTTP GET https://pub.dev/api/packages/image
+IO  : HTTP GET https://pub.dev/api/packages/json_annotation
+IO  : HTTP GET https://pub.dev/api/packages/html
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/flutter_local_notifications_web
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/flutter_local_notifications_platform_interface
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/http
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/firebase_core_web
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/args
+IO  : HTTP GET https://pub.dev/api/packages/universal_io
+IO  : HTTP GET https://pub.dev/api/packages/xml
+IO  : HTTP GET https://pub.dev/api/packages/ansicolor
+IO  : HTTP GET https://pub.dev/api/packages/flutter_secure_storage_macos
+IO  : HTTP GET https://pub.dev/api/packages/charcode
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/checked_yaml
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/image
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/json_annotation
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/html
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/cli_util
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/universal_io
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/xml
+IO  : HTTP GET https://pub.dev/api/packages/recase
+IO  : HTTP GET https://pub.dev/api/packages/stream_transform
+IO  : HTTP GET https://pub.dev/api/packages/yaml_edit
+IO  : HTTP GET https://pub.dev/api/packages/io
+IO  : HTTP GET https://pub.dev/api/packages/sqlparser
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/ansicolor
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/flutter_secure_storage_macos
+IO  : HTTP GET https://pub.dev/api/packages/analyzer
+IO  : HTTP GET https://pub.dev/api/packages/source_span
+IO  : HTTP GET https://pub.dev/api/packages/package_config
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/charcode
+IO  : HTTP GET https://pub.dev/api/packages/pub_semver
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/recase
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/stream_transform
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/analyzer
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/yaml_edit
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/sqlparser
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/source_span
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/io
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/package_config
+IO  : HTTP GET https://pub.dev/api/packages/characters
+IO  : HTTP GET https://pub.dev/api/packages/material_color_utilities
+IO  : HTTP GET https://pub.dev/api/packages/build
+IO  : HTTP GET https://pub.dev/api/packages/build_config
+IO  : HTTP GET https://pub.dev/api/packages/dart_style
+IO  : HTTP GET https://pub.dev/api/packages/source_gen
+IO  : HTTP GET https://pub.dev/api/packages/string_scanner
+IO  : HTTP GET https://pub.dev/api/packages/build_daemon
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/pub_semver
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/characters
+IO  : HTTP GET https://pub.dev/api/packages/built_collection
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/material_color_utilities
+IO  : HTTP GET https://pub.dev/api/packages/built_value
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/build
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/dart_style
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/build_config
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/source_gen
+IO  : HTTP GET https://pub.dev/api/packages/glob
+IO  : HTTP GET https://pub.dev/api/packages/graphs
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/string_scanner
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/build_daemon
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/built_collection
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/built_value
+IO  : HTTP GET https://pub.dev/api/packages/boolean_selector
+IO  : HTTP GET https://pub.dev/api/packages/term_glyph
+IO  : HTTP GET https://pub.dev/api/packages/http_multi_server
+IO  : HTTP GET https://pub.dev/api/packages/pool
+IO  : HTTP GET https://pub.dev/api/packages/shelf
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/glob
+IO  : HTTP GET https://pub.dev/api/packages/shelf_web_socket
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/graphs
+IO  : HTTP GET https://pub.dev/api/packages/watcher
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/boolean_selector
+IO  : HTTP GET https://pub.dev/api/packages/web_socket_channel
+IO  : HTTP GET https://pub.dev/api/packages/listen
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/http_multi_server
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/term_glyph
+IO  : HTTP GET https://pub.dev/api/packages/intl
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/pool
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/shelf
+IO  : HTTP GET https://pub.dev/api/packages/typed_data
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/shelf_web_socket
+IO  : HTTP GET https://pub.dev/api/packages/hooks
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/watcher
+IO  : HTTP GET https://pub.dev/api/packages/leak_tracker
+IO  : HTTP GET https://pub.dev/api/packages/leak_tracker_testing
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/web_socket_channel
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/listen
+IO  : HTTP GET https://pub.dev/api/packages/code_assets
+IO  : HTTP GET https://pub.dev/api/packages/native_toolchain_c
+IO  : HTTP GET https://pub.dev/api/packages/jni
+IO  : HTTP GET https://pub.dev/api/packages/jni_flutter
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/intl
+IO  : HTTP GET https://pub.dev/api/packages/objective_c
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/hooks
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/typed_data
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/code_assets
+IO  : HTTP GET https://pub.dev/api/packages/xdg_directories
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/leak_tracker
+IO  : HTTP GET https://pub.dev/api/packages/platform
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/leak_tracker_testing
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/jni
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/native_toolchain_c
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/jni_flutter
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/objective_c
+IO  : HTTP GET https://pub.dev/api/packages/plugin_platform_interface
+IO  : HTTP GET https://pub.dev/api/packages/dbus
+IO  : HTTP GET https://pub.dev/api/packages/cross_file_android
+IO  : HTTP GET https://pub.dev/api/packages/cross_file_darwin
+IO  : HTTP GET https://pub.dev/api/packages/cross_file_io
+IO  : HTTP GET https://pub.dev/api/packages/cross_file_platform_interface
+IO  : HTTP GET https://pub.dev/api/packages/cross_file_web
+IO  : HTTP GET https://pub.dev/api/packages/flutter_plugin_android_lifecycle
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/xdg_directories
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/platform
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/cross_file_darwin
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/dbus
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/cross_file_android
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/plugin_platform_interface
+IO  : HTTP GET https://pub.dev/api/packages/ffi_leak_tracker
+IO  : HTTP GET https://pub.dev/api/packages/file_selector_linux
+IO  : HTTP GET https://pub.dev/api/packages/file_selector_platform_interface
+IO  : HTTP GET https://pub.dev/api/packages/file_selector_macos
+IO  : HTTP GET https://pub.dev/api/packages/file_selector_windows
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/cross_file_io
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/cross_file_web
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/cross_file_platform_interface
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/flutter_plugin_android_lifecycle
+IO  : HTTP GET https://pub.dev/api/packages/_flutterfire_internals
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/ffi_leak_tracker
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/file_selector_platform_interface
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/file_selector_linux
+IO  : HTTP GET https://pub.dev/api/packages/pdfium_dart
+IO  : HTTP GET https://pub.dev/api/packages/archive
+IO  : HTTP GET https://pub.dev/api/packages/csslib
+IO  : HTTP GET https://pub.dev/api/packages/petitparser
+IO  : HTTP GET https://pub.dev/api/packages/_fe_analyzer_shared
+IO  : HTTP GET https://pub.dev/api/packages/pubspec_parse
+IO  : HTTP GET https://pub.dev/api/packages/web_socket
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/file_selector_windows
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/file_selector_macos
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/_flutterfire_internals
+IO  : HTTP GET https://pub.dev/api/packages/record_use
+IO  : HTTP GET https://pub.dev/api/packages/vm_service
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/pdfium_dart
+IO  : HTTP GET https://pub.dev/api/packages/process
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/archive
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/csslib
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/_fe_analyzer_shared
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/pubspec_parse
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/petitparser
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/web_socket
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/vm_service
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/record_use
+IO  : HTTP GET https://pub.dev/api/packages/js
+IO  : HTTP GET https://pub.dev/api/packages/jni_util
+IO  : HTTP GET https://pub.dev/api/packages/posix
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/js
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/jni_util
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/process
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/posix
+IO  : HTTP GET https://pub.dev/api/packages/code_builder
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/code_builder
+IO  : HTTP GET https://pub.dev/api/packages/dart_pubspec_licenses
+IO  : HTTP GET https://pub.dev/api/packages/pana
+IO  : HTTP GET https://pub.dev/api/packages/markdown
+IO  : HTTP GET https://pub.dev/api/packages/retry
+IO  : HTTP GET https://pub.dev/api/packages/safe_url_check
+IO  : HTTP GET https://pub.dev/api/packages/test
+IO  : HTTP GET https://pub.dev/api/packages/coverage
+IO  : HTTP GET https://pub.dev/api/packages/node_preamble
+IO  : HTTP GET https://pub.dev/api/packages/shelf_packages_handler
+IO  : HTTP GET https://pub.dev/api/packages/shelf_static
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/coverage
+IO  : HTTP GET https://pub.dev/api/packages/test_core
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/test
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/markdown
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/node_preamble
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/shelf_static
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/shelf_packages_handler
+IO  : HTTP GET https://pub.dev/api/packages/webkit_inspection_protocol
+IO  : HTTP GET https://pub.dev/api/packages/cli_config
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/dart_pubspec_licenses
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/retry
+IO  : HTTP GET https://pub.dev/api/packages/source_maps
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/test_core
+IO  : HTTP GET https://pub.dev/api/packages/frontend_server_client
+IO  : HTTP GET https://pub.dev/api/packages/source_map_stack_trace
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/webkit_inspection_protocol
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/cli_config
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/source_maps
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/frontend_server_client
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/source_map_stack_trace
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/safe_url_check
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/pana
+MSG : Downloading packages...
+IO  : HTTP GET https://pub.dev/api/archives/device_info_plus-11.5.0.tar.gz
+IO  : HTTP response 200 OK for GET https://pub.dev/api/archives/device_info_plus-11.5.0.tar.gz
+IO  : HTTP GET https://pub.dev/api/packages/dio/advisories
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/dio/advisories
+IO  : HTTP GET https://pub.dev/api/packages/shared_preferences_android/advisories
+IO  : HTTP response 200 OK for GET https://pub.dev/api/packages/shared_preferences_android/advisories
+MSG : + _fe_analyzer_shared 93.0.0 (111.0.0 available)
+MSG : Changed 164 dependencies!
+MSG : 89 packages have newer versions incompatible with dependency constraints.
+MSG : Logs written to C:\Users\cs-ap\AppData\Local\Pub\Cache\log\pub_log.txt.

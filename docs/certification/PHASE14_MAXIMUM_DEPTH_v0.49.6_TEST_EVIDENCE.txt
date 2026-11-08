@@ -1,0 +1,22 @@
+EDUNOVA v0.49.6 -- LOCAL VERIFICATION EVIDENCE
+Date: 2026-10-13
+Baseline v0.49.5 full backend suite:
+........................................................................ [ 90%]
+..............................................................           [100%]
+638 passed in 29.08s
+Baseline exit code:
+0
+Candidate v0.49.6 full backend suite command: PYTHONPATH=services/api python -m pytest -q services/api/tests
+........................................................................ [ 97%]
+..................                                                       [100%]
+666 passed in 29.60s
+Candidate exit code:
+0
+Focus suite command: PYTHONPATH=services/api python -m pytest -q services/api/tests/test_phase14_pedagogical_intelligence.py
+45 passed in 0.54s
+Compileall command: python -m compileall -q services/api/app services/api/tests
+Exit code: 0
+Structural audit command: python scripts/audit_lot32_global.py
+LOT32 GLOBAL AUDIT: 17/17 PASS
+Exit code: 0
+Flutter/Dart/real PostgreSQL/Redis/object-store/device/third-party verification: NOT RUN

@@ -1,0 +1,15 @@
+import 'package:flutter_test/flutter_test.dart';
+import 'package:edunova/src/features/analytics/application/analytics_engine.dart';
+import 'package:edunova/src/features/analytics/domain/analytics.dart';
+
+void main(){
+  const engine=LocalAnalyticsEngine();
+  AnalyticsSnapshot snapshot({List<CourseAnalyticsSignal> courses=const [],double? adherence=.7,List<DailyLearningPoint> activity14d=const []})=>AnalyticsSnapshot(generatedAt:DateTime.utc(2026,9,22),studyMinutes7d:240,studyMinutesPrev7d:150,quizAccuracy7d:.78,quizAccuracyPrev7d:.60,planAdherence7d:adherence,activeDays7d:5,streakDays:4,courses:courses,activity14d:activity14d);
+
+  test('momentum is explainable and improving',(){final r=engine.build(snapshot());expect(r.momentum,AnalyticsTrend.improving);expect(r.studyTime.delta,90);expect(r.explanation,contains('ne prédisent pas ta note'));expect(r.generatedAt,DateTime.utc(2026,9,22));});
+  test('urgent low readiness course is prioritized',(){final c=CourseAnalyticsSignal(courseId:'bio',title:'Biochimie',coverage:.4,quizMastery:.45,openErrors:8,daysToNextAssessment:2,nextAssessmentReadiness:42);final r=engine.build(snapshot(courses:[c]));expect(r.courseInsights.first.risk,AnalyticsRisk.high);expect(r.recommendations.first.kind,RecommendationKind.assessmentFocus);});
+  test('recommendations remain diversified',(){final courses=List.generate(4,(i)=>CourseAnalyticsSignal(courseId:'c$i',title:'Cours $i',coverage:.2,quizMastery:.3,openErrors:10,overdueFlashcards:15,daysToNextAssessment:3,nextAssessmentReadiness:35));final r=engine.build(snapshot(courses:courses));expect(r.recommendations.length,5);final counts=<String,int>{};for(final x in r.recommendations){counts[x.courseId??'g']=(counts[x.courseId??'g']??0)+1;}expect(counts.values.every((n)=>n<=2),isTrue);});
+  test('activity timeline is preserved for premium UI',(){final days=List.generate(14,(i)=>DailyLearningPoint(day:DateTime.utc(2026,9,9+i),studyMinutes:i*5,completedTasks:i%3,quizQuestions:i,flashcardsReviewed:i*2));final r=engine.build(snapshot(activity14d:days));expect(r.activity14d.length,14);expect(r.activity14d.last.studyMinutes,65);});
+  test('course insight exposes drilldown dimensions',(){const c=CourseAnalyticsSignal(courseId:'math',title:'Mathématiques',coverage:.62,quizMastery:.71,flashcardMastery:.55,weaknessRecovery:.8,openErrors:3,overdueFlashcards:6,daysToNextAssessment:5,studyMinutes7d:95,masteryDelta7d:.08);final i=engine.build(snapshot(courses:[c])).courseInsights.single;expect(i.coverage,.62);expect(i.quizMastery,.71);expect(i.flashcardMastery,.55);expect(i.weaknessRecovery,.8);expect(i.openErrors,3);expect(i.overdueFlashcards,6);expect(i.daysToNextAssessment,5);expect(i.studyMinutes7d,95);});
+  test('course recommendation links keep the human title',(){const c=CourseAnalyticsSignal(courseId:'chim',title:'Chimie générale',coverage:.2,quizMastery:.4,openErrors:2);final links=engine.build(snapshot(courses:[c])).recommendations.map((r)=>r.deepLink).toList();expect(links.any((l)=>l.contains('title=Chimie%20g%C3%A9n%C3%A9rale')),isTrue);});
+}

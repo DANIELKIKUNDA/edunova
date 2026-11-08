@@ -1,0 +1,41 @@
+EDUNOVA v0.49.12 — PHASE 14 GRADING-TIME SNAPSHOT
+SOURCE: EduNova_v0.49.11_RC_PHASE14_SCORE_RECONCILIATION.zip
+SOURCE SHA-256 CHECKED: ea790751bd6cc798f1486ded5391290e22264fd235149649963df50b0bbd5655
+
+BASELINE — unmodified v0.49.11 archive
+Command: PYTHONPATH=services/api python -m pytest -q services/api/tests
+Exit code: 0
+727 passed in 44.61s
+
+FINAL GLOBAL BACKEND REGRESSION — v0.49.12
+Command: PYTHONPATH=services/api python -m pytest -q services/api/tests
+Exit code: 0
+752 passed in 50.80s
+
+FOCUSED PHASE 14 AND MIGRATION — v0.49.12
+Command: PYTHONPATH=services/api python -m pytest -q services/api/tests/test_phase14_score_reconciliation.py services/api/tests/test_phase14_pedagogical_intelligence.py services/api/tests/test_migration_contract.py
+Exit code: 0
+132 passed in 18.69s
+
+MIGRATION CONTRACT
+Command: PYTHONPATH=services/api python -m pytest -q services/api/tests/test_migration_contract.py
+Exit code: 0
+1 passed in 0.70s
+
+STRUCTURAL AUDIT
+Command: python scripts/audit_lot32_global.py
+Exit code: 0
+LOT32 GLOBAL AUDIT: 17/17 PASS
+
+PYTHON COMPILATION
+Command: python -m compileall -q services/api/app services/api/tests
+Exit code: 0
+
+EXTERNAL GATES NOT EXECUTED:
+Flutter/Dart CLI absent. PostgreSQL live SQL/migration/row-lock test not executed.
+Redis, object storage, real devices, external providers, legally qualified signatures not tested.
+
+SCOPE:
+New SQL snapshot version 2 for deterministic additive auto-grades only. Hash is not an authentication signature.
+No alteration of existing official or historical grade rows; v0/v1 not backfilled.
+No automatic linkage to official published gradebook/jury results.

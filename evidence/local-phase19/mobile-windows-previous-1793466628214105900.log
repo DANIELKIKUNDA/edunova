@@ -1,0 +1,16 @@
+COMMAND: C:\Users\cs-ap\dev\flutter\bin\flutter.bat build windows --release --no-pub
+CWD: C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile
+Building Windows application...                                 
+CMake Deprecation Warning at C:/Users/cs-ap/dev/edusync-web/edunova/apps/mobile/build/windows/x64/extracted/firebase_cpp_sdk_windows/CMakeLists.txt:17 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\windows\flutter\ephemeral\.plugin_symlinks\flutter_secure_storage_windows\windows\flutter_secure_storage_windows_plugin.cpp(6,10): error C1083: Cannot open include file: 'atlstr.h': No such file or directory [C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\build\windows\x64\plugins\flutter_secure_storage_windows\flutter_secure_storage_windows_plugin.vcxproj]
+C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\windows\flutter\ephemeral\.plugin_symlinks\flutter_local_notifications_windows\src\plugin.cpp(5,10): error C1083: Cannot open include file: 'atlbase.h': No such file or directory [C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\build\windows\x64\plugins\flutter_local_notifications_windows\shared\flutter_local_notifications_windows.vcxproj]
+Building Windows application...                                   567.5s
+Build process failed.

@@ -1,0 +1,53 @@
+[√] Flutter (Channel stable, 3.35.4, on Microsoft Windows [Version 10.0.26200.9711], locale en-US) [43.6s]
+    • Flutter version 3.35.4 on channel stable at C:\Users\cs-ap\dev\flutter
+    • Upstream repository https://github.com/flutter/flutter.git
+    • Framework revision d693b4b9db (1 year, 1 month ago), 2025-09-16 14:27:41 +0000
+    • Engine revision c298091351
+    • Dart version 3.9.2
+    • DevTools version 2.48.0
+    • Feature flags: enable-web, enable-linux-desktop, enable-macos-desktop, enable-windows-desktop, enable-android, enable-ios, cli-animations, enable-lldb-debugging
+
+[√] Windows Version (Windows 11 or higher, 25H2, 2009) [123.2s]
+
+[√] Android toolchain - develop for Android devices (Android SDK version 36.0.0) [130.6s]
+    • Android SDK at C:\Users\cs-ap\dev\Android\Sdk
+    • Emulator version unknown
+    • Platform android-36, build-tools 36.0.0
+    • ANDROID_HOME = C:\Users\cs-ap\dev\Android\Sdk
+    • Java binary at: C:\Program Files\Android\Android Studio\jbr\bin\java
+      This is the JDK bundled with the latest Android Studio installation on this machine.
+      To manually set the JDK path, use: `flutter config --jdk-dir="path/to/jdk"`.
+    • Java version OpenJDK Runtime Environment (build 21.0.7+-13880790-b1038.58)
+    • All Android licenses accepted.
+
+[√] Chrome - develop for the web [47.3s]
+    • Chrome at C:\Program Files\Google\Chrome\Application\chrome.exe
+
+[√] Visual Studio - develop Windows apps (Visual Studio Community 2022 17.14.41 (September 2026)) [47.3s]
+    • Visual Studio at C:\Program Files\Microsoft Visual Studio\2022\Community
+    • Visual Studio Community 2022 version 17.14.37710.0
+    • Windows 10 SDK version 10.0.26100.0
+
+[√] Android Studio (version 2025.1.3) [13.6s]
+    • Android Studio at C:\Program Files\Android\Android Studio
+    • Flutter plugin can be installed from:
+       https://plugins.jetbrains.com/plugin/9212-flutter
+    • Dart plugin can be installed from:
+       https://plugins.jetbrains.com/plugin/6351-dart
+    • Java version OpenJDK Runtime Environment (build 21.0.7+-13880790-b1038.58)
+
+[√] VS Code (version unknown) [11.6s]
+    • VS Code at C:\Users\cs-ap\AppData\Local\Programs\Microsoft VS Code
+    • Flutter extension can be installed from:
+       https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter
+    X Unable to determine VS Code version.
+
+[√] Connected device (3 available) [44.1s]
+    • Windows (desktop) • windows • windows-x64    • Microsoft Windows [Version 10.0.26200.9711]
+    • Chrome (web)      • chrome  • web-javascript • Google Chrome 156.0.8078.79
+    • Edge (web)        • edge    • web-javascript • Microsoft Edge 156.0.4314.50
+
+[√] Network resources [38.9s]
+    • All expected network resources are available.
+
+• No issues found!

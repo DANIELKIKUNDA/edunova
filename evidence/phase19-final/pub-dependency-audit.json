@@ -1,0 +1,10 @@
+{
+  "commit": "339100bad268775b8e055f8f311535539d3b52bf",
+  "command": [
+    "C:\\Users\\cs-ap\\dev\\edusync-web\\edunova\\.local-certification\\security-venv\\Scripts\\python.exe",
+    "C:\\Users\\cs-ap\\dev\\edusync-web\\edunova\\scripts\\certify_pub_dependencies.py"
+  ],
+  "cwd": "C:\\Users\\cs-ap\\dev\\edusync-web\\edunova",
+  "exit_code": 0,
+  "seconds": 3.29
+}

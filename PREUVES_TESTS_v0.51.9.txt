@@ -1,0 +1,11 @@
+EduNova v0.51.9 — preuves observées dans ce conteneur
+Commande backend : PYTHONPATH=services/api python -m pytest -q services/api/tests
+Résultat : 1062 passed in 229.18s (0:03:49), code de sortie 0.
+Commande ciblée : PYTHONPATH=services/api python -m pytest -q services/api/tests/test_phase16_closure_v0_51_9.py
+Résultat : 5 passed, code de sortie 0.
+Compilation : python -m compileall -q services/api/app services/api/tests : code de sortie 0.
+Audit : python scripts/audit_phase16_closure_v0_51_9.py : 22/22 PASS.
+Audit statique préexistant : python scripts/audit_campus_intelligence_flutter.py : 33/33 PASS (non compilateur).
+YAML CI : PyYAML charge `.github/workflows/ci.yml`, job campus-flutter présent.
+Flutter analyse/tests/build : NON EXÉCUTÉS (SDK absent).
+PostgreSQL/Redis/appareils réels : NON EXÉCUTÉS.

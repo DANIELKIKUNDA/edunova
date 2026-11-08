@@ -1,0 +1,116 @@
+COMMAND: C:\Users\cs-ap\dev\flutter\bin\flutter.bat build web --release --no-pub
+CWD: C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile
+Compiling lib\main.dart for the Web...                          
+Wasm dry run findings:
+Found incompatibilities with WebAssembly.
+
+package:flutter_secure_storage_web/flutter_secure_storage_web.dart 5:1 - dart:html unsupported (0)
+package:flutter_secure_storage_web/src/subtle.dart 21:1 - dart:html unsupported (0)
+package:js/js.dart 10:1 - dart:js unsupported (1)
+package:flutter_secure_storage_web/flutter_secure_storage_web.dart 6:1 - JS interop library 'dart:js_util' can't be imported when compiling to Wasm. (2)
+package:flutter_secure_storage_web/src/subtle.dart 22:1 - JS interop library 'dart:js_util' can't be imported when compiling to Wasm. (2)
+package:flutter_secure_storage_web/src/subtle.dart 26:1 - JS interop library 'package:js/js.dart' can't be imported when compiling to Wasm. (2)
+
+Consider addressing these issues to enable wasm builds. See docs for more info: https://docs.flutter.dev/platform-integration/web/wasm
+
+Use --no-wasm-dry-run to disable these warnings.
+Target dart2js failed: ProcessException: Process exited abnormally with exit code 1:
+lib/src/features/campus_intelligence/infrastructure/campus_intelligence_gateway.dart:132:10:
+Error: 'await' can only be used in 'async' or 'async*' methods.
+    _map(await _get('/v1/institutional-analytics/institutions/${_id(iid)}/comparisons', {
+         ^^^^^
+lib/src/features/delivery/application/delivery_repository.dart:56:90:
+Error: Type 'DownloadResource' not found.
+  final OfflineDeliveryRepository local; final LibraryRemoteGateway remoteLibrary; final DownloadResource downloader;
+                                                                                         ^^^^^^^^^^^^^^^^
+lib/src/features/campus_intelligence/infrastructure/campus_intelligence_gateway.dart:132:5:
+Error: A value of type 'Map<String, dynamic>' can't be returned from a function with return type 'Future<Map<String, dynamic>>'.
+ - 'Map' is from 'dart:core'.
+ - 'Future' is from 'dart:async'.
+    _map(await _get('/v1/institutional-analytics/institutions/${_id(iid)}/comparisons', {
+    ^
+lib/src/features/delivery/application/delivery_repository.dart:56:90:
+Error: 'DownloadResource' isn't a type.
+  final OfflineDeliveryRepository local; final LibraryRemoteGateway remoteLibrary; final DownloadResource downloader;
+                                                                                         ^^^^^^^^^^^^^^^^
+lib/src/features/delivery/application/download_resource.dart:30:25:
+Error: Not a constant expression.
+        final ids=const CacheEvictionPlanner().plan(candidates:await local.cacheCandidates(),currentBytes:currentCache,targetBytes:(policy.maxCacheBytes-grant.sizeBytes).clamp(0,policy.maxCacheBytes).toInt(),keepFollowed:policy.keepFollowedCourses);
+                        ^^^^^^^^^^^^^^^^^^^^
+lib/src/features/campus_services/presentation/campus_alumni_page.dart:214:28:
+Error: No named parameter with the name 'mainAxisSize'.
+            trailing: Wrap(mainAxisSize: MainAxisSize.min, children: [
+                           ^^^^^^^^^^^^
+../../../../flutter/packages/flutter/lib/src/widgets/basic.dart:6044:9:
+Info: Found this candidate, but the arguments don't match.
+  const Wrap({
+        ^^^^
+lib/src/features/campus_services/presentation/campus_services_page.dart:309:40:
+Error: No named parameter with the name 'mainAxisSize'.
+          trailing: _canReserve ? Wrap(mainAxisSize: MainAxisSize.min, children: [
+                                       ^^^^^^^^^^^^
+../../../../flutter/packages/flutter/lib/src/widgets/basic.dart:6044:9:
+Info: Found this candidate, but the arguments don't match.
+  const Wrap({
+        ^^^^
+lib/src/features/identity/presentation/security_page.dart:87:42:
+Error: Member not found: 'devices_off_rounded'.
+                  icon: const Icon(Icons.devices_off_rounded),
+                                         ^^^^^^^^^^^^^^^^^^^
+lib/src/features/analytics/presentation/analytics_page.dart:35:18:
+Error: The method 'ErrorStateCard' isn't defined for the type 'AnalyticsPage'.
+ - 'AnalyticsPage' is from 'package:edunova/src/features/analytics/presentation/analytics_page.dart' ('lib/src/features/analytics/presentation/analytics_page.dart').
+          child: ErrorStateCard(
+                 ^^^^^^^^^^^^^^
+lib/src/features/analytics/presentation/analytics_page.dart:443:51:
+Error: Member not found: 'event_upcoming_rounded'.
+      RecommendationKind.assessmentFocus => Icons.event_upcoming_rounded,
+                                                  ^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/pilot/presentation/pilot_center_page.dart:2:387:
+Error: Member not found: 'domain_verified_outlined'.
+class PilotCenterPage extends StatelessWidget { const PilotCenterPage({super.key}); @override Widget build(BuildContext context)=>Scaffold(appBar:AppBar(title:const Text('PrÃ©paration du pilote')),body:ListView(padding:const EdgeInsets.all(20),children:const [Text('EduNova Campus',style:TextStyle(fontSize:24,fontWeight:FontWeight.w700)),SizedBox(height:12),ListTile(leading:Icon(Icons.domain_verified_outlined),title:Text('Configuration institutionnelle')),ListTile(leading:Icon(Icons.school_outlined),title:Text('Structure acadÃ©mique')),ListTile(leading:Icon(Icons.group_outlined),title:Text('Enseignants et Ã©tudiants')),ListTile(leading:Icon(Icons.support_agent_outlined),title:Text('Support & diagnostic')),SizedBox(height:32),Center(child:Text('From Volcano Tech'))])); }
+                                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^
+Error: Compilation failed.
+  Command: C:\Users\cs-ap\dev\flutter\bin\cache\dart-sdk\bin\dart.exe compile js --platform-binaries=C:\Users\cs-ap\dev\flutter\bin\cache\flutter_web_sdk\kernel --invoker=flutter_tool -Ddart.vm.product=true -DFLUTTER_VERSION=3.35.4 -DFLUTTER_CHANNEL=stable -DFLUTTER_GIT_URL=https://github.com/flutter/flutter.git -DFLUTTER_FRAMEWORK_REVISION=d693b4b9db -DFLUTTER_ENGINE_REVISION=c298091351 -DFLUTTER_DART_VERSION=3.9.2 -DFLUTTER_WEB_USE_SKIA=true -DFLUTTER_WEB_USE_SKWASM=false -DFLUTTER_WEB_CANVASKIT_URL=https://www.gstatic.com/flutter-canvaskit/c29809135135e262a912cf583b2c90deb9ded610/ --native-null-assertions --no-source-maps -O4 --minify -o C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\.dart_tool\flutter_build\06891925383680661ef2ef3e4209975d\app.dill --packages=C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\.dart_tool\package_config.json --cfe-only C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile\.dart_tool\flutter_build\06891925383680661ef2ef3e4209975d\main.dart
+#0      RunResult.throwException (package:flutter_tools/src/base/process.dart:118:5)
+#1      _DefaultProcessUtils.run (package:flutter_tools/src/base/process.dart:344:19)
+<asynchronous suspension>
+#2      Dart2JSTarget.build (package:flutter_tools/src/build_system/targets/web.dart:204:5)
+<asynchronous suspension>
+#3      _BuildInstance._invokeInternal (package:flutter_tools/src/build_system/build_system.dart:873:9)
+<asynchronous suspension>
+#4      Future.wait.<anonymous closure> (dart:async/future.dart:525:21)
+<asynchronous suspension>
+#5      _BuildInstance.invokeTarget (package:flutter_tools/src/build_system/build_system.dart:811:32)
+<asynchronous suspension>
+#6      Future.wait.<anonymous closure> (dart:async/future.dart:525:21)
+<asynchronous suspension>
+#7      _BuildInstance.invokeTarget (package:flutter_tools/src/build_system/build_system.dart:811:32)
+<asynchronous suspension>
+#8      FlutterBuildSystem.build (package:flutter_tools/src/build_system/build_system.dart:631:16)
+<asynchronous suspension>
+#9      WebBuilder.buildWeb (package:flutter_tools/src/web/compile.dart:90:34)
+<asynchronous suspension>
+#10     BuildWebCommand.runCommand (package:flutter_tools/src/commands/build_web.dart:282:5)
+<asynchronous suspension>
+#11     FlutterCommand.run.<anonymous closure> (package:flutter_tools/src/runner/flutter_command.dart:1581:27)
+<asynchronous suspension>
+#12     AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:154:19)
+<asynchronous suspension>
+#13     CommandRunner.runCommand (package:args/command_runner.dart:212:13)
+<asynchronous suspension>
+#14     FlutterCommandRunner.runCommand.<anonymous closure> (package:flutter_tools/src/runner/flutter_command_runner.dart:503:9)
+<asynchronous suspension>
+#15     AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:154:19)
+<asynchronous suspension>
+#16     FlutterCommandRunner.runCommand (package:flutter_tools/src/runner/flutter_command_runner.dart:438:5)
+<asynchronous suspension>
+#17     run.<anonymous closure>.<anonymous closure> (package:flutter_tools/runner.dart:98:11)
+<asynchronous suspension>
+#18     AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:154:19)
+<asynchronous suspension>
+#19     main (package:flutter_tools/executable.dart:101:3)
+<asynchronous suspension>
+
+Compiling lib\main.dart for the Web...                          10264.9s
+Error: Failed to compile application for the Web.

@@ -1,0 +1,14 @@
+{
+  "commit": "9246f18aa93f177a190122a4643fab65b6a778fa",
+  "command": [
+    "C:\\Users\\cs-ap\\dev\\edusync-web\\edunova\\.venv\\Scripts\\python.exe",
+    "-m",
+    "compileall",
+    "-q",
+    "services/api/app",
+    "services/api/tests"
+  ],
+  "cwd": "C:\\Users\\cs-ap\\dev\\edusync-web\\edunova",
+  "exit_code": 0,
+  "seconds": 3.83
+}

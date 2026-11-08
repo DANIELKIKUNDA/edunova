@@ -1,0 +1,12 @@
+{
+  "command": [
+    "C:\\Users\\cs-ap\\dev\\flutter\\bin\\flutter.bat",
+    "build",
+    "web",
+    "--release",
+    "--no-pub"
+  ],
+  "cwd": "C:\\Users\\cs-ap\\dev\\edusync-web\\edunova\\apps\\admin",
+  "exit_code": 1,
+  "seconds": 88.92
+}

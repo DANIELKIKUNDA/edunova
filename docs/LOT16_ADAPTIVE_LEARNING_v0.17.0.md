@@ -1,0 +1,2 @@
+# LOT 16 v0.17.0 — Student Intelligence & Adaptive Learning
+Pipeline: learning evidence → scoring → uncertainty/risk → prioritized adaptive actions → explanation → auditable snapshot. Includes mastery/readiness/consistency, weak-signal priorities, error repair, spaced review, practice/assessment recommendations. OPEN-machine: Flutter builds/UX, PostgreSQL concurrency, offline multi-device and load/endurance.

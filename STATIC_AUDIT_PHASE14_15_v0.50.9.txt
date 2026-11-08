@@ -1,0 +1,24 @@
+PASS: gateway_is_authenticated
+PASS: gateway_forbids_cache
+PASS: gateway_has_route_id_validation
+PASS: gateway_has_objective_report
+PASS: gateway_has_create_objective
+PASS: gateway_has_question_mapping
+PASS: gateway_has_blueprint_binding
+PASS: gateway_has_archives
+PASS: gateway_has_archive_capture
+PASS: gateway_has_archival_comparison
+PASS: gateway_csv_has_bound
+PASS: gateway_does_not_write_jury
+PASS: frontend_rechecks_membership
+PASS: frontend_handles_auditor
+PASS: frontend_teacher_panel_linked
+PASS: frontend_archive_panel_linked
+PASS: teacher_mutations_have_server_refresh
+PASS: archive_mutation_requires_confirmation
+PASS: archive_ignores_payload
+PASS: archive_no_file_write
+PASS: auditor_capture_hidden
+PASS: auditor_mutation_denied_by_backend
+PASS: dart_tests_present
+Static contract checks: 23/23 PASS (not Flutter certification)

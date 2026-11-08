@@ -1,0 +1,3 @@
+COMMAND: C:\Users\cs-ap\dev\edusync-web\edunova\.venv\Scripts\python.exe -m pip check
+CWD: C:\Users\cs-ap\dev\edusync-web\edunova
+No broken requirements found.

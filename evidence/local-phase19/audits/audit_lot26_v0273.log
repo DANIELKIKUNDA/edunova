@@ -1,0 +1,14 @@
+PASS presence_secure
+PASS proximity_signed
+PASS absence_workflow
+PASS announcements
+PASS calendar_operations
+PASS operations_dashboard
+PASS audit_trace
+PASS campus_push
+PASS fcm_backend
+PASS push_registry
+PASS fcm_mobile
+PASS push_device_mobile
+PASS offline_local_notifications
+LOT26 CLOSURE AUDIT: 13/13 PASS

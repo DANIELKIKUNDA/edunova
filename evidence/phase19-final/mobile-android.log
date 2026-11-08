@@ -1,0 +1,4 @@
+COMMAND: C:\Users\cs-ap\dev\flutter\bin\flutter.bat build apk --debug --no-pub
+CWD: C:\Users\cs-ap\dev\edusync-web\edunova\apps\mobile
+Running Gradle task 'assembleDebug'...                            144.2s
+√ Built build\app\outputs\flutter-apk\app-debug.apk
