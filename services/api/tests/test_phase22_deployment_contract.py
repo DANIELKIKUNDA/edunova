@@ -24,3 +24,9 @@ def test_migrations_run_from_postgres_client_with_read_only_mount():
     compose = (ROOT / "docker-compose.production.yml").read_text()
     assert "./services/api/migrations:/migrations:ro" in compose
     assert "--set=ON_ERROR_STOP=1" in compose
+
+
+def test_api_image_explicitly_installs_security_updated_zlib():
+    dockerfile = (ROOT / "services" / "api" / "Dockerfile").read_text()
+    assert "apt-get update" in dockerfile
+    assert "zlib1g" in dockerfile
